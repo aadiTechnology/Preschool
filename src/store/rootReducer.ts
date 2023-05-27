@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import Holidaysslice from "../Slice/Student/Holidays"
+import Holidaysslice from "../requests/Student/Holidays"
 
 const rootReducer = combineReducers({
     Holidays:Holidaysslice

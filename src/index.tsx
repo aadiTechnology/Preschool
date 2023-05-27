@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
-import ScrollTop from 'src/hooks/useScrollTop';
+import ScrollTop from 'src/utils/hooks/useScrollTop';
 
 import 'nprogress/nprogress.css';
 import { Provider } from 'react-redux';
