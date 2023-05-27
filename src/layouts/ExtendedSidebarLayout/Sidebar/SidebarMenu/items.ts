@@ -21,25 +21,7 @@ const menuItems: MenuItems[] = [
   {
     heading: 'General',
     items: [
-      {
-        name: 'Dashboards',
-        icon: SmartToyTwoToneIcon,
-        link: '/extended-sidebar/dashboards',
-        items: [
-          {
-            name: 'Reports',
-            link: '/extended-sidebar/dashboards/reports',
-            badge: '',
-            badgeTooltip: 'Reports Dashboard - ve rsion 3.0'
-          },
-          {
-            name: 'Expenses',
-            link: '/extended-sidebar/dashboards/expenses',
-            badge: '',
-            badgeTooltip: 'Expenses Dashboard - version 3.0'
-          },
-        ],
-      },
+    
       {
         name: 'Holidays',
         icon: AccountTreeTwoToneIcon,

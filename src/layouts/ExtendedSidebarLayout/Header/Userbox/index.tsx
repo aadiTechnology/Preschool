@@ -21,7 +21,7 @@ import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import ChevronRightTwoToneIcon from '@mui/icons-material/ChevronRightTwoTone';
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
-import Text from 'src/components/Text';
+import Text from 'src/library/Text';
 import MonetizationOnTwoToneIcon from '@mui/icons-material/MonetizationOnTwoTone';
 
 const DotLegend = styled('span')(

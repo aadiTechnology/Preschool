@@ -21,10 +21,10 @@ import {
   styled,
   useTheme
 } from '@mui/material';
-import Text from 'src/components/Text';
+import Text from 'src/library/Text';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import ArrowForwardTwoToneIcon from '@mui/icons-material/ArrowForwardTwoTone';
-import Scrollbar from 'src/components/Scrollbar';
+import Scrollbar from 'src/layouts/Components/Scrollbar';
 import ForumTwoToneIcon from '@mui/icons-material/ForumTwoTone';
 import MarkChatReadTwoToneIcon from '@mui/icons-material/MarkChatReadTwoTone';
 

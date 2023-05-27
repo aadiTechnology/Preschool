@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
+import Logo from '../Logo';
 
-import Logo from 'src/components/LogoSign';
+
 
 function AppInit() {
   return (
@@ -18,7 +19,7 @@ function AppInit() {
       alignItems="center"
       justifyContent="center"
     >
-      <Logo />
+  <Logo/>
     </Box>
   );
 }

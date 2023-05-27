@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import Scrollbar from 'src/components/Scrollbar';
+import Scrollbar from 'src/layouts/Components/Scrollbar';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 
 import {
@@ -16,7 +16,7 @@ import {
 import SidebarTopSection from './SidebarTopSection';
 import SidebarMenu from './SidebarMenu';
 import SidebarFooter from './SidebarFooter';
-import Logo from 'src/components/LogoSign';
+import Logo from 'src/library/Logo';
 
 const SidebarWrapper = styled(Box)(
   ({ theme }) => `
