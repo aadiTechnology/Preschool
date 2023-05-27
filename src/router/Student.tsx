@@ -11,7 +11,7 @@ const Loader = (Component) => (props) =>
   );
 
 // Dashboards
-const Holidays = Loader(lazy(() => import('src/RITeSchool/student/holidays/Holidays')));
+const Holidays = Loader(lazy(() => import('src/components/Holiday/Holiday')));
 
 
 
