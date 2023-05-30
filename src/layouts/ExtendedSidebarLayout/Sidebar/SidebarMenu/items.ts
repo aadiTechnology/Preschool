@@ -27,6 +27,12 @@ const menuItems: MenuItems[] = [
         icon: AccountTreeTwoToneIcon,
         link: '/extended-sidebar/Student/holidays'
       },
+
+      {
+        name: 'SchoolList',
+        icon: AccountTreeTwoToneIcon,
+        link: '/extended-sidebar/Student/SchoolList'
+      },
       
     
    

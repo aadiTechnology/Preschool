@@ -4,7 +4,6 @@ import { styled, Typography, Box, Divider, useTheme, Container } from '@mui/mate
 
 interface PageHeaderProps {
   heading: string;
-  subheading: string;
 }
 
 const RootWrapper = styled(Box)(
@@ -14,14 +13,13 @@ const RootWrapper = styled(Box)(
 `
 );
 
-const PageHeader: FC<PageHeaderProps> = ({ heading, subheading }) => {
+const PageHeader: FC<PageHeaderProps> = ({ heading}) => {
   const theme = useTheme();
 
   return (
     <Container>
       <RootWrapper display="flex" alignItems="center">
-
-        <Typography variant="h3"
+      <Typography variant="h3"
           sx={{
             fontWeight: 'bolder',
             fontSize: '32px',
@@ -30,19 +28,13 @@ const PageHeader: FC<PageHeaderProps> = ({ heading, subheading }) => {
             fontFamily: 'roboto',
             textShadow: '7px 7px 10px grey'
           }}>{(heading)}</Typography>
-        {subheading && (
-          <Typography variant="subtitle2" sx={{
-            ml: 2
-          }}>{(subheading)}</Typography>
-        )}
-      </RootWrapper>
+       </RootWrapper>
     </Container>
   );
 };
 
 PageHeader.propTypes = {
   heading: PropTypes.string,
-  subheading: PropTypes.string
 };
 
 export default PageHeader;

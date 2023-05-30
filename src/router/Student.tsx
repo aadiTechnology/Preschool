@@ -12,7 +12,7 @@ const Loader = (Component) => (props) =>
 
 // Dashboards
 const Holidays = Loader(lazy(() => import('src/components/Holiday/Holiday')));
-
+const SchoolList = Loader(lazy(() => import('src/components/SchoolList/SchoolList')));
 
 
 const studentRoutes = [
@@ -24,10 +24,10 @@ const studentRoutes = [
     path: 'holidays',
     element: <Holidays />
   },
-
-
-
- 
+  {
+    path: 'schoolList',
+    element: <SchoolList />
+  },
 ];
 
 export default studentRoutes;
