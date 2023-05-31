@@ -33,6 +33,12 @@ const menuItems: MenuItems[] = [
         icon: AccountTreeTwoToneIcon,
         link: '/extended-sidebar/Student/SchoolList'
       },
+
+      {
+        name: 'ChangePassword',
+        icon: AccountTreeTwoToneIcon,
+        link: '/extended-sidebar/Student/ChangePassword'
+      },
       
     
    
