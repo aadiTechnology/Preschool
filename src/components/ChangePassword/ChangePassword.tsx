@@ -77,7 +77,9 @@ function ChangePassword() {
                     <TextField fullWidth label="Confirm Password" value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)} variant="standard" />
                     {errorconfirmPassword}
-                    <Button onClick={Submit}>
+                    <br></br>
+                    <br></br>
+                    <Button onClick={Submit} variant='contained'>
                         Submit
                     </Button>
                 </Card>
