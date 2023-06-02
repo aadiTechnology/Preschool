@@ -6,7 +6,7 @@ import '@mui/lab/themeAugmentation';
 const themeColors = {
   primary: '#5569ff',
   secondary: '#6E759F',
-  success: '#57CA22',
+  success: '#ffc107',
   warning: '#FFA319',
   error: '#FF1943',
   info: '#33C2FF',
@@ -481,6 +481,13 @@ export const PureLightTheme = createTheme({
         }
       }
     },
+    MuiCard:{
+      styleOverrides: {
+        root:{
+          padding:10
+        }
+      }
+    },
     MuiCardHeader: {
       styleOverrides: {
         action: {
@@ -569,6 +576,18 @@ export const PureLightTheme = createTheme({
         }
       }
     },
+
+    MuiTextField: {
+      defaultProps: {
+        variant:'standard',
+        fullWidth:true,
+        margin:"dense",
+
+      },
+      styleOverrides: {
+       
+      }
+    },
     MuiPaginationItem: {
       styleOverrides: {
         page: {
@@ -591,14 +610,16 @@ export const PureLightTheme = createTheme({
     },
     MuiButton: {
       defaultProps: {
-        disableRipple: true
+        variant:"contained",
+        size:"small",
+       fullWidth:true
       },
       styleOverrides: {
         root: {
           fontWeight: 'bold',
           textTransform: 'none',
-          paddingLeft: 16,
-          paddingRight: 16,
+          paddingLeft: 10,
+          paddingRight: 10,
 
           '.MuiSvgIcon-root': {
             transition: 'all .2s'
@@ -607,17 +628,35 @@ export const PureLightTheme = createTheme({
         endIcon: {
           marginRight: -8
         },
-        containedSecondary: {
-          backgroundColor: colors.secondary.main,
-          color: colors.alpha.white[100],
-          border: '1px solid ' + colors.alpha.black[30]
+        containedPrimary: {
+          backgroundColor: "#26a69a",
+          '&:hover, &.MuiSelected': {
+            backgroundColor: "#26a69a",
+            
+          }
+        },
+
+        containedSecondary:{
+          backgroundColor: "#bdbdbd",
+          '&:hover, &.MuiSelected': {
+            backgroundColor: "#bdbdbd",
+            
+          },
+
+          containedSuccess:{
+            backgroundColor: "#ffc107",
+            '&:hover, &.MuiSelected': {
+              backgroundColor: "#ffc107",
+              
+            }
+
         },
         outlinedSecondary: {
           backgroundColor: colors.alpha.white[100],
 
           '&:hover, &.MuiSelected': {
-            backgroundColor: colors.alpha.black[5],
-            color: colors.alpha.black[100]
+            backgroundColor: "#26a69a",
+            
           }
         },
         sizeSmall: {
@@ -640,7 +679,7 @@ export const PureLightTheme = createTheme({
           padding: '12px 16px'
         }
       }
-    },
+    },},
     MuiButtonBase: {
       defaultProps: {
         disableRipple: false
