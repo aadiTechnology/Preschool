@@ -7,4 +7,16 @@ export interface IGetClassNameListResult {
     ClassName: string,
     InsertBy: number,
    TeacherId: number
-}
+};
+
+export interface IGetDescriptionBody {
+    Class:string,
+    SubjectName:string,
+    SubjectDescription:string,
+    AssignDate:string,
+    Attachment:string,
+    Camera:string
+};
+
+export interface IGetDescriptionResult{}
+
