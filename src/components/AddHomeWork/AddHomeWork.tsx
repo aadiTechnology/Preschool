@@ -65,6 +65,9 @@ function AddHomeWork() {
        }, [])
 
     const SaveDetails=()=>{
+    setDescription('')
+    setSelectClass('')
+    setSelectDate('')
     dispatch(getDescription(GetDescriptionBody));
     }
 
@@ -84,8 +87,7 @@ function AddHomeWork() {
            dispatch(getHomeworkListForEdit(GetHomeworkEditBody));
         }
 
-        useEffect(() => {
-       
+       useEffect(() => {
        toast.success(GetDescription)
       }, [GetDescription])
     return (
@@ -113,7 +115,7 @@ function AddHomeWork() {
              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Button>Submit</Button>
                 <Button color="success" sx={{ ml: 1 }} onClick={()=>Edit(item.Id)}>Edit</Button>
-                <Button color="error" sx={{ ml: 1 }} onClick={()=>Delete(item.Id)}>Delete</Button>
+                <Button color="error" sx={{ ml: 1 }}   onClick={()=>Delete(item.Id)}>Delete</Button>
                  </Box>
               </div>
               
