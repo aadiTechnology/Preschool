@@ -5,54 +5,56 @@ import DropDown from 'src/library/DropDown/DropDown'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { getClassNameList ,getDescription ,getDetailsList ,getDeleteHomework ,getHomeworkListForEdit} from 'src/requests/Teacher/RequestTeacher';
-import { IGetClassNameListBody ,IGetDescriptionBody,IGetDetailsListBody ,IDeleteHomeworkBody ,IHomeworkListForEditBody} from 'src/Interface/Teacher/ITeacher';
+import { getClassNameList, getAddHomework, getDetailsList, getDeleteHomework, getHomeworkListForEdit } from 'src/requests/Teacher/RequestTeacher';
+import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDeleteHomeworkBody, IHomeworkListForEditBody } from 'src/Interface/Teacher/ITeacher';
 import { toast } from 'react-toastify';
 import Card4Text from 'src/library/Card/Card4Text';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import TabulerCard from 'src/library/Card/TabulerCard';
+
 function AddHomeWork() {
     const GetHomeWork: any = useSelector(
         (state: RootState) => state.ClassNameList.ClassNameList
     );
 
-    const GetDescription: any = useSelector(
-        (state: RootState) => state.ClassNameList.Description
+    const GetAddHomework: any = useSelector(
+        (state: RootState) => state.ClassNameList.AddHomework
     );
 
     const GetDetailsList: any = useSelector(
         (state: RootState) => state.ClassNameList.DetailsList
     );
-    
-    const GetDelete: any = useSelector(
-        (state: RootState) => state.ClassNameList.DeleteHomework
-    );
 
   
-    const GetEditList: any = useSelector(
-        (state: RootState) => state.ClassNameList.HomeworkListForEdit
-    );
-  
+
     const dispatch = useDispatch();
-    const [description, setDescription] = useState('')
-    const [selectclass, setSelectClass] = useState('');
-    const [selectdate, setSelectDate] = useState('');
+    const [description, setDescription] = useState(' ')
+    const [selectclass, setSelectClass] = useState(' ');
+    const [selectdate, setSelectDate] = useState(' ');
 
+    const [errordescription, setErrordescription] = useState('')
+
+    const handleContentChange = (value) => {
+        setDescription(value);
+    };
     const ClickItem = (value) => {
         setSelectClass(value);
     };
 
-   const GetClassNameListBody: IGetClassNameListBody =
+    const GetClassNameListBody: IGetClassNameListBody =
     {
         TeacherId: 0
     }
 
-    const GetDescriptionBody: IGetDescriptionBody =
+    const GetAddHomeworkBody: IGetAddHomeworkBody =
     {
         Class: selectclass,
         SubjectName: '',
-        SubjectDescription:description,
+        SubjectDescription: description,
         AssignDate: selectdate,
         Attachment: '',
-        Camera:''
+        Camera: ''
     }
 
     const GetDetailsListBody: IGetDetailsListBody =
@@ -62,66 +64,96 @@ function AddHomeWork() {
     useEffect(() => {
         dispatch(getClassNameList(GetClassNameListBody));
         dispatch(getDetailsList(GetDetailsListBody));
-       }, [])
+    }, [])
 
-    const SaveDetails=()=>{
-    setDescription('')
-    setSelectClass('')
-    setSelectDate('')
-    dispatch(getDescription(GetDescriptionBody));
+    const SubmitHomework = () => {
+        if (Validation()) {
+            setDescription('')
+            setSelectClass('')
+            setSelectDate('')
+            dispatch(getAddHomework(GetAddHomeworkBody));
+        }
     }
 
-    const Delete=(Id)=>{
-     const GetDeleteHomeworkBody:IDeleteHomeworkBody =
-        {
-            TeacherId: Id
+    const Validation = () => {
+        let isValid = true;
+        if (description === '') {
+            setErrordescription('field is required')
+            isValid = true
         }
-        dispatch(getDeleteHomework(GetDeleteHomeworkBody));
-     }
+        return isValid;
+    }
 
-     const Edit=(Id)=>{
-        const GetHomeworkEditBody:IHomeworkListForEditBody =
-           {
-            HomeworkDetailsId: Id
-           }
-           dispatch(getHomeworkListForEdit(GetHomeworkEditBody));
-        }
 
-       useEffect(() => {
-       toast.success(GetDescription)
-      }, [GetDescription])
+    useEffect(() => {
+        toast.success(GetAddHomework)
+    }, [GetAddHomework])
+
+
+    const toolbarOptions = {
+        toolbar: {
+            container: [
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ color: [] }],
+                [{ align: [] }],
+                [{ size: ['small', 'normal', 'large', 'huge'] }],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['link', 'image'],
+                ['clean'],
+            ],
+        },
+    };
     return (
         <Container>
             <PageHeader heading={'AddHomeWork'} />
             <Card>
                 <DropDown itemList={GetHomeWork} ClickItem={ClickItem} DefaultValue={selectclass} Label={'Select Class'} />
-                <TextField
-                    label="Description"
+                <br></br>
+                <ReactQuill
                     value={description}
-                    onChange={(e) => setDescription(e.target.value)} />
-                   <TextField type="date"
-                    value={selectdate} 
+                    onChange={handleContentChange}
+                    modules={toolbarOptions}
+                />
+
+
+                <TextField type="date"
+                    value={selectdate}
                     onChange={(e) => setSelectDate(e.target.value)}
-                    />
-                  <Box mt={2}>
+                />
+                <Box mt={2}>
                     <input type="file" ></input>
                 </Box>
-                <Button sx={{ mt: 2 }} onClick={SaveDetails}>Save</Button>
+                <Button sx={{ mt: 2 }} onClick={SubmitHomework}>Save</Button>
             </Card>
-            {GetDetailsList.map((item, i)=>{
-              <div key={i}>
-             <Card4Text Text1={item.Text1} Text2={item.Text2} Text3={item.Text3} Text4={item.Text4}/>
+             
+             <TabulerCard/>
 
-             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+
+            {/* {GetDetailsList.map((item, i) => {
+                <div key={i}>
+                    <Card4Text Text1={item.Text1} Text2={item.Text2} Text3={item.Text3} Text4={item.Text4} />
+
+
+                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Button>Submit</Button>
+                        <Button color="success" sx={{ ml: 1 }} onClick={() => Edit(item.Id)}>Edit</Button>
+                        <Button color="error" sx={{ ml: 1 }} onClick={() => Delete(item.Id)}>Delete</Button>
+                    </Box>
+                </div>
+
+            })} */}
+
+
+            {/* <Card4Text Text1={'english'} Text2={'marathi'} Text3={'bvdyvbgw'} Text4={'cbcebqyvbye'} />
+
+
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Button>Submit</Button>
-                <Button color="success" sx={{ ml: 1 }} onClick={()=>Edit(item.Id)}>Edit</Button>
-                <Button color="error" sx={{ ml: 1 }}   onClick={()=>Delete(item.Id)}>Delete</Button>
-                 </Box>
-              </div>
-              
-                 })}
-               
-           </Container>
+                <Button color="success" sx={{ ml: 1 }} onClick={() => Edit(Id)}>Edit</Button>
+                <Button color="error" sx={{ ml: 1 }} onClick={() => Delete(Id)}>Delete</Button>
+            </Box> */}
+
+        </Container>
     )
 }
 

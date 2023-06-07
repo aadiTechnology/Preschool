@@ -9,7 +9,7 @@ export interface IGetClassNameListResult {
    TeacherId: number
 };
 
-export interface IGetDescriptionBody {
+export interface IGetAddHomeworkBody {
     Class:string,
     SubjectName:string,
     SubjectDescription:string,
@@ -18,7 +18,7 @@ export interface IGetDescriptionBody {
     Camera:string
 };
 
-export interface IGetDescriptionResult{};
+export interface IGetAddHomeworkResult{};
 
 export interface IGetDetailsListBody {
     TeacherId:number

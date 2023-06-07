@@ -1,14 +1,14 @@
 import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'src/store';
-import {IGetClassNameListBody ,IGetDescriptionBody ,IGetDetailsListBody ,IDeleteHomeworkBody ,IHomeworkListForEditBody} from 'src/Interface/Teacher/ITeacher';
+import {IGetClassNameListBody ,IGetAddHomeworkBody ,IGetDetailsListBody ,IDeleteHomeworkBody ,IHomeworkListForEditBody} from 'src/Interface/Teacher/ITeacher';
 import GetClassForTeacherApi from 'src/api/Teacher/ApiTeacher'
 
 const ClassNameListSlice = createSlice({
   name: 'ClassNameList',
   initialState:{
     ClassNameList:[],
-    Description:{},
+    AddHomework:{},
     DetailsList:[],
     DeleteHomework:{},
     HomeworkListForEdit:{}
@@ -18,8 +18,8 @@ const ClassNameListSlice = createSlice({
     getClassNameList(state,action){
       state.ClassNameList=action.payload;
     },
-    getDescription(state,action){
-      state.Description=action.payload;
+    getAddHomework(state,action){
+      state.AddHomework=action.payload;
     },
 
     getDetailsList(state,action){
@@ -32,7 +32,7 @@ const ClassNameListSlice = createSlice({
       state.HomeworkListForEdit=action.payload;
     },
     resetMessage(state) {
-      state.Description = {};
+      state.AddHomework = {};
     },
   }   
 });
@@ -53,11 +53,11 @@ export const getClassNameList =
   };
 
 
-  export const getDescription =
-  (data:IGetDescriptionBody): AppThunk =>
+  export const getAddHomework =
+  (data:IGetAddHomeworkBody): AppThunk =>
   async (dispatch) => {
-    const response = await GetClassForTeacherApi.GetDescription(data);
-    dispatch(ClassNameListSlice.actions.getDescription(response.data));
+    const response = await GetClassForTeacherApi.GetAddHomework(data);
+    dispatch(ClassNameListSlice.actions.getAddHomework(response.data));
   };
 
   

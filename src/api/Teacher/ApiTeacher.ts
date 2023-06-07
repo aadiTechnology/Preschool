@@ -1,13 +1,13 @@
 import http from "../../utils/http-common";
-import {IGetClassNameListBody ,IGetClassNameListResult ,IGetDescriptionBody ,
-  IGetDescriptionResult ,IGetDetailsListBody,IGetDetailsListResult ,IDeleteHomeworkBody ,IDeleteHomeworkResult ,IHomeworkListForEditBody,IHomeworkListForEditResult} from "src/Interface/Teacher/ITeacher";
+import {IGetClassNameListBody ,IGetClassNameListResult ,IGetAddHomeworkBody ,
+  IGetAddHomeworkResult ,IGetDetailsListBody,IGetDetailsListResult ,IDeleteHomeworkBody ,IDeleteHomeworkResult ,IHomeworkListForEditBody,IHomeworkListForEditResult} from "src/Interface/Teacher/ITeacher";
 
   const GetClassForTeacher = (data: IGetClassNameListBody) => {
     return http.post<IGetClassNameListResult[]>('GetClassNameList',data);
   };
 
-  const GetDescription = (data: IGetDescriptionBody) => {
-    return http.post<IGetDescriptionResult[]>('AddHomeworkDetails',data);
+  const GetAddHomework = (data: IGetAddHomeworkBody) => {
+    return http.post<IGetAddHomeworkResult[]>('AddHomeworkDetails',data);
   };
 
   const GetDetailsList = (data: IGetDetailsListBody) => {
@@ -24,7 +24,7 @@ import {IGetClassNameListBody ,IGetClassNameListResult ,IGetDescriptionBody ,
   
 const GetClassForTeacherApi ={
     GetClassForTeacher,
-    GetDescription,
+    GetAddHomework,
     GetDetailsList,
     GetDeleteHomework,
     GetHomeworkListForEdit
