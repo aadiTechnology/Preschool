@@ -15,6 +15,9 @@ const Holidays = Loader(lazy(() => import('src/components/Holiday/Holiday')));
 const SchoolList = Loader(lazy(() => import('src/components/SchoolList/SchoolList')));
 const ChangePassword = Loader(lazy(()=> import('src/components/ChangePassword/ChangePassword')))
 const AddHomeWork = Loader(lazy(()=> import('src/components/AddHomeWork/AddHomeWork')))
+ const ViewPhotoAlbum = Loader(lazy(()=> import('src/components/ViewPhotoAlbum/ViewPhotoAlbum')))
+const AddStaff = Loader(lazy(()=> import('src/components/AddStaff/AddStaff')))
+const Login = Loader(lazy(()=> import('src/components/Login/Login')))
 const studentRoutes = [
   {
     path: '/',
@@ -35,6 +38,18 @@ const studentRoutes = [
   {
     path: 'AddHomeWork',
     element: <AddHomeWork/>
+  },
+  {
+    path: 'ViewPhotoAlbum',
+    element: <ViewPhotoAlbum/>
+  },
+  {
+    path: 'AddStaff',
+    element: <AddStaff/>
+  },
+  {
+    path: 'Login',
+    element: <Login/>
   },
 ];
 
