@@ -11,11 +11,14 @@ function AddStaff() {
     const [alignment, setAlignment] = React.useState('Teacher');
     const [name,setName]=useState('');
     const [nameerror , setNameerror] =useState('')
+    const [birthdate, setBirthdate] = useState('')
+    const [birthdateerror ,setBirthdateerror] = useState('')
     const [qualification,setQualification]=useState('');
     const [address,setAddress]=useState('');
     const [phonenumber,setPhoneNumber]=useState('');
     const [email,setEmail]=useState(''); 
-    const [joiningdate,setJoiningDate]=useState(''); 
+    const [joiningdate,setJoiningDate]=useState('');
+    const [joiningdateerror , setJoiningDateerror] =useState('') 
     const [experience,setExperience]=useState(''); 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -28,16 +31,35 @@ function AddStaff() {
 const clickSaveStaff = ()=>{
 let isError = false;
 if(name ===''){
-    setNameerror("Please enter teacher's name")
+    setNameerror("Please enter  teacher name")
     isError = true
   } else if(!regex.test(name)){
-    setNameerror("Accept only alphabet characters")
+    setNameerror("Accept only alphabetic characters")
   }
   else{
     setNameerror('')
    
   }
+
+  if(birthdate ===''){
+    setBirthdateerror("This field is required")
+    isError = true
+  }else{
+    setBirthdateerror('')
+   
+  }
+
+  if(joiningdate ===''){
+    setJoiningDateerror("This field is required")
+    isError = true
+  }else{
+    setJoiningDateerror('')
+   
+  }
 }
+
+
+
 
   return (
     <Container>
@@ -59,6 +81,7 @@ if(name ===''){
     {nameerror}
     <Typography sx={{mt:"3px" ,fontSize:"10px"}}>Birthdate</Typography>
     <TextField type={'date'} sx={{mt:"-5px"}}/>
+    {birthdateerror}
     <TextField value={qualification} onChange={(e)=>{setQualification(e.target.value)}} 
     label={'Qualification'}/>
     <TextField value={address} onChange={(e)=>{setAddress(e.target.value)}} 
@@ -67,8 +90,9 @@ if(name ===''){
     label={'Phone Number'}/>
     <TextField value={email} onChange={(e)=>{setEmail(e.target.value)}} 
     label={'Email'}/>
-    <TextField value={joiningdate} onChange={(e)=>{setJoiningDate(e.target.value)}} 
-    label={'Joining Date'}/>
+    <Typography sx={{mt:"3px" ,fontSize:"10px"}}>JoiningDate</Typography>
+    <TextField type={'date'} sx={{mt:"-5px"}}/>
+    {joiningdateerror}
     <TextField value={experience} onChange={(e)=>{setExperience(e.target.value)}} 
     label={'Experience'}/>
     <Button  variant='contained' onClick={clickSaveStaff}>
