@@ -7,7 +7,7 @@ function Card2Text({ Text1,Text2}) {
       <Typography variant="h5">
           {Text1}
         </Typography>
-      <Typography variant='body2' >
+      <Typography variant='body2' color={"Green"} >
          {Text2}
      </Typography>
     </Box>
