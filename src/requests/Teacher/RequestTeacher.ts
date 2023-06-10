@@ -82,7 +82,7 @@ export const getClassNameList =
    let DeleteList = response.data.map((item,i)=>{
     return {
          Id:item.Id,
-         Text1:item.SubjectName,
+         Text1:  item.Class,
          Text2 : item.SubjectDescription,
          Text3 : item.SubjectName,
          Text4 : item.Attachment,
