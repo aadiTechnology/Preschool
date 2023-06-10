@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { getDeleteHomework, getHomeworkListForEdit ,getSubmitHomework } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IDeleteHomeworkBody, IHomeworkListForEditBody , ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
-function TabulerCard({ homeWorkList}) {
+function TabulerCard({ homeWorkList , onEdit}) {
 
   const [editing, setEditing] = useState(false);
     const dispatch = useDispatch();
@@ -22,9 +22,7 @@ function TabulerCard({ homeWorkList}) {
   );
 
 
-    const GetEditList: any = useSelector(
-        (state: RootState) => state.AddHomeWork.HomeworkListForEdit
-    );
+  
 
     const Delete = (Id) => {
         const GetDeleteHomeworkBody: IDeleteHomeworkBody =
@@ -35,14 +33,7 @@ function TabulerCard({ homeWorkList}) {
     }
 
 
-    const Edit = (Id) => {
-      setEditing(true);
-        const GetHomeworkEditBody: IHomeworkListForEditBody =
-        {
-            HomeworkDetailsId: Id
-        }
-        dispatch(getHomeworkListForEdit(GetHomeworkEditBody));
-    }
+ 
 
     const Submit = (Id) => {
       const GetSubmitHomeworkBody: ISubmitHomeworkBody =
@@ -82,7 +73,7 @@ function TabulerCard({ homeWorkList}) {
         <ArrowRightAltIcon onClick={()=>Submit(item.Id)}/>
         </Grid>
         <Grid item xs={1}>
-       <EditIcon onClick={()=>Edit(item.Id)}/>
+       <EditIcon onClick={()=>onEdit(item.Id)}/>
         </Grid>
         <Grid item xs={1}>
        <DeleteIcon onClick={()=>Delete(item.Id)}/>
