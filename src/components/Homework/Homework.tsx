@@ -7,8 +7,31 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
 import DotLegend from 'src/library/Legend/DotLegend'
+import {GetDateForLegend} from 'src/requests/Student/Homework/RequestHomework'
+import { IGetDateForLegendBody } from 'src/Interface/Student/IHomework';
 
 function Homework()  {
+
+  const dispatch = useDispatch();
+
+  const GetDateLegend: any = useSelector(
+    (state: RootState) => state.HomeWork.HighlightedDate
+);
+
+console.log(GetDateLegend,"GetDateLegend")
+
+  const GetHighlightedDateBody: IGetDateForLegendBody =
+  {
+    
+      "AssignDate":"08/06/2023"
+  
+      
+  }
+
+  useEffect(() => {
+    dispatch(GetDateForLegend(GetHighlightedDateBody));
+   }, [])
+
   return (
     <Container>
         <PageHeader heading={'Homework'} />
