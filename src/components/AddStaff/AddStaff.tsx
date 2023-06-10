@@ -24,13 +24,16 @@ function AddStaff() {
     setAlignment(newAlignment);
   };
 
-  
+  const regex =  /^[a-zA-Z]*$/; 
 const clickSaveStaff = ()=>{
 let isError = false;
 if(name ===''){
-    setNameerror("feild required")
+    setNameerror("Please enter teacher's name")
     isError = true
-  }else{
+  } else if(!regex.test(name)){
+    setNameerror("Accept only alphabet characters")
+  }
+  else{
     setNameerror('')
    
   }
