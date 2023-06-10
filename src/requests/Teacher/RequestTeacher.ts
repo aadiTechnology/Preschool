@@ -1,7 +1,7 @@
 import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'src/store';
-import {IGetClassNameListBody ,IGetAddHomeworkBody ,IGetDetailsListBody ,IDeleteHomeworkBody ,IHomeworkListForEditBody} from 'src/Interface/Teacher/ITeacher';
+import {IGetClassNameListBody ,IGetAddHomeworkBody ,IGetDetailsListBody ,IDeleteHomeworkBody ,IHomeworkListForEditBody} from 'src/Interface/Teacher/IAddHomework';
 import GetClassForTeacherApi from 'src/api/Teacher/ApiTeacher'
 
 const ClassNameListSlice = createSlice({
@@ -82,7 +82,7 @@ export const getClassNameList =
    let DeleteList = response.data.map((item,i)=>{
     return {
          Id:item.Id,
-         Text1:item.SubjectName,
+         Text1:  item.Class,
          Text2 : item.SubjectDescription,
          Text3 : item.SubjectName,
          Text4 : item.Attachment,

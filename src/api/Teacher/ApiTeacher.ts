@@ -1,6 +1,6 @@
 import http from "../../utils/http-common";
 import {IGetClassNameListBody ,IGetClassNameListResult ,IGetAddHomeworkBody ,
-  IGetAddHomeworkResult ,IGetDetailsListBody,IGetDetailsListResult ,IDeleteHomeworkBody ,IDeleteHomeworkResult ,IHomeworkListForEditBody,IHomeworkListForEditResult} from "src/Interface/Teacher/ITeacher";
+  IGetAddHomeworkResult ,IGetDetailsListBody,IGetDetailsListResult ,IDeleteHomeworkBody ,IDeleteHomeworkResult ,IHomeworkListForEditBody,IHomeworkListForEditResult} from "src/Interface/Teacher/IAddHomework";
 
   const GetClassForTeacher = (data: IGetClassNameListBody) => {
     return http.post<IGetClassNameListResult[]>('GetClassNameList',data);
