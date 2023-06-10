@@ -54,3 +54,9 @@ export interface IHomeworkListForEditResult{
     Camera: string
 
 };
+
+export interface ISubmitHomeworkBody {
+    TeacherId:number
+}
+
+export interface ISubmitHomeworkResult{};

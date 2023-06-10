@@ -7,15 +7,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { getDeleteHomework, getHomeworkListForEdit } from 'src/requests/Teacher/RequestTeacher';
-import { IDeleteHomeworkBody, IHomeworkListForEditBody } from 'src/Interface/Teacher/IAddHomework';
-function TabulerCard({SubmitHomework ,homeWorkList}) {
+import { getDeleteHomework, getHomeworkListForEdit ,getSubmitHomework } from 'src/requests/Teacher/RequestTeacher';
+import { IDeleteHomeworkBody, IHomeworkListForEditBody , ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
+function TabulerCard({ homeWorkList}) {
 
   const [editing, setEditing] = useState(false);
     const dispatch = useDispatch();
     const GetDelete: any = useSelector(
         (state: RootState) => state.ClassNameList.DeleteHomework
     );
+
+    const GetSubmit: any = useSelector(
+      (state: RootState) => state.ClassNameList.SubmitHomework
+  );
 
 
     const GetEditList: any = useSelector(
@@ -30,6 +34,7 @@ function TabulerCard({SubmitHomework ,homeWorkList}) {
         dispatch(getDeleteHomework(GetDeleteHomeworkBody));
     }
 
+
     const Edit = (Id) => {
       setEditing(true);
         const GetHomeworkEditBody: IHomeworkListForEditBody =
@@ -39,10 +44,22 @@ function TabulerCard({SubmitHomework ,homeWorkList}) {
         dispatch(getHomeworkListForEdit(GetHomeworkEditBody));
     }
 
+    const Submit = (Id) => {
+      const GetSubmitHomeworkBody: ISubmitHomeworkBody =
+      {
+          TeacherId: Id
+      }
+      dispatch(getSubmitHomework(GetSubmitHomeworkBody));
+  }
+
 
     useEffect(() => {
       toast.success(GetDelete)
   }, [GetDelete])
+
+    useEffect(() => {
+    toast.success(GetSubmit)
+   }, [GetSubmit])
   
  
   return (
@@ -61,8 +78,8 @@ function TabulerCard({SubmitHomework ,homeWorkList}) {
         <Grid item xs={2}>
           <Typography>{item.Text6}</Typography>
         </Grid>
-        <Grid item xs={2} onClick={SubmitHomework}>
-        <ArrowRightAltIcon/>
+        <Grid item xs={2} >
+        <ArrowRightAltIcon onClick={()=>Submit(item.Id)}/>
         </Grid>
         <Grid item xs={1}>
        <EditIcon onClick={()=>Edit(item.Id)}/>
