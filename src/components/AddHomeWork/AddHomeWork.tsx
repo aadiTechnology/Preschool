@@ -8,12 +8,11 @@ import { RootState } from 'src/store';
 import { getClassNameList, getAddHomework, getDetailsList, getDeleteHomework, getHomeworkListForEdit } from 'src/requests/Teacher/RequestTeacher';
 import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDeleteHomeworkBody, IHomeworkListForEditBody } from 'src/Interface/Teacher/IAddHomework';
 import { toast } from 'react-toastify';
-import Card4Text from 'src/library/Card/Card4Text';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import TabulerCard from 'src/library/Card/TabulerCard';
 import { toolbarOptions } from '../Common/util';
-import MonthYearDropDown from 'src/library/DropDown/MonthYearDropDown';
+
 
 function AddHomeWork() {
 
@@ -35,10 +34,9 @@ function AddHomeWork() {
     const [selectdate, setSelectDate] = useState('');
     const [errordescription, setErrordescription] = useState('')
     const [errorselectdate, setErrorselectdate] = useState('')
-    const handleContentChange = (value, editor) => {
+    const handleContentChange = (value) => {
         setSubjectDescription(value);
-
-    };
+     };
     const ClickItem = (value) => {
         setSelectClass(value);
     };
@@ -76,12 +74,7 @@ function AddHomeWork() {
   
  
 
-    const SubmitHomework = () => {
-        setSubjectDescription('')
-        setSelectClass('')
-        setSelectDate('')
-        dispatch(getAddHomework(GetAddHomeworkBody));
-    }
+  
 
     const onAddHomeWork = () => {
         let isValid = true;
@@ -126,7 +119,7 @@ function AddHomeWork() {
                 <Button sx={{ mt: 2 }} onClick={onAddHomeWork}>Save</Button>
             </Card>
             <br></br>
-            <TabulerCard SubmitHomework={SubmitHomework} homeWorkList={GetHomeWorkDetailsList} />
+            <TabulerCard homeWorkList={GetHomeWorkDetailsList} />
         
         </Container>
 

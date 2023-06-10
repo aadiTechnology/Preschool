@@ -1,6 +1,6 @@
 import http from "../../utils/http-common";
 import {IGetClassNameListBody ,IGetClassNameListResult ,IGetAddHomeworkBody ,
-  IGetAddHomeworkResult ,IGetDetailsListBody,IGetDetailsListResult ,IDeleteHomeworkBody ,IDeleteHomeworkResult ,IHomeworkListForEditBody,IHomeworkListForEditResult} from "src/Interface/Teacher/IAddHomework";
+  IGetAddHomeworkResult ,IGetDetailsListBody,IGetDetailsListResult ,IDeleteHomeworkBody ,IDeleteHomeworkResult , ISubmitHomeworkBody,ISubmitHomeworkResult,IHomeworkListForEditBody,IHomeworkListForEditResult} from "src/Interface/Teacher/IAddHomework";
 
   const GetClassForTeacher = (data: IGetClassNameListBody) => {
     return http.post<IGetClassNameListResult[]>('GetClassNameList',data);
@@ -12,6 +12,10 @@ import {IGetClassNameListBody ,IGetClassNameListResult ,IGetAddHomeworkBody ,
 
   const GetDetailsList = (data: IGetDetailsListBody) => {
     return http.post<IGetDetailsListResult[]>('GetHomeworkDetailsList',data);
+  };
+
+  const GetSubmitHomework = (data: ISubmitHomeworkBody) => {
+    return http.post<ISubmitHomeworkResult[]>('SubmitHomework',data);
   };
 
   const GetDeleteHomework= (data: IDeleteHomeworkBody) => {
@@ -27,7 +31,8 @@ const GetClassForTeacherApi ={
     GetAddHomework,
     GetDetailsList,
     GetDeleteHomework,
-    GetHomeworkListForEdit
+    GetHomeworkListForEdit,
+    GetSubmitHomework
 }
 
 export default GetClassForTeacherApi;
