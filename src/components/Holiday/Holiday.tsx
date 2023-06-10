@@ -33,7 +33,7 @@ function Holiday() {
     <Container>
       <PageHeader heading={'Holiday'}/>
       <DotLegend ItemList={[{Value:'blue', Name:'Holiday'}]}/><br></br>
-       <ListCard ItemList={ItemList}/>
+       {/* <ListCard ItemList={ItemList}/> */}
        <List2Card ItemList={ItemList}/>
        <List3Card ItemList={ItemList}/>
 

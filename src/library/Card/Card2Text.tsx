@@ -1,8 +1,8 @@
 import React from 'react'
 import { Box , Card, Typography } from '@mui/material'
-function Card2Text({ Text1,Text2}) {
+function Card2Text({ Text1,Text2,clickNavigate}) {
   return (
-    <Card component={Box} mb={1}>
+    <Card component={Box} mb={1} onClick={clickNavigate}>
     <Box display={"flex"} justifyContent={'space-between'}  p={1}>
       <Typography variant="h5">
           {Text1}
