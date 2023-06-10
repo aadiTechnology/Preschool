@@ -7,23 +7,23 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { getDeleteHomework, getHomeworkListForEdit ,getSubmitHomework } from 'src/requests/Teacher/RequestTeacher';
+import { getDeleteHomework, getHomeworkListForEdit ,getSubmitHomework } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IDeleteHomeworkBody, IHomeworkListForEditBody , ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
 function TabulerCard({ homeWorkList}) {
 
   const [editing, setEditing] = useState(false);
     const dispatch = useDispatch();
     const GetDelete: any = useSelector(
-        (state: RootState) => state.ClassNameList.DeleteHomework
+        (state: RootState) => state.AddHomeWork.DeleteHomework
     );
 
     const GetSubmit: any = useSelector(
-      (state: RootState) => state.ClassNameList.SubmitHomework
+      (state: RootState) => state.AddHomeWork.SubmitHomework
   );
 
 
     const GetEditList: any = useSelector(
-        (state: RootState) => state.ClassNameList.HomeworkListForEdit
+        (state: RootState) => state.AddHomeWork.HomeworkListForEdit
     );
 
     const Delete = (Id) => {

@@ -5,7 +5,7 @@ import DropDown from 'src/library/DropDown/DropDown'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { getClassNameList, getAddHomework, getDetailsList, getDeleteHomework, getHomeworkListForEdit } from 'src/requests/Teacher/RequestTeacher';
+import { getClassNameList, getAddHomework, getDetailsList, getDeleteHomework, getHomeworkListForEdit } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDeleteHomeworkBody, IHomeworkListForEditBody } from 'src/Interface/Teacher/IAddHomework';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
@@ -17,15 +17,15 @@ import { toolbarOptions } from '../Common/util';
 function AddHomeWork() {
 
      const GetHomeWork: any = useSelector(
-        (state: RootState) => state.ClassNameList.ClassNameList
+        (state: RootState) => state.AddHomeWork.ClassNameList
     );
 
     const GetHomeWorkDetailsList: any = useSelector(
-        (state: RootState) => state.ClassNameList.DetailsList
+        (state: RootState) => state.AddHomeWork.DetailsList
     );
 
     const GetAddHomework: any = useSelector(
-        (state: RootState) => state.ClassNameList.AddHomework
+        (state: RootState) => state.AddHomeWork.AddHomework
     );
 
     const dispatch = useDispatch();
