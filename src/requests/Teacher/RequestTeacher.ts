@@ -1,7 +1,7 @@
 import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'src/store';
-import {IGetClassNameListBody ,IGetAddHomeworkBody ,IGetDetailsListBody ,IDeleteHomeworkBody ,IHomeworkListForEditBody} from 'src/Interface/Teacher/ITeacher';
+import {IGetClassNameListBody ,IGetAddHomeworkBody ,IGetDetailsListBody ,IDeleteHomeworkBody ,IHomeworkListForEditBody} from 'src/Interface/Teacher/IAddHomework';
 import GetClassForTeacherApi from 'src/api/Teacher/ApiTeacher'
 
 const ClassNameListSlice = createSlice({

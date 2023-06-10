@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { getDeleteHomework, getHomeworkListForEdit } from 'src/requests/Teacher/RequestTeacher';
-import { IDeleteHomeworkBody, IHomeworkListForEditBody } from 'src/Interface/Teacher/ITeacher';
+import { IDeleteHomeworkBody, IHomeworkListForEditBody } from 'src/Interface/Teacher/IAddHomework';
 function TabulerCard({SubmitHomework ,homeWorkList}) {
 
   const [editing, setEditing] = useState(false);

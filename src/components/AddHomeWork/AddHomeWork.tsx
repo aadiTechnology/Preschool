@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { getClassNameList, getAddHomework, getDetailsList, getDeleteHomework, getHomeworkListForEdit } from 'src/requests/Teacher/RequestTeacher';
-import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDeleteHomeworkBody, IHomeworkListForEditBody } from 'src/Interface/Teacher/ITeacher';
+import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDeleteHomeworkBody, IHomeworkListForEditBody } from 'src/Interface/Teacher/IAddHomework';
 import { toast } from 'react-toastify';
 import Card4Text from 'src/library/Card/Card4Text';
 import ReactQuill from 'react-quill';
