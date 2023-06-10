@@ -45,6 +45,24 @@ const menuItems: MenuItems[] = [
         icon: AccountTreeTwoToneIcon,
         link: '/extended-sidebar/Student/AddHomeWork'
       },
+
+      {
+        name: 'PhotoGallery',
+        icon: AccountTreeTwoToneIcon,
+        link: '/extended-sidebar/Student/ViewPhotoAlbum'
+      },
+      
+      {
+        name: 'AddStaff',
+        icon: AccountTreeTwoToneIcon,
+        link: '/extended-sidebar/Student/AddStaff'
+      },
+      
+      {
+        name: 'Login',
+        icon: AccountTreeTwoToneIcon,
+        link: '/extended-sidebar/Student/Login'
+      },
       
     
    
