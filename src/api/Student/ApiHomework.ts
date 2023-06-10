@@ -1,13 +1,20 @@
 import http from "../../utils/http-common";
-import { IGetDateForLegendBody,IGetDateForLegendResult } from "src/Interface/Student/IHomework";
+import { IGetDateForLegendBody, IGetDateForLegendResult,IGetViewHomeWorkListBody,IGetViewHomeWorkListResult} from "src/Interface/Student/IHomework";
 
-const GetDateForLegend =(data:IGetDateForLegendBody)=>{
-    return http.post<IGetDateForLegendResult>('GetDateForLegend',data)
+
+const GetDateForLegend = (data: IGetDateForLegendBody) => {
+    return http.post<IGetDateForLegendResult>('GetDateForLegend', data)
 };
 
-const GetDateForLegendApi ={
-    GetDateForLegend
+const GetViewHomeWorkList = (data: IGetViewHomeWorkListBody) => {
+    return http.post<IGetViewHomeWorkListResult>('GetViewHomeWorkList', data)
+};
+
+
+const GetHomeworkApi = {
+    GetDateForLegend,
+    GetViewHomeWorkList
 
 }
 
-export default GetDateForLegendApi;
+export default GetHomeworkApi
