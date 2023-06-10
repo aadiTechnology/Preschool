@@ -64,8 +64,11 @@ const menuItems: MenuItems[] = [
         link: '/extended-sidebar/Student/Login'
       },
       
-    
-   
+    {
+      name:'Homework',
+      icon: AccountTreeTwoToneIcon,
+      link:'/extended-sidebar/Student/Homework'
+    }
 
     
 
