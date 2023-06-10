@@ -4,22 +4,28 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Container, TextField, Button,Card, Typography} from '@mui/material';
 import { useState } from 'react';
+import { number } from 'prop-types';
 
 
 
 function AddStaff() {
     const [alignment, setAlignment] = React.useState('Teacher');
     const [name,setName]=useState('');
-    const [nameerror , setNameerror] =useState('')
+    const [nameerror, setNameerror] =useState('')
     const [birthdate, setBirthdate] = useState('')
-    const [birthdateerror ,setBirthdateerror] = useState('')
-    const [qualification,setQualification]=useState('');
-    const [address,setAddress]=useState('');
-    const [phonenumber,setPhoneNumber]=useState('');
-    const [email,setEmail]=useState(''); 
-    const [joiningdate,setJoiningDate]=useState('');
-    const [joiningdateerror , setJoiningDateerror] =useState('') 
-    const [experience,setExperience]=useState(''); 
+    const [birthdateerror, setBirthdateerror] = useState('')
+    const [qualification, setQualification]=useState('');
+    const [qualificationerror, setQualificationerror] = useState('')
+    const [address, setAddress]=useState('');
+    const [addresserror, setAddresserror] = useState('')
+    const [phonenumber, setPhoneNumber]=useState('');
+    const [phonenumbererror, setPhoneNumbererror] = useState('')
+    const [email, setEmail]=useState('');
+    const [emailerror, setEmailerror] = useState('') 
+    const [joiningdate, setJoiningDate]=useState('');
+    const [joiningdateerror, setJoiningDateerror] =useState('') 
+    const [experience, setExperience]=useState(''); 
+    const [experienceerror, setExperienceerror] = useState('')
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string,
@@ -28,10 +34,13 @@ function AddStaff() {
   };
 
   const regex =  /^[a-zA-Z]*$/; 
+  const emailRegExp = /^\S+@\S+\.\S+$/;
+  var phoneno = /^\d{10}$/;
+
 const clickSaveStaff = ()=>{
 let isError = false;
 if(name ===''){
-    setNameerror("Please enter  teacher name")
+    setNameerror("This field is required")
     isError = true
   } else if(!regex.test(name)){
     setNameerror("Accept only alphabetic characters")
@@ -49,11 +58,61 @@ if(name ===''){
    
   }
 
+  if(qualification ===''){
+    setQualificationerror("This field is required")
+    isError = true
+  }else{
+    setQualificationerror('')
+   
+  }
+
+  if(address ===''){
+    setAddresserror("This field is required")
+    isError = true
+  }else{
+    setAddresserror('')
+   
+  }
+
+  if(phonenumber ===''){
+    setPhoneNumbererror("This field is required")
+  isError = true
+} 
+else if(!phoneno.test(phonenumber)){
+  setPhoneNumbererror('Invalid phone number');                  
+}
+
+else{
+  setPhoneNumbererror('')
+ 
+}
+
+  if(email ===''){
+    setEmailerror("This field is required")
+  isError = true
+} 
+else if(!emailRegExp.test(email)){
+  setEmailerror('Invalid email address');                  
+}
+
+else{
+  setEmailerror('')
+ 
+}
+
   if(joiningdate ===''){
     setJoiningDateerror("This field is required")
     isError = true
   }else{
     setJoiningDateerror('')
+   
+  }
+
+  if(experience ===''){
+    setExperienceerror("This field is required")
+    isError = true
+  }else{
+    setExperienceerror('')
    
   }
 }
@@ -84,17 +143,22 @@ if(name ===''){
     {birthdateerror}
     <TextField value={qualification} onChange={(e)=>{setQualification(e.target.value)}} 
     label={'Qualification'}/>
+    {qualificationerror}
     <TextField value={address} onChange={(e)=>{setAddress(e.target.value)}} 
     label={'Address'}/>
+    {addresserror}
     <TextField value={phonenumber} onChange={(e)=>{setPhoneNumber(e.target.value)}} 
     label={'Phone Number'}/>
+    {phonenumbererror}
     <TextField value={email} onChange={(e)=>{setEmail(e.target.value)}} 
     label={'Email'}/>
+    {emailerror}
     <Typography sx={{mt:"3px" ,fontSize:"10px"}}>JoiningDate</Typography>
     <TextField type={'date'} sx={{mt:"-5px"}}/>
     {joiningdateerror}
     <TextField value={experience} onChange={(e)=>{setExperience(e.target.value)}} 
     label={'Experience'}/>
+    {experienceerror}
     <Button  variant='contained' onClick={clickSaveStaff}>
                         Save
                     </Button>
