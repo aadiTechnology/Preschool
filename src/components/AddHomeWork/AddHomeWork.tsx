@@ -28,12 +28,17 @@ function AddHomeWork() {
         (state: RootState) => state.AddHomeWork.AddHomework
     );
 
+    const GetEditList: any = useSelector(
+        (state: RootState) => state.AddHomeWork.HomeworkListForEdit
+    );
+
     const dispatch = useDispatch();
     const [subjectDescription, setSubjectDescription] = useState('')
     const [selectclass, setSelectClass] = useState('');
     const [selectdate, setSelectDate] = useState('');
     const [errordescription, setErrordescription] = useState('')
     const [errorselectdate, setErrorselectdate] = useState('')
+    const [editing, setEditing] = useState(GetEditList);
     const handleContentChange = (value) => {
         setSubjectDescription(value);
      };
@@ -62,6 +67,7 @@ function AddHomeWork() {
     {
         TeacherId: 0
     }
+
     useEffect(() => {
         dispatch(getClassNameList(GetClassNameListBody));
         dispatch(getDetailsList(GetDetailsListBody));
@@ -73,7 +79,18 @@ function AddHomeWork() {
     }, [GetAddHomework])
   
  
-
+    const Edit = (Id) => {
+      
+        setEditing(GetEditList);
+        console.log(GetEditList)
+          const GetHomeworkEditBody: IHomeworkListForEditBody =
+          {
+              HomeworkDetailsId: Id
+          }
+          dispatch(getHomeworkListForEdit(GetHomeworkEditBody));
+  
+         
+      }
   
 
     const onAddHomeWork = () => {
@@ -119,7 +136,7 @@ function AddHomeWork() {
                 <Button sx={{ mt: 2 }} onClick={onAddHomeWork}>Save</Button>
             </Card>
             <br></br>
-            <TabulerCard homeWorkList={GetHomeWorkDetailsList} />
+            <TabulerCard homeWorkList={GetHomeWorkDetailsList} onEdit={Edit}/>
         
         </Container>
 
