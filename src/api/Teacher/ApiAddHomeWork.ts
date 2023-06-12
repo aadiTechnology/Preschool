@@ -11,7 +11,7 @@ import {IGetClassNameListBody ,IGetClassNameListResult ,IGetAddHomeworkBody ,
   };
 
   const GetDetailsList = (data: IGetDetailsListBody) => {
-    return http.post<IGetDetailsListResult[]>('GetHomeworkDetailsList',data);
+    return http.post<IGetDetailsListResult[]>('GetHomeworekDetailsList',data);
   };
 
   const GetSubmitHomework = (data: ISubmitHomeworkBody) => {

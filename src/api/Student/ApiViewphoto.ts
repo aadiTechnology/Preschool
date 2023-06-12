@@ -1,13 +1,17 @@
 import http from "../../utils/http-common";
-import { IGetYearDropDownForAlbumListBody,IGetYearDropDownForAlbumListResult } from "src/Interface/Student/IViewphoto";
+import { IGetYearDropDownForAlbumListBody,IGetYearDropDownForAlbumListResult, IGetAlbumNameListBody,IGetAlbumNameListResult} from "src/Interface/Student/IViewphoto";
 
 const GetYearDropDownForAlbumList =(data:IGetYearDropDownForAlbumListBody)=>{
-    return http.post<IGetYearDropDownForAlbumListResult>('GetYearDropDownForAlbumList',data)
+    return http.post<IGetYearDropDownForAlbumListResult[]>('GetYearDropDownForAlbumList',data)
 };
 
-const GetYearDropDownForAlbumListApi ={
-    GetYearDropDownForAlbumList
+const GetAlbumNameList =(data:IGetAlbumNameListBody)=>{
+    return http.post<IGetAlbumNameListResult>('GetAlbumNameList',data)
+};
 
+const GetViewAlbumbApi ={
+    GetYearDropDownForAlbumList,
+    GetAlbumNameList
 }
 
-export default GetYearDropDownForAlbumListApi;
+export default GetViewAlbumbApi;

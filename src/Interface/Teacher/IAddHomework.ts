@@ -1,5 +1,5 @@
 export interface IGetClassNameListBody {
-    TeacherId:number
+    Id:number
 };
 
 export interface IGetClassNameListResult {
@@ -21,7 +21,7 @@ export interface IGetAddHomeworkBody {
 export interface IGetAddHomeworkResult{};
 
 export interface IGetDetailsListBody {
-    TeacherId:number
+    Id:number
 };
 
 export interface IGetDetailsListResult {
@@ -41,7 +41,7 @@ export interface IDeleteHomeworkBody {
 export interface IDeleteHomeworkResult{};
 
 export interface IHomeworkListForEditBody {
-    HomeworkDetailsId:number
+    Id:number
 }
 
 export interface IHomeworkListForEditResult{

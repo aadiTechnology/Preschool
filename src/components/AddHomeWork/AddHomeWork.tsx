@@ -50,7 +50,7 @@ function AddHomeWork() {
 
     const GetClassNameListBody: IGetClassNameListBody =
     {
-        TeacherId: 0
+        Id: 0
     }
 
     const GetAddHomeworkBody: IGetAddHomeworkBody =
@@ -65,7 +65,7 @@ function AddHomeWork() {
 
     const GetDetailsListBody: IGetDetailsListBody =
     {
-        TeacherId: 0
+        Id: 0
     }
 
     useEffect(() => {
@@ -85,7 +85,7 @@ function AddHomeWork() {
         console.log(GetEditList)
           const GetHomeworkEditBody: IHomeworkListForEditBody =
           {
-              HomeworkDetailsId: Id
+              Id: Id
           }
           dispatch(getHomeworkListForEdit(GetHomeworkEditBody));
   
