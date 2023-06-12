@@ -31,6 +31,7 @@ function ViewHomework() {
              <Card>
              <Typography>{item.SubjectDescription}</Typography>
         <Typography>{item.AssignDate}</Typography>
+        <Typography>{item.Attachment}</Typography>
       </Card>
            </div>
       ))}
