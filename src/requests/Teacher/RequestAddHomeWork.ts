@@ -12,7 +12,7 @@ const AddHomeWorkSlice = createSlice({
     DetailsList:[],
     DeleteHomework:{},
     SubmitHomework:{},
-    HomeworkListForEdit:{}
+    HomeworkListForEdit:null
    
   },
   reducers: {
