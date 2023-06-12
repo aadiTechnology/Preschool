@@ -1,4 +1,4 @@
-import { Card, Container, Grid } from '@mui/material'
+import { Card, Container, Grid, Typography } from '@mui/material'
 import React, { useState ,useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
@@ -14,6 +14,8 @@ import {monthArray} from 'src/components/Common/util'
 
 function ViewPhotoAlbum() {
     const dispatch = useDispatch();
+    const [year ,setYear] =useState('')
+    const [month ,setMonth] =useState('')
 
     const GetAlbumList: any = useSelector(
         (state: RootState) => state.Viewphoto.AlbumList
@@ -29,13 +31,11 @@ function ViewPhotoAlbum() {
     const AlbumListBody:IGetAlbumNameListBody=
 
     {
-        month:"5",
-        year:"2023"
+        month:month,
+        year:year
     }
 
-    useEffect(()=>{
-        dispatch(GetAlbumNameList(AlbumListBody));
-    },[])
+   
     
     const GetYearBody: IGetYearDropDownForAlbumListBody =
     {
@@ -43,20 +43,23 @@ function ViewPhotoAlbum() {
     }
     useEffect(() => {
         dispatch(GetYearDropDownForAlbumList(GetYearBody));
-        
-    }, [])
+        }, [])
 
-//  console.log(GetYearList ,"GetYearList")
-// console.log(GetAlbumList ,"GetAlbumList")
+    useEffect(()=>{
+        dispatch(GetAlbumNameList(AlbumListBody));
+    },[ year ,month])
+
+  console.log(GetYearList ,"GetYearList")
+ console.log(GetAlbumList ,"GetAlbumList")
 
     
-    const [year ,setYear] =useState('')
+    
     const clickYear=(value)=>{
         setYear(value)
     }
 
     
-        const [month ,setMonth] =useState('')
+       
         const clickMonth=(value)=>{
             setMonth(value)
         }
@@ -75,7 +78,13 @@ function ViewPhotoAlbum() {
             </Grid>
         </Card>
         <br></br>
-       
+       <Card>
+        {GetAlbumList.map((item,i)=>(
+            <div key={i}>
+              <Typography>{item.Title}</Typography>
+            </div>
+        ))}
+       </Card>
         
     </Container>
   )

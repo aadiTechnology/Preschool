@@ -29,9 +29,15 @@ export const GetYearDropDownForAlbumList=
 (data:IGetYearDropDownForAlbumListBody):AppThunk =>
 async(dispatch)=>{
     const response=await GetViewAlbumbApi.GetYearDropDownForAlbumList(data)
-   
+    let YearList = response.data.map((item, i) => {
+        return {
+            Id: item.AlbumId,
+            Name: item.AlbumDate,
+            Value: item.AlbumId,
+        }
+      })
 
-    dispatch(Viewphotoslice.actions.GetYearDropDownForAlbumList(response.data))
+    dispatch(Viewphotoslice.actions.GetYearDropDownForAlbumList(YearList))
 }
 
 export const GetAlbumNameList=
