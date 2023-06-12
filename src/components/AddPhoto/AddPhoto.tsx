@@ -5,45 +5,74 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { toast } from 'react-toastify';
-import {IAddPhotoAlbumBody} from 'src/Interface/Admin/IAddPhoto'
-import {getAddPhoto} from 'src/requests/Admin/RequestAddPhoto'
-
+import {IAddPhotoAlbumBody,IGetClassNameListBody} from 'src/Interface/Admin/IAddPhoto'
+import {getAddPhoto,getClassNameList } from 'src/requests/Admin/RequestAddPhoto'
+import SelectedCard from 'src/library/Card/SelectedCard';
+// const ItemList=[
+//   {Id:1 , Name:"playGroup" , Value:1 ,IsActive:false} ,  {Id:2 , Name:"Nursary" , Value:2 ,IsActive:false},
+//   {Id:3 , Name:"SR KG" , Value:3 ,IsActive:false} , {Id:4 , Name:"SR KG2" , Value:4 ,IsActive:false}
+// ]
 function AddPhoto  ()  {
+  const dispatch = useDispatch();
 
+  const [title, setTitle] = useState('');
+  const[titlerror,setTitleError]=useState('')
+  const [date , setDate] = useState('')
+ const [ItemList , setItemList] = useState([])
 
-    const [title, setTitle] = useState('');
-    const onSubmit = () => {
-        console.log({ title })
-    
-      }
-
-    const GetAddPhoto: any = useSelector(
+  
+   const GetAddPhoto: any = useSelector(
         (state: RootState) => state.AddPhoto.AddPhotoAlbum
     );
-    const dispatch = useDispatch();
-    console.log(GetAddPhoto,"AddPhoto")
 
+    const GetClass: any = useSelector(
+      (state: RootState) => state.AddPhoto.GetClassNameList
+  );
+
+  
+    console.log(GetClass ,"GetClass")
+   
+    
+    const clickItem=(value)=>{
+      setItemList(value)
+    }
+    
+ 
     const AddPhoto: IAddPhotoAlbumBody =
     {
-        "Title":"Agnipariksha",
+        "Title":title,
         "Class":"firstStandard",
-        "AlbumDate":"05/27/2023",
+        "AlbumDate":date,
         "FacebookLink":"httplocalhost45",
         "CreatedBy":101
     }
+
+    const ClassNameBody:IGetClassNameListBody = {
+      "ClassId": 1,
+    }
+
+    const onSubmit = () => {
+      console.log({ title })
+      dispatch(getAddPhoto(AddPhoto));
+  
+    }
+    useEffect(()=>{
+   setItemList(GetClass)
+    },[GetClass])
     useEffect(() => {
-        toast.success(GetAddPhoto)
-        dispatch(getAddPhoto(AddPhoto));
+      dispatch(getClassNameList(ClassNameBody))
       }, [])
-    
 
   return (
     <Container>
         <PageHeader heading={'AddPhoto'} />
-        <TextField value={title} onChange={(e)=>{setTitle(e.target.value)}}  
+        {ItemList.length>0 &&
+        <SelectedCard ItemList={ItemList} clickItem={clickItem}/> 
+      }
+        <TextField value={title} onChange={(e)=>setTitle(e.target.value)}  
       label={'Title'} />
        <Typography> Link</Typography>
-      <TextField type='date' />
+      <TextField type='date' onChange={(e)=>setDate(e.target.value)} />
       <br></br>
       <Button onClick={onSubmit}>Submit</Button>
     </Container>

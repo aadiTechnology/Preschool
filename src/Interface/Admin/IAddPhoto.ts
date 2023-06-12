@@ -7,3 +7,13 @@ export interface IAddPhotoAlbumBody {
 };
 
 export interface IAddPhotoAlbumResult{};
+
+export interface IGetClassNameListBody{};
+
+export interface IGetClassNameListResult{
+    ClassId: number,
+    ClassName: string,
+    InsertBy: string,
+    TeacherId: string
+
+}

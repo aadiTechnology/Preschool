@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AppThunk } from 'src/store';
-import{IAddPhotoAlbumBody,IAddPhotoAlbumResult} from "src/Interface/Admin/IAddPhoto"
+import{IAddPhotoAlbumBody,IAddPhotoAlbumResult,IGetClassNameListBody,IGetClassNameListResult} from "src/Interface/Admin/IAddPhoto"
 import GetAddPhotoApi from 'src/api/Admin/ApiAddPhoto';
 
 
@@ -9,10 +9,14 @@ const AddPhotoSlice = createSlice({
     initialState:{
       
       AddPhotoAlbum:{},
+      GetClassNameList:[]
       
      
     },
     reducers: {
+      GetClassNameList(state,action){
+        state.GetClassNameList=action.payload;
+      },
      
       getAddPhoto(state,action){
         state.AddPhotoAlbum=action.payload;
@@ -25,6 +29,20 @@ const AddPhotoSlice = createSlice({
   async (dispatch) => {
     const response = await GetAddPhotoApi.GetAddPhoto(data);
     dispatch(AddPhotoSlice.actions.getAddPhoto(response.data));
+  };
+
+  export const getClassNameList =
+  (data:IGetClassNameListBody): AppThunk =>
+  async (dispatch) => {
+    const response = await GetAddPhotoApi.GetClassList(data);
+    let getClass = response.data.map((item, i) => {
+      return {
+          Id: i,
+          Name: item.ClassName,
+          Value: item.ClassId,
+      }
+    })
+    dispatch(AddPhotoSlice.actions.GetClassNameList(getClass));
   };
 
   export default AddPhotoSlice.reducer
