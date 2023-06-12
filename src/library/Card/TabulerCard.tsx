@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { getDeleteHomework, getHomeworkListForEdit ,getSubmitHomework } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IDeleteHomeworkBody, IHomeworkListForEditBody , ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
-function TabulerCard({ homeWorkList , onEdit}) {
+function TabulerCard({ homeWorkList , onEdit, clickDelete}) {
 
   const [editing, setEditing] = useState(false);
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ function TabulerCard({ homeWorkList , onEdit}) {
     const Delete = (Id) => {
         const GetDeleteHomeworkBody: IDeleteHomeworkBody =
         {
-            TeacherId: Id
+            Id: Id
         }
         dispatch(getDeleteHomework(GetDeleteHomeworkBody));
     }
@@ -46,6 +46,8 @@ function TabulerCard({ homeWorkList , onEdit}) {
 
     useEffect(() => {
       toast.success(GetDelete)
+      clickDelete();
+
   }, [GetDelete])
 
     useEffect(() => {

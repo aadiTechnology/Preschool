@@ -24,13 +24,19 @@ function AddHomeWork() {
         (state: RootState) => state.AddHomeWork.DetailsList
     );
 
+    console.log(GetHomeWorkDetailsList , "GetHomeWorkDetailsList")
+
     const GetAddHomework: any = useSelector(
         (state: RootState) => state.AddHomeWork.AddHomework
     );
 
     const GetEditList: any = useSelector(
+        
         (state: RootState) => state.AddHomeWork.HomeworkListForEdit
     );
+    
+
+    console.log(GetEditList , "GetEditList")
 
     const dispatch = useDispatch();
     const [subjectDescription, setSubjectDescription] = useState('')
@@ -72,6 +78,13 @@ function AddHomeWork() {
         dispatch(getClassNameList(GetClassNameListBody));
         dispatch(getDetailsList(GetDetailsListBody));
     }, [])
+
+    useEffect(() => {
+        if(GetEditList!==null){
+        setSelectDate(GetEditList.AssignDate)
+        setSelectClass("2")
+    }
+    }, [GetEditList])
 
     useEffect(() => {
       toast.success(GetAddHomework)
@@ -118,7 +131,10 @@ function AddHomeWork() {
         }
     };
 
+const clickDelete = () =>{
+    dispatch(getDetailsList(GetDetailsListBody));
 
+}
 
     return (
         <Container>
@@ -136,7 +152,8 @@ function AddHomeWork() {
                 <Button sx={{ mt: 2 }} onClick={onAddHomeWork}>Save</Button>
             </Card>
             <br></br>
-            <TabulerCard homeWorkList={GetHomeWorkDetailsList} onEdit={Edit}/>
+            <TabulerCard homeWorkList={GetHomeWorkDetailsList} 
+            onEdit={Edit} clickDelete={clickDelete}/>
         
         </Container>
 
