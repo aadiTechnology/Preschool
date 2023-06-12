@@ -33,7 +33,7 @@ async(dispatch)=>{
         return {
             Id: item.AlbumId,
             Name: item.AlbumDate,
-            Value: item.AlbumId,
+            Value: item.AlbumDate,
         }
       })
 
