@@ -16,9 +16,11 @@ function ViewPhotoAlbum() {
     const dispatch = useDispatch();
     const [year ,setYear] =useState('')
     const [month ,setMonth] =useState('')
+
     const GetYearList: any = useSelector(
         (state: RootState) => state.Viewphoto.YearList
     );
+
     const GetAlbumList: any = useSelector(
         (state: RootState) => state.Viewphoto.AlbumList
     );
@@ -27,6 +29,7 @@ function ViewPhotoAlbum() {
     {
         AlbumId: 0
     }
+
   const AlbumListBody:IGetAlbumNameListBody=
 
     {
@@ -39,6 +42,7 @@ function ViewPhotoAlbum() {
         }, [])
 
     useEffect(()=>{
+        if(year !== "" && month!=="" )
         dispatch(GetAlbumNameList(AlbumListBody));
     },[ year ,month])
 
