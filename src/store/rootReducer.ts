@@ -5,7 +5,6 @@ import SchoolListslice from 'src/requests/Student/SchoolList/SchoolList';
 import ChangePasswordslice from 'src/requests/ChangePassword/ChangePassword'
 import Homeworkslice from 'src/requests/Student/Homework/RequestHomework'
 import Viewphotoslice from 'src/requests/Student/Viewphoto/RequestViewphoto'
-
 import AddHomeWorkSlice from 'src/requests/Teacher/RequestAddHomeWork';
 import AddPhotoSlice from 'src/requests/Admin/RequestAddPhoto'
 
@@ -15,7 +14,8 @@ const rootReducer = combineReducers({
     ChangePassword:ChangePasswordslice,
     AddHomeWork: AddHomeWorkSlice,
     HomeWork: Homeworkslice,
-    Viewphoto: Viewphotoslice
+    Viewphoto: Viewphotoslice,
+    AddPhoto:AddPhotoSlice
 });
 
 export default rootReducer;
