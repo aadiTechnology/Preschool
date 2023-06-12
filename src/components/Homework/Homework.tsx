@@ -27,16 +27,24 @@ function Homework() {
     (state: RootState) => state.HomeWork.HighlightedDate
   );
 
-  console.log(GetDateLegend, "GetDateLegend")
+
+
+
 
   const GetHighlightedDateBody: IGetDateForLegendBody =
   {
     "AssignDate": "08/06/2023"
   }
 
+
+
+
   useEffect(() => {
     dispatch(GetDateForLegend(GetHighlightedDateBody));
   }, [])
+
+
+
 
   return (
     <Container>
