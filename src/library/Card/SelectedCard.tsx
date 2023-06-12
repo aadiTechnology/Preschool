@@ -19,23 +19,15 @@ function SelectedCard({ItemList,clickItem}) {
 
     <Grid container spacing={1}>
     
-    {
-          ItemList.map((data, i) => {
-           
-            return (
-            <Grid  item  xs={4} key={i}>
-           
-              <SingleButton Item={data}
+    {ItemList.map((data, i) => {
+           return (
+            <Grid  item  key={i}>
+            <SingleButton Item={data}
              ClickItem={onClick}></SingleButton>
               </Grid>
             )
           })
         }
-        
-        
-
-
-
     </Grid>
   )
 }
