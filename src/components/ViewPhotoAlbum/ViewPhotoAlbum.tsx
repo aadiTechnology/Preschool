@@ -16,32 +16,25 @@ function ViewPhotoAlbum() {
     const dispatch = useDispatch();
     const [year ,setYear] =useState('')
     const [month ,setMonth] =useState('')
-
+    const GetYearList: any = useSelector(
+        (state: RootState) => state.Viewphoto.YearList
+    );
     const GetAlbumList: any = useSelector(
         (state: RootState) => state.Viewphoto.AlbumList
     );
 
-    const GetYearList: any = useSelector(
-        (state: RootState) => state.Viewphoto.YearList
-    );
-    
-  
-
-
-    const AlbumListBody:IGetAlbumNameListBody=
+    const GetYearBody: IGetYearDropDownForAlbumListBody =
+    {
+        AlbumId: 0
+    }
+  const AlbumListBody:IGetAlbumNameListBody=
 
     {
         month:month,
         year:year
     }
 
-   
-    
-    const GetYearBody: IGetYearDropDownForAlbumListBody =
-    {
-        AlbumId: 0
-    }
-    useEffect(() => {
+     useEffect(() => {
         dispatch(GetYearDropDownForAlbumList(GetYearBody));
         }, [])
 
@@ -49,8 +42,8 @@ function ViewPhotoAlbum() {
         dispatch(GetAlbumNameList(AlbumListBody));
     },[ year ,month])
 
-  console.log(GetYearList ,"GetYearList")
- console.log(GetAlbumList ,"GetAlbumList")
+   console.log(GetYearList ,"GetYearList")
+   console.log(GetAlbumList ,"GetAlbumList")
 
     
     
@@ -58,10 +51,8 @@ function ViewPhotoAlbum() {
         setYear(value)
     }
 
-    
-       
-        const clickMonth=(value)=>{
-            setMonth(value)
+   const clickMonth=(value)=>{
+    setMonth(value)
         }
   return (
     <Container>
