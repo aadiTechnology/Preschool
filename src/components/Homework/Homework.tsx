@@ -12,6 +12,7 @@ import { IGetDateForLegendBody } from 'src/Interface/Student/IHomework';
 import ListCard from 'src/library/List/ListCard';
 import Card2Text from 'src/library/Card/Card2Text';
 import { useNavigate } from 'react-router';
+import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 
 function Homework() {
 
@@ -27,7 +28,9 @@ function Homework() {
     (state: RootState) => state.HomeWork.HighlightedDate
   );
 
-
+  const loading = useSelector(
+    (state: RootState) => state.HomeWork.Loading
+  );
 
 
 
@@ -64,7 +67,8 @@ function Homework() {
         </Grid>
       </Grid>
       <br></br>
-    <Card2Text Text1={GetDateLegend.SubjectName} Text2={GetDateLegend.AssignDate} clickNavigate={clickViewHomework}/>
+      {loading ? <SuspenseLoader/> :
+    <Card2Text Text1={GetDateLegend.SubjectName} Text2={GetDateLegend.AssignDate} clickNavigate={clickViewHomework}/>}
     </Container>
   )
 }

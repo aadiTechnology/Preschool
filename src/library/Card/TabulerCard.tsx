@@ -7,7 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { getDeleteHomework, getHomeworkListForEdit ,getSubmitHomework } from 'src/requests/Teacher/RequestAddHomeWork';
+import { getDeleteHomework, getHomeworkListForEdit ,getSubmitHomework, resetMessage1 } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IDeleteHomeworkBody, IHomeworkListForEditBody , ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
 function TabulerCard({ homeWorkList , onEdit, clickDelete}) {
 
@@ -45,7 +45,8 @@ function TabulerCard({ homeWorkList , onEdit, clickDelete}) {
 
 
     useEffect(() => {
-      toast.success(GetDelete)
+      toast.success(GetDelete.Message,{ toastId: 'success1' })
+      dispatch(resetMessage1());
       clickDelete();
 
   }, [GetDelete])

@@ -10,7 +10,8 @@ const Homeworkslice = createSlice({
     name: 'Homework',
     initialState: {
         HighlightedDate: {},
-        ViewHomework:[]
+        ViewHomework:[],
+        Loading :true
 
     },
     reducers: {
@@ -19,7 +20,11 @@ const Homeworkslice = createSlice({
         },
         GetViewHomework(state, action) {
             state.ViewHomework = action.payload;
+            state.Loading = false;
         },
+        getLoading(state, action) {
+            state.Loading = true
+          }
     }
 });
 

@@ -12,6 +12,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import TabulerCard from 'src/library/Card/TabulerCard';
 import { toolbarOptions } from '../Common/util';
+import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 
 
 function AddHomeWork() {
@@ -34,6 +35,10 @@ function AddHomeWork() {
         
         (state: RootState) => state.AddHomeWork.HomeworkListForEdit
     );
+
+    const loading = useSelector(
+        (state: RootState) => state.AddHomeWork.Loading
+      );
     
 
     console.log(GetEditList , "GetEditList")
@@ -152,8 +157,9 @@ const clickDelete = () =>{
                 <Button sx={{ mt: 2 }} onClick={onAddHomeWork}>Save</Button>
             </Card>
             <br></br>
+            {loading ? <SuspenseLoader /> : 
             <TabulerCard homeWorkList={GetHomeWorkDetailsList} 
-            onEdit={Edit} clickDelete={clickDelete}/>
+            onEdit={Edit} clickDelete={clickDelete}/>}
         
         </Container>
 
