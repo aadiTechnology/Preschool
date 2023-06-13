@@ -39,7 +39,7 @@ const AddPhotoSlice = createSlice({
       return {
           Id: i,
           Name: item.ClassName,
-          Value: item.ClassId,
+          Value: item.ClassName,
       }
     })
     dispatch(AddPhotoSlice.actions.GetClassNameList(getClass));
