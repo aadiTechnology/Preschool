@@ -15,7 +15,8 @@ const rootReducer = combineReducers({
     AddHomeWork: AddHomeWorkSlice,
     HomeWork: Homeworkslice,
     Viewphoto: Viewphotoslice,
-    AddPhoto:AddPhotoSlice
+    AddPhoto:AddPhotoSlice,
+    UserLogin:UserLoginSlice
 });
 
 export default rootReducer;
