@@ -44,9 +44,14 @@ export const GetAlbumNameList=
 (data:IGetAlbumNameListBody):AppThunk =>
 async(dispatch)=>{
     const response=await GetViewAlbumbApi.GetAlbumNameList(data)
-   
+   let AlbumList = response.data.map((item ,i)=>{
+    return{
+        Id: item.AlbumId,
+        Text1: item.Title,
+    }
+   })
 
-    dispatch(Viewphotoslice.actions.GetAlbumNameList(response.data))
+    dispatch(Viewphotoslice.actions.GetAlbumNameList(AlbumList))
 }
 
 export default Viewphotoslice.reducer

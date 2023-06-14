@@ -3,7 +3,7 @@ import { MenuItem ,FormControl ,InputLabel ,Select ,Box ,NativeSelect} from '@mu
 function DropDown({itemList, ClickItem , DefaultValue ,Label }) {
   return (
     <div>
-    <Box sx={{minWidth:300}}>
+    <Box >
     <FormControl fullWidth>
         <NativeSelect fullWidth
                 value={DefaultValue}

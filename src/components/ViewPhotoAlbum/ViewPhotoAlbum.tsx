@@ -8,6 +8,7 @@ import { RootState } from 'src/store'
 import {GetYearDropDownForAlbumList ,GetAlbumNameList} from 'src/requests/Student/Viewphoto/RequestViewphoto'
 import {IGetYearDropDownForAlbumListBody ,IGetAlbumNameListBody} from "src/Interface/Student/IViewphoto"
 import {monthArray} from 'src/components/Common/util'
+import ListCard from 'src/library/List/ListCard'
 
 
 
@@ -58,30 +59,27 @@ function ViewPhotoAlbum() {
    const clickMonth=(value)=>{
     setMonth(value)
         }
+
+  const clickNavigate =()=>{
+    //   faceBookLink
+   }
   return (
     <Container>
         <PageHeader heading={'Photo Gallery'}/>
-        <Card>
+        
             <Grid container spacing={2} >
-                <Grid item xs={4}>
+                <Grid item xs={6}>
                 <DropDown itemList={GetYearList} ClickItem={clickYear} DefaultValue={year} Label={'select Year'}/>
                 </Grid >
-             <Grid item xs={2}/>
-                <Grid item xs={4}>
+             {/* <Grid item xs={2}/> */}
+                <Grid item xs={6}>
                 <DropDown itemList={monthArray} ClickItem={clickMonth} DefaultValue={month} Label={'select Month'}/>
                 </Grid >
             </Grid>
-        </Card>
+       
         <br></br>
-       <Card>
-        {GetAlbumList.map((item,i)=>(
-            <div key={i}>
-              <Typography>{item.Title}</Typography>
-            </div>
-        ))}
-       </Card>
-        
-    </Container>
+    <ListCard ItemList={GetAlbumList} clickNavigate={clickNavigate}/>
+   </Container>
   )
 }
 

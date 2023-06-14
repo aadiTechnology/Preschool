@@ -8,11 +8,12 @@ const AddHomeWorkSlice = createSlice({
   name: 'AddHomeWork',
   initialState:{
     ClassNameList:[],
-    AddHomework:{},
+    AddHomework:null,
     DetailsList:[],
     DeleteHomework:{},
     SubmitHomework:{},
-    HomeworkListForEdit:{}
+    HomeworkListForEdit:null,
+    Loading: true,
    
   },
   reducers: {
@@ -25,9 +26,13 @@ const AddHomeWorkSlice = createSlice({
 
     getDetailsList(state,action){
       state.DetailsList=action.payload;
+      state.Loading = false;
     },
     getDeleteHomework(state,action){
       state.DeleteHomework=action.payload;
+    },
+    resetMessage1(state) {
+      state.DeleteHomework = {};
     },
 
     getSubmitHomework(state,action){
@@ -39,6 +44,9 @@ const AddHomeWorkSlice = createSlice({
     resetMessage(state) {
       state.AddHomework = {};
     },
+    getLoading(state, action) {
+      state.Loading = true
+    }
   }   
 });
 
@@ -72,6 +80,12 @@ export const getClassNameList =
     const response = await GetClassForTeacherApi.GetDeleteHomework(data);
     dispatch(AddHomeWorkSlice.actions.getDeleteHomework(response.data));
   };
+
+  export const resetMessage1 =
+  (): AppThunk =>
+    async (dispatch) => {
+      dispatch(AddHomeWorkSlice.actions.resetMessage1());
+    }
 
   export const getSubmitHomework =
   (data:ISubmitHomeworkBody): AppThunk =>

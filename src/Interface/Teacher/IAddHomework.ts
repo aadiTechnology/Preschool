@@ -35,7 +35,7 @@ export interface IGetDetailsListResult {
 };
 
 export interface IDeleteHomeworkBody {
-    TeacherId:number
+    Id:number
 }
 
 export interface IDeleteHomeworkResult{};

@@ -12,6 +12,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import TabulerCard from 'src/library/Card/TabulerCard';
 import { toolbarOptions } from '../Common/util';
+import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 
 
 function AddHomeWork() {
@@ -24,13 +25,24 @@ function AddHomeWork() {
         (state: RootState) => state.AddHomeWork.DetailsList
     );
 
+    console.log(GetHomeWorkDetailsList , "GetHomeWorkDetailsList")
+
     const GetAddHomework: any = useSelector(
         (state: RootState) => state.AddHomeWork.AddHomework
     );
 
     const GetEditList: any = useSelector(
+        
         (state: RootState) => state.AddHomeWork.HomeworkListForEdit
     );
+
+    const loading = useSelector(
+        
+        (state: RootState) => state.AddHomeWork.Loading
+      );
+    
+
+    console.log(GetEditList , "GetEditList")
 
     const dispatch = useDispatch();
     const [subjectDescription, setSubjectDescription] = useState('')
@@ -74,8 +86,18 @@ function AddHomeWork() {
     }, [])
 
     useEffect(() => {
+        if(GetEditList!==null){
+        setSelectDate(GetEditList.AssignDate)
+        setSelectClass("2")
+    }
+    }, [GetEditList])
+
+    useEffect(() => {
+        if(GetAddHomework!==null){
       toast.success(GetAddHomework)
       dispatch(getDetailsList(GetDetailsListBody));
+
+    }
     }, [GetAddHomework])
   
  
@@ -118,7 +140,10 @@ function AddHomeWork() {
         }
     };
 
+const clickDelete = () =>{
+    dispatch(getDetailsList(GetDetailsListBody));
 
+}
 
     return (
         <Container>
@@ -136,7 +161,9 @@ function AddHomeWork() {
                 <Button sx={{ mt: 2 }} onClick={onAddHomeWork}>Save</Button>
             </Card>
             <br></br>
-            <TabulerCard homeWorkList={GetHomeWorkDetailsList} onEdit={Edit}/>
+            {loading ? <SuspenseLoader /> : 
+            <TabulerCard homeWorkList={GetHomeWorkDetailsList} 
+            onEdit={Edit} clickDelete={clickDelete}/>}
         
         </Container>
 
