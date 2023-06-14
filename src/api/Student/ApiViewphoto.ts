@@ -6,7 +6,7 @@ const GetYearDropDownForAlbumList =(data:IGetYearDropDownForAlbumListBody)=>{
 };
 
 const GetAlbumNameList =(data:IGetAlbumNameListBody)=>{
-    return http.post<IGetAlbumNameListResult>('GetAlbumNameList',data)
+    return http.post<IGetAlbumNameListResult[]>('GetAlbumNameList',data)
 };
 
 const GetViewAlbumbApi ={

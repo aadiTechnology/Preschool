@@ -7,7 +7,7 @@ function ListCard({ItemList,clickNavigate}) {
    {ItemList.map((Item,i)=>{
     return(
         <div key={i}>
-     {/* <Card2Text Text1={Item.Text1} Text2={Item.Text2} /> */}
+     <Card2Text Text1={Item.Text1} Text2={Item.Text2}  clickNavigate={clickNavigate}/>
         </div>
     )})}
     </div>
