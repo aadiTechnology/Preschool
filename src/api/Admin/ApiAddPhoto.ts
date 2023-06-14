@@ -15,7 +15,7 @@ const GetAddPhoto = (data: IAddPhotoAlbumBody) => {
   };
 
   const DeleteAlbumList=(data:IDeletePhotoAlbumBody)=>{
-    return http.post<IDeletePhotoAlbumResult[]>('DeletePhotoAlbum',data)
+    return http.post<IDeletePhotoAlbumResult>('DeletePhotoAlbum',data)
   }
 
   const GetAddPhotoApi ={

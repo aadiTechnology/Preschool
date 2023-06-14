@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { toast } from 'react-toastify';
-import {IAddPhotoAlbumBody,IGetClassNameListBody,IGetAllAlbumNameListBody} from 'src/Interface/Admin/IAddPhoto'
-import {getAddPhoto,getClassNameList,GetAllAlbumNameList} from 'src/requests/Admin/RequestAddPhoto'
+import {IAddPhotoAlbumBody,IGetClassNameListBody,IGetAllAlbumNameListBody,IDeletePhotoAlbumBody} from 'src/Interface/Admin/IAddPhoto'
+import {getAddPhoto,getClassNameList,GetAllAlbumNameList,DeleteAllAlbumList} from 'src/requests/Admin/RequestAddPhoto'
 import SelectedCard from 'src/library/Card/SelectedCard';
 import ListCard from 'src/library/List/ListCard';
 import List2Card from 'src/library/List/List2Card';
@@ -35,8 +35,12 @@ function AddPhoto  ()  {
   const GetAllAlbum:any=useSelector(
     (state:RootState)=>state.AddPhoto.GetAllAlbumNameList
   );
+
+  const DeleteAllAlbum:any=useSelector(
+    (state:RootState)=>state.AddPhoto.DeleteAllAlbumList
+  );
   
-    console.log(GetAllAlbum ,"GetAllAlbum")
+   
    
     
     const clickItem=(value)=>{
@@ -57,8 +61,13 @@ function AddPhoto  ()  {
       "ClassId": 1,
     }
 
-    const   GetAllAlbumBody:IGetAllAlbumNameListBody={
+    const  GetAllAlbumBody:IGetAllAlbumNameListBody={
       Id:1,
+    }
+
+
+    const DeleteAllAlbumBody:IDeletePhotoAlbumBody={
+      "Id":10,
     }
 
     const onSubmit = () => {
@@ -100,6 +109,9 @@ function AddPhoto  ()  {
         useEffect(()=>{
           dispatch(GetAllAlbumNameList(GetAllAlbumBody))
         },[])
+        // useEffect(()=>{
+        //   dispatch(DeleteAllAlbumList(DeleteAllAlbumBody))
+        // },[])
   
 const clickNavigate =()=>{
 
@@ -118,6 +130,7 @@ const clickNavigate =()=>{
       {dateerror}
       <br></br>
       <Button onClick={onSubmit}>Submit</Button>
+     
       <List2Card ItemList={GetAllAlbum}/>
     </Container>
   )

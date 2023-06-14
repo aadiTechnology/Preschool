@@ -10,7 +10,7 @@ const AddPhotoSlice = createSlice({
     AddPhotoAlbum: {},
     GetClassNameList: [],
     GetAllAlbumNameList: [],
-    DeleteAllAlbumList: []
+    DeleteAllAlbumList: {}
 
   },
   reducers: {
@@ -67,7 +67,12 @@ export const GetAllAlbumNameList =
       dispatch(AddPhotoSlice.actions.GetAllAlubumList(getAllAlbum));
     };
 
-   
+    export const DeleteAllAlbumList =
+    (data:IDeletePhotoAlbumBody): AppThunk =>
+    async (dispatch) => {
+      const response = await GetAddPhotoApi.DeleteAlbumList(data);
+      dispatch(AddPhotoSlice.actions.DeleteAllAlbumList(response.data));
+    };
 
 
 export default AddPhotoSlice.reducer
