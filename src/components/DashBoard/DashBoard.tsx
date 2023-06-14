@@ -35,6 +35,11 @@ function DashBoard() {
   Link: 'Student/AddPhoto',
   icon : <AddToQueueIcon/>
 },
+{
+  Text:"Login",
+  Link: 'Student/Login',
+  icon : <AddToQueueIcon/>
+},
 
 
 ]
