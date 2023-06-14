@@ -8,7 +8,7 @@ const AddHomeWorkSlice = createSlice({
   name: 'AddHomeWork',
   initialState:{
     ClassNameList:[],
-    AddHomework:{},
+    AddHomework:null,
     DetailsList:[],
     DeleteHomework:{},
     SubmitHomework:{},
