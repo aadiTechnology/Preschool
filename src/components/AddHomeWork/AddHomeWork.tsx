@@ -37,6 +37,7 @@ function AddHomeWork() {
     );
 
     const loading = useSelector(
+        
         (state: RootState) => state.AddHomeWork.Loading
       );
     
@@ -92,8 +93,11 @@ function AddHomeWork() {
     }, [GetEditList])
 
     useEffect(() => {
+        if(GetAddHomework!==null){
       toast.success(GetAddHomework)
       dispatch(getDetailsList(GetDetailsListBody));
+
+    }
     }, [GetAddHomework])
   
  
