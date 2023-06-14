@@ -7,7 +7,7 @@ import Homeworkslice from 'src/requests/Student/Homework/RequestHomework'
 import Viewphotoslice from 'src/requests/Student/Viewphoto/RequestViewphoto'
 import AddHomeWorkSlice from 'src/requests/Teacher/RequestAddHomeWork';
 import AddPhotoSlice from 'src/requests/Admin/RequestAddPhoto'
-
+import UserLoginSlice, { UserLogin } from 'src/requests/Admin/RequestUserLogin'
 const rootReducer = combineReducers({
     Holidays:Holidaysslice,
     SchoolList: SchoolListslice,
@@ -15,7 +15,8 @@ const rootReducer = combineReducers({
     AddHomeWork: AddHomeWorkSlice,
     HomeWork: Homeworkslice,
     Viewphoto: Viewphotoslice,
-    AddPhoto:AddPhotoSlice
+    AddPhoto:AddPhotoSlice,
+    UserLogin:UserLoginSlice
 });
 
 export default rootReducer;
