@@ -7,7 +7,7 @@ function List2Card({ItemList}) {
    {ItemList.map((Item,i)=>{
     return(
         <div key={i}>
-     <Card3Text Text1={Item.Text1} Text2={Item.Text2} Text3={Item.Text3} />
+     <Card3Text Text1={Item.Text1} Text2={Item.Text2} Text3={Item.Text3} Id ={Item.Id}/>
         </div>
     )})}
     </div>
