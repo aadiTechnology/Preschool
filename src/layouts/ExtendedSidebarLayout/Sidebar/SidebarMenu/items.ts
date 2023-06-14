@@ -23,9 +23,9 @@ const menuItems: MenuItems[] = [
     items: [
     
       {
-        name: 'Holidays',
+        name: 'DashBoard',
         icon: AccountTreeTwoToneIcon,
-        link: '/extended-sidebar/Student/holidays'
+        link: '/extended-sidebar/Student/DashBoard'
       },
 
       {

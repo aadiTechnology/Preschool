@@ -2,13 +2,13 @@ import { PartialRouteObject } from 'react-router';
 import { Navigate } from 'react-router-dom';
 import ExtendedSidebarLayout from 'src/layouts/ExtendedSidebarLayout';
 import studentRoutes from './Student';
-
+import landingRoutes from './Landing';
+import AuthenticationRoutes from './Authentication';
 const router: PartialRouteObject[] = [
 
   {
     path: '/',
-    element: <ExtendedSidebarLayout />,
-    children: studentRoutes
+    children: AuthenticationRoutes
   },
 
   // ExtendedSidebarLayout 
@@ -21,7 +21,12 @@ const router: PartialRouteObject[] = [
     children: [
       {
         path: '/',
-        element: <Navigate to="/Student" replace />
+        element: <Navigate to="/Authentication" replace />
+      },
+
+      {
+        path:'/landing',
+        children:landingRoutes
       },
       {
         path: '/Student',

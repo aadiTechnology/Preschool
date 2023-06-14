@@ -5,6 +5,7 @@ import ThemeSettings from 'src/layouts/Components/ThemeSettings';
 
 import Sidebar from './Sidebar';
 import Header from './Header';
+import Footer from '../BaseNavigation/Footer';
 
 interface ExtendedSidebarLayoutProps {
   children?: ReactNode;
@@ -19,7 +20,9 @@ const ExtendedSidebarLayout: FC<ExtendedSidebarLayoutProps> = () => {
         sx={{
           flex: 1,
           height: '100%',
-
+          width: '100%',
+          position:"fixed",
+          overflowY: "scroll",
           '.MuiPageTitle-wrapper': {
             background:
               theme.palette.mode === 'dark'
@@ -39,7 +42,19 @@ const ExtendedSidebarLayout: FC<ExtendedSidebarLayoutProps> = () => {
         }}
       >
         <Header />
-        <Sidebar />
+        {/* <Sidebar /> */}
+
+        <Box sx={{  position: "fixed",
+                       bottom: 0,
+                       flex: 1,
+                    
+                    
+                       width: "100%",
+                        zIndex: 9999,
+                     
+                       }} >
+                   <Footer />
+                     </Box>
         <Box
           sx={{
             position: 'relative',
@@ -47,9 +62,9 @@ const ExtendedSidebarLayout: FC<ExtendedSidebarLayoutProps> = () => {
             display: 'block',
             flex: 1,
             pt: `${theme.header.height}`,
-            [theme.breakpoints.up('lg')]: {
-              ml: `${theme.sidebar.width}`
-            }
+            // [theme.breakpoints.up('lg')]: {
+            //   ml: `${theme.sidebar.width}`
+            // }
           }}
         >
           <Box display="block">

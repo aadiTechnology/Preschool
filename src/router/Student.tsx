@@ -21,15 +21,17 @@ const Login = Loader(lazy(()=> import('src/components/Login/Login')))
 const Homework = Loader(lazy(()=> import('src/components/Homework/Homework')))
 const ViewHomework = Loader(lazy(()=> import('src/components/Homework/ViewHomework')))
 const AddPhoto = Loader(lazy(()=> import('src/components/AddPhoto/AddPhoto')))
+const Dashboard = Loader(lazy(()=> import('src/components/DashBoard/DashBoard')))
 const studentRoutes = [
   {
     path: '/',
     element: <Navigate to="holidays" replace />
   },
   {
-    path: 'holidays',
-    element: <Holidays />
+    path: 'Dashboard',
+    element: <Dashboard/>
   },
+
   {
     path: 'schoolList',
     element: <SchoolList />
