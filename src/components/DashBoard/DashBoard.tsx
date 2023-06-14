@@ -40,6 +40,11 @@ function DashBoard() {
   Link: 'Student/Login',
   icon : <AddToQueueIcon/>
 },
+{
+  Text:"ChangePassword",
+  Link: 'Student/ChangePassword',
+  icon : <AddToQueueIcon/>
+}
 
 
 ]
