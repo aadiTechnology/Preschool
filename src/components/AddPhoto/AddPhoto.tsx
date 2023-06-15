@@ -95,12 +95,8 @@ function AddPhoto() {
 
     setTitle('')
     setDate('')
-
-    dispatch(getAddPhoto(AddPhoto));
-
-
-
-  }
+    dispatch(getClassNameList(ClassNameBody))
+    dispatch(getAddPhoto(AddPhoto));}
 
 
   useEffect(() => {
@@ -120,9 +116,17 @@ function AddPhoto() {
     }
     dispatch(GetAllAlbumNameList(GetAllAlbumBody))
   }, [GetAddPhoto])
-  // useEffect(()=>{
-  //   dispatch(DeleteAllAlbumList(DeleteAllAlbumBody))
-  // },[])
+ 
+  useEffect(()=>{
+    if(DeleteAllAlbum!==null){
+      toast.success(DeleteAllAlbum)
+    }
+   
+  },[DeleteAllAlbum])
+
+  const Delete =()=>{
+    dispatch(DeleteAllAlbumList(DeleteAllAlbumBody))
+  }
 
   const clickNavigate = () => {
 
@@ -144,7 +148,7 @@ function AddPhoto() {
       <br></br>
       <Button onClick={onSubmit}>Submit</Button>
 
-      <List2Card ItemList={GetAllAlbum} />
+      <List2Card ItemList={GetAllAlbum} Delete={Delete} />
     </Container>
   )
 }
