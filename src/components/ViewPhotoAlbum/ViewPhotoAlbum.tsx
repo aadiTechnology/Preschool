@@ -17,7 +17,9 @@ function ViewPhotoAlbum() {
     const dispatch = useDispatch();
     const [year ,setYear] =useState('')
     const [month ,setMonth] =useState('')
-
+    const currentDate = new Date()
+    const currentMonth = currentDate.getMonth() + 1 
+    const currentYear = currentDate.getFullYear()
     const GetYearList: any = useSelector(
         (state: RootState) => state.Viewphoto.YearList
     );
@@ -39,6 +41,8 @@ function ViewPhotoAlbum() {
     }
 
      useEffect(() => {
+        setMonth(currentMonth.toString())
+        setYear(currentYear.toString())
         dispatch(GetYearDropDownForAlbumList(GetYearBody));
         }, [])
 

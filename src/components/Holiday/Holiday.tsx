@@ -33,17 +33,7 @@ function Holiday() {
     <Container>
       <PageHeader heading={'Holiday'}/>
       <DotLegend ItemList={[{Value:'blue', Name:'Holiday'}]}/><br></br>
-       {/* <ListCard ItemList={ItemList}/> */}
-       <List2Card ItemList={ItemList}/>
-       <List3Card ItemList={ItemList}/>
-
-       
-       {ItemListA.map((item , i)=>(
-        <div key={i}>
-         <Accordion1 Header={item.Header} Id={item.Id} 
-         ItemList={item.itemList} ClickAccordion={()=>ClickAccordion(item.Id)} />
-        </div>
-       ))}
+  
       
   </Container>
   )
