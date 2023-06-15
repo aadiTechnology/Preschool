@@ -18,10 +18,14 @@ import List2Card from 'src/library/List/List2Card';
 function AddPhoto() {
 
   const dispatch = useDispatch();
-
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = currentDate.getDate().toString().padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
   const [title, setTitle] = useState('');
   const [titlerror, setTitleError] = useState('')
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(formattedDate)
   const [dateerror, setDateError] = useState('')
   const [ItemList, setItemList] = useState([])
 
@@ -75,7 +79,7 @@ function AddPhoto() {
   const onSubmit = () => {
     let isError = false
     if (title === '') {
-      setTitleError('Mandotory Field')
+      setTitleError('Please Enter Title Name')
       isError = true
     }
     else {
@@ -91,16 +95,17 @@ function AddPhoto() {
 
     setTitle('')
     setDate('')
+
     dispatch(getAddPhoto(AddPhoto));
-if(title !==""){
-  toast.success("Photos Added Sucessfully")
-}
+
+
 
   }
 
 
   useEffect(() => {
     dispatch(getClassNameList(ClassNameBody))
+    dispatch(GetAllAlbumNameList(GetAllAlbumBody))
   }, [])
 
   useEffect(() => {
@@ -110,8 +115,11 @@ if(title !==""){
 
 
   useEffect(() => {
+    if (title !== "") {
+      toast.success("Photos Added Sucessfully")
+    }
     dispatch(GetAllAlbumNameList(GetAllAlbumBody))
-  }, [])
+  }, [GetAddPhoto])
   // useEffect(()=>{
   //   dispatch(DeleteAllAlbumList(DeleteAllAlbumBody))
   // },[])
@@ -129,7 +137,9 @@ if(title !==""){
         label={'Title'} />
       {titlerror}
       <Typography> Link</Typography>
-      <TextField type='date' value={date} onChange={(e) => setDate(e.target.value)} />
+      <TextField type='date' value={date} onChange={(e) => setDate(e.target.value)} inputProps={{
+        max: formattedDate,
+      }} />
       {dateerror}
       <br></br>
       <Button onClick={onSubmit}>Submit</Button>
