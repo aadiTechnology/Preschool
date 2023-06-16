@@ -8,10 +8,10 @@ const AddHomeWorkSlice = createSlice({
   name: 'AddHomeWork',
   initialState:{
     ClassNameList:[],
-    AddHomework:null,
+    AddHomework:'',
     DetailsList:[],
-    DeleteHomework:{},
-    SubmitHomework:{},
+    DeleteHomework:'',
+    SubmitHomework:'',
     HomeworkListForEdit:null,
     Loading: true,
    
@@ -19,32 +19,42 @@ const AddHomeWorkSlice = createSlice({
   reducers: {
     getClassNameList(state,action){
       state.ClassNameList=action.payload;
+      state.Loading = false;
     },
     getAddHomework(state,action){
       state.AddHomework=action.payload;
+      state.Loading = false
     },
-
+    resetAddHomeworkMessage(state) {
+      state.AddHomework = '';
+    },
     getDetailsList(state,action){
       state.DetailsList=action.payload;
       state.Loading = false;
     },
     getDeleteHomework(state,action){
       state.DeleteHomework=action.payload;
+      state.Loading = false;
     },
-    resetMessage1(state) {
-      state.DeleteHomework = {};
+    resetDeleteMessage(state) {
+      state.DeleteHomework = '';
     },
 
     getSubmitHomework(state,action){
       state.SubmitHomework=action.payload;
+      state.Loading = false
+    },
+    resetSubmitMessage(state) {
+      state.SubmitHomework = '';
     },
     getHomeworkListForEdit(state,action){
       state.HomeworkListForEdit=action.payload;
+      state.Loading = false
     },
     resetMessage(state) {
-      state.AddHomework = {};
+      state.AddHomework = null;
     },
-    getLoading(state, action) {
+    getLoading(state) {
       state.Loading = true
     }
   }   
@@ -54,12 +64,14 @@ const AddHomeWorkSlice = createSlice({
 export const getClassNameList =
   (data:IGetClassNameListBody): AppThunk =>
   async (dispatch) => {
+    dispatch(AddHomeWorkSlice.actions.getLoading());
+
     const response = await GetClassForTeacherApi. GetClassForTeacher(data);
     let a = response.data.map((item, i) => {
         return {
             Id: i,
             Name: item.ClassName,
-            AssignedDate: item.ClassId,
+            Value: item.ClassId,
         }
       })
      dispatch(AddHomeWorkSlice.actions.getClassNameList(a));
@@ -69,27 +81,35 @@ export const getClassNameList =
   export const getAddHomework =
   (data:IGetAddHomeworkBody): AppThunk =>
   async (dispatch) => {
+    dispatch(AddHomeWorkSlice.actions.getLoading());
     const response = await GetClassForTeacherApi.GetAddHomework(data);
     dispatch(AddHomeWorkSlice.actions.getAddHomework(response.data));
   };
 
-  
+
+  export const resetAddHomeworkMessage =
+  (): AppThunk =>
+    async (dispatch) => {
+      dispatch(AddHomeWorkSlice.actions.resetAddHomeworkMessage());
+    }
   export const getDeleteHomework =
   (data:IDeleteHomeworkBody): AppThunk =>
   async (dispatch) => {
+    dispatch(AddHomeWorkSlice.actions.getLoading());
     const response = await GetClassForTeacherApi.GetDeleteHomework(data);
     dispatch(AddHomeWorkSlice.actions.getDeleteHomework(response.data));
   };
 
-  export const resetMessage1 =
+  export const resetDeleteMessage =
   (): AppThunk =>
     async (dispatch) => {
-      dispatch(AddHomeWorkSlice.actions.resetMessage1());
+      dispatch(AddHomeWorkSlice.actions.resetDeleteMessage());
     }
 
   export const getSubmitHomework =
   (data:ISubmitHomeworkBody): AppThunk =>
   async (dispatch) => {
+    dispatch(AddHomeWorkSlice.actions.getLoading());
     const response = await GetClassForTeacherApi.GetSubmitHomework(data);
     dispatch(AddHomeWorkSlice.actions.getSubmitHomework(response.data));
   };
@@ -97,6 +117,7 @@ export const getClassNameList =
   export const getHomeworkListForEdit =
   (data:IHomeworkListForEditBody): AppThunk =>
   async (dispatch) => {
+    dispatch(AddHomeWorkSlice.actions.getLoading());
     const response = await GetClassForTeacherApi.GetHomeworkListForEdit(data);
     dispatch(AddHomeWorkSlice.actions.getHomeworkListForEdit(response.data));
   };
@@ -113,19 +134,13 @@ export const getClassNameList =
          Text3 : item.SubjectName,
          Text4 : item.Attachment,
          Text5 : item.Camera,
-         Text6 : item.AssignDate
+         Text6 : item.AssignDate,
+         IsSubmited: item.IsSubmited
     }
    })
 
     dispatch(AddHomeWorkSlice.actions.getDetailsList(DeleteList));
   };
-
-  export const resetMessage =
-  (): AppThunk =>
-    async (dispatch) => {
-      dispatch(AddHomeWorkSlice.actions.resetMessage());
-    }
-
 
 
 export default AddHomeWorkSlice.reducer

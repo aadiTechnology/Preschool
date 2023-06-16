@@ -5,7 +5,7 @@ import DropDown from 'src/library/DropDown/DropDown'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { getClassNameList, getAddHomework, getDetailsList, getDeleteHomework, getHomeworkListForEdit } from 'src/requests/Teacher/RequestAddHomeWork';
+import { getClassNameList, getAddHomework, getHomeworkListForEdit, resetAddHomeworkMessage } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDeleteHomeworkBody, IHomeworkListForEditBody } from 'src/Interface/Teacher/IAddHomework';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
@@ -17,103 +17,62 @@ import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 
 function AddHomeWork() {
 
-     const GetHomeWork: any = useSelector(
-        (state: RootState) => state.AddHomeWork.ClassNameList
-    );
+    const GetHomeWork: any = useSelector((state: RootState) => state.AddHomeWork.ClassNameList);
+    const GetAddHomework: any = useSelector((state: RootState) => state.AddHomeWork.AddHomework);
+    const GetEditList: any = useSelector((state: RootState) => state.AddHomeWork.HomeworkListForEdit);
 
-    const GetHomeWorkDetailsList: any = useSelector(
-        (state: RootState) => state.AddHomeWork.DetailsList
-    );
+    const loading = useSelector((state: RootState) => state.AddHomeWork.Loading);
 
-    console.log(GetHomeWorkDetailsList , "GetHomeWorkDetailsList")
-
-    const GetAddHomework: any = useSelector(
-        (state: RootState) => state.AddHomeWork.AddHomework
-    );
-
-    const GetEditList: any = useSelector(
-        
-        (state: RootState) => state.AddHomeWork.HomeworkListForEdit
-    );
-
-    const loading = useSelector(
-        
-        (state: RootState) => state.AddHomeWork.Loading
-      );
-    
-
-    console.log(GetEditList , "GetEditList")
 
     const dispatch = useDispatch();
+    const [Id, setId] = useState(0)
     const [subjectDescription, setSubjectDescription] = useState('')
-    const [selectclass, setSelectClass] = useState('');
+    const [selectclass, setSelectClass] = useState(0);
     const [selectdate, setSelectDate] = useState('');
     const [errordescription, setErrordescription] = useState('')
     const [errorselectdate, setErrorselectdate] = useState('')
     const [editing, setEditing] = useState(GetEditList);
-    const handleContentChange = (value) => {
-        setSubjectDescription(value);
-     };
+
+
     const ClickItem = (value) => {
         setSelectClass(value);
     };
 
-
-
-    const GetClassNameListBody: IGetClassNameListBody =
-    {
-        Id: 0
-    }
+    const GetClassNameListBody: IGetClassNameListBody = { Id: 0 }
 
     const GetAddHomeworkBody: IGetAddHomeworkBody =
     {
-        Class: selectclass,
-        SubjectName: '',
+        Id: Id,
+        ClassId: selectclass,
+        SubjectId: 1,
         SubjectDescription: subjectDescription,
         AssignDate: selectdate,
+        AcademicId: 4,
         Attachment: '',
-        Camera: ''
-    }
+        Camera: '',
+        UserId: 1,
+        UserRoleId: 1
 
-    const GetDetailsListBody: IGetDetailsListBody =
-    {
-        Id: 0
     }
 
     useEffect(() => {
         dispatch(getClassNameList(GetClassNameListBody));
-        dispatch(getDetailsList(GetDetailsListBody));
     }, [])
 
     useEffect(() => {
-        if(GetEditList!==null){
-        setSelectDate(GetEditList.AssignDate)
-        setSelectClass("2")
-    }
+        if (GetEditList !== null) {
+            setId(GetEditList.Id)
+            setSelectDate(GetEditList.AssignDate)
+            setSubjectDescription(GetEditList.SubjectDescription)
+            setSelectClass(GetEditList.ClassId)
+        }
     }, [GetEditList])
 
-    useEffect(() => {
-        if(GetAddHomework!==null){
-      toast.success(GetAddHomework)
-      dispatch(getDetailsList(GetDetailsListBody));
-
-    }
-    }, [GetAddHomework])
-  
- 
-    const Edit = (Id) => {
-      
+    const clickEdit = (Id) => {
         setEditing(GetEditList);
-        console.log(GetEditList)
-          const GetHomeworkEditBody: IHomeworkListForEditBody =
-          {
-              Id: Id
-          }
-          dispatch(getHomeworkListForEdit(GetHomeworkEditBody));
-  
-         
-      }
-  
+        const GetHomeworkEditBody: IHomeworkListForEditBody = { Id: Id }
+        dispatch(getHomeworkListForEdit(GetHomeworkEditBody));
+    }
 
     const onAddHomeWork = () => {
         let isValid = true;
@@ -133,25 +92,31 @@ function AddHomeWork() {
         }
 
         if (isValid) {
+            console.log(GetAddHomeworkBody,"GetAddHomeworkBody")
             dispatch(getAddHomework(GetAddHomeworkBody));
             setSubjectDescription('');
-            setSelectClass('');
+            setSelectClass(0);
+            // console.log("oy.AssignDate",GetEditList.AssignDate)
             setSelectDate('');
         }
     };
 
-const clickDelete = () =>{
-    dispatch(getDetailsList(GetDetailsListBody));
-
-}
-
+    useEffect(() => {
+        if (GetAddHomework !== '') {
+          toast.success("Homework added successfully", { toastId: 'success1' })
+          dispatch(resetAddHomeworkMessage());
+        }
+      }, [GetAddHomework])
+    
     return (
         <Container>
             <PageHeader heading={'AddHomeWork'} />
             <Card>
                 <DropDown itemList={GetHomeWork} ClickItem={ClickItem} DefaultValue={selectclass} Label={'Select Class'} />
                 <br></br>
-                <ReactQuill value={subjectDescription} onChange={handleContentChange} modules={toolbarOptions} />
+                {/* <DropDown itemList={GetHomeWork} ClickItem={ClickItem} DefaultValue={selectclass} Label={'Select Subject'} />
+                <br></br> */}
+                <ReactQuill value={subjectDescription} onChange={(value) => setSubjectDescription(value)} modules={toolbarOptions} />
                 {errordescription}
                 <TextField type="date" value={selectdate} onChange={(e) => setSelectDate(e.target.value)} />
                 {errorselectdate}
@@ -161,10 +126,11 @@ const clickDelete = () =>{
                 <Button sx={{ mt: 2 }} onClick={onAddHomeWork}>Save</Button>
             </Card>
             <br></br>
-            {loading ? <SuspenseLoader /> : 
-            <TabulerCard homeWorkList={GetHomeWorkDetailsList} 
-            onEdit={Edit} clickDelete={clickDelete}/>}
-        
+            {
+                loading ? <SuspenseLoader /> :
+                    <TabulerCard clickEdit={clickEdit} />
+            }
+
         </Container>
 
     )

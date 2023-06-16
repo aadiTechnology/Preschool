@@ -10,12 +10,16 @@ export interface IGetClassNameListResult {
 };
 
 export interface IGetAddHomeworkBody {
-    Class:string,
-    SubjectName:string,
+    Id:number,
+    ClassId:number,
+    SubjectId:number,
     SubjectDescription:string,
     AssignDate:string,
+    AcademicId:number,
     Attachment:string,
-    Camera:string
+    Camera:string,
+    UserId: number,
+    UserRoleId: number
 };
 
 export interface IGetAddHomeworkResult{};
@@ -30,6 +34,7 @@ export interface IGetDetailsListResult {
    SubjectName: string,
    SubjectDescription: string,
    AssignDate: string,
+   IsSubmited: boolean,
    Attachment: string,
    Camera: string
 };
@@ -56,7 +61,7 @@ export interface IHomeworkListForEditResult{
 };
 
 export interface ISubmitHomeworkBody {
-    TeacherId:number
+    Id:number
 }
 
 export interface ISubmitHomeworkResult{};
