@@ -7,10 +7,10 @@ import GetAddPhotoApi from 'src/api/Admin/ApiAddPhoto';
 const AddPhotoSlice = createSlice({
   name: 'AddPhoto',
   initialState: {
-    AddPhotoAlbum: {},
+    AddPhotoAlbum: null,
     GetClassNameList: [],
     GetAllAlbumNameList: [],
-    DeleteAllAlbumList: {}
+    DeleteAllAlbumList: null
 
   },
   reducers: {

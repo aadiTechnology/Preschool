@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box , Card, IconButton, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-function Card3Text({ Text1, Text2, Text3, textVariant = 'body2' ,Id}) {
+function Card3Text({ Text1, Text2, Text3, textVariant = 'body2' ,Id ,Delete}) {
   return (
     <Card component={Box} mb={1}>
     <Box display={"flex"} justifyContent={'space-between'}  p={1}>
@@ -15,7 +15,7 @@ function Card3Text({ Text1, Text2, Text3, textVariant = 'body2' ,Id}) {
     <Typography variant='body2' pl={1} pb={1}>
          {Text3}
      </Typography>
-     <IconButton onClick={()=>Id}>
+     <IconButton onClick={()=>Delete(Id)}>
      <DeleteIcon/>
      </IconButton>
    

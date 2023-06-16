@@ -18,10 +18,14 @@ import List2Card from 'src/library/List/List2Card';
 function AddPhoto() {
 
   const dispatch = useDispatch();
-
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = currentDate.getDate().toString().padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
   const [title, setTitle] = useState('');
   const [titlerror, setTitleError] = useState('')
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(formattedDate)
   const [dateerror, setDateError] = useState('')
   const [ItemList, setItemList] = useState([])
 
@@ -50,14 +54,6 @@ function AddPhoto() {
   }
 
 
-  const AddPhoto: IAddPhotoAlbumBody =
-  {
-    Title: title,
-    Class: ItemList.filter((item) => { return (item.IsActive) }).map((obj) => { return obj.Value }).toString(),
-    AlbumDate: date,
-    FacebookLink: "httplocalhost45",
-    UserId: 1
-  }
 
   const ClassNameBody: IGetClassNameListBody = {
     "ClassId": 1,
@@ -75,7 +71,7 @@ function AddPhoto() {
   const onSubmit = () => {
     let isError = false
     if (title === '') {
-      setTitleError('Mandotory Field')
+      setTitleError('Please Enter Title Name')
       isError = true
     }
     else {
@@ -88,19 +84,25 @@ function AddPhoto() {
     else {
       setDateError('')
     }
-
+    const AddPhoto: IAddPhotoAlbumBody =
+    {
+      Title: title,
+      Class: ItemList.filter((item) => { return (item.IsActive) }).map((obj) => { return obj.Value }).toString(),
+      AlbumDate: date,
+      FacebookLink: "httplocalhost45",
+      UserId: 1
+    }
+    // dispatch(getClassNameList(ClassNameBody))
+    dispatch(getAddPhoto(AddPhoto));
     setTitle('')
     setDate('')
-    dispatch(getAddPhoto(AddPhoto));
-if(title !==""){
-  toast.success("Photos Added Sucessfully")
-}
-
+    setItemList(prev=> prev.map((item)=> 
+      {return {...item,IsActive:false}}))
   }
-
 
   useEffect(() => {
     dispatch(getClassNameList(ClassNameBody))
+    dispatch(GetAllAlbumNameList(GetAllAlbumBody))
   }, [])
 
   useEffect(() => {
@@ -110,11 +112,22 @@ if(title !==""){
 
 
   useEffect(() => {
+    if (GetAddPhoto !== "") {
+      toast.success("Photos Added Sucessfully")
+    }
     dispatch(GetAllAlbumNameList(GetAllAlbumBody))
-  }, [])
-  // useEffect(()=>{
-  //   dispatch(DeleteAllAlbumList(DeleteAllAlbumBody))
-  // },[])
+  }, [GetAddPhoto])
+ 
+  useEffect(()=>{
+    if(DeleteAllAlbum!==null){
+      toast.success(DeleteAllAlbum)
+    }
+   
+  },[DeleteAllAlbum])
+
+  const Delete =()=>{
+    dispatch(DeleteAllAlbumList(DeleteAllAlbumBody))
+  }
 
   const clickNavigate = () => {
 
@@ -129,12 +142,14 @@ if(title !==""){
         label={'Title'} />
       {titlerror}
       <Typography> Link</Typography>
-      <TextField type='date' value={date} onChange={(e) => setDate(e.target.value)} />
+      <TextField type='date' value={date} onChange={(e) => setDate(e.target.value)} inputProps={{
+        max: formattedDate,
+      }} />
       {dateerror}
       <br></br>
       <Button onClick={onSubmit}>Submit</Button>
 
-      <List2Card ItemList={GetAllAlbum} />
+      <List2Card ItemList={GetAllAlbum} Delete={Delete} />
     </Container>
   )
 }

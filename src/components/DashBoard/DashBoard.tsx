@@ -53,13 +53,11 @@ function DashBoard() {
     <Container>
        <Grid container spacing={2} mt={2}>
         {itemList.map((item,i)=>(
-        
-         
-            <Grid item xs={3} key={i}>
+          <Grid item xs={3} key={i}>
             <Link to={`/${location.pathname.split('/')[1]}/${item.Link}`} style={{ textDecoration: 'none' }}>
-            <Card>
-              <IconButton>{item.icon}</IconButton>
-            <Typography>{item.Text}</Typography>
+            <Card sx={{textAlign:"center"}}>
+            <IconButton >{item.icon}</IconButton>
+            <Typography sx={{textAlign:"center"}}>{item.Text}</Typography>
             </Card>
             </Link>
             </Grid>
