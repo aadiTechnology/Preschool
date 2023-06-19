@@ -26,7 +26,11 @@ const AddPhotoSlice = createSlice({
     },
     DeleteAllAlbumList(state, action) {
       state.DeleteAllAlbumList = action.payload;
-    }
+    },
+
+    resetDeleteAllAlbumList(state) {
+      state.DeleteAllAlbumList = "";
+    },
   }
 });
 
@@ -77,5 +81,10 @@ export const GetAllAlbumNameList =
       dispatch(AddPhotoSlice.actions.DeleteAllAlbumList(response.data));
     };
 
+    export const resetDeleteAlbumListMessage =
+    (): AppThunk =>
+      async (dispatch) => {
+        dispatch(AddPhotoSlice.actions.resetDeleteAllAlbumList());
+      }
 
 export default AddPhotoSlice.reducer

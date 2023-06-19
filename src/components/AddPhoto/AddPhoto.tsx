@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { toast } from 'react-toastify';
 import { IAddPhotoAlbumBody, IGetClassNameListBody, IGetAllAlbumNameListBody, IDeletePhotoAlbumBody } from 'src/Interface/Admin/IAddPhoto'
-import { getAddPhoto, getClassNameList, GetAllAlbumNameList, DeleteAllAlbumList } from 'src/requests/Admin/RequestAddPhoto'
+import { getAddPhoto, getClassNameList, GetAllAlbumNameList, DeleteAllAlbumList ,resetDeleteAlbumListMessage } from 'src/requests/Admin/RequestAddPhoto'
 import SelectedCard from 'src/library/Card/SelectedCard';
 import ListCard from 'src/library/List/ListCard';
 import List2Card from 'src/library/List/List2Card';
@@ -94,11 +94,13 @@ function AddPhoto() {
       toast.success("Photos Added Sucessfully")
     }
     dispatch(GetAllAlbumNameList())
-  }, [GetAddPhoto])
+   }, [GetAddPhoto])
+ console.log("DeleteAllAlbum",DeleteAllAlbum);
  
   useEffect(()=>{
-    if(DeleteAllAlbum!==null){
-      toast.success(DeleteAllAlbum)
+    if(DeleteAllAlbum !== null && DeleteAllAlbum !== ""){
+      toast.success(DeleteAllAlbum , { toastId: 'success1' })
+    dispatch(resetDeleteAlbumListMessage());
     }
     dispatch(GetAllAlbumNameList())
   },[DeleteAllAlbum])
