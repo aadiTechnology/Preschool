@@ -11,10 +11,7 @@ import SelectedCard from 'src/library/Card/SelectedCard';
 import ListCard from 'src/library/List/ListCard';
 import List2Card from 'src/library/List/List2Card';
 
-// const ItemList=[
-//   {Id:1 , Name:"playGroup" , Value:1 ,IsActive:false} ,  {Id:2 , Name:"Nursary" , Value:2 ,IsActive:false},
-//   {Id:3 , Name:"SR KG" , Value:3 ,IsActive:false} , {Id:4 , Name:"SR KG2" , Value:4 ,IsActive:false}
-// ]
+
 function AddPhoto() {
 
   const dispatch = useDispatch();
@@ -45,26 +42,10 @@ function AddPhoto() {
   const DeleteAllAlbum: any = useSelector(
     (state: RootState) => state.AddPhoto.DeleteAllAlbumList
   );
-
-
-
-
-  const clickItem = (value) => {
+   const clickItem = (value) => {
     setItemList(value)
   }
-
-
-
- 
-
- 
-
-
-  const DeleteAllAlbumBody: IDeletePhotoAlbumBody = {
-    "Id": 10,
-  }
-
-  const onSubmit = () => {
+   const onSubmit = () => {
     let isError = false
     if (title === '') {
       setTitleError('Please Enter Title Name')
@@ -89,9 +70,7 @@ function AddPhoto() {
       FacebookLink: "httplocalhost45",
       UserId: 1
     }
-
     
-    // dispatch(getClassNameList(ClassNameBody))
     dispatch(getAddPhoto(AddPhoto));
     setTitle('')
     setDate('')
@@ -121,10 +100,11 @@ function AddPhoto() {
     if(DeleteAllAlbum!==null){
       toast.success(DeleteAllAlbum)
     }
-   
+    dispatch(GetAllAlbumNameList())
   },[DeleteAllAlbum])
 
-  const Delete =()=>{
+  const Delete =(Id)=>{
+    const DeleteAllAlbumBody: IDeletePhotoAlbumBody = { Id: Id }
     dispatch(DeleteAllAlbumList(DeleteAllAlbumBody))
   }
 
