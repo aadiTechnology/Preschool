@@ -32,11 +32,11 @@ function Homework() {
     (state: RootState) => state.HomeWork.Loading
   );
 
-
+const [assignDate , setAssignDate] = useState()
 
   const GetHighlightedDateBody: IGetDateForLegendBody =
   {
-    "AssignDate": "08/06/2023"
+    "AssignDate": "2023-06-28"
   }
 
 
@@ -67,8 +67,8 @@ function Homework() {
         </Grid>
       </Grid>
       <br></br>
-      {loading ? <SuspenseLoader/> :
-    <Card2Text Text1={GetDateLegend.SubjectName} Text2={GetDateLegend.AssignDate} clickNavigate={clickViewHomework}/>}
+     <ListCard ItemList={GetDateLegend} clickNavigate={clickViewHomework}/>
+    {/* <Card2Text Text1={GetDateLegend.SubjectName} Text2={GetDateLegend.AssignDate} clickNavigate={clickViewHomework}/> */}
     </Container>
   )
 }

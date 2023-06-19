@@ -3,7 +3,7 @@ import { IGetDateForLegendBody, IGetDateForLegendResult,IGetViewHomeWorkListBody
 
 
 const GetDateForLegend = (data: IGetDateForLegendBody) => {
-    return http.post<IGetDateForLegendResult>('GetDateForLegend', data)
+    return http.post<IGetDateForLegendResult[]>('GetDateForLegend', data)
 };
 
 const GetViewHomeWorkList = (data: IGetViewHomeWorkListBody) => {

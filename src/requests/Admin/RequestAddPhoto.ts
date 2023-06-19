@@ -38,23 +38,26 @@ export const getAddPhoto =
     };
 
 export const getClassNameList =
-  (data: IGetClassNameListBody): AppThunk =>
+  (): AppThunk =>
     async (dispatch) => {
-      const response = await GetAddPhotoApi.GetClassList(data);
+      const response = await GetAddPhotoApi.GetClassList();
+     
       let getClass = response.data.map((item, i) => {
+        console.log(item ,"Value")
         return {
           Id: i,
           Name: item.ClassName,
-          Value: item.ClassName,
+          Value: item.ClassId,
         }
       })
+      
       dispatch(AddPhotoSlice.actions.GetClassNameList(getClass));
     };
 
 export const GetAllAlbumNameList =
-  (data: IGetAllAlbumNameListBody): AppThunk =>
+  (): AppThunk =>
     async (dispatch) => {
-      const response = await GetAddPhotoApi.GetAllAlbumList(data);
+      const response = await GetAddPhotoApi.GetAllAlbumList();
       let getAllAlbum = response.data.map((item, i) => {
         return {
           Id: item.Id,

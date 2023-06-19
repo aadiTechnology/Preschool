@@ -1,9 +1,13 @@
 import http from "../../utils/http-common";
-import {IGetClassNameListBody ,IGetClassNameListResult ,IGetAddHomeworkBody ,
+import {IGetClassNameListBody ,IGetClassNameListResult ,IGetAddHomeworkBody ,IGetSubjectNameBody,IGetSubjectNameResult,
   IGetAddHomeworkResult ,IGetDetailsListBody,IGetDetailsListResult ,IDeleteHomeworkBody ,IDeleteHomeworkResult , ISubmitHomeworkBody,ISubmitHomeworkResult,IHomeworkListForEditBody,IHomeworkListForEditResult} from "src/Interface/Teacher/IAddHomework";
 
   const GetClassForTeacher = (data: IGetClassNameListBody) => {
     return http.post<IGetClassNameListResult[]>('GetClassNameList',data);
+  };
+
+  const GetSubjectForTeacher = () => {
+    return http.post<IGetSubjectNameResult[]>('GetSubjectNameDropdown');
   };
 
   const GetAddHomework = (data: IGetAddHomeworkBody) => {
@@ -32,7 +36,8 @@ const GetClassForTeacherApi ={
     GetDetailsList,
     GetDeleteHomework,
     GetHomeworkListForEdit,
-    GetSubmitHomework
+    GetSubmitHomework,
+    GetSubjectForTeacher
 }
 
 export default GetClassForTeacherApi;

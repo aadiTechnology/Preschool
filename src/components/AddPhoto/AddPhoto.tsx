@@ -55,13 +55,9 @@ function AddPhoto() {
 
 
 
-  const ClassNameBody: IGetClassNameListBody = {
-    "ClassId": 1,
-  }
+ 
 
-  const GetAllAlbumBody: IGetAllAlbumNameListBody = {
-    Id: 1,
-  }
+ 
 
 
   const DeleteAllAlbumBody: IDeletePhotoAlbumBody = {
@@ -85,13 +81,16 @@ function AddPhoto() {
       setDateError('')
     }
     const AddPhoto: IAddPhotoAlbumBody =
+   
     {
       Title: title,
-      Class: ItemList.filter((item) => { return (item.IsActive) }).map((obj) => { return obj.Value }).toString(),
+      ClassId: ItemList.filter((item) => {return (item.IsActive) }).map((obj) => { return obj.Value }).toString(),
       AlbumDate: date,
       FacebookLink: "httplocalhost45",
       UserId: 1
     }
+
+    
     // dispatch(getClassNameList(ClassNameBody))
     dispatch(getAddPhoto(AddPhoto));
     setTitle('')
@@ -101,8 +100,8 @@ function AddPhoto() {
   }
 
   useEffect(() => {
-    dispatch(getClassNameList(ClassNameBody))
-    dispatch(GetAllAlbumNameList(GetAllAlbumBody))
+    dispatch(getClassNameList())
+    dispatch(GetAllAlbumNameList())
   }, [])
 
   useEffect(() => {
@@ -115,7 +114,7 @@ function AddPhoto() {
     if (GetAddPhoto !== "") {
       toast.success("Photos Added Sucessfully")
     }
-    dispatch(GetAllAlbumNameList(GetAllAlbumBody))
+    dispatch(GetAllAlbumNameList())
   }, [GetAddPhoto])
  
   useEffect(()=>{

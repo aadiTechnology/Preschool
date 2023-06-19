@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
 import {  GetViewHomework} from 'src/requests/Student/Homework/RequestHomework'
 import { IGetViewHomeWorkListBody } from 'src/Interface/Student/IHomework';
-import { Typography ,Card} from '@mui/material';
+import { Typography ,Card, Container} from '@mui/material';
 
 function ViewHomework() {
   const dispatch = useDispatch();
@@ -17,26 +17,26 @@ function ViewHomework() {
   console.log(ViewHomework ,"ViewHomework")
   const GetViewHomeworkBody: IGetViewHomeWorkListBody =
   {
-    "AssignDate": "08/06/2023"
+    "AssignDate": "2023-06-22"
   }
   useEffect(() => {
     dispatch(GetViewHomework(GetViewHomeworkBody));
   }, [])
   return (
-    <div>
+    <Container>
       <PageHeader heading={'View Homework'} />
       <BackButton  FromRoute={'/Student/Homework'}/>
       {ViewHomework.map((item,i)=>(
         <div key={i}>
-             <Card>
-             <Typography>{item.SubjectDescription}</Typography>
+             <Card sx={{mb:"10px"}}>
+        <Typography dangerouslySetInnerHTML={{ __html: item.SubjectDescription }}></Typography>
         <Typography>{item.AssignDate}</Typography>
         <Typography>{item.Attachment}</Typography>
       </Card>
            </div>
       ))}
    
-    </div>
+    </Container>
   )
 }
 export default ViewHomework

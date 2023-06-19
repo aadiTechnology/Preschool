@@ -1,13 +1,14 @@
 import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'src/store';
-import {IGetClassNameListBody ,IGetAddHomeworkBody , ISubmitHomeworkBody,IGetDetailsListBody ,IDeleteHomeworkBody ,IHomeworkListForEditBody} from 'src/Interface/Teacher/IAddHomework';
+import {IGetClassNameListBody ,IGetAddHomeworkBody , IGetSubjectNameBody,ISubmitHomeworkBody,IGetDetailsListBody ,IDeleteHomeworkBody ,IHomeworkListForEditBody} from 'src/Interface/Teacher/IAddHomework';
 import GetClassForTeacherApi from 'src/api/Teacher/ApiAddHomeWork'
 
 const AddHomeWorkSlice = createSlice({
   name: 'AddHomeWork',
   initialState:{
     ClassNameList:[],
+    SubjectList:[],
     AddHomework:'',
     DetailsList:[],
     DeleteHomework:'',
@@ -19,6 +20,11 @@ const AddHomeWorkSlice = createSlice({
   reducers: {
     getClassNameList(state,action){
       state.ClassNameList=action.payload;
+      state.Loading = false;
+    },
+
+    getSubjectNameList(state,action){
+      state.SubjectList=action.payload;
       state.Loading = false;
     },
     getAddHomework(state,action){
@@ -75,6 +81,23 @@ export const getClassNameList =
         }
       })
      dispatch(AddHomeWorkSlice.actions.getClassNameList(a));
+  };
+
+
+  export const getSubjectNameList =
+  (): AppThunk =>
+  async (dispatch) => {
+    dispatch(AddHomeWorkSlice.actions.getLoading());
+
+    const response = await GetClassForTeacherApi.GetSubjectForTeacher();
+    let Subject = response.data.map((item, i) => {
+        return {
+            Id: i,
+            Name: item.SubjectName,
+            Value: item.Id,
+        }
+      })
+     dispatch(AddHomeWorkSlice.actions.getSubjectNameList(Subject));
   };
 
 

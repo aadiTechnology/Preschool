@@ -5,8 +5,8 @@ import DropDown from 'src/library/DropDown/DropDown'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { getClassNameList, getAddHomework, getHomeworkListForEdit, resetAddHomeworkMessage } from 'src/requests/Teacher/RequestAddHomeWork';
-import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDeleteHomeworkBody, IHomeworkListForEditBody } from 'src/Interface/Teacher/IAddHomework';
+import { getClassNameList, getAddHomework, getHomeworkListForEdit, resetAddHomeworkMessage ,getSubjectNameList} from 'src/requests/Teacher/RequestAddHomeWork';
+import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDeleteHomeworkBody, IHomeworkListForEditBody ,IGetSubjectNameBody} from 'src/Interface/Teacher/IAddHomework';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -18,16 +18,18 @@ import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 function AddHomeWork() {
 
     const GetHomeWork: any = useSelector((state: RootState) => state.AddHomeWork.ClassNameList);
+    const GetSubject: any = useSelector((state: RootState) => state.AddHomeWork.SubjectList);
     const GetAddHomework: any = useSelector((state: RootState) => state.AddHomeWork.AddHomework);
     const GetEditList: any = useSelector((state: RootState) => state.AddHomeWork.HomeworkListForEdit);
 
     const loading = useSelector((state: RootState) => state.AddHomeWork.Loading);
-
+     console.log(GetSubject ,"GetSubject")
 
     const dispatch = useDispatch();
     const [Id, setId] = useState(0)
     const [subjectDescription, setSubjectDescription] = useState('')
     const [selectclass, setSelectClass] = useState(0);
+    const [selectsubject, setSelectSubject] = useState(0);
     const [selectdate, setSelectDate] = useState('');
     const [errordescription, setErrordescription] = useState('')
     const [errorselectdate, setErrorselectdate] = useState('')
@@ -38,13 +40,17 @@ function AddHomeWork() {
         setSelectClass(value);
     };
 
+    const ClickSubjectItem = (value) => {
+        setSelectSubject(value);
+    };
+
     const GetClassNameListBody: IGetClassNameListBody = { Id: 0 }
 
     const GetAddHomeworkBody: IGetAddHomeworkBody =
     {
         Id: Id,
         ClassId: selectclass,
-        SubjectId: 1,
+        SubjectId: selectsubject,
         SubjectDescription: subjectDescription,
         AssignDate: selectdate,
         AcademicId: 4,
@@ -55,8 +61,11 @@ function AddHomeWork() {
 
     }
 
+  
+
     useEffect(() => {
         dispatch(getClassNameList(GetClassNameListBody));
+        dispatch(getSubjectNameList());
     }, [])
 
     useEffect(() => {
@@ -114,8 +123,8 @@ function AddHomeWork() {
             <Card>
                 <DropDown itemList={GetHomeWork} ClickItem={ClickItem} DefaultValue={selectclass} Label={'Select Class'} />
                 <br></br>
-                {/* <DropDown itemList={GetHomeWork} ClickItem={ClickItem} DefaultValue={selectclass} Label={'Select Subject'} />
-                <br></br> */}
+                <DropDown itemList={GetSubject} ClickItem={ClickSubjectItem} DefaultValue={selectsubject} Label={'Select Subject'} />
+                <br></br>
                 <ReactQuill value={subjectDescription} onChange={(value) => setSubjectDescription(value)} modules={toolbarOptions} />
                 {errordescription}
                 <TextField type="date" value={selectdate} onChange={(e) => setSelectDate(e.target.value)} />

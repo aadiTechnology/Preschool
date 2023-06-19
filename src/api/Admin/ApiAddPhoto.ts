@@ -6,12 +6,12 @@ const GetAddPhoto = (data: IAddPhotoAlbumBody) => {
     return http.post<IAddPhotoAlbumResult[]>('AddPhotoAlbum',data);
   };
 
-  const GetClassList=(data:IGetClassNameListBody)=>{
-    return http.post<IGetClassNameListResult[]>('GetClassNameList',data);
+  const GetClassList=()=>{
+    return http.post<IGetClassNameListResult[]>('GetClassNameList');
   };
 
-  const GetAllAlbumList=(data:IGetAllAlbumNameListBody)=>{
-    return http.post<IGetAllAlbumNameListResult[]>('GetAllAlbumNameList',data);
+  const GetAllAlbumList=()=>{
+    return http.post<IGetAllAlbumNameListResult[]>('GetAllAlbumNameList');
   };
 
   const DeleteAlbumList=(data:IDeletePhotoAlbumBody)=>{

@@ -1,6 +1,6 @@
 export interface IAddPhotoAlbumBody {
     Title:string,
-    Class:string,
+    ClassId:string,
     AlbumDate:string,
     FacebookLink:string,
     UserId:number
@@ -11,6 +11,7 @@ export interface IAddPhotoAlbumResult{};
 export interface IGetClassNameListBody{};
 
 export interface IGetClassNameListResult{
+    Id:number
     ClassId: number,
     ClassName: string,
     InsertBy: string,

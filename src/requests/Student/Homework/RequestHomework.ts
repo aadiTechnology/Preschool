@@ -9,7 +9,7 @@ import {IGetViewHomeWorkListBody} from  "src/Interface/Student/IHomework"
 const Homeworkslice = createSlice({
     name: 'Homework',
     initialState: {
-        HighlightedDate: {},
+        HighlightedDate: [],
         ViewHomework:[],
         Loading :true
 
@@ -32,9 +32,16 @@ export const GetDateForLegend=
 (data:IGetDateForLegendBody):AppThunk =>
 async(dispatch)=>{
     const response=await GetHomeworkApi.GetDateForLegend(data)
-   
-
-    dispatch(Homeworkslice.actions.GetDateForLegend(response.data))
+    let HomeWorkList = response.data.map((item,i)=>{
+        return {
+             Id:item.Id,
+             Text1:  item.SubjectName,
+             Text2 : item.AssignDate,
+           
+          
+        }
+       })
+    dispatch(Homeworkslice.actions.GetDateForLegend(HomeWorkList))
 }
 export const GetViewHomework=
 (data:IGetViewHomeWorkListBody):AppThunk =>

@@ -9,6 +9,17 @@ export interface IGetClassNameListResult {
    TeacherId: number
 };
 
+
+export interface IGetSubjectNameBody {
+    SubjectName:string
+};
+
+export interface IGetSubjectNameResult {
+    Id: number,
+    SubjectName: string,
+   
+};
+
 export interface IGetAddHomeworkBody {
     Id:number,
     ClassId:number,
