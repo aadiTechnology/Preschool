@@ -59,6 +59,9 @@ function TabulerCard({ clickEdit }) {
               <Grid item xs={2}>
                 <Typography>{item.Text1}</Typography>
               </Grid>
+              <Grid item xs={2}>
+                <Typography>{item.Text3}</Typography>
+              </Grid>
               <Grid item xs={2} >
                 <Typography dangerouslySetInnerHTML={{ __html: item.Text2 }}></Typography>
               </Grid>

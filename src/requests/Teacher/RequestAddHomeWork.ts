@@ -152,12 +152,12 @@ export const getClassNameList =
    let DeleteList = response.data.map((item,i)=>{
     return {
          Id:item.Id,
-         Text1:  item.Class,
+         Text1:  item.ClassName,
          Text2 : item.SubjectDescription,
          Text3 : item.SubjectName,
          Text4 : item.Attachment,
          Text5 : item.Camera,
-         Text6 : item.AssignDate,
+         Text6 : item.AssignDate.split(' ')[0],
          IsSubmited: item.IsSubmited
     }
    })

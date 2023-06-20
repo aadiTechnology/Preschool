@@ -41,7 +41,7 @@ export interface IGetDetailsListBody {
 
 export interface IGetDetailsListResult {
    Id: number,
-   Class: string,
+   ClassName: string,
    SubjectName: string,
    SubjectDescription: string,
    AssignDate: string,

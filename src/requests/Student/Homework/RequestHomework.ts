@@ -38,7 +38,7 @@ async(dispatch)=>{
         return {
              Id:item.Id,
              Text1:  item.SubjectName,
-             Text2 : item.AssignDate,
+             Text2 : item.AssignDate.split(' ')[0],
            
           
         }
