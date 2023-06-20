@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Button, Container, TextField } from '@mui/material';
 import PageHeader from 'src/library/heading/pageHeader';
-import { UserLogin } from 'src/requests/Admin/RequestUserLogin';
+import { UserLogin, resetUserLogin } from 'src/requests/Admin/RequestUserLogin';
 import { IUserLoginBody } from 'src/Interface/Admin/IUserLogin';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -37,11 +37,19 @@ function Login() {
       if (GetUserLogin.UserType === null)
         toast.error("UserId and or Password is incorrect")
       else {
-        navigate('/AddHomeWork');
+        setSession()
+        dispatch(resetUserLogin());
+        if(sessionStorage.getItem("UserType")==="3")
+        navigate('/extended-sidebar/Student/HomeWork');
+        else
+        navigate('/extended-sidebar/Student/AddHomeWork');
       }
     }
 
   }, [GetUserLogin])
+  const setSession=()=>{
+    sessionStorage.setItem("UserType",GetUserLogin.UserType)
+  }
   const emailRegExp = /^\S+@\S+\.\S+$/;
   const onSubmit = () => {
     let isError = false;

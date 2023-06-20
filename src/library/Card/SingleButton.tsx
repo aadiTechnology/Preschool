@@ -3,17 +3,22 @@ import React from 'react'
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-const SingleButton = ({Item,ClickItem}) => {
+const SingleButton = ({Item,ClickItem ,type="checkBox"}) => {
+ 
   const onClick=()=>{
     Item = {...Item,IsActive:Item.IsActive?Item.IsActive:!Item.IsActive}
     ClickItem(Item)}
   return (
     <div>
-    <Card sx={{display:"flex"}}>
+      {type === "checkBox" ?  <Card sx={{display:"flex"}}>
       {Item.IsActive ? <CheckCircleIcon  onClick={onClick} /> :
            <RadioButtonUncheckedIcon  onClick={onClick}  />}
           <Typography>{Item.Name}</Typography>
-    </Card>
+    </Card>:
+    <Card sx={{background:Item.IsActive  ? "#90CAF9" : "#ffffff"}}  onClick={onClick}>{Item.Name}</Card>
+  }
+   
+
     </div>
   )
 }

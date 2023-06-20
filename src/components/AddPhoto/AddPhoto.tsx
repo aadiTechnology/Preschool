@@ -122,7 +122,7 @@ function AddPhoto() {
     <Container>
       <PageHeader heading={'AddPhoto'} />
       {ItemList.length > 0 &&
-        <SelectedCard ItemList={ItemList} clickItem={clickItem} />
+        <SelectedCard ItemList={ItemList} clickItem={clickItem}  />
       }
       <TextField value={title} onChange={(e) => setTitle(e.target.value)}
         label={'Title'} />

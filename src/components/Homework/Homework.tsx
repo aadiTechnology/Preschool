@@ -13,6 +13,7 @@ import ListCard from 'src/library/List/ListCard';
 import Card2Text from 'src/library/Card/Card2Text';
 import { useNavigate } from 'react-router';
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
+import SelectedCard from 'src/library/Card/SelectedCard';
 
 function Homework() {
 
@@ -22,7 +23,7 @@ function Homework() {
     navigate('ViewHomework')
   }
 
-  // const ItemList=[{Text1:"Drawing",Text2:"08-05-23"},{Text1:"English",Text2:"10-01-20"},{Text1:"Craft",Text2:"17-06-21"}]
+  const itemList=[{Id:1 , Name:"4-5-2023" , Value:"4-5-2023" , IsActive:false},{Id:2 , Name:"5-5-2023" , Value:"5-5-2023" , IsActive:false},{Id:3 , Name:"6-5-2023" , Value:"6-5-2023" , IsActive:false},{Id:4 , Name:"6-5-2023" , Value:"4-5-2023" , IsActive:false}]
 
   const GetDateLegend: any = useSelector(
     (state: RootState) => state.HomeWork.HighlightedDate
@@ -46,9 +47,27 @@ const [assignDate , setAssignDate] = useState()
     dispatch(GetDateForLegend(GetHighlightedDateBody));
   }, [])
 
+  const [ItemList, setItemList] = useState(itemList)
+  
+  const clickItem = (value) => {
+    setItemList(value)
+  }
+  const [index, setIndex] = useState(0);
+  const arrowClick = (value) => {
+    const maxlength = itemList.length - 1;
+    const min = 0;
+    if (value === -1 && index === 0) {
+      setIndex(maxlength)
+    } else
+      if (value === 1 && index === maxlength) {
+        setIndex(min)
+      }
+      else {
+        setIndex(index + value)
 
+      }
 
-
+  }
   return (
     <Container>
       <PageHeader heading={'Homework'} />
@@ -56,14 +75,14 @@ const [assignDate , setAssignDate] = useState()
 
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          <Card sx={{ textAlign: 'center', height: "40px" }}><ArrowLeftIcon></ArrowLeftIcon></Card>
+          <Card sx={{ textAlign: 'center', height: "40px" }}><ArrowLeftIcon onClick={() => arrowClick(-1)}></ArrowLeftIcon></Card>
 
         </Grid>
         <Grid item xs={4}>
-          <Card sx={{ textAlign: 'center', height: "40px" }}>10-06-2023</Card>
+      <SelectedCard ItemList={ItemList} clickItem={clickItem} type='Button' />
         </Grid>
         <Grid item xs={4}>
-          <Card sx={{ textAlign: 'center', height: "40px" }}><ArrowRightIcon></ArrowRightIcon></Card>
+          <Card sx={{ textAlign: 'center', height: "40px" }}><ArrowRightIcon onClick={() => arrowClick(1)}></ArrowRightIcon></Card>
         </Grid>
       </Grid>
       <br></br>

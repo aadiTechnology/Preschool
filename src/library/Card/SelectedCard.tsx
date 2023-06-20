@@ -4,7 +4,8 @@ import { Grid } from '@mui/material';
 import SingleButton from './SingleButton';
 
 
-function SelectedCard({ItemList,clickItem}) {
+function SelectedCard({ItemList,clickItem , type="checkBox"}) {
+
    const onClick = (value) => {
       ItemList = ItemList.map((item) => {
         return item.Id === value.Id ?
@@ -19,11 +20,12 @@ function SelectedCard({ItemList,clickItem}) {
 
     <Grid container spacing={1}>
     
-    {ItemList.map((data, i) => {
+    {ItemList.map((item, i) => {
+       console.log(item ,"item")
            return (
             <Grid  item xs={6} md={3} key={i}>
-            <SingleButton Item={data}
-             ClickItem={onClick}></SingleButton>
+            <SingleButton Item={item}
+             ClickItem={onClick} type={type}></SingleButton>
               </Grid>
             )
           })

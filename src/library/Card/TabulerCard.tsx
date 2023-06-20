@@ -71,7 +71,7 @@ function TabulerCard({ clickEdit }) {
               </Grid>
               <Grid item xs={4} md={1}>
                 {
-                  item.IsSubmited && <SendIcon color={'primary'}  onClick={() => Submit(item.Id)} />
+                  !item.IsSubmited && <SendIcon color={'primary'}  onClick={() => Submit(item.Id)} />
                 }
               </Grid>
               <Grid item xs={2} md={1}>

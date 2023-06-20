@@ -16,6 +16,9 @@ const UserLoginSlice = createSlice({
       UserLogin(state,action){
         state.UserLogin=action.payload;
       },
+      resetUserLogin(state){
+        state.UserLogin=null;
+      },
     }   
   });
 
@@ -24,6 +27,11 @@ const UserLoginSlice = createSlice({
   async (dispatch) => {
     const response = await UserLoginApi.UserLogin(data);
     dispatch(UserLoginSlice.actions.UserLogin(response.data));
+  };
+  export const resetUserLogin =
+  (): AppThunk =>
+  async (dispatch) => {
+    dispatch(UserLoginSlice.actions.resetUserLogin());
   };
 
   export default UserLoginSlice.reducer
