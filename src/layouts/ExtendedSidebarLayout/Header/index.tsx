@@ -66,7 +66,7 @@ function Header() {
        
       </Stack>
       <Box display="flex" alignItems="center">
-        <HeaderButtons />
+        {/* <HeaderButtons /> */}
         <HeaderUserbox />
         <Box
           component="span"
@@ -75,7 +75,7 @@ function Header() {
             display: { lg: 'none', xs: 'inline-block' }
           }}
         >
-          <Tooltip arrow title="Toggle Menu">
+          {/* <Tooltip arrow title="Toggle Menu">
             <IconButton color="primary" onClick={toggleSidebar}>
               {!sidebarToggle ? (
                 <MenuTwoToneIcon fontSize="small" />
@@ -83,7 +83,7 @@ function Header() {
                 <CloseTwoToneIcon fontSize="small" />
               )}
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
         </Box>
       </Box>
     </HeaderWrapper>
