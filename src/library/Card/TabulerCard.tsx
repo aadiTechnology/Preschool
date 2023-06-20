@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { getDeleteHomework, getDetailsList, getHomeworkListForEdit, getSubmitHomework, resetDeleteMessage } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IDeleteHomeworkBody, IGetDetailsListBody, IHomeworkListForEditBody, ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 function TabulerCard({ clickEdit }) {
 
   const [editing, setEditing] = useState(false);
@@ -48,7 +49,10 @@ function TabulerCard({ clickEdit }) {
   }, [])
   return (
     <div>
-      {GetHomeWorkDetailsList.map((item, i) => (
+      {GetHomeWorkDetailsList.length == 0 ? <ErrorMessage  error={'No records found'}/> :
+      
+      <>
+          {GetHomeWorkDetailsList.map((item, i) => (
         <div key={i}>
           <Card sx={{ mb: 1 }}  >
             <Grid container style={{ display: "flex", alignItems: "center" }}>
@@ -76,6 +80,12 @@ function TabulerCard({ clickEdit }) {
           </Card>
         </div>
       ))}
+      
+      
+      
+      
+      </>}
+  
     </div>
   )
 }
