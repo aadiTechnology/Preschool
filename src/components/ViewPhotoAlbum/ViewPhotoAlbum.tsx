@@ -9,6 +9,7 @@ import {GetYearDropDownForAlbumList ,GetAlbumNameList} from 'src/requests/Studen
 import {IGetYearDropDownForAlbumListBody ,IGetAlbumNameListBody} from "src/Interface/Student/IViewphoto"
 import {monthArray} from 'src/components/Common/util'
 import ListCard from 'src/library/List/ListCard'
+import SuspenseLoader from 'src/layouts/Components/SuspenseLoader'
 
 
 
@@ -27,6 +28,7 @@ function ViewPhotoAlbum() {
     const GetAlbumList: any = useSelector(
         (state: RootState) => state.Viewphoto.AlbumList
     );
+    const loading = useSelector((state: RootState) => state.Viewphoto.Loading);
 
     const GetYearBody: IGetYearDropDownForAlbumListBody =
     {
@@ -75,14 +77,15 @@ function ViewPhotoAlbum() {
                 <Grid item xs={6}>
                 <DropDown itemList={GetYearList} ClickItem={clickYear} DefaultValue={year} Label={'select Year'}/>
                 </Grid >
-             {/* <Grid item xs={2}/> */}
+           
                 <Grid item xs={6}>
                 <DropDown itemList={monthArray} ClickItem={clickMonth} DefaultValue={month} Label={'select Month'}/>
                 </Grid >
             </Grid>
        
         <br></br>
-    <ListCard ItemList={GetAlbumList} clickNavigate={clickNavigate}/>
+        {loading ? <SuspenseLoader/> :
+    <ListCard ItemList={GetAlbumList} clickNavigate={clickNavigate}/>}
    </Container>
   )
 }

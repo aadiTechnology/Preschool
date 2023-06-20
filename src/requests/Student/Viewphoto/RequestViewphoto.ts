@@ -11,7 +11,8 @@ const Viewphotoslice = createSlice({
     name: 'Viewphoto',
     initialState: {
         YearList: [],
-        AlbumList: []
+        AlbumList: [],
+        Loading: true,
 
     },
     reducers: {
@@ -21,7 +22,11 @@ const Viewphotoslice = createSlice({
 
         GetAlbumNameList(state, action) {
             state.AlbumList = action.payload;
+            state.Loading = false
         },
+        getLoading(state) {
+            state.Loading = true
+          }
     }
 });
 
@@ -43,6 +48,7 @@ async(dispatch)=>{
 export const GetAlbumNameList=
 (data:IGetAlbumNameListBody):AppThunk =>
 async(dispatch)=>{
+    dispatch(Viewphotoslice.actions.getLoading());
     const response=await GetViewAlbumbApi.GetAlbumNameList(data)
    let AlbumList = response.data.map((item ,i)=>{
     return{
