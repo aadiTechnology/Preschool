@@ -6,10 +6,11 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { toast } from 'react-toastify';
 import { IAddPhotoAlbumBody, IGetClassNameListBody, IGetAllAlbumNameListBody, IDeletePhotoAlbumBody } from 'src/Interface/Admin/IAddPhoto'
-import { getAddPhoto, getClassNameList, GetAllAlbumNameList, DeleteAllAlbumList ,resetDeleteAlbumListMessage } from 'src/requests/Admin/RequestAddPhoto'
+import { getAddPhoto, getClassNameList, GetAllAlbumNameList, DeleteAllAlbumList ,resetDeleteAlbumListMessage ,resetgetAddPhoto } from 'src/requests/Admin/RequestAddPhoto'
 import SelectedCard from 'src/library/Card/SelectedCard';
 import ListCard from 'src/library/List/ListCard';
 import List2Card from 'src/library/List/List2Card';
+import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 
 
 function AddPhoto() {
@@ -41,6 +42,9 @@ function AddPhoto() {
 
   const DeleteAllAlbum: any = useSelector(
     (state: RootState) => state.AddPhoto.DeleteAllAlbumList
+  );
+  const loading = useSelector(
+    (state: RootState) => state.AddPhoto.Loading
   );
    const clickItem = (value) => {
     setItemList(value)
@@ -91,7 +95,8 @@ function AddPhoto() {
 
   useEffect(() => {
     if (GetAddPhoto !== "") {
-      toast.success("Photos Added Sucessfully")
+      toast.success("Photos Added Sucessfully" ,{ toastId: 'success2' })
+      dispatch(resetgetAddPhoto());
     }
     dispatch(GetAllAlbumNameList())
    }, [GetAddPhoto])
@@ -129,8 +134,8 @@ function AddPhoto() {
       {dateerror}
       <br></br>
       <Button onClick={onSubmit}>Submit</Button>
-
-      <List2Card ItemList={GetAllAlbum} Delete={Delete} />
+         {loading ? <SuspenseLoader/> : 
+      <List2Card ItemList={GetAllAlbum} Delete={Delete} />}
     </Container>
   )
 }

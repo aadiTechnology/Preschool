@@ -10,7 +10,8 @@ const AddPhotoSlice = createSlice({
     AddPhotoAlbum: null,
     GetClassNameList: [],
     GetAllAlbumNameList: [],
-    DeleteAllAlbumList: null
+    DeleteAllAlbumList: null,
+    Loading :true
 
   },
   reducers: {
@@ -21,8 +22,13 @@ const AddPhotoSlice = createSlice({
     getAddPhoto(state, action) {
       state.AddPhotoAlbum = action.payload;
     },
+
+    resetgetAddPhotoMessage(state) {
+      state.AddPhotoAlbum = "";
+    },
     GetAllAlubumList(state, action) {
       state.GetAllAlbumNameList = action.payload;
+      state.Loading = false;
     },
     DeleteAllAlbumList(state, action) {
       state.DeleteAllAlbumList = action.payload;
@@ -31,6 +37,9 @@ const AddPhotoSlice = createSlice({
     resetDeleteAllAlbumList(state) {
       state.DeleteAllAlbumList = "";
     },
+    getLoading(state) {
+      state.Loading = true
+    }
   }
 });
 
@@ -40,6 +49,12 @@ export const getAddPhoto =
       const response = await GetAddPhotoApi.GetAddPhoto(data);
       dispatch(AddPhotoSlice.actions.getAddPhoto(response.data));
     };
+
+    export const resetgetAddPhoto =
+    (): AppThunk =>
+      async (dispatch) => {
+        dispatch(AddPhotoSlice.actions.resetgetAddPhotoMessage());
+      }
 
 export const getClassNameList =
   (): AppThunk =>
@@ -61,6 +76,7 @@ export const getClassNameList =
 export const GetAllAlbumNameList =
   (): AppThunk =>
     async (dispatch) => {
+      dispatch(AddPhotoSlice.actions.getLoading());
       const response = await GetAddPhotoApi.GetAllAlbumList();
       let getAllAlbum = response.data.map((item, i) => {
         return {
