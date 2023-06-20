@@ -17,12 +17,13 @@ const Homeworkslice = createSlice({
     reducers: {
         GetDateForLegend(state, action) {
             state.HighlightedDate = action.payload;
+            state.Loading = false;
         },
         GetViewHomework(state, action) {
             state.ViewHomework = action.payload;
             state.Loading = false;
         },
-        getLoading(state, action) {
+        getLoading(state) {
             state.Loading = true
           }
     }
@@ -31,6 +32,7 @@ const Homeworkslice = createSlice({
 export const GetDateForLegend=
 (data:IGetDateForLegendBody):AppThunk =>
 async(dispatch)=>{
+    dispatch(Homeworkslice.actions.getLoading());
     const response=await GetHomeworkApi.GetDateForLegend(data)
     let HomeWorkList = response.data.map((item,i)=>{
         return {
@@ -46,6 +48,7 @@ async(dispatch)=>{
 export const GetViewHomework=
 (data:IGetViewHomeWorkListBody):AppThunk =>
 async(dispatch)=>{
+    dispatch(Homeworkslice.actions.getLoading());
     const response=await GetHomeworkApi.GetViewHomeWorkList(data)
    
 

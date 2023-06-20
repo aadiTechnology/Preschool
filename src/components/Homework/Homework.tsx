@@ -67,8 +67,9 @@ const [assignDate , setAssignDate] = useState()
         </Grid>
       </Grid>
       <br></br>
-     <ListCard ItemList={GetDateLegend} clickNavigate={clickViewHomework}/>
-    {/* <Card2Text Text1={GetDateLegend.SubjectName} Text2={GetDateLegend.AssignDate} clickNavigate={clickViewHomework}/> */}
+      {loading ? <SuspenseLoader/> : 
+     <ListCard ItemList={GetDateLegend} clickNavigate={clickViewHomework}/>}
+    
     </Container>
   )
 }
