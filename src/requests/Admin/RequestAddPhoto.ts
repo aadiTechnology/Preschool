@@ -17,10 +17,13 @@ const AddPhotoSlice = createSlice({
   reducers: {
     GetClassNameList(state, action) {
       state.GetClassNameList = action.payload;
+      state.Loading = false;
     },
+    
 
     getAddPhoto(state, action) {
       state.AddPhotoAlbum = action.payload;
+      state.Loading = false;
     },
 
     resetgetAddPhotoMessage(state) {
@@ -32,6 +35,7 @@ const AddPhotoSlice = createSlice({
     },
     DeleteAllAlbumList(state, action) {
       state.DeleteAllAlbumList = action.payload;
+      state.Loading = false;
     },
 
     resetDeleteAllAlbumList(state) {
@@ -46,6 +50,7 @@ const AddPhotoSlice = createSlice({
 export const getAddPhoto =
   (data: IAddPhotoAlbumBody): AppThunk =>
     async (dispatch) => {
+      dispatch(AddPhotoSlice.actions.getLoading());
       const response = await GetAddPhotoApi.GetAddPhoto(data);
       dispatch(AddPhotoSlice.actions.getAddPhoto(response.data));
     };
@@ -59,6 +64,7 @@ export const getAddPhoto =
 export const getClassNameList =
   (): AppThunk =>
     async (dispatch) => {
+      dispatch(AddPhotoSlice.actions.getLoading());
       const response = await GetAddPhotoApi.GetClassList();
      
       let getClass = response.data.map((item, i) => {
@@ -93,6 +99,7 @@ export const GetAllAlbumNameList =
     export const DeleteAllAlbumList =
     (data:IDeletePhotoAlbumBody): AppThunk =>
     async (dispatch) => {
+      dispatch(AddPhotoSlice.actions.getLoading());
       const response = await GetAddPhotoApi.DeleteAlbumList(data);
       dispatch(AddPhotoSlice.actions.DeleteAllAlbumList(response.data));
     };

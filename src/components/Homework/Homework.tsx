@@ -36,7 +36,7 @@ const [assignDate , setAssignDate] = useState()
 
   const GetHighlightedDateBody: IGetDateForLegendBody =
   {
-    "AssignDate": "2023-06-08"
+    "AssignDate": "2023-06-20"
   }
 
 

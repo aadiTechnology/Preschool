@@ -21,7 +21,7 @@ function SelectedCard({ItemList,clickItem}) {
     
     {ItemList.map((data, i) => {
            return (
-            <Grid  item  key={i}>
+            <Grid  item xs={6} key={i}>
             <SingleButton Item={data}
              ClickItem={onClick}></SingleButton>
               </Grid>
