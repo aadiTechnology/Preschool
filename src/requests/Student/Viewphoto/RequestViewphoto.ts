@@ -54,6 +54,7 @@ async(dispatch)=>{
     return{
         Id: item.AlbumId,
         Text1: item.Title,
+        Link: item.FacebookLink
     }
    })
 

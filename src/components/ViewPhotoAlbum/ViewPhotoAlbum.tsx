@@ -10,12 +10,12 @@ import {IGetYearDropDownForAlbumListBody ,IGetAlbumNameListBody} from "src/Inter
 import {monthArray} from 'src/components/Common/util'
 import ListCard from 'src/library/List/ListCard'
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader'
-
-
+import { useNavigate } from 'react-router';
 
 
 function ViewPhotoAlbum() {
     const dispatch = useDispatch();
+    const navigate=useNavigate()
     const [year ,setYear] =useState('')
     const [month ,setMonth] =useState('')
     const currentDate = new Date()
@@ -66,8 +66,8 @@ function ViewPhotoAlbum() {
     setMonth(value)
         }
 
-  const clickNavigate =()=>{
-    //   faceBookLink
+  const clickNavigate =(value)=>{
+     navigate(value)
    }
   return (
     <Container>

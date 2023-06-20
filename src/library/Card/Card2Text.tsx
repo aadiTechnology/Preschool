@@ -1,8 +1,10 @@
 import React from 'react'
 import { Box , Card, Typography } from '@mui/material'
-function Card2Text({ Text1,Text2,clickNavigate}) {
+function Card2Text({ Text1,Text2,clickNavigate ,Link}) {
   return (
-    <Card component={Box} mb={1} onClick={clickNavigate}>
+    <>
+    <a href={Link} rel="noreferrer" target="_blank" style={{ textDecoration: 'none' }}>
+       <Card component={Box} mb={1} onClick={clickNavigate}>
     <Box display={"flex"} justifyContent={'space-between'}  p={0.5}>
       <Typography variant="h5">
           {Text1}
@@ -12,6 +14,10 @@ function Card2Text({ Text1,Text2,clickNavigate}) {
      </Typography>
     </Box>
     </Card>
+    </a>
+    
+    </>
+ 
   )
 }
 
