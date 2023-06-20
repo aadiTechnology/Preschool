@@ -6,44 +6,53 @@ import ChromeReaderModeIcon from '@mui/icons-material/ChromeReaderMode';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
+import { IconCardSize } from 'src/library/StyledComponents/CommonStyled';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 function DashBoard() {
  const itemList=[
  {
     Text:"AddStaff",
+    iconColor: '#35abd9',
     Link: 'Student/AddStaff',
-    icon: <PeopleIcon/>
+    icon: <PeopleIcon fontSize='large'/>
  },
 
  {
-    Text:"AddHomeWork",
+    Text:"Add",
+    Text2:"HomeWork",
     Link: 'Student/AddHomeWork',
-    icon: <ChromeReaderModeIcon/>
+    icon: <ChromeReaderModeIcon fontSize='large'/>
  },
  {
-  Text:"PhotoGallery",
+  Text:"Photo",
+  Text2:"Gallery",
+  iconColor: '#f0483e',
   Link: 'Student/ViewPhotoAlbum',
-  icon: <AddPhotoAlternateIcon/>
+  icon: <AddPhotoAlternateIcon fontSize='large'/>
 },
 
 {
   Text:"Homework",
   Link: 'Student/Homework',
-  icon: <MenuBookIcon/>
+  iconColor: '#35abd9',
+  icon: <MenuBookIcon fontSize='large'/>
 },
 {
   Text:"AddPhoto",
   Link: 'Student/AddPhoto',
-  icon : <AddToQueueIcon/>
+  iconColor: '#f0483e',
+  icon : <AddAPhotoIcon fontSize='large'/>
 },
 {
   Text:"Login",
   Link: 'Student/Login',
-  icon : <AddToQueueIcon/>
+  icon : <AddToQueueIcon fontSize='large'/>
 },
 {
-  Text:"ChangePassword",
+  Text:"Change",
+  Text2:"Password",
   Link: 'Student/ChangePassword',
-  icon : <AddToQueueIcon/>
+  icon : <AddToQueueIcon fontSize='large'/>
 }
 
 
@@ -55,10 +64,11 @@ function DashBoard() {
         {itemList.map((item,i)=>(
           <Grid item xs={3} key={i}>
             <Link to={`/${location.pathname.split('/')[1]}/${item.Link}`} style={{ textDecoration: 'none' }}>
-            <Card sx={{textAlign:"center"}}>
-            <IconButton >{item.icon}</IconButton>
-            <Typography sx={{textAlign:"center"}}>{item.Text}</Typography>
-            </Card>
+            <IconCardSize>
+            <IconButton sx={{color:item.iconColor}}>{item.icon}</IconButton>
+            <Typography sx={{textAlign:"center" ,textDecoration:"none" , color:"black", mt:"-10px"}} variant='h1'>{item.Text}</Typography>
+            <Typography sx={{textAlign:"center" ,textDecoration:"none" , color:"black" }}  variant='h1'>{item.Text2}</Typography>
+            </IconCardSize>
             </Link>
             </Grid>
           

@@ -70,7 +70,7 @@ const ExtendedSidebarLayout: FC<ExtendedSidebarLayoutProps> = () => {
           <Box display="block">
             <Outlet />
           </Box>
-          <ThemeSettings />
+          {/* <ThemeSettings /> */}
         </Box>
       </Box>
     </>
