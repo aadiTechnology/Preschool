@@ -6,10 +6,11 @@ import { Card, Grid, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+
 import { getDeleteHomework, getDetailsList, getHomeworkListForEdit, getSubmitHomework, resetDeleteMessage } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IDeleteHomeworkBody, IGetDetailsListBody, IHomeworkListForEditBody, ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import SendIcon from '@mui/icons-material/Send';
 function TabulerCard({ clickEdit }) {
 
   const [editing, setEditing] = useState(false);
@@ -56,28 +57,28 @@ function TabulerCard({ clickEdit }) {
         <div key={i}>
           <Card sx={{ mb: 1 }}  >
             <Grid container style={{ display: "flex", alignItems: "center" }}>
-              <Grid item xs={2}>
+              <Grid item xs={4} md={2}>
                 <Typography>{item.Text1}</Typography>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={4} md={2}>
                 <Typography>{item.Text3}</Typography>
               </Grid>
-              <Grid item xs={2} >
+              <Grid item xs={4} md={2}>
                 <Typography dangerouslySetInnerHTML={{ __html: item.Text2 }}></Typography>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={4} md={2}>
                 <Typography>{item.Text6}</Typography>
               </Grid>
-              <Grid item xs={2} >
+              <Grid item xs={4} md={1}>
                 {
-                  !item.IsSubmited && <ArrowRightAltIcon onClick={() => Submit(item.Id)} />
+                  item.IsSubmited && <SendIcon color={'primary'}  onClick={() => Submit(item.Id)} />
                 }
               </Grid>
-              <Grid item xs={1}>
-                <EditIcon onClick={() => clickEdit(item.Id)} />
+              <Grid item xs={2} md={1}>
+                <EditIcon color={'success'} onClick={() => clickEdit(item.Id)} />
               </Grid>
-              <Grid item xs={1}>
-                <DeleteIcon onClick={() => Delete(item.Id)} />
+              <Grid item xs={2} md={1}>
+                <DeleteIcon  color={'error'} onClick={() => Delete(item.Id)} />
               </Grid>
             </Grid>
           </Card>

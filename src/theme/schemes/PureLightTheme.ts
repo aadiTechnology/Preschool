@@ -4,12 +4,12 @@ import '@mui/lab/themeAugmentation';
 // import i18n from 'src/i18n/i18n';
 
 const themeColors = {
-  primary: '#5569ff',
+  primary: '#26a69a',
   secondary: '#6E759F',
   success: '#ffc107',
   warning: '#FFA319',
   error: '#FF1943',
-  info: '#33C2FF',
+  info: '#777777',
   black: '#223354',
   white: '#ffffff',
   primaryAlt: '#000C57'
@@ -582,6 +582,7 @@ export const PureLightTheme = createTheme({
         variant:'standard',
         fullWidth:true,
         margin:"dense",
+        color:"info"
 
       },
       styleOverrides: {
