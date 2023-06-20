@@ -94,7 +94,7 @@ function AddPhoto() {
 
 
   useEffect(() => {
-    if (GetAddPhoto !== "") {
+    if (GetAddPhoto !== "" && GetAddPhoto !== null ) {
       toast.success("Photos Added Sucessfully" ,{ toastId: 'success2' })
       dispatch(resetgetAddPhoto());
     }
