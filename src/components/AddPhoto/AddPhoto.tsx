@@ -27,6 +27,7 @@ function AddPhoto() {
   const [dateerror, setDateError] = useState('')
   const [ItemList, setItemList] = useState([])
 
+  let enableButton = (title !== '' || date !== '')
 
   const GetAddPhoto: any = useSelector(
     (state: RootState) => state.AddPhoto.AddPhotoAlbum
@@ -65,6 +66,7 @@ function AddPhoto() {
     else {
       setDateError('')
     }
+  
     const AddPhoto: IAddPhotoAlbumBody =
    
     {
@@ -95,8 +97,11 @@ function AddPhoto() {
 
   useEffect(() => {
     if (GetAddPhoto !== "" && GetAddPhoto !== null ) {
-      toast.success("Photos Added Sucessfully" ,{ toastId: 'success2' })
-      dispatch(resetgetAddPhoto());
+      if(title !=='' && date !=='' ){
+        toast.success("Photos Added Sucessfully" ,{ toastId: 'success2' })
+        dispatch(resetgetAddPhoto());
+      }
+     
     }
     dispatch(GetAllAlbumNameList())
    }, [GetAddPhoto])
@@ -122,7 +127,9 @@ function AddPhoto() {
     <Container>
       <PageHeader heading={'AddPhoto'} />
       {ItemList.length > 0 &&
+
         <SelectedCard ItemList={ItemList} clickItem={clickItem}  />
+           
       }
       <TextField value={title} onChange={(e) => setTitle(e.target.value)}
         label={'Title'} />

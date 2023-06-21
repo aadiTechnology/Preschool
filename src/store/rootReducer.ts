@@ -6,7 +6,8 @@ import ChangePasswordslice from 'src/requests/ChangePassword/ChangePassword'
 import Homeworkslice from 'src/requests/Student/Homework/RequestHomework'
 import Viewphotoslice from 'src/requests/Student/Viewphoto/RequestViewphoto'
 import AddHomeWorkSlice from 'src/requests/Teacher/RequestAddHomeWork';
-import AddPhotoSlice from 'src/requests/Admin/RequestAddPhoto'
+import AddPhotoSlice from 'src/requests/Admin/RequestAddPhoto';
+import AddStudentDetailsslice from 'src/requests/Student/AddStudentDetails/RequestAddStudentDetails';
 import UserLoginSlice, { UserLogin } from 'src/requests/Admin/RequestUserLogin'
 const rootReducer = combineReducers({
     Holidays:Holidaysslice,
@@ -16,7 +17,9 @@ const rootReducer = combineReducers({
     HomeWork: Homeworkslice,
     Viewphoto: Viewphotoslice,
     AddPhoto:AddPhotoSlice,
-    UserLogin:UserLoginSlice
+    UserLogin:UserLoginSlice,
+    AddStudentDetails :AddStudentDetailsslice,
+    
 });
 
 export default rootReducer;
