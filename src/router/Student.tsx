@@ -22,6 +22,7 @@ const Homework = Loader(lazy(()=> import('src/components/Homework/Homework')))
 const ViewHomework = Loader(lazy(()=> import('src/components/Homework/ViewHomework')))
 const AddPhoto = Loader(lazy(()=> import('src/components/AddPhoto/AddPhoto')))
 const Dashboard = Loader(lazy(()=> import('src/components/DashBoard/DashBoard')))
+const AddStudentDetails = Loader(lazy(()=> import('src/components/AddStudentDetails/AddStudentDetails')))
 const studentRoutes = [
   {
     path: '/',
@@ -67,6 +68,11 @@ const studentRoutes = [
   {
     path:'AddPhoto',
     element:<AddPhoto/>
+  },
+
+  {
+    path:'AddStudentDetails',
+    element:<AddStudentDetails/>
   },
 
 ];

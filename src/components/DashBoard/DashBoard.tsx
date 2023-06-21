@@ -53,6 +53,12 @@ function DashBoard() {
   Text2:"Password",
   Link: 'Student/ChangePassword',
   icon : <AddToQueueIcon fontSize='large'/>
+},
+{
+  Text:"AddStudent",
+  Text2:"Details",
+  Link: 'Student/AddStudentDetails',
+  icon : <AddToQueueIcon fontSize='large'/>
 }
 
 
