@@ -41,8 +41,10 @@ function Login() {
         dispatch(resetUserLogin());
         if(sessionStorage.getItem("UserType")==="3")
         navigate('/extended-sidebar/Student/HomeWork');
-        else
+        else if(sessionStorage.getItem("UserType")==="2")
         navigate('/extended-sidebar/Student/AddHomeWork');
+        else
+        navigate('/extended-sidebar/Student/AddPhoto');
       }
     }
 
@@ -75,7 +77,7 @@ function Login() {
     }
 
     console.log({ username })
-    console.log({ name })
+    
   }
 
 
