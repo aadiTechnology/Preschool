@@ -34,6 +34,8 @@ function AddPhoto() {
     (state: RootState) => state.AddPhoto.AddPhotoAlbum
   );
 
+  console.log(GetAddPhoto ,'GetAddPhoto')
+
   const GetClass: any = useSelector(
     (state: RootState) => state.AddPhoto.GetClassNameList
   );
@@ -51,7 +53,17 @@ function AddPhoto() {
    const clickItem = (value) => {
     setItemList(value)
   }
-   const onSubmit = () => {
+
+  const IsSelected = () => {
+    let returnVal = false;
+    ItemList.map((item)=>{
+      if(item.IsActive){
+        returnVal = true
+      }
+    })
+    return returnVal;
+  }
+ const onSubmit = () => {
     let isError = false
     if (title === '') {
       setTitleError('Please Enter Title Name')
@@ -67,6 +79,13 @@ function AddPhoto() {
     else {
       setDateError('')
     }
+    // if(!IsSelected()){
+    //   setDateError('Fill the Mandatory Field')
+    //   isError = true
+    // }
+    // else {
+    //   setDateError('')
+    // }
   
     const AddPhoto: IAddPhotoAlbumBody =
    
@@ -97,16 +116,13 @@ function AddPhoto() {
 
 
   useEffect(() => {
-    if (GetAddPhoto !== "" && GetAddPhoto !== null ) {
-      if(title !=='' && date !=='' ){
-        toast.success("Photos Added Sucessfully" ,{ toastId: 'success2' })
-        dispatch(resetgetAddPhoto());
+    if (GetAddPhoto !== ''  ) {
+      toast.success(GetAddPhoto ,{ toastId: 'success2' })
+      dispatch(resetgetAddPhoto());
       }
-     
-    }
     dispatch(GetAllAlbumNameList())
    }, [GetAddPhoto])
- console.log("DeleteAllAlbum",DeleteAllAlbum);
+
  
   useEffect(()=>{
     if(DeleteAllAlbum !== null && DeleteAllAlbum !== ""){
@@ -121,16 +137,14 @@ function AddPhoto() {
     dispatch(DeleteAllAlbumList(DeleteAllAlbumBody))
   }
 
-  const clickNavigate = () => {
-
-  }
+  
   return (
     <Container>
       <PageHeader heading={'AddPhoto'} />
       {ItemList.length > 0 &&
 
         <SelectedCard ItemList={ItemList} clickItem={clickItem}  />
-           
+         
       }
       <TextField value={title} onChange={(e) => setTitle(e.target.value)}
         label={'Title'} />

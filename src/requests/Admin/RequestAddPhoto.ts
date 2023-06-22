@@ -7,7 +7,7 @@ import GetAddPhotoApi from 'src/api/Admin/ApiAddPhoto';
 const AddPhotoSlice = createSlice({
   name: 'AddPhoto',
   initialState: {
-    AddPhotoAlbum: null,
+    AddPhotoAlbum: '',
     GetClassNameList: [],
     GetAllAlbumNameList: [],
     DeleteAllAlbumList: null,
@@ -27,7 +27,7 @@ const AddPhotoSlice = createSlice({
     },
 
     resetgetAddPhotoMessage(state) {
-      state.AddPhotoAlbum = "";
+      state.AddPhotoAlbum = '';
     },
     GetAllAlubumList(state, action) {
       state.GetAllAlbumNameList = action.payload;
@@ -39,7 +39,7 @@ const AddPhotoSlice = createSlice({
     },
 
     resetDeleteAllAlbumList(state) {
-      state.DeleteAllAlbumList = "";
+      state.DeleteAllAlbumList = '';
     },
     getLoading(state) {
       state.Loading = true

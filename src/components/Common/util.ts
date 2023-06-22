@@ -26,3 +26,14 @@ export const monthArray = [
     { Value: 11, Name: "November" },
     { Value: 12, Name: "December" },
 ]
+
+export function IsMobileNoValid(value) {
+    const phoneRegExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+    if (!value) {
+        return 'Mobile No should not be blank.';
+    }
+    else if (!phoneRegExp.test(value)) {
+        return 'Invalid email address';
+    }
+    return ''
+}

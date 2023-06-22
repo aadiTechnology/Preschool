@@ -8,7 +8,7 @@ import {IGetAddStudentDetailsBody} from  "src/Interface/Student/IAddStudentDetai
 const AddStudentDetailsslice = createSlice({
     name: 'AddStudentDetails',
     initialState: {
-        AddStudentDetails: {},
+        AddStudentDetails: '',
       },
     reducers: {
         GetAddStudentDetails(state, action) {
