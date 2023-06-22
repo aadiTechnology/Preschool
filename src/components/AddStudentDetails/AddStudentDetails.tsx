@@ -7,6 +7,7 @@ import {IGetAddStudentDetailsBody} from "src/Interface/Student/IAddStudentDetail
 import {GetAddStudentDetails ,resetAddStudent} from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
 import { Button, TextField ,Container} from '@mui/material';
 import { toast } from 'react-toastify';
+import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 function AddStudentDetails() {
     const dispatch = useDispatch();
     const GetAddStudent: any = useSelector(
@@ -25,10 +26,14 @@ function AddStudentDetails() {
      const[phoneNo ,setPhoneNo]= useState('');
      const[phoneNoerror ,setPhoneNoerror]= useState('');
      const[motherName ,setMotherName]= useState('');
+     const[motherNameerror ,setMotherNameerror]= useState('');
      const[phoneNo2 ,setPhoneNo2]= useState('');
      const[societyName ,setSocietyName]= useState('');
+     const[societyNameerror ,setSocietyNameerror]= useState('');
      const[studentAddress ,setStudentAddress]= useState('');
+     const[studentAddresserror ,setStudentAddresserror]= useState('');
      const[emailid ,setEmailid]= useState('');
+     const[emailiderror ,setEmailiderror]= useState('');
     
 
       const GetAddStudentDetailsBody: IGetAddStudentDetailsBody =
@@ -77,10 +82,35 @@ function AddStudentDetails() {
       }else{
         setFatherNameerror('')
       }
-      if(fatherName===''){
+      if(motherName===''){
+        setMotherNameerror('This field is required')
+      }else{
+        setMotherNameerror('')
+      }
+
+      if(phoneNo===''){
         setPhoneNoerror('This field is required')
       }else{
         setPhoneNoerror('')
+      }
+
+      if(societyName===''){
+        setSocietyNameerror('This field is required')
+      }else{
+        setSocietyNameerror('')
+      }
+
+      if(studentAddress===''){
+        setStudentAddresserror('This field is required')
+      }else{
+        setStudentAddresserror('')
+      }
+
+      
+      if(emailid===''){
+        setEmailiderror('This field is required')
+      }else{
+        setEmailiderror('')
       }
         dispatch(GetAddStudentDetails(GetAddStudentDetailsBody));
       }
@@ -89,20 +119,30 @@ function AddStudentDetails() {
     <Container>
         <PageHeader heading={'AddStudent Details'}/>
         <TextField value={studentName} onChange={(e)=>{setStudentName(e.target.value)}} label={'studentName'}/>
-        {studentNameerror}
+      
+        <ErrorMessageForm error={studentNameerror}/>
         <TextField value={birthDate} type='date' onChange={(e)=>{setBirthDate(e.target.value)}} label={''}/>
-        {birthDateerror}
+      
+        <ErrorMessageForm error={birthDateerror}/>
         <TextField value={age} onChange={(e)=>{setAge(e.target.value)}} label={'Age'}/>
-        {ageerror}
+       
+        <ErrorMessageForm error={ageerror}/>
         <TextField value={fatherName} onChange={(e)=>{setFatherName(e.target.value)}} label={'FatherName'}/>
-        {fatherNameerror}
+      
+        <ErrorMessageForm error={fatherNameerror}/>
         <TextField value={phoneNo} onChange={(e)=>{setPhoneNo(e.target.value)}} label={'PhoneNo'}/>
-        {phoneNoerror}
+       
+        <ErrorMessageForm error={phoneNoerror}/>
         <TextField value={motherName} onChange={(e)=>{setMotherName(e.target.value)}} label={'MotherName'}/>
+        <ErrorMessageForm error={motherNameerror}/>
         <TextField value={phoneNo2} onChange={(e)=>{setPhoneNo2(e.target.value)}} label={'PhoneNo2'}/>
+       
         <TextField value={societyName} onChange={(e)=>{setSocietyName(e.target.value)}} label={'SocietyName'}/>
+        <ErrorMessageForm error={societyNameerror}/>
         <TextField value={studentAddress} onChange={(e)=>{setStudentAddress(e.target.value)}} label={'StudentAddress'}/>
+        <ErrorMessageForm error={studentAddresserror}/>
         <TextField value={emailid} onChange={(e)=>{setEmailid(e.target.value)}} label={'Emailid'}/>
+        <ErrorMessageForm error={emailiderror}/>
         <Button onClick={onSubmit}>Submit</Button>
     </Container>
   )
