@@ -13,6 +13,7 @@ import 'react-quill/dist/quill.snow.css';
 import TabulerCard from 'src/library/Card/TabulerCard';
 import { toolbarOptions } from '../Common/util';
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
+import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 
 
 function AddHomeWork() {
@@ -126,9 +127,9 @@ function AddHomeWork() {
                 <DropDown itemList={GetSubject} ClickItem={ClickSubjectItem} DefaultValue={selectsubject} Label={'Select Subject'} />
                 <br></br>
                 <ReactQuill value={subjectDescription} onChange={(value) => setSubjectDescription(value)} modules={toolbarOptions} />
-                {errordescription}
+                <ErrorMessageForm  error={errordescription}/>
                 <TextField type="date" value={selectdate} onChange={(e) => setSelectDate(e.target.value)} />
-                {errorselectdate}
+                <ErrorMessageForm error={errorselectdate}/>
                 <Box mt={2}>
                     <input type="file" ></input>
                 </Box>

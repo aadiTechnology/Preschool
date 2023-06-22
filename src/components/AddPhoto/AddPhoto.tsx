@@ -11,6 +11,7 @@ import SelectedCard from 'src/library/Card/SelectedCard';
 import ListCard from 'src/library/List/ListCard';
 import List2Card from 'src/library/List/List2Card';
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
+import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 
 
 function AddPhoto() {
@@ -60,7 +61,7 @@ function AddPhoto() {
       setTitleError('')
     }
     if (date === '') {
-      setDateError('Mandatory Field')
+      setDateError('Fill the Mandatory Field')
       isError = true
     }
     else {
@@ -133,13 +134,12 @@ function AddPhoto() {
       }
       <TextField value={title} onChange={(e) => setTitle(e.target.value)}
         label={'Title'} />
-      {titlerror}
+        <ErrorMessageForm error={titlerror}/>
       <Typography> Link</Typography>
       <TextField type='date' value={date} onChange={(e) => setDate(e.target.value)} inputProps={{
         max: formattedDate,
       }} />
-      {dateerror}
-      <br></br>
+      <ErrorMessageForm error={dateerror}/>
       <Button onClick={onSubmit}>Submit</Button>
          {loading ? <SuspenseLoader/> : 
       <List2Card ItemList={GetAllAlbum} Delete={Delete} />}
