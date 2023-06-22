@@ -5,6 +5,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Container, TextField, Button,Card, Typography} from '@mui/material';
 import { useState } from 'react';
 import { number } from 'prop-types';
+import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 
 
 
@@ -137,28 +138,36 @@ else{
     </ToggleButtonGroup>
     <Card >
     <TextField value={name} onChange={(e)=>{setName(e.target.value)}} label={'Name'}/>
-    {nameerror}
+    <ErrorMessageForm error={nameerror}/>
+    
     <Typography sx={{mt:"3px" ,fontSize:"10px"}}>Birthdate</Typography>
     <TextField type={'date'} sx={{mt:"-5px"}}/>
-    {birthdateerror}
+    <ErrorMessageForm error={birthdateerror}/>
+    
     <TextField value={qualification} onChange={(e)=>{setQualification(e.target.value)}} 
     label={'Qualification'}/>
-    {qualificationerror}
+    <ErrorMessageForm error={qualificationerror}/>
+    
     <TextField value={address} onChange={(e)=>{setAddress(e.target.value)}} 
     label={'Address'}/>
-    {addresserror}
+    <ErrorMessageForm error={addresserror}/>
+    
     <TextField value={phonenumber} onChange={(e)=>{setPhoneNumber(e.target.value)}} 
     label={'Phone Number'}/>
-    {phonenumbererror}
+    <ErrorMessageForm error={phonenumbererror}/>
+    
     <TextField value={email} onChange={(e)=>{setEmail(e.target.value)}} 
     label={'Email'}/>
-    {emailerror}
+    <ErrorMessageForm error={emailerror}/>
+    
     <Typography sx={{mt:"3px" ,fontSize:"10px"}}>JoiningDate</Typography>
     <TextField type={'date'} sx={{mt:"-5px"}}/>
-    {joiningdateerror}
+    <ErrorMessageForm error={joiningdateerror}/>
+    
     <TextField value={experience} onChange={(e)=>{setExperience(e.target.value)}} 
     label={'Experience'}/>
-    {experienceerror}
+    <ErrorMessageForm error={experienceerror}/>
+    
     <Button  variant='contained' onClick={clickSaveStaff}>
                         Save
                     </Button>
