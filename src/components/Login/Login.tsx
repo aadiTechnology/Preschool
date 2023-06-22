@@ -10,6 +10,8 @@ import { RootState } from 'src/store';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate, useLocation } from 'react-router-dom';
+import ErrorMessage from 'src/library/ErrorMessage/ErrorMessage';
+import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 
 function Login() {
   const dispatch = useDispatch();
@@ -86,7 +88,8 @@ function Login() {
       <PageHeader heading={'Login'} />
       <TextField value={username} onChange={(e) => { setUserName(e.target.value) }}
         label={'username'} />
-      {usernameError}
+   
+      <ErrorMessageForm error={usernameError}/>
 
       <TextField value={password} onChange={(e) => { setPassword(e.target.value) }}
         label={'password'} />

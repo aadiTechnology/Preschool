@@ -14,7 +14,12 @@ const AddStudentDetailsslice = createSlice({
         GetAddStudentDetails(state, action) {
             state.AddStudentDetails = action.payload;
             
-        },}
+        },
+        resetAddStudentDetails(state) {
+            state.AddStudentDetails = '';
+          },
+    
+    }
      
      
 });
@@ -26,5 +31,11 @@ async(dispatch)=>{
   const response=await GetAddStudentDetailsApi.GetAddStudentDetails(data)
    dispatch(AddStudentDetailsslice.actions.GetAddStudentDetails(response.data))
 }
+
+export const resetAddStudent=
+(): AppThunk =>
+  async (dispatch) => {
+    dispatch(AddStudentDetailsslice.actions.resetAddStudentDetails());
+  }
 
 export default AddStudentDetailsslice.reducer
