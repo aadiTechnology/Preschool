@@ -5,10 +5,11 @@ import { useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
 import { IGetAddStudentDetailsBody } from "src/Interface/Student/IAddStudentDetails"
 import { GetAddStudentDetails, resetAddStudent } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
-import { Button, TextField, Container } from '@mui/material';
+import { Button, TextField, Container ,Card } from '@mui/material';
 import { toast } from 'react-toastify';
-import {IsMobileNoValid} from "src/components/Common/util"
+import { IsMobileNoValid } from "src/components/Common/util"
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
+import { number } from 'prop-types';
 function AddStudentDetails() {
   const dispatch = useDispatch();
   const GetAddStudent: any = useSelector(
@@ -29,6 +30,7 @@ function AddStudentDetails() {
   const [motherName, setMotherName] = useState('');
   const [motherNameerror, setMotherNameerror] = useState('');
   const [phoneNo2, setPhoneNo2] = useState('');
+  const [phoneNoerror2, setPhoneNoerror2] = useState('');
   const [societyName, setSocietyName] = useState('');
   const [societyNameerror, setSocietyNameerror] = useState('');
   const [studentAddress, setStudentAddress] = useState('');
@@ -54,11 +56,14 @@ function AddStudentDetails() {
     "SMS": "true",
     "UserId": 1
   }
-
+  const display = studentName !== '' && birthDate !== ""
   useEffect(() => {
     if (GetAddStudent !== '') {
-      toast.success("StudentDetails added successfully", { toastId: 'success1' })
-      dispatch(resetAddStudent());
+      if (display) {
+        toast.success(GetAddStudent, { toastId: 'success1' })
+        dispatch(resetAddStudent());
+      }
+
     }
   }, [GetAddStudent])
 
@@ -91,14 +96,14 @@ function AddStudentDetails() {
       setMotherNameerror('')
     }
 
-    if (phoneNo === '') {
-      setPhoneNoerror('This field is required')
-    } else if (!phoneNumberRegex.test(phoneNo)) {
-      setEmailiderror("Invalid phoneNo ")
-    }
-    else {
-      setPhoneNoerror('')
-    }
+    // if (phoneNo === '') {
+    //   setPhoneNoerror('This field is required')
+    // } else if (!phoneNumberRegex.test(phoneNo)) {
+    //   setEmailiderror("Invalid phoneNo ")
+    // }
+    // else {
+    //   setPhoneNoerror('')
+    // }
 
     if (societyName === '') {
       setSocietyNameerror('This field is required')
@@ -128,34 +133,42 @@ function AddStudentDetails() {
   return (
     <Container>
       <PageHeader heading={'AddStudent Details'} />
+      <Card>
       <TextField value={studentName} onChange={(e) => { setStudentName(e.target.value) }} label={'studentName'} />
 
-      <ErrorMessageForm error={studentNameerror} />
-      <TextField value={birthDate} type='date' onChange={(e) => { setBirthDate(e.target.value) }} label={''} />
+<ErrorMessageForm error={studentNameerror} />
+<TextField value={birthDate} type='date' onChange={(e) => { setBirthDate(e.target.value) }} label={''} />
 
-      <ErrorMessageForm error={birthDateerror} />
-      <TextField value={age} onChange={(e) => { setAge(e.target.value) }} label={'Age'} />
+<ErrorMessageForm error={birthDateerror} />
+<TextField value={age} type="number"
+  onChange={(e) => { setAge(e.target.value) }} label={'Age'} />
 
-      <ErrorMessageForm error={ageerror} />
-      <TextField value={fatherName} onChange={(e) => { setFatherName(e.target.value) }} label={'FatherName'} />
+<ErrorMessageForm error={ageerror} />
+<TextField value={fatherName} onChange={(e) => { setFatherName(e.target.value) }} label={'FatherName'} />
 
-      <ErrorMessageForm error={fatherNameerror} />
-      <TextField value={phoneNo} onChange={(e) => { setPhoneNo(e.target.value) }} inputProps={{
-        pattern: '[0-9]{10}',
-        maxLength: 10,
-      }} label={'PhoneNo'} />
-
-      <ErrorMessageForm error={phoneNoerror} />
-      <TextField value={motherName} onChange={(e) => { setMotherName(e.target.value) }} label={'MotherName'} />
-      <ErrorMessageForm error={motherNameerror} />
-      <TextField value={phoneNo2} onChange={(e) => { setPhoneNo2(e.target.value) }} label={'PhoneNo2'} />
-      <TextField value={societyName} onChange={(e) => { setSocietyName(e.target.value) }} label={'SocietyName'} />
-      <ErrorMessageForm error={societyNameerror} />
-      <TextField value={studentAddress} onChange={(e) => { setStudentAddress(e.target.value) }} label={'StudentAddress'} />
-      <ErrorMessageForm error={studentAddresserror} />
-      <TextField value={emailid} onChange={(e) => { setEmailid(e.target.value) }} label={'Emailid'} />
-      <ErrorMessageForm error={emailiderror} />
-      <Button onClick={onSubmit}>Submit</Button>
+<ErrorMessageForm error={fatherNameerror} />
+<TextField value={phoneNo}
+  type={'number'}
+  onChange={(e) => { setPhoneNo(e.target.value) }}
+  onBlur={(e) => { setPhoneNoerror(IsMobileNoValid(e.target.value)) }}
+  error={phoneNoerror !== ''}
+  helperText={phoneNoerror}
+  label={'PhoneNo'} />
+<TextField value={motherName} onChange={(e) => { setMotherName(e.target.value) }} label={'MotherName'} />
+<ErrorMessageForm error={motherNameerror} />
+<TextField value={phoneNo2} onChange={(e) => { setPhoneNo2(e.target.value) }} onBlur={(e) => { setPhoneNoerror2(IsMobileNoValid(e.target.value)) }}
+  error={phoneNoerror2 !== ''}
+  helperText={phoneNoerror2}
+ label={'PhoneNo2'} />
+<TextField value={societyName} onChange={(e) => { setSocietyName(e.target.value) }} label={'SocietyName'} />
+<ErrorMessageForm error={societyNameerror} />
+<TextField value={studentAddress} onChange={(e) => { setStudentAddress(e.target.value) }} label={'StudentAddress'} />
+<ErrorMessageForm error={studentAddresserror} />
+<TextField value={emailid} onChange={(e) => { setEmailid(e.target.value) }} label={'Emailid'} />
+<ErrorMessageForm error={emailiderror} />
+<Button onClick={onSubmit}>Submit</Button>
+      </Card>
+    
     </Container>
   )
 }

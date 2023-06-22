@@ -33,7 +33,7 @@ export function IsMobileNoValid(value) {
         return 'Mobile No should not be blank.';
     }
     else if (!phoneRegExp.test(value)) {
-        return 'Invalid email address';
+        return 'Invalid Phone No.';
     }
     return ''
 }
