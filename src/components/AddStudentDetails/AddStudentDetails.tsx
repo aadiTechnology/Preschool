@@ -61,6 +61,8 @@ function AddStudentDetails() {
       }
       }, [GetAddStudent])
 
+      const emailRegExp = /^\S+@\S+\.\S+$/;
+      const phoneNumberRegex = /^\d{10}$/;
      const onSubmit=()=>{
       if(studentName===''){
         setStudentNameerror('This field is required')
@@ -90,7 +92,10 @@ function AddStudentDetails() {
 
       if(phoneNo===''){
         setPhoneNoerror('This field is required')
-      }else{
+      }else if(!phoneNumberRegex.test(phoneNo)){
+        setEmailiderror("Invalid phoneNo ")
+      }
+      else{
         setPhoneNoerror('')
       }
 
@@ -109,7 +114,11 @@ function AddStudentDetails() {
       
       if(emailid===''){
         setEmailiderror('This field is required')
-      }else{
+      }else if(!emailRegExp.test(emailid)){
+        setEmailiderror("Invalid email address")
+      }
+      
+      else{
         setEmailiderror('')
       }
         dispatch(GetAddStudentDetails(GetAddStudentDetailsBody));
@@ -130,12 +139,15 @@ function AddStudentDetails() {
         <TextField value={fatherName} onChange={(e)=>{setFatherName(e.target.value)}} label={'FatherName'}/>
       
         <ErrorMessageForm error={fatherNameerror}/>
-        <TextField value={phoneNo} onChange={(e)=>{setPhoneNo(e.target.value)}} label={'PhoneNo'}/>
+        <TextField value={phoneNo}  onChange={(e)=>{setPhoneNo(e.target.value)}}   inputProps={{
+         pattern: '[0-9]{10}', 
+         maxLength: 10, 
+      }} label={'PhoneNo'}/>
        
         <ErrorMessageForm error={phoneNoerror}/>
         <TextField value={motherName} onChange={(e)=>{setMotherName(e.target.value)}} label={'MotherName'}/>
         <ErrorMessageForm error={motherNameerror}/>
-        <TextField value={phoneNo2} onChange={(e)=>{setPhoneNo2(e.target.value)}} label={'PhoneNo2'}/>
+        <TextField value={phoneNo2}  onChange={(e)=>{setPhoneNo2(e.target.value)}} label={'PhoneNo2'}/>
        
         <TextField value={societyName} onChange={(e)=>{setSocietyName(e.target.value)}} label={'SocietyName'}/>
         <ErrorMessageForm error={societyNameerror}/>
