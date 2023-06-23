@@ -7,7 +7,7 @@ import { IGetAddStudentDetailsBody ,IGetAdmissionDetailsBody,IAddUserLoginInfoBo
 import { GetAddStudentDetails, resetAddStudent ,getAdmissionDetails,AddUserLoginInfo } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
 import { Button, TextField, Container, Card, Checkbox, Typography, FormControlLabel } from '@mui/material';
 import { toast } from 'react-toastify';
-import { IsMobileNoValid } from "src/components/Common/util"
+import { IsEmailValid, IsMobileNoValid } from "src/components/Common/util"
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import { number } from 'prop-types';
 import List3Card from 'src/library/List/List3Card';
@@ -21,7 +21,7 @@ function AddStudentDetails() {
   const GetAdmissionDetails: any = useSelector(
     (state: RootState) => state.AddStudentDetails.AdmissionDetails
   );
-  const AddUserLoginInfo: any = useSelector(
+  const AddUserLogin: any = useSelector(
     (state: RootState) => state.AddStudentDetails.AddUserLoginInfo
   );
   console.log("AddUserLoginInfo",AddUserLoginInfo)
@@ -48,13 +48,20 @@ function AddStudentDetails() {
   const [studentAddresserror, setStudentAddresserror] = useState('');
   const [emailid, setEmailid] = useState('');
   const [emailiderror, setEmailiderror] = useState('');
-  
+  const [checked, setChecked] = useState(false);
   const GetAdmissionDetailsBody: IGetAdmissionDetailsBody =
   {"Id": 1,}
-  
+
+  const AddUserLoginInfoBody:IAddUserLoginInfoBody={
+    "emailid":emailid,
+    "PhoneNo":phoneNo,
+    "BirthDate":birthDate,
+    "UserId":1
+  }
   useEffect(() => {
     dispatch(getAdmissionDetails(GetAdmissionDetailsBody));
-    }, [])
+    
+   },[])
 
   const GetAddStudentDetailsBody: IGetAddStudentDetailsBody =
   {
@@ -75,78 +82,82 @@ function AddStudentDetails() {
   }
 
 
-const AddUserLoginInfoBody:IAddUserLoginInfoBody={
-  "emailid":"a@gmail.com",
-  "PhoneNo":"123456",
-  "BirthDate":"6/22/2023",
-  "UserId":1
-}
+
 
 
   const display = studentName !== '' && birthDate !== ""
   useEffect(() => {
     if (GetAddStudent !== '') {
-      if (display) {
-        toast.success(GetAddStudent, { toastId: 'success1' })
-        dispatch(resetAddStudent());
+      toast.success(GetAddStudent, { toastId: 'success1' })
+      dispatch(resetAddStudent());
       }
-
-    }
   }, [GetAddStudent])
 
-  const emailRegExp = /^\S+@\S+\.\S+$/;
-  
 
-  const onSubmit = () => {
+  useEffect(() => {
+    if (AddUserLogin !== '') {
+      toast.success(AddUserLogin, { toastId: 'success2' })
+    }
+  }, [AddUserLogin])
+
+   const onSubmit = () => {
+    let isError = false
     if (studentName === '') {
       setStudentNameerror('This field is required')
+      isError=true
     } else {
       setStudentNameerror('')
     }
     if (birthDate === '') {
       setBirthDateerror('This field is required')
+      isError=true
+
     } else {
       setBirthDateerror('')
     }
     if (age === '0') {
       setAgeerror('This field is required')
+      isError=true
     } else {
       setAgeerror('')
     }
     if (fatherName === '') {
       setFatherNameerror('This field is required')
+      isError=true
     } else {
       setFatherNameerror('')
     }
     if (motherName === '') {
       setMotherNameerror('This field is required')
+      isError=true
     } else {
       setMotherNameerror('')
     }
      if (societyName === '') {
       setSocietyNameerror('This field is required')
+      isError=true
     } else {
       setSocietyNameerror('')
     }
 
     if (studentAddress === '') {
       setStudentAddresserror('This field is required')
+      isError=true
     } else {
       setStudentAddresserror('')
+      
     }
-
-
-    if (emailid === '') {
-      setEmailiderror('This field is required')
-    } else if (!emailRegExp.test(emailid)) {
-      setEmailiderror("Invalid email address")
+    if(!isError){
+      dispatch(GetAddStudentDetails(GetAddStudentDetailsBody));
+      
+    if(checked){
+      dispatch(AddUserLoginInfo(AddUserLoginInfoBody));
+      }
     }
-
-    else {
-      setEmailiderror('')
+    if(!isError){
+      ResetForm()
     }
-    dispatch(GetAddStudentDetails(GetAddStudentDetailsBody));
-    ResetForm()
+    
   }
 
   const ResetForm = () => {
@@ -160,6 +171,7 @@ const AddUserLoginInfoBody:IAddUserLoginInfoBody={
     setSocietyName('')
     setStudentAddress('')
     setEmailid('')
+    setChecked(false)
    }
 
    const handleChange = (e) => {
@@ -185,6 +197,8 @@ const AddUserLoginInfoBody:IAddUserLoginInfoBody={
       setPhoneNo2(input);
     }
   };
+
+ 
   return (
     <Container>
       <PageHeader heading={'AddStudent Details'} />
@@ -198,8 +212,7 @@ const AddUserLoginInfoBody:IAddUserLoginInfoBody={
         <TextField value={age}  type="text"
           onChange={(e) => handleChange(e)}
           label={'Age'} />
-       
-        <ErrorMessageForm error={ageerror} />
+       <ErrorMessageForm error={ageerror} />
         <TextField value={fatherName} onChange={(e) => { setFatherName(e.target.value) }} label={'FatherName'} />
 
         <ErrorMessageForm error={fatherNameerror} />
@@ -220,13 +233,18 @@ const AddUserLoginInfoBody:IAddUserLoginInfoBody={
         <ErrorMessageForm error={societyNameerror} />
         <TextField value={studentAddress} onChange={(e) => { setStudentAddress(e.target.value) }} label={'StudentAddress'} />
         <ErrorMessageForm error={studentAddresserror} />
-        <TextField value={emailid} onChange={(e) => { setEmailid(e.target.value) }} label={'Emailid'} />
+        <TextField value={emailid} 
+         onChange={(e) => { setEmailid(e.target.value) }}
+         onBlur={(e) => { setEmailiderror(IsEmailValid(e.target.value)) }}
+        
+        label={'Emailid'} />
         <ErrorMessageForm error={emailiderror} />
-       <FormControlLabel  control={<Checkbox/>} label="ischecked" />
+       <FormControlLabel  control={<Checkbox checked={checked}
+          onChange={()=>setChecked(!checked)}  />} label="ischecked" />
         <Button onClick={onSubmit}>Submit</Button>
-      </Card>
+       </Card>
         <br></br>
-      <List3Card ItemList={GetAdmissionDetails}/>
+     
 
 
     </Container>

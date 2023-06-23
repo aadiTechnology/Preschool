@@ -25,7 +25,7 @@ const AddStudentDetailsslice = createSlice({
             state.AddStudentDetails = '';
           },
           AddUserLoginInfo(state, action) {
-            state.AddUserLoginInfo = '';
+            state.AddUserLoginInfo =action.payload;
             },   
     
     }
