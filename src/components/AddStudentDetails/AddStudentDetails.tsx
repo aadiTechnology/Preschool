@@ -3,8 +3,8 @@ import PageHeader from 'src/library/heading/pageHeader'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
-import { IGetAddStudentDetailsBody ,IGetAdmissionDetailsBody } from "src/Interface/Student/IAddStudentDetails"
-import { GetAddStudentDetails, resetAddStudent ,getAdmissionDetails } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
+import { IGetAddStudentDetailsBody ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody } from "src/Interface/Student/IAddStudentDetails"
+import { GetAddStudentDetails, resetAddStudent ,getAdmissionDetails,AddUserLoginInfo } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
 import { Button, TextField, Container, Card, Checkbox, Typography, FormControlLabel } from '@mui/material';
 import { toast } from 'react-toastify';
 import { IsMobileNoValid } from "src/components/Common/util"
@@ -21,6 +21,11 @@ function AddStudentDetails() {
   const GetAdmissionDetails: any = useSelector(
     (state: RootState) => state.AddStudentDetails.AdmissionDetails
   );
+  const AddUserLoginInfo: any = useSelector(
+    (state: RootState) => state.AddStudentDetails.AddUserLoginInfo
+  );
+  console.log("AddUserLoginInfo",AddUserLoginInfo)
+
 
 
   const [studentName, setStudentName] = useState('');
@@ -68,6 +73,14 @@ function AddStudentDetails() {
     "SMS": "true",
     "UserId": 1
   }
+
+
+const AddUserLoginInfoBody:IAddUserLoginInfoBody={
+  "emailid":"a@gmail.com",
+  "PhoneNo":"123456",
+  "BirthDate":"6/22/2023",
+  "UserId":1
+}
 
 
   const display = studentName !== '' && birthDate !== ""
