@@ -11,7 +11,7 @@ import { IsMobileNoValid } from "src/components/Common/util"
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import { number } from 'prop-types';
 import List3Card from 'src/library/List/List3Card';
-import CardTextFeild from 'src/library/Card/CardTextFeild';
+
 function AddStudentDetails() {
   const dispatch = useDispatch();
   const GetAddStudent: any = useSelector(
@@ -199,7 +199,7 @@ function AddStudentDetails() {
 <br></br>
       <List3Card ItemList={GetAdmissionDetails}/>
 
-<CardTextFeild/>
+
     </Container>
   )
 }
