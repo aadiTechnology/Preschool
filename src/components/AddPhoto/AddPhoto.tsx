@@ -26,11 +26,12 @@ function AddPhoto() {
   const [titlerror, setTitleError] = useState('')
   const [link, setLink] = useState('');
   const [linkerror, setLinkError] = useState('');
-  const [date, setDate] = useState(formattedDate)
-  const [dateerror, setDateError] = useState('')
+  const [date, setDate] = useState(formattedDate);
+  const [dateerror, setDateError] = useState('');
+  const [schoolListerror, setSchoolListError] = useState('');
   const [ItemList, setItemList] = useState([])
 
-  let enableButton = (title !== '' || date !== '')
+ 
 
   const GetAddPhoto: any = useSelector(
     (state: RootState) => state.AddPhoto.AddPhotoAlbum
@@ -89,13 +90,13 @@ function AddPhoto() {
     else {
       setDateError('')
     }
-    // if(!IsSelected()){
-    //   setDateError('Fill the Mandatory Field')
-    //   isError = true
-    // }
-    // else {
-    //   setDateError('')
-    // }
+    if(!IsSelected()){
+      setSchoolListError('Fill the Mandatory Field')
+      isError = true
+    }
+    else {
+      setSchoolListError('')
+    }
   
     const AddPhoto: IAddPhotoAlbumBody =
    
@@ -159,6 +160,8 @@ function AddPhoto() {
         <SelectedCard ItemList={ItemList} clickItem={clickItem}  />
          
       }
+        <ErrorMessageForm error={schoolListerror}/>
+    
       <TextField value={title} onChange={(e) => setTitle(e.target.value)}
         label={'Title'} />
         <ErrorMessageForm error={titlerror}/>
