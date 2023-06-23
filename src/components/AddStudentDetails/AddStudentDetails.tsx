@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
 import { IGetAddStudentDetailsBody ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody } from "src/Interface/Student/IAddStudentDetails"
-import { GetAddStudentDetails, resetAddStudent ,getAdmissionDetails,AddUserLoginInfo } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
+import { GetAddStudentDetails, resetAddStudent , resetAddUserLogin ,getAdmissionDetails,AddUserLoginInfo } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
 import { Button, TextField, Container, Card, Checkbox, Typography, FormControlLabel } from '@mui/material';
 import { toast } from 'react-toastify';
 import { IsEmailValid, IsMobileNoValid } from "src/components/Common/util"
@@ -97,6 +97,7 @@ function AddStudentDetails() {
   useEffect(() => {
     if (AddUserLogin !== '') {
       toast.success(AddUserLogin, { toastId: 'success2' })
+      dispatch(resetAddUserLogin());
     }
   }, [AddUserLogin])
 

@@ -26,6 +26,9 @@ const AddStudentDetailsslice = createSlice({
           },
           AddUserLoginInfo(state, action) {
             state.AddUserLoginInfo =action.payload;
+            },
+            resetAddUser(state) {
+              state.AddUserLoginInfo = '';
             },   
     
     }
@@ -65,6 +68,13 @@ export const resetAddStudent=
   async (dispatch) => {
     dispatch(AddStudentDetailsslice.actions.resetAddStudentDetails());
   }
+
+  export const  resetAddUserLogin=
+(): AppThunk =>
+  async (dispatch) => {
+    dispatch(AddStudentDetailsslice.actions.resetAddUser());
+  }
+ 
 
   
 export const AddUserLoginInfo=
