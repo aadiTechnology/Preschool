@@ -156,6 +156,22 @@ function AddStudentDetails() {
       setAge(input);
     }
   };
+
+  const ChangephoneNo = (e) => {
+    const input = e.target.value;
+    const regex = /^[0-9\b]+$/;
+    if (input === "" || (regex.test(input) && input.length <= 10)) {
+      setPhoneNo(input);
+    }
+  };
+
+  const ChangephoneNo2 = (e) => {
+    const input = e.target.value;
+    const regex = /^[0-9\b]+$/;
+    if (input === "" || (regex.test(input) && input.length <= 10)) {
+      setPhoneNo2(input);
+    }
+  };
   return (
     <Container>
       <PageHeader heading={'AddStudent Details'} />
@@ -175,15 +191,15 @@ function AddStudentDetails() {
 
         <ErrorMessageForm error={fatherNameerror} />
         <TextField value={phoneNo}
-          type={'number'}
-          onChange={(e) => { setPhoneNo(e.target.value) }}
-          onBlur={(e) => { setPhoneNoerror(IsMobileNoValid(e.target.value)) }}
+          type="text"
+          onChange={(e) => ChangephoneNo(e)}
+          onBlur={(e) => {setPhoneNoerror(IsMobileNoValid(e.target.value)) }}
           error={phoneNoerror !== ''}
           helperText={phoneNoerror}
           label={'PhoneNo'} />
         <TextField value={motherName} onChange={(e) => { setMotherName(e.target.value) }} label={'MotherName'} />
         <ErrorMessageForm error={motherNameerror} />
-        <TextField value={phoneNo2} onChange={(e) => { setPhoneNo2(e.target.value) }} onBlur={(e) => { setPhoneNoerror2(IsMobileNoValid(e.target.value)) }}
+        <TextField value={phoneNo2} onChange={(e) => ChangephoneNo2(e)} onBlur={(e) => { setPhoneNoerror2(IsMobileNoValid(e.target.value)) }}
           error={phoneNoerror2 !== ''}
           helperText={phoneNoerror2}
           label={'PhoneNo2'} />
@@ -196,7 +212,7 @@ function AddStudentDetails() {
        <FormControlLabel  control={<Checkbox/>} label="ischecked" />
         <Button onClick={onSubmit}>Submit</Button>
       </Card>
-<br></br>
+        <br></br>
       <List3Card ItemList={GetAdmissionDetails}/>
 
 
