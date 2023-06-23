@@ -1,5 +1,5 @@
 import http from "../../utils/http-common";
-import { IGetAddStudentDetailsResult, IGetAddStudentDetailsBody ,IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody} from "src/Interface/Student/IAddStudentDetails";
+import { IGetAddStudentDetailsResult, IGetAddStudentDetailsBody ,IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody,IAddUserLoginInfoResult} from "src/Interface/Student/IAddStudentDetails";
 
 
 const GetAddStudentDetails = (data: IGetAddStudentDetailsBody) => {
@@ -10,9 +10,14 @@ const GetAdmissionDetail = (data: IGetAdmissionDetailsBody) => {
     return http.post<IGetAdmissionDetailsResult[]>('GetAdmissionDetails', data)
 };
 
+const AddUserLoginInfo= (data: IAddUserLoginInfoBody) => {
+    return http.post<IAddUserLoginInfoResult[]>('AddUserLoginInfo', data)
+};
+
 const GetAddStudentDetailsApi = {
     GetAddStudentDetails,
-    GetAdmissionDetail
+    GetAdmissionDetail,
+    AddUserLoginInfo
 
 }
 

@@ -2,14 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from "src/store";
 import GetAddStudentDetailsApi from "src/api/Student/ApiAddStudentDetails";
 import { async } from "q";
-import {IGetAddStudentDetailsBody ,IGetAdmissionDetailsBody} from  "src/Interface/Student/IAddStudentDetails"
+import {IGetAddStudentDetailsBody ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody} from  "src/Interface/Student/IAddStudentDetails"
 
 
 const AddStudentDetailsslice = createSlice({
     name: 'AddStudentDetails',
     initialState: {
         AddStudentDetails: '',
-        AdmissionDetails:[]
+        AdmissionDetails:[],
+        AddUserLoginInfo:''
+
       },
     reducers: {
         GetAddStudentDetails(state, action) {
@@ -22,6 +24,9 @@ const AddStudentDetailsslice = createSlice({
         resetAddStudentDetails(state) {
             state.AddStudentDetails = '';
           },
+          AddUserLoginInfo(state, action) {
+            state.AddUserLoginInfo = '';
+            },   
     
     }
      
@@ -60,5 +65,14 @@ export const resetAddStudent=
   async (dispatch) => {
     dispatch(AddStudentDetailsslice.actions.resetAddStudentDetails());
   }
+
+  
+export const AddUserLoginInfo=
+(data:IAddUserLoginInfoBody):AppThunk =>
+async(dispatch)=>{
+  const response=await GetAddStudentDetailsApi.AddUserLoginInfo(data)
+   dispatch(AddStudentDetailsslice.actions.AddUserLoginInfo(response.data))
+}
+
 
 export default AddStudentDetailsslice.reducer

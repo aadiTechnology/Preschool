@@ -38,3 +38,12 @@ export interface IGetAdmissionDetailsResult{
     BirthDate: null,
     UserId: 0
 }
+export interface IAddUserLoginInfoBody{
+    emailid:string,
+    PhoneNo:string,
+    BirthDate:string,
+    UserId:number
+}
+export interface IAddUserLoginInfoResult{
+    
+}
