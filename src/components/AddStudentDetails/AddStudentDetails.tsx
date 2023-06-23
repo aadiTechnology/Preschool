@@ -11,6 +11,7 @@ import { IsMobileNoValid } from "src/components/Common/util"
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import { number } from 'prop-types';
 import List3Card from 'src/library/List/List3Card';
+import CardTextFeild from 'src/library/Card/CardTextFeild';
 function AddStudentDetails() {
   const dispatch = useDispatch();
   const GetAddStudent: any = useSelector(
@@ -81,7 +82,7 @@ function AddStudentDetails() {
   }, [GetAddStudent])
 
   const emailRegExp = /^\S+@\S+\.\S+$/;
-  const phoneNumberRegex = /^\d{10}$/;
+  
 
   const onSubmit = () => {
     if (studentName === '') {
@@ -147,6 +148,14 @@ function AddStudentDetails() {
     setStudentAddress('')
     setEmailid('')
    }
+
+   const handleChange = (e) => {
+    const input = e.target.value;
+    const regex = /^[0-9\b]+$/;
+    if (input === "" || (regex.test(input) && input.length <= 2)) {
+      setAge(input);
+    }
+  };
   return (
     <Container>
       <PageHeader heading={'AddStudent Details'} />
@@ -157,9 +166,10 @@ function AddStudentDetails() {
         <TextField value={birthDate} type='date' onChange={(e) => { setBirthDate(e.target.value) }} label={''} />
 
         <ErrorMessageForm error={birthDateerror} />
-        <TextField value={age} type="number"
-          onChange={(e) => { setAge(e.target.value) }} label={'Age'} />
-
+        <TextField value={age}  type="text"
+          onChange={(e) => handleChange(e)}
+          label={'Age'} />
+       
         <ErrorMessageForm error={ageerror} />
         <TextField value={fatherName} onChange={(e) => { setFatherName(e.target.value) }} label={'FatherName'} />
 
@@ -189,6 +199,7 @@ function AddStudentDetails() {
 <br></br>
       <List3Card ItemList={GetAdmissionDetails}/>
 
+<CardTextFeild/>
     </Container>
   )
 }
