@@ -9,7 +9,7 @@ export interface IGetDateForLegendResult{
     SubjectDescription: string,
     AssignDate: string,
     Attachment: string,
-    UserId: number
+    UserId: number,
 }
 
 
