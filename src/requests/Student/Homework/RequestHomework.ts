@@ -1,25 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from "src/store";
-import { IGetDateForLegendBody } from "src/Interface/Student/IHomework";
+import { IGetDateForLegendBody ,IGetDatewiseHomeworkDetailsBody } from "src/Interface/Student/IHomework";
 import GetHomeworkApi from "src/api/Student/ApiHomework";
-import { async } from "q";
 import {IGetViewHomeWorkListBody} from  "src/Interface/Student/IHomework"
+
 
 
 const Homeworkslice = createSlice({
     name: 'Homework',
     initialState: {
         HomeworkDetails: [],
-        // HomeworkDate: [],
+         HomeworkDate: [],
         ViewHomework:[],
-        // AllowPrevious: false,
-        // AllowNext:false,
+        AllowPrevious: false,
+        AllowNext:false,
         Loading :true
 
     },
     reducers: {
-        GetHomeworkDate(state, action) {
+        GetHomework(state, action) {
             state.HomeworkDetails = action.payload;
+            state.Loading = false;
+        },
+        GetHomeworkDate(state, action) {
+           
+            let count = action.payload.HomeworkDate?.length-1;
+            let HomeWorkDateList = action.payload.HomeworkDate?.map((item,i)=>{
+               
+                return {
+                Id:i,
+                Name:item.split(' ')[0],
+                Value: item,
+                IsActive: i===count?true:false 
+                }
+            })
+            state.HomeworkDate = HomeWorkDateList;
+            state.AllowPrevious = action.payload.AllowPrevious
+            state.AllowNext = action.payload.AllowNext
             state.Loading = false;
         },
         GetViewHomework(state, action) {
@@ -32,7 +49,7 @@ const Homeworkslice = createSlice({
     }
 });
 
-export const GetHomeworkDate=
+export const GetHomework=
 (data:IGetDateForLegendBody):AppThunk =>
 async(dispatch)=>{
     dispatch(Homeworkslice.actions.getLoading());
@@ -45,7 +62,16 @@ async(dispatch)=>{
              Text2 : item.AssignDate.split(' ')[0],
         }
        })
-       dispatch(Homeworkslice.actions.GetHomeworkDate(HomeWorkList))
+       dispatch(Homeworkslice.actions.GetHomework(HomeWorkList))
+};
+
+export const GetHomeworkDate=
+(data:IGetDatewiseHomeworkDetailsBody):AppThunk =>
+async(dispatch)=>{
+    dispatch(Homeworkslice.actions.getLoading());
+    const response=await GetHomeworkApi.GetHomeWorkDate(data)
+  console.log(response.data,"response.data")
+       dispatch(Homeworkslice.actions.GetHomeworkDate(response.data))
 }
 export const GetViewHomework=
 (data:IGetViewHomeWorkListBody):AppThunk =>
