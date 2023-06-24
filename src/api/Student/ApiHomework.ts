@@ -1,9 +1,13 @@
 import http from "../../utils/http-common";
-import { IGetDateForLegendBody, IGetDateForLegendResult,IGetViewHomeWorkListBody,IGetViewHomeWorkListResult} from "src/Interface/Student/IHomework";
+import { IGetDateForLegendBody, IGetDateForLegendResult,IGetViewHomeWorkListBody,IGetViewHomeWorkListResult ,IGetDatewiseHomeworkDetailsBody ,IGetDatewiseHomeworkDetailsResult} from "src/Interface/Student/IHomework";
 
 
 const GetDateForLegend = (data: IGetDateForLegendBody) => {
     return http.post<IGetDateForLegendResult[]>('GetDateForLegend', data)
+};
+
+const GetHomeWorkDate = (data: IGetDatewiseHomeworkDetailsBody) => {
+    return http.post<IGetDatewiseHomeworkDetailsResult>('GetDatewiseHomeworkDetails', data)
 };
 
 const GetViewHomeWorkList = (data: IGetViewHomeWorkListBody) => {
@@ -13,7 +17,8 @@ const GetViewHomeWorkList = (data: IGetViewHomeWorkListBody) => {
 
 const GetHomeworkApi = {
     GetDateForLegend,
-    GetViewHomeWorkList
+    GetViewHomeWorkList,
+    GetHomeWorkDate
 
 }
 

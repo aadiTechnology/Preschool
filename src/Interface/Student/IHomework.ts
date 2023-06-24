@@ -10,7 +10,18 @@ export interface IGetDateForLegendResult{
     AssignDate: string,
     Attachment: string,
     UserId: number,
-}
+};
+
+export interface IGetDatewiseHomeworkDetailsBody {
+    StartDate:string;
+};
+
+export interface IGetDatewiseHomeworkDetailsResult{
+    Id: number,
+    HomeworkDate:string[]
+    AllowPrevious:boolean,
+    AllowNext:boolean
+};
 
 
 export interface IGetViewHomeWorkListBody {

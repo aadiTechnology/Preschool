@@ -48,3 +48,18 @@ export function IsEmailValid(value) {
     }
     return ''
 }
+export const getDateFormatted = (date) => {
+    date = date || new Date();
+    const Day = new Date(date).getDate();
+    const Month = new Date(date).toLocaleString('default', { month: 'short' });
+    const Year = new Date(date).getFullYear();
+    return `${Day} ${Month} ${Year}`;
+}
+
+export const getNextDate = (date, prevNext) => {
+    var nextDate = new Date(date);
+    console.log(date,"nextDate",nextDate)
+    console.log(nextDate.getDate() + prevNext,"nextDate",nextDate.getDate())
+    nextDate.setDate(nextDate.getDate() + prevNext);
+    return getDateFormatted(nextDate)
+}
