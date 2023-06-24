@@ -59,7 +59,14 @@ function DashBoard() {
   Text2:"Details",
   Link: 'Student/AddStudentDetails',
   icon : <AddToQueueIcon fontSize='large'/>
-}
+},
+{
+  Text:"AdmissionConversion",
+  Link: 'Student/AdmissionConversion',
+  icon : <AddToQueueIcon fontSize='large'/>
+},
+
+
 
 
 ]
