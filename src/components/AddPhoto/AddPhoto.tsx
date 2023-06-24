@@ -24,11 +24,14 @@ function AddPhoto() {
   const formattedDate = `${year}-${month}-${day}`;
   const [title, setTitle] = useState('');
   const [titlerror, setTitleError] = useState('')
-  const [date, setDate] = useState(formattedDate)
-  const [dateerror, setDateError] = useState('')
+  const [link, setLink] = useState('');
+  const [linkerror, setLinkError] = useState('');
+  const [date, setDate] = useState(formattedDate);
+  const [dateerror, setDateError] = useState('');
+  const [schoolListerror, setSchoolListError] = useState('');
   const [ItemList, setItemList] = useState([])
 
-  let enableButton = (title !== '' || date !== '')
+ 
 
   const GetAddPhoto: any = useSelector(
     (state: RootState) => state.AddPhoto.AddPhotoAlbum
@@ -72,6 +75,14 @@ function AddPhoto() {
     else {
       setTitleError('')
     }
+
+    if (link === '') {
+      setLinkError('Please Enter Link')
+      isError = true
+    }
+    else {
+      setLinkError('')
+    }
     if (date === '') {
       setDateError('Fill the Mandatory Field')
       isError = true
@@ -79,13 +90,13 @@ function AddPhoto() {
     else {
       setDateError('')
     }
-    // if(!IsSelected()){
-    //   setDateError('Fill the Mandatory Field')
-    //   isError = true
-    // }
-    // else {
-    //   setDateError('')
-    // }
+    if(!IsSelected()){
+      setSchoolListError('Fill the Mandatory Field')
+      isError = true
+    }
+    else {
+      setSchoolListError('')
+    }
   
     const AddPhoto: IAddPhotoAlbumBody =
    
@@ -93,13 +104,16 @@ function AddPhoto() {
       Title: title,
       ClassId: ItemList.filter((item) => {return (item.IsActive) }).map((obj) => { return obj.Value }).toString(),
       AlbumDate: date,
-      FacebookLink: "httplocalhost45",
+      FacebookLink: link,
       UserId: 1
     }
-    
-    dispatch(getAddPhoto(AddPhoto));
+    if(!isError){
+      dispatch(getAddPhoto(AddPhoto));
+    }
+  
     setTitle('')
     setDate('')
+    setLink('')
     setItemList(prev=> prev.map((item)=> 
       {return {...item,IsActive:false}}))
   }
@@ -146,10 +160,14 @@ function AddPhoto() {
         <SelectedCard ItemList={ItemList} clickItem={clickItem}  />
          
       }
+        <ErrorMessageForm error={schoolListerror}/>
+    
       <TextField value={title} onChange={(e) => setTitle(e.target.value)}
         label={'Title'} />
         <ErrorMessageForm error={titlerror}/>
-      <Typography> Link</Typography>
+        <TextField value={link} onChange={(e) => setLink(e.target.value)}
+        label={'Link'} />
+        <ErrorMessageForm error={linkerror}/>
       <TextField type='date' value={date} onChange={(e) => setDate(e.target.value)} inputProps={{
         max: formattedDate,
       }} />

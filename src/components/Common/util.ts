@@ -37,3 +37,29 @@ export function IsMobileNoValid(value) {
     }
     return ''
 }
+
+export function IsEmailValid(value) {
+    const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{1,3})+$/;
+    if (!value) {
+        return 'Email Id should not be blank.';
+    }
+    else if (!emailRegExp.test(value)) {
+        return 'Invalid email address';
+    }
+    return ''
+}
+export const getDateFormatted = (date) => {
+    date = date || new Date();
+    const Day = new Date(date).getDate();
+    const Month = new Date(date).toLocaleString('default', { month: 'short' });
+    const Year = new Date(date).getFullYear();
+    return `${Day} ${Month} ${Year}`;
+}
+
+export const getNextDate = (date, prevNext) => {
+    var nextDate = new Date(date);
+    console.log(date,"nextDate",nextDate)
+    console.log(nextDate.getDate() + prevNext,"nextDate",nextDate.getDate())
+    nextDate.setDate(nextDate.getDate() + prevNext);
+    return getDateFormatted(nextDate)
+}

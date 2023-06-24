@@ -21,7 +21,7 @@ function SelectedCard({ItemList,clickItem , type="checkBox"}) {
     <Grid container spacing={1}>
     
     {ItemList.map((item, i) => {
-       console.log(item ,"item")
+       
            return (
             <Grid  item xs={6} md={3} key={i}>
             <SingleButton Item={item}
