@@ -3,14 +3,13 @@ import PageHeader from 'src/library/heading/pageHeader'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
-import { IGetAddStudentDetailsBody ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody } from "src/Interface/Student/IAddStudentDetails"
-import { GetAddStudentDetails, resetAddStudent , resetAddUserLogin ,getAdmissionDetails,AddUserLoginInfo } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
+import { IGetAddStudentDetailsBody, IGetAdmissionDetailsBody, IAddUserLoginInfoBody } from "src/Interface/Student/IAddStudentDetails"
+import { GetAddStudentDetails, resetAddStudent, resetAddUserLogin, getAdmissionDetails, AddUserLoginInfo } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
 import { Button, TextField, Container, Card, Checkbox, Typography, FormControlLabel } from '@mui/material';
 import { toast } from 'react-toastify';
 import { IsEmailValid, IsMobileNoValid } from "src/components/Common/util"
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
-import { number } from 'prop-types';
-import List3Card from 'src/library/List/List3Card';
+
 
 function AddStudentDetails() {
   const dispatch = useDispatch();
@@ -24,9 +23,6 @@ function AddStudentDetails() {
   const AddUserLogin: any = useSelector(
     (state: RootState) => state.AddStudentDetails.AddUserLoginInfo
   );
-  console.log("AddUserLoginInfo",AddUserLoginInfo)
-
-
 
   const [studentName, setStudentName] = useState('');
   const [studentNameerror, setStudentNameerror] = useState('');
@@ -50,18 +46,17 @@ function AddStudentDetails() {
   const [emailiderror, setEmailiderror] = useState('');
   const [checked, setChecked] = useState(false);
   const GetAdmissionDetailsBody: IGetAdmissionDetailsBody =
-  {"Id": 1,}
+    { "Id": 1, }
 
-  const AddUserLoginInfoBody:IAddUserLoginInfoBody={
-    "emailid":emailid,
-    "PhoneNo":phoneNo,
-    "BirthDate":birthDate,
-    "UserId":1
+  const AddUserLoginInfoBody: IAddUserLoginInfoBody = {
+    "emailid": emailid,
+    "PhoneNo": phoneNo,
+    "BirthDate": birthDate,
+    "UserId": 1
   }
   useEffect(() => {
     dispatch(getAdmissionDetails(GetAdmissionDetailsBody));
-    
-   },[])
+  }, [])
 
   const GetAddStudentDetailsBody: IGetAddStudentDetailsBody =
   {
@@ -80,17 +75,11 @@ function AddStudentDetails() {
     "SMS": "true",
     "UserId": 1
   }
-
-
-
-
-
-  const display = studentName !== '' && birthDate !== ""
   useEffect(() => {
     if (GetAddStudent !== '') {
       toast.success(GetAddStudent, { toastId: 'success1' })
       dispatch(resetAddStudent());
-      }
+    }
   }, [GetAddStudent])
 
 
@@ -101,64 +90,64 @@ function AddStudentDetails() {
     }
   }, [AddUserLogin])
 
-   const onSubmit = () => {
+  const onSubmit = () => {
     let isError = false
     if (studentName === '') {
       setStudentNameerror('This field is required')
-      isError=true
+      isError = true
     } else {
       setStudentNameerror('')
     }
     if (birthDate === '') {
       setBirthDateerror('This field is required')
-      isError=true
+      isError = true
 
     } else {
       setBirthDateerror('')
     }
-    if (age === '0') {
+    if (age === '') {
       setAgeerror('This field is required')
-      isError=true
+      isError = true
     } else {
       setAgeerror('')
     }
     if (fatherName === '') {
       setFatherNameerror('This field is required')
-      isError=true
+      isError = true
     } else {
       setFatherNameerror('')
     }
     if (motherName === '') {
       setMotherNameerror('This field is required')
-      isError=true
+      isError = true
     } else {
       setMotherNameerror('')
     }
-     if (societyName === '') {
+    if (societyName === '') {
       setSocietyNameerror('This field is required')
-      isError=true
+      isError = true
     } else {
       setSocietyNameerror('')
     }
 
     if (studentAddress === '') {
       setStudentAddresserror('This field is required')
-      isError=true
+      isError = true
     } else {
       setStudentAddresserror('')
-      
+
     }
-    if(!isError){
+    if (!isError) {
       dispatch(GetAddStudentDetails(GetAddStudentDetailsBody));
-      
-    if(checked){
-      dispatch(AddUserLoginInfo(AddUserLoginInfoBody));
+
+      if (checked) {
+        dispatch(AddUserLoginInfo(AddUserLoginInfoBody));
       }
     }
-    if(!isError){
+    if (!isError) {
       ResetForm()
     }
-    
+
   }
 
   const ResetForm = () => {
@@ -173,9 +162,9 @@ function AddStudentDetails() {
     setStudentAddress('')
     setEmailid('')
     setChecked(false)
-   }
+  }
 
-   const handleChange = (e) => {
+  const handleChange = (e) => {
     const input = e.target.value;
     const regex = /^[0-9\b]+$/;
     if (input === "" || (regex.test(input) && input.length <= 2)) {
@@ -199,7 +188,6 @@ function AddStudentDetails() {
     }
   };
 
- 
   return (
     <Container>
       <PageHeader heading={'AddStudent Details'} />
@@ -210,17 +198,18 @@ function AddStudentDetails() {
         <TextField value={birthDate} type='date' onChange={(e) => { setBirthDate(e.target.value) }} label={''} />
 
         <ErrorMessageForm error={birthDateerror} />
-        <TextField value={age}  type="text"
+        <TextField value={age} type="text"
           onChange={(e) => handleChange(e)}
           label={'Age'} />
-       <ErrorMessageForm error={ageerror} />
+
+        <ErrorMessageForm error={ageerror} />
         <TextField value={fatherName} onChange={(e) => { setFatherName(e.target.value) }} label={'FatherName'} />
 
         <ErrorMessageForm error={fatherNameerror} />
         <TextField value={phoneNo}
           type="text"
           onChange={(e) => ChangephoneNo(e)}
-          onBlur={(e) => {setPhoneNoerror(IsMobileNoValid(e.target.value)) }}
+          onBlur={(e) => { setPhoneNoerror(IsMobileNoValid(e.target.value)) }}
           error={phoneNoerror !== ''}
           helperText={phoneNoerror}
           label={'PhoneNo'} />
@@ -234,21 +223,17 @@ function AddStudentDetails() {
         <ErrorMessageForm error={societyNameerror} />
         <TextField value={studentAddress} onChange={(e) => { setStudentAddress(e.target.value) }} label={'StudentAddress'} />
         <ErrorMessageForm error={studentAddresserror} />
-        <TextField value={emailid} 
-         onChange={(e) => { setEmailid(e.target.value) }}
-         onBlur={(e) => { setEmailiderror(IsEmailValid(e.target.value)) }}
-        
-        label={'Emailid'} />
-        <ErrorMessageForm error={emailiderror} />
-       <FormControlLabel  control={<Checkbox checked={checked}
-          onChange={()=>setChecked(!checked)}  />} label="ischecked" />
+        <TextField value={emailid}
+          onChange={(e) => { setEmailid(e.target.value) }}
+          onBlur={(e) => { setEmailiderror(IsEmailValid(e.target.value)) }}
+          label={'Emailid'} />
+
+        <FormControlLabel control={<Checkbox checked={checked}
+          onChange={() => setChecked(!checked)} />} label="ischecked" />
         <Button onClick={onSubmit}>Submit</Button>
-       </Card>
-        <br></br>
-     
-
-
-    </Container>
+      </Card>
+      <br></br>
+  </Container>
   )
 }
 
