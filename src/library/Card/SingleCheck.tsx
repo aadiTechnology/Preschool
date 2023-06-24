@@ -4,15 +4,16 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const SingleCheck = ({Item,ClickItem}) => {
- 
+ console.log(Item,"Item")
   const onClick=()=>{
     Item = {...Item,IsActive:!Item.IsActive}
     ClickItem(Item)}
   return (
     <div>
     <Card sx={{display:"flex"}}>
-      {Item.IsActive ? < RadioButtonUncheckedIcon  onClick={onClick} /> :
-           <CheckCircleIcon  onClick={onClick}  />}
+      {Item.IsActive ?  
+           <CheckCircleIcon  onClick={onClick}  />:
+           < RadioButtonUncheckedIcon  onClick={onClick} />}
           <Typography>{Item.Name}</Typography>
     </Card>
   

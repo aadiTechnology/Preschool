@@ -18,11 +18,8 @@ const[phonenumber1, setPhoneNumber1] = useState("");
 const[mothername, setMotherName] = useState("");
 const[phonenumber2, setPhoneNumber2] = useState("");
 const[email, setEmail] = useState("");
- const[itemList , setItemList] =useState([])
+ const[itemList , setItemList] =useState([{Id:1  ,Name:"yes" , Value:1 , IsActive:false} ,{Id:2  ,Name:"No" , Value:2 , IsActive:false}, {Id:3  ,Name:"Did Not Connect" , Value:3 , IsActive:false}])
 
-useEffect(()=>{
-    setItemList(ItemList1)
-},[ItemList1])
 const clickItem=(value)=>{
     setItemList(value)
 }
@@ -51,7 +48,7 @@ const clickItem=(value)=>{
         <TextField value={email} onChange={(e)=>{setEmail(e.target.value)}}  label={'Email'}/>
         
        <CheckUnCheckList ItemList={itemList} clickItem={clickItem}/>
-
+<br></br>
     <Button>Save</Button>
         
         </Card>
