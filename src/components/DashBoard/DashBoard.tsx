@@ -59,8 +59,14 @@ function DashBoard() {
   Text2:"Details",
   Link: 'Student/AddStudentDetails',
   icon : <AddToQueueIcon fontSize='large'/>
-}
+},
 
+{
+  Text:"FollowUp",
+  Link: 'Student/FollowUp',
+  iconColor: '#f0483e',
+  icon : <AddToQueueIcon fontSize='large'/>
+}
 
 ]
 
