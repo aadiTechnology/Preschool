@@ -24,6 +24,7 @@ const AddPhoto = Loader(lazy(()=> import('src/components/AddPhoto/AddPhoto')))
 const Dashboard = Loader(lazy(()=> import('src/components/DashBoard/DashBoard')))
 const AddStudentDetails = Loader(lazy(()=> import('src/components/AddStudentDetails/AddStudentDetails')))
 const FollowUp = Loader(lazy(()=> import('src/components/FollowUp/FollowUp')))
+const AdmissionConversion = Loader(lazy(()=> import('src/components/AdmissionConversion/AdmisssionConversion')))
 const studentRoutes = [
   {
     path: '/',
@@ -76,6 +77,10 @@ const studentRoutes = [
     element:<AddStudentDetails/>
   },
 
+  {
+    path:'AdmissionConversion',
+    element:<AdmissionConversion/>
+  },
   {
     path:'FollowUp',
     element:<FollowUp/>
