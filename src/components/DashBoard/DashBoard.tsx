@@ -68,7 +68,8 @@ function DashBoard() {
   icon : <AddToQueueIcon fontSize='large'/>
 },
 {
-  Text:"AdmissionConversion",
+  Text:"Admission",
+  Text2:"Conversion",
   Link: 'Student/AdmissionConversion',
   iconColor: '#f0483e',
   icon : <AddToQueueIcon fontSize='large'/>
