@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
 import DotLegend from 'src/library/Legend/DotLegend'
-import { GetDateForLegend } from 'src/requests/Student/Homework/RequestHomework'
+import { GetHomeworkDate } from 'src/requests/Student/Homework/RequestHomework'
 import { IGetDateForLegendBody } from 'src/Interface/Student/IHomework';
 import ListCard from 'src/library/List/ListCard';
 import Card2Text from 'src/library/Card/Card2Text';
@@ -25,9 +25,10 @@ function Homework() {
 
   const itemList=[{Id:1 , Name:"4-5-2023" , Value:"4-5-2023" , IsActive:false},{Id:2 , Name:"5-5-2023" , Value:"5-5-2023" , IsActive:false},{Id:3 , Name:"6-5-2023" , Value:"6-5-2023" , IsActive:false},{Id:4 , Name:"6-5-2023" , Value:"4-5-2023" , IsActive:false}]
 
-  const GetDateLegend: any = useSelector(
-    (state: RootState) => state.HomeWork.HighlightedDate
+  const HomeworkDetails: any = useSelector(
+    (state: RootState) => state.HomeWork.HomeworkDetails
   );
+
 
   const loading = useSelector(
     (state: RootState) => state.HomeWork.Loading
@@ -40,11 +41,8 @@ const [assignDate , setAssignDate] = useState()
     "AssignDate": "2023-06-20"
   }
 
-
-
-
   useEffect(() => {
-    dispatch(GetDateForLegend(GetHighlightedDateBody));
+    dispatch(GetHomeworkDate(GetHighlightedDateBody));
   }, [])
 
   const [ItemList, setItemList] = useState(itemList)
@@ -87,7 +85,7 @@ const [assignDate , setAssignDate] = useState()
       </Grid>
       <br></br>
       {loading ? <SuspenseLoader/> : 
-     <ListCard ItemList={GetDateLegend} clickNavigate={clickViewHomework}/>}
+     <ListCard ItemList={HomeworkDetails} clickNavigate={clickViewHomework}/>}
     
     </Container>
   )
