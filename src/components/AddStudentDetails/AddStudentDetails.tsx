@@ -9,6 +9,7 @@ import { Button, TextField, Container, Card, Checkbox, Typography, FormControlLa
 import { toast } from 'react-toastify';
 import { IsEmailValid, IsMobileNoValid } from "src/components/Common/util"
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
+import List3Card from 'src/library/List/List3Card';
 
 
 function AddStudentDetails() {
@@ -233,6 +234,7 @@ function AddStudentDetails() {
         <Button onClick={onSubmit}>Submit</Button>
       </Card>
       <br></br>
+      <List3Card ItemList={GetAdmissionDetails}/>
   </Container>
   )
 }
