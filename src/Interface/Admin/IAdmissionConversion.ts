@@ -1,6 +1,6 @@
 export interface IAdmissionConversionBody{
 
-    ClassId: number,
+    Class: number,
     StudentName:string,
     FatherName:string,
     PhoneNo:string,
@@ -14,6 +14,3 @@ export interface IAdmissionConversionBody{
     UserId:number
 };
 
-export interface IAdmissionConversionResult{
-    
-}

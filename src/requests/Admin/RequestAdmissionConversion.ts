@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AppThunk } from 'src/store';
-import{IAdmissionConversionBody,IAdmissionConversionResult} from   "src/Interface/Admin/IAdmissionConversion"
+import{IAdmissionConversionBody} from   "src/Interface/Admin/IAdmissionConversion"
 import AdmissionConversionApi from "src/api/Admin/ApiAdmissionConversion"
 
 
 const AdmissionConversionSlice = createSlice({
     name: 'AdmissionConversion',
     initialState:{
-      AdmissionConversion:{},
+      AdmissionConversion:'',
       Loading :true
      
     },
@@ -15,6 +15,11 @@ const AdmissionConversionSlice = createSlice({
      
       AdmissionConversion(state,action){
         state.AdmissionConversion=action.payload;
+        state.Loading = false;
+      },
+
+      resetgetAdmissionConversion(state){
+        state.AdmissionConversion='';
         state.Loading = false;
       },
       getLoading(state) {
@@ -30,5 +35,11 @@ const AdmissionConversionSlice = createSlice({
     const response = await AdmissionConversionApi.AddAdmissionConversion(data);
     dispatch(AdmissionConversionSlice.actions.AdmissionConversion(response.data));
   };
+
+  export const resetgetAddAdmissionConversion =
+  (): AppThunk =>
+    async (dispatch) => {
+      dispatch(AdmissionConversionSlice.actions.resetgetAdmissionConversion());
+    }
 
   export default AdmissionConversionSlice.reducer

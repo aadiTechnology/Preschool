@@ -1,9 +1,9 @@
 import http from "../../utils/http-common";
-import{IAdmissionConversionBody,IAdmissionConversionResult} from 'src/Interface/Admin/IAdmissionConversion'
+import{IAdmissionConversionBody} from 'src/Interface/Admin/IAdmissionConversion'
 
 
 const AddAdmissionConversion = (data: IAdmissionConversionBody) => {
-    return http.post<IAdmissionConversionResult[]>('AdmissionConversion',data);
+    return http.post<String>('AdmissionConversion',data);
   };
 
   const AdmissionConversionApi ={

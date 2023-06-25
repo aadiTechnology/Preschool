@@ -3,10 +3,11 @@ import PageHeader from 'src/library/heading/pageHeader'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { IAdmissionConversionBody, IAdmissionConversionResult } from 'src/Interface/Admin/IAdmissionConversion'
-import { AdmissionConversion } from 'src/requests/Admin/RequestAdmissionConversion'
-import { Card, Container, TextField, Grid } from '@mui/material';
+import { IAdmissionConversionBody } from 'src/Interface/Admin/IAdmissionConversion'
+import { AdmissionConversion ,resetgetAddAdmissionConversion} from 'src/requests/Admin/RequestAdmissionConversion'
+import { Card, Container, TextField, Grid, Button, FormControlLabel, Checkbox } from '@mui/material';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
+import { toast } from 'react-toastify';
 
 function AdmisssionConversion() {
 
@@ -21,6 +22,7 @@ function AdmisssionConversion() {
   );
 
   const [class1, setClass1] = useState('');
+  const [class1error, setClass1Error] = useState('');
   const [studentName, setStudentName] = useState('');
   const [birtDate, setBirthDate] = useState('')
   const [fathersName, setFathersName] = useState('');
@@ -29,6 +31,9 @@ function AdmisssionConversion() {
   const[phoneNo1,setPhoneNo1]=useState('');
   const [address, setAddress] = useState('');
   const [emailid, setEmailid] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmpassword] = useState('');
+  const [checked, setChecked] = useState(false);
   
 
 
@@ -38,26 +43,30 @@ function AdmisssionConversion() {
 
   const AddAdmissionConversionBody: IAdmissionConversionBody = {
 
-    ClassId: 2,
-    StudentName: "rupesh",
-    FatherName: "ramesh",
-    PhoneNo: "1234",
-    MotherName: "rani",
-    PhoneNo1: "12345",
-    emailid: "e@gmauil.com",
-    BirthDate: "6/20/2023",
-    Address: "pune",
-    Sms: true,
+    Class: parseInt(class1),
+    StudentName: studentName,
+    FatherName: fathersName,
+    PhoneNo: phoneNo,
+    MotherName: mothersName,
+    PhoneNo1: phoneNo1,
+    emailid: emailid,
+    BirthDate: birtDate,
+    Address: address,
+    Sms: checked,
     Attachment: "yes",
     UserId: 3
   }
 
   useEffect(() => {
-    dispatch(AdmissionConversion(AddAdmissionConversionBody));
+    if (AddAdmissionConversion !== ''  ) {
+  toast.success(AddAdmissionConversion ,{ toastId: 'success1' } )}
+  dispatch(resetgetAddAdmissionConversion());
+  }, [AddAdmissionConversion])
 
-  }, [])
-
-
+const onSubmit=()=>{
+  setChecked(false)
+  dispatch(AdmissionConversion(AddAdmissionConversionBody));
+}
 
   return (
     <Container>
@@ -71,7 +80,7 @@ function AdmisssionConversion() {
           </Grid>
           <Grid item xs={6}>
             
-            <TextField type={'date'} sx={{mt:"-5px"}} label={'BirthDate'}/>
+            <TextField type={'date'} value={birtDate} onChange={(e) => { setBirthDate(e.target.value) }}  label={'BirthDate'}/>
           </Grid>
         </Grid>
         <Grid container spacing={2}>
@@ -93,7 +102,13 @@ function AdmisssionConversion() {
 
         <TextField value={address} onChange={(e)=>{setAddress(e.target.value)}} label={'Address'}/>
         <TextField value={emailid} onChange={(e)=>{setEmailid(e.target.value)}} label={'Email Id'}/>
-
+        
+        <FormControlLabel control={<Checkbox checked={checked}
+          onChange={() => setChecked(!checked)} />} label="ischecked" /><br></br>
+          <input type="file"/>
+          <TextField  value={password} onChange={(e)=>{setPassword(e.target.value)}} label={'Password'}/>
+          <TextField value={confirmpassword} onChange={(e)=>{setConfirmpassword(e.target.value)}} label={'Confirmpassword'}/>
+        <Button onClick={onSubmit}>Submit</Button>
       </Card>
 
     </Container>
