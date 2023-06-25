@@ -5,8 +5,7 @@ import { RootState } from 'src/store';
 import { toast } from 'react-toastify';
 import { getDeleteHomework, getDetailsList, getHomeworkListForEdit, getSubmitHomework, resetDeleteMessage } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IDeleteHomeworkBody, IGetDetailsListBody, IHomeworkListForEditBody, ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
-import ErrorMessage from 'src/library/ErrorMessage/ErrorMessage';
-import TabulerCard from 'src/library/Card/TabulerCard';
+import TabulerList from 'src/library/List/TabulerList';
 function AddHomeworkList({ clickEdit }) {
 const dispatch = useDispatch();
   
@@ -43,14 +42,7 @@ const dispatch = useDispatch();
   }, [])
   return (
     <div>
-      {GetHomeWorkDetailsList.length == 0 ? <ErrorMessage  error={'No records found'}/> :
-      <>
-      {GetHomeWorkDetailsList.map((item, i) => (
-      <div key={i}>
-      <TabulerCard item={item} Delete={Delete} clickEdit={clickEdit} Submit={Submit}/>
-        </div>
-      ))}
-      </>}
+  <TabulerList ItemList={GetHomeWorkDetailsList} clickEdit={clickEdit} Submit={Submit} Delete={Delete}/>
    </div>
   )
 }

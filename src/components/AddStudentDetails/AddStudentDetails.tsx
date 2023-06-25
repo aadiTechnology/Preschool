@@ -9,8 +9,7 @@ import { Button, TextField, Container, Card, Checkbox, Typography, FormControlLa
 import { toast } from 'react-toastify';
 import { IsEmailValid, IsMobileNoValid } from "src/components/Common/util"
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
-import List3Card from 'src/library/List/List3Card';
-import TabulerCard from 'src/library/Card/TabulerCard';
+import AddStudentList from './AddStudentList';
 
 
 function AddStudentDetails() {
@@ -19,9 +18,7 @@ function AddStudentDetails() {
     (state: RootState) => state.AddStudentDetails.AddStudentDetails
   );
 
-  const GetAdmissionDetails: any = useSelector(
-    (state: RootState) => state.AddStudentDetails.AdmissionDetails
-  );
+ 
   const AddUserLogin: any = useSelector(
     (state: RootState) => state.AddStudentDetails.AddUserLoginInfo
   );
@@ -47,8 +44,7 @@ function AddStudentDetails() {
   const [emailid, setEmailid] = useState('');
   const [emailiderror, setEmailiderror] = useState('');
   const [checked, setChecked] = useState(false);
-  const GetAdmissionDetailsBody: IGetAdmissionDetailsBody =
-    { "Id": 1, }
+
 
   const AddUserLoginInfoBody: IAddUserLoginInfoBody = {
     "emailid": emailid,
@@ -56,9 +52,7 @@ function AddStudentDetails() {
     "BirthDate": birthDate,
     "UserId": 1
   }
-  useEffect(() => {
-    dispatch(getAdmissionDetails(GetAdmissionDetailsBody));
-  }, [])
+
 
   const GetAddStudentDetailsBody: IGetAddStudentDetailsBody =
   {
@@ -190,6 +184,9 @@ function AddStudentDetails() {
     }
   };
 
+  const clickEdit=()=>{
+
+  }
   return (
     <Container>
       <PageHeader heading={'AddStudent Details'} />
@@ -235,8 +232,7 @@ function AddStudentDetails() {
         <Button onClick={onSubmit}>Submit</Button>
       </Card>
       <br></br>
-      <List3Card ItemList={GetAdmissionDetails}/>
-   
+    <AddStudentList clickEdit={clickEdit}/>
   </Container>
   )
 }
