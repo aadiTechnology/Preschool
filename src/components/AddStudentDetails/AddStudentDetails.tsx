@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { IsEmailValid, IsMobileNoValid } from "src/components/Common/util"
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import List3Card from 'src/library/List/List3Card';
+import TabulerCard from 'src/library/Card/TabulerCard';
 
 
 function AddStudentDetails() {
@@ -235,6 +236,7 @@ function AddStudentDetails() {
       </Card>
       <br></br>
       <List3Card ItemList={GetAdmissionDetails}/>
+   
   </Container>
   )
 }

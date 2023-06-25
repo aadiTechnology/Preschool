@@ -14,6 +14,7 @@ import TabulerCard from 'src/library/Card/TabulerCard';
 import { toolbarOptions } from '../Common/util';
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
+import TabulerCardList from './AddHomeworkList';
 
 
 function AddHomeWork() {
@@ -138,7 +139,7 @@ function AddHomeWork() {
             <br></br>
             {
                 loading ? <SuspenseLoader /> :
-                    <TabulerCard clickEdit={clickEdit} />
+                    <TabulerCardList clickEdit={clickEdit} />
             }
 
         </Container>
