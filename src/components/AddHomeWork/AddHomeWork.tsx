@@ -10,11 +10,10 @@ import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDelet
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import TabulerCard from 'src/library/Card/TabulerCard';
 import { toolbarOptions } from '../Common/util';
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
-import TabulerCardList from './AddHomeworkList';
+import AddHomeworkList from './AddHomeworkList';
 
 
 function AddHomeWork() {
@@ -25,8 +24,7 @@ function AddHomeWork() {
     const GetEditList: any = useSelector((state: RootState) => state.AddHomeWork.HomeworkListForEdit);
 
     const loading = useSelector((state: RootState) => state.AddHomeWork.Loading);
-     console.log(GetSubject ,"GetSubject")
-
+    
     const dispatch = useDispatch();
     const [Id, setId] = useState(0)
     const [subjectDescription, setSubjectDescription] = useState('')
@@ -107,7 +105,6 @@ function AddHomeWork() {
             dispatch(getAddHomework(GetAddHomeworkBody));
             setSubjectDescription('');
             setSelectClass(0);
-            // console.log("oy.AssignDate",GetEditList.AssignDate)
             setSelectDate('');
         }
     };
@@ -139,7 +136,7 @@ function AddHomeWork() {
             <br></br>
             {
                 loading ? <SuspenseLoader /> :
-                    <TabulerCardList clickEdit={clickEdit} />
+                    <AddHomeworkList clickEdit={clickEdit} />
             }
 
         </Container>
