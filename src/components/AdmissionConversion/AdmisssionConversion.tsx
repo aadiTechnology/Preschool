@@ -3,11 +3,12 @@ import PageHeader from 'src/library/heading/pageHeader'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { IAdmissionConversionBody } from 'src/Interface/Admin/IAdmissionConversion'
-import { AdmissionConversion ,resetgetAddAdmissionConversion} from 'src/requests/Admin/RequestAdmissionConversion'
+import { IAdmissionConversionBody ,IGetAdmissionDetailsBody} from 'src/Interface/Admin/IAdmissionConversion'
+import { AdmissionConversion ,resetgetAddAdmissionConversion ,GetAdmissionDetail} from 'src/requests/Admin/RequestAdmissionConversion'
 import { Card, Container, TextField, Grid, Button, FormControlLabel, Checkbox } from '@mui/material';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import { toast } from 'react-toastify';
+import List3Card from 'src/library/List/List3Card';
 
 function AdmisssionConversion() {
 
@@ -16,6 +17,10 @@ function AdmisssionConversion() {
 
   const AddAdmissionConversion: any = useSelector(
     (state: RootState) => state.AddAdmissionConversion.AdmissionConversion
+  );
+
+  const AdmissionDetailList: any = useSelector(
+    (state: RootState) => state.AddAdmissionConversion.AdmissionDetail
   );
   const loading = useSelector(
     (state: RootState) => state.AddPhoto.Loading
@@ -63,6 +68,15 @@ function AdmisssionConversion() {
   dispatch(resetgetAddAdmissionConversion());
   }, [AddAdmissionConversion])
 
+
+
+  const AdmissionDetailBody:IGetAdmissionDetailsBody={
+   Id:2
+   }
+  useEffect(() => {
+   dispatch(GetAdmissionDetail(AdmissionDetailBody))
+  }, [])
+
 const onSubmit=()=>{
   setChecked(false)
   dispatch(AdmissionConversion(AddAdmissionConversionBody));
@@ -109,8 +123,10 @@ const onSubmit=()=>{
           <TextField  value={password} onChange={(e)=>{setPassword(e.target.value)}} label={'Password'}/>
           <TextField value={confirmpassword} onChange={(e)=>{setConfirmpassword(e.target.value)}} label={'Confirmpassword'}/>
         <Button onClick={onSubmit}>Submit</Button>
+      
       </Card>
-
+      <br></br>
+      <List3Card ItemList={AdmissionDetailList}/>
     </Container>
   )
 }
