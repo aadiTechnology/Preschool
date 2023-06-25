@@ -23,7 +23,7 @@ function SelectedCard({ItemList,clickItem , type="checkBox"}) {
     {ItemList.map((item, i) => {
        
            return (
-            <Grid  item xs={6} md={3} key={i}>
+            <Grid  item xs={4}  key={i}>
             <SingleButton Item={item}
              ClickItem={onClick} type={type}></SingleButton>
               </Grid>

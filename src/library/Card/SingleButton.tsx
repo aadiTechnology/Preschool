@@ -15,7 +15,7 @@ const SingleButton = ({Item,ClickItem ,type="checkBox"}) => {
            <RadioButtonUncheckedIcon  onClick={onClick}  />}
           <Typography>{Item.Name}</Typography>
     </Card>:
-    <Card sx={{background:Item.IsActive  ? "#90CAF9" : "#ffffff"}}  onClick={onClick}>{Item.Name}</Card>
+    <Card sx={{background:Item.IsActive  ? "#90CAF9" : "#ffffff" , textAlign:"center"}}   onClick={onClick}>{Item.Name}</Card>
   }
    
 

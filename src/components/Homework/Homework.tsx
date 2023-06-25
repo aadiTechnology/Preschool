@@ -89,25 +89,23 @@ const [endDate, setEndDate] = useState('')
     <Container>
       <PageHeader heading={'Homework'} />
       <DotLegend ItemList={[{ Value: 'Green', Name: 'Recieved Homework' }]} /><br></br>
-
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <Card sx={{ textAlign: 'center', height: "40px" }}>
-            <IconButton disabled={AllowPrevious}>
+      <Grid container spacing={2} alignItems={"center"}>
+         <Grid item xs={2} alignItems={"center"} >
+          <IconButton disabled={AllowPrevious}>
+            <Card sx={{ textAlign: 'center', height: "40px"}}>
             <ArrowLeftIcon  onClick={() => clickPrevNext(-1)}></ArrowLeftIcon>
-            </IconButton>
             </Card>
-        </Grid>
-        <Grid item xs={4}>
+            </IconButton>
+           </Grid>
+        <Grid item xs={8}>
       <SelectedCard ItemList={ItemList} clickItem={clickItem} type='Button' />
         </Grid>
-        <Grid item xs={4}>
-          <Card sx={{ textAlign: 'center', height: "40px" }}>
-            <IconButton disabled={AllowNext}>
+        <Grid item xs={2}  alignItems={"center"}>
+          <IconButton disabled={AllowNext}>
+            <Card sx={{ textAlign: 'center', height: "40px" }}>
             <ArrowRightIcon onClick={() => clickPrevNext(1)}></ArrowRightIcon>
-            </IconButton>
             </Card>
-        
+            </IconButton>
         </Grid>
       </Grid>
       <br></br>
