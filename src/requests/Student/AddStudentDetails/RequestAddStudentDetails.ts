@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from "src/store";
 import GetAddStudentDetailsApi from "src/api/Student/ApiAddStudentDetails";
 import { async } from "q";
-import {IGetAddStudentDetailsBody ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody} from  "src/Interface/Student/IAddStudentDetails"
+import {IAddStudentEnquiryBody ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody} from  "src/Interface/Student/IAddStudentDetails"
 
 
 const AddStudentDetailsslice = createSlice({
@@ -37,10 +37,10 @@ const AddStudentDetailsslice = createSlice({
 });
 
 
-export const GetAddStudentDetails=
-(data:IGetAddStudentDetailsBody):AppThunk =>
+export const GetAddStudentEnquiryDetails=
+(data:IAddStudentEnquiryBody):AppThunk =>
 async(dispatch)=>{
-  const response=await GetAddStudentDetailsApi.GetAddStudentDetails(data)
+  const response=await GetAddStudentDetailsApi.GetAddStudentEnquiryDetails(data)
    dispatch(AddStudentDetailsslice.actions.GetAddStudentDetails(response.data))
 }
 

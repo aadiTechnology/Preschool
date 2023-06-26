@@ -1,9 +1,9 @@
 import http from "../../utils/http-common";
-import { IGetAddStudentDetailsResult, IGetAddStudentDetailsBody ,IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody,IAddUserLoginInfoResult} from "src/Interface/Student/IAddStudentDetails";
+import { IAddStudentEnquiryResult, IAddStudentEnquiryBody ,IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody,IAddUserLoginInfoResult} from "src/Interface/Student/IAddStudentDetails";
 
 
-const GetAddStudentDetails = (data: IGetAddStudentDetailsBody) => {
-    return http.post<IGetAddStudentDetailsResult[]>('AddStudentDetails', data)
+const GetAddStudentEnquiryDetails = (data: IAddStudentEnquiryBody) => {
+    return http.post<IAddStudentEnquiryResult[]>('AddStudentEnquiryDetails', data)
 };
 
 const GetAdmissionDetail = (data: IGetAdmissionDetailsBody) => {
@@ -14,11 +14,11 @@ const AddUserLoginInfo= (data: IAddUserLoginInfoBody) => {
     return http.post<IAddUserLoginInfoResult[]>('AddUserLoginInfo', data)
 };
 
-const GetAddStudentDetailsApi = {
-    GetAddStudentDetails,
+const GetAddStudentEnquiryDetailsApi = {
+    GetAddStudentEnquiryDetails,
     GetAdmissionDetail,
     AddUserLoginInfo
 
 }
 
-export default GetAddStudentDetailsApi
+export default GetAddStudentEnquiryDetailsApi

@@ -3,9 +3,9 @@ import PageHeader from 'src/library/heading/pageHeader'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
-import { IGetAddStudentDetailsBody, IGetAdmissionDetailsBody, IAddUserLoginInfoBody } from "src/Interface/Student/IAddStudentDetails"
-import { GetAddStudentDetails, resetAddStudent, resetAddUserLogin, getAdmissionDetails, AddUserLoginInfo } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
-import { Button, TextField, Container, Card, Checkbox, Typography, FormControlLabel } from '@mui/material';
+import { IAddStudentEnquiryBody, IAddUserLoginInfoBody } from "src/Interface/Student/IAddStudentDetails"
+import { GetAddStudentEnquiryDetails, resetAddStudent, resetAddUserLogin, AddUserLoginInfo } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
+import { Button, TextField, Container, Card, Checkbox, FormControlLabel } from '@mui/material';
 import { toast } from 'react-toastify';
 import { IsEmailValid, IsMobileNoValid } from "src/components/Common/util"
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
@@ -54,7 +54,7 @@ function AddStudentDetails() {
   }
 
 
-  const GetAddStudentDetailsBody: IGetAddStudentDetailsBody =
+  const GetAddStudentDetailsBody: IAddStudentEnquiryBody =
   {
 
     "ClassId": 1,
@@ -134,7 +134,7 @@ function AddStudentDetails() {
 
     }
     if (!isError) {
-      dispatch(GetAddStudentDetails(GetAddStudentDetailsBody));
+      dispatch(GetAddStudentEnquiryDetails(GetAddStudentDetailsBody));
 
       if (checked) {
         dispatch(AddUserLoginInfo(AddUserLoginInfoBody));
@@ -189,7 +189,7 @@ function AddStudentDetails() {
   }
   return (
     <Container>
-      <PageHeader heading={'AddStudent Details'} />
+      <PageHeader heading={'Add Student Enquiry Details'} />
       <Card>
         <TextField value={studentName} onChange={(e) => { setStudentName(e.target.value) }} label={'studentName'} />
 

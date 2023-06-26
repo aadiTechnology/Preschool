@@ -1,4 +1,4 @@
-export interface IGetAddStudentDetailsBody{
+export interface IAddStudentEnquiryBody{
     ClassId: number,
     StudentName:string,
     BirthDate:string,
@@ -14,7 +14,7 @@ export interface IGetAddStudentDetailsBody{
     UserId:number
 };
 
-export interface IGetAddStudentDetailsResult{}
+export interface IAddStudentEnquiryResult{}
 
 
 export interface IGetAdmissionDetailsBody{
