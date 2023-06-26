@@ -26,8 +26,8 @@ function AddStudentList({ clickEdit }) {
     dispatch(getStudentEnquiryList());
     }, [])
 
-    const Submit = () => {
-    navigate('/extended-sidebar/Student/FollowUp')
+    const Submit = (Id) => {
+    navigate('/extended-sidebar/Student/FollowUp/'+Id)
     }
 
     const Delete = () => {
