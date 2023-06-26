@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from "src/store";
 import GetAddStudentDetailsApi from "src/api/Student/ApiAddStudentDetails";
 import { async } from "q";
-import {IAddStudentEnquiryBody ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody} from  "src/Interface/Student/IAddStudentDetails"
+import {IAddStudentEnquiryBody ,IStudentDetailFollowUpBody,IGetAdmissionDetailsBody,IAddUserLoginInfoBody} from  "src/Interface/Student/IAddStudentDetails"
 
 
 const AddStudentDetailsslice = createSlice({
@@ -11,7 +11,8 @@ const AddStudentDetailsslice = createSlice({
         AddStudentDetails: '',
         AdmissionDetails:[],
         AddUserLoginInfo:'',
-        StudentEnquiry:[]
+        StudentEnquiry:[],
+        StudentDetailsFollowUp:{}
 
       },
     reducers: {
@@ -25,6 +26,9 @@ const AddStudentDetailsslice = createSlice({
               getStudentEnquiry(state, action) {
                 state.StudentEnquiry = action.payload;
                 },
+                getStudentDetailsFollowUp(state, action) {
+                  state.StudentDetailsFollowUp = action.payload;
+                  },
             resetAddStudentDetails(state) {
             state.AddStudentDetails = '';
           },
@@ -84,6 +88,25 @@ async(dispatch)=>{
    })
 
    dispatch(AddStudentDetailsslice.actions.getStudentEnquiry(StudentEnquiryList))
+}
+
+export const StudentDetailsForFollowUp=
+(data:IStudentDetailFollowUpBody):AppThunk =>
+async(dispatch)=>{
+  const response=await GetAddStudentDetailsApi.GetStudentDetailsFollowUp(data)
+  let StudentFollowUpList = response.data.map((item,i)=>{
+    return {
+         Id:item.Id,
+         Text1:  item.StudentName,
+         Text2 : item.FatherName,
+         Text3 : item.PhoneNo,
+         Text4 : item.ClassName,
+         Text5 : item.EmailId,
+     
+    }
+   })
+
+   dispatch(AddStudentDetailsslice.actions.getStudentDetailsFollowUp(StudentFollowUpList))
 }
 
 export const resetAddStudent=

@@ -59,6 +59,27 @@ export interface IStudentEnquiryListResult{
         InsertedDate: string,
         ClassName: string
 }
+
+
+export interface IStudentDetailFollowUpBody{
+    Id:number
+ };
+ 
+ export interface IStudentDetailFollowUpResult{
+     
+    Id: number,
+    StudentName: string,
+    CallStatus: null,
+    Reminder: null,
+    Comment: null,
+    EmailId: string,
+    FatherName: string,
+    PhoneNo: string,
+    MotherName: string,
+    PhoneNo2: null,
+    ClassName: string
+ }
+
 export interface IAddUserLoginInfoBody{
     emailid:string,
     PhoneNo:string,
