@@ -82,7 +82,7 @@ const studentRoutes = [
     element:<AdmissionConversion/>
   },
   {
-    path:'FollowUp/:Id',
+    path:'FollowUp',
     element:<FollowUp/>
   },
 
