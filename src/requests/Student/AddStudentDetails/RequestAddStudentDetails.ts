@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from "src/store";
 import GetAddStudentDetailsApi from "src/api/Student/ApiAddStudentDetails";
 import { async } from "q";
-import {IGetAddStudentDetailsBody ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody} from  "src/Interface/Student/IAddStudentDetails"
+import {IAddStudentEnquiryBody ,IStudentDetailFollowUpBody,IGetAdmissionDetailsBody,IAddUserLoginInfoBody} from  "src/Interface/Student/IAddStudentDetails"
 
 
 const AddStudentDetailsslice = createSlice({
@@ -10,7 +10,9 @@ const AddStudentDetailsslice = createSlice({
     initialState: {
         AddStudentDetails: '',
         AdmissionDetails:[],
-        AddUserLoginInfo:''
+        AddUserLoginInfo:'',
+        StudentEnquiry:[],
+        StudentDetailsFollowUp:{}
 
       },
     reducers: {
@@ -21,7 +23,13 @@ const AddStudentDetailsslice = createSlice({
             getAdmissionDetails(state, action) {
               state.AdmissionDetails = action.payload;
               },
-        resetAddStudentDetails(state) {
+              getStudentEnquiry(state, action) {
+                state.StudentEnquiry = action.payload;
+                },
+                getStudentDetailsFollowUp(state, action) {
+                  state.StudentDetailsFollowUp = action.payload;
+                  },
+            resetAddStudentDetails(state) {
             state.AddStudentDetails = '';
           },
           AddUserLoginInfo(state, action) {
@@ -37,10 +45,10 @@ const AddStudentDetailsslice = createSlice({
 });
 
 
-export const GetAddStudentDetails=
-(data:IGetAddStudentDetailsBody):AppThunk =>
+export const GetAddStudentEnquiryDetails=
+(data:IAddStudentEnquiryBody):AppThunk =>
 async(dispatch)=>{
-  const response=await GetAddStudentDetailsApi.GetAddStudentDetails(data)
+  const response=await GetAddStudentDetailsApi.GetAddStudentEnquiryDetails(data)
    dispatch(AddStudentDetailsslice.actions.GetAddStudentDetails(response.data))
 }
 
@@ -61,6 +69,44 @@ async(dispatch)=>{
    })
 
    dispatch(AddStudentDetailsslice.actions.getAdmissionDetails(StudentList))
+}
+
+export const getStudentEnquiryList=
+():AppThunk =>
+async(dispatch)=>{
+  const response=await GetAddStudentDetailsApi.GetStudentEnquiryList()
+  let StudentEnquiryList = response.data.map((item,i)=>{
+    return {
+         Id:item.ClassId,
+         Text1:  item.StudentName,
+         Text2 : item.BirthDate,
+         Text3 : item.FatherName,
+         Text4 : item.SocietyName,
+         Text5 : item.EmailId,
+     
+    }
+   })
+
+   dispatch(AddStudentDetailsslice.actions.getStudentEnquiry(StudentEnquiryList))
+}
+
+export const StudentDetailsForFollowUp=
+(data:IStudentDetailFollowUpBody):AppThunk =>
+async(dispatch)=>{
+  const response=await GetAddStudentDetailsApi.GetStudentDetailsFollowUp(data)
+  let StudentFollowUpList = response.data.map((item,i)=>{
+    return {
+         Id:item.Id,
+         Text1:  item.StudentName,
+         Text2 : item.FatherName,
+         Text3 : item.PhoneNo,
+         Text4 : item.ClassName,
+         Text5 : item.EmailId,
+     
+    }
+   })
+
+   dispatch(AddStudentDetailsslice.actions.getStudentDetailsFollowUp(StudentFollowUpList))
 }
 
 export const resetAddStudent=

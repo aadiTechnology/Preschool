@@ -1,4 +1,4 @@
-export interface IGetAddStudentDetailsBody{
+export interface IAddStudentEnquiryBody{
     ClassId: number,
     StudentName:string,
     BirthDate:string,
@@ -14,7 +14,7 @@ export interface IGetAddStudentDetailsBody{
     UserId:number
 };
 
-export interface IGetAddStudentDetailsResult{}
+export interface IAddStudentEnquiryResult{}
 
 
 export interface IGetAdmissionDetailsBody{
@@ -38,6 +38,48 @@ export interface IGetAdmissionDetailsResult{
     BirthDate: null,
     UserId: 0
 }
+
+export interface IStudentEnquiryListResult{
+        Id: number,
+        Class: null,
+        ClassId: 0,
+        StudentName: string,
+        BirthDate: null,
+        Age: 0,
+        FatherName: string,
+        PhoneNo: string,
+        MotherName: null,
+        PhoneNo2: null,
+        SocietyName: null,
+        StudentAddress: null,
+        EmailId: null,
+        StudentDetailsId: number,
+        SMS: false,
+        UserId: number,
+        InsertedDate: string,
+        ClassName: string
+}
+
+
+export interface IStudentDetailFollowUpBody{
+    Id:number
+ };
+ 
+ export interface IStudentDetailFollowUpResult{
+     
+    Id: number,
+    StudentName: string,
+    CallStatus: null,
+    Reminder: null,
+    Comment: null,
+    EmailId: string,
+    FatherName: string,
+    PhoneNo: string,
+    MotherName: string,
+    PhoneNo2: null,
+    ClassName: string
+ }
+
 export interface IAddUserLoginInfoBody{
     emailid:string,
     PhoneNo:string,

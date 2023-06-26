@@ -1,24 +1,35 @@
 import http from "../../utils/http-common";
-import { IGetAddStudentDetailsResult, IGetAddStudentDetailsBody ,IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody,IAddUserLoginInfoResult} from "src/Interface/Student/IAddStudentDetails";
+import { IAddStudentEnquiryResult, IAddStudentEnquiryBody ,IStudentEnquiryListResult,
+IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody,
+IAddUserLoginInfoResult ,IStudentDetailFollowUpResult ,IStudentDetailFollowUpBody} from "src/Interface/Student/IAddStudentDetails";
 
 
-const GetAddStudentDetails = (data: IGetAddStudentDetailsBody) => {
-    return http.post<IGetAddStudentDetailsResult[]>('AddStudentDetails', data)
+const GetAddStudentEnquiryDetails = (data: IAddStudentEnquiryBody) => {
+    return http.post<IAddStudentEnquiryResult[]>('AddStudentEnquiryDetails', data)
 };
 
 const GetAdmissionDetail = (data: IGetAdmissionDetailsBody) => {
     return http.post<IGetAdmissionDetailsResult[]>('GetAdmissionDetails', data)
+};
+const GetStudentEnquiryList = () => {
+    return http.post<IStudentEnquiryListResult[]>('GetStudentEnquiryDetailsList')
+};
+
+const GetStudentDetailsFollowUp = (data: IStudentDetailFollowUpBody) => {
+    return http.post<IStudentDetailFollowUpResult[]>('GetStudentDetailsForFollowUp', data)
 };
 
 const AddUserLoginInfo= (data: IAddUserLoginInfoBody) => {
     return http.post<IAddUserLoginInfoResult[]>('AddUserLoginInfo', data)
 };
 
-const GetAddStudentDetailsApi = {
-    GetAddStudentDetails,
+const GetAddStudentEnquiryDetailsApi = {
+    GetAddStudentEnquiryDetails,
     GetAdmissionDetail,
-    AddUserLoginInfo
+    AddUserLoginInfo,
+    GetStudentEnquiryList,
+    GetStudentDetailsFollowUp
 
 }
 
-export default GetAddStudentDetailsApi
+export default GetAddStudentEnquiryDetailsApi
