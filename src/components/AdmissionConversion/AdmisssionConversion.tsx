@@ -8,8 +8,6 @@ import { AdmissionConversion ,resetgetAddAdmissionConversion } from 'src/request
 import { Card, Container, TextField, Grid, Button, FormControlLabel, Checkbox } from '@mui/material';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import { toast } from 'react-toastify';
-import List3Card from 'src/library/List/List3Card';
-import TabulerList from 'src/library/List/TabulerList';
 import AdmissionConversionList from './AdmissionConversionList';
 
 function AdmisssionConversion() {
@@ -23,7 +21,6 @@ function AdmisssionConversion() {
   );
 
   const [class1, setClass1] = useState('');
-  const [class1error, setClass1Error] = useState('');
   const [studentName, setStudentName] = useState('');
   const [birtDate, setBirthDate] = useState('')
   const [fathersName, setFathersName] = useState('');
@@ -33,7 +30,9 @@ function AdmisssionConversion() {
   const [address, setAddress] = useState('');
   const [emailid, setEmailid] = useState('');
   const [password, setPassword] = useState('');
+  const [passworderror, setPasswordError] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
+  const [confirmpassworderror, setConfirmpasswordError] = useState('');
   const [checked, setChecked] = useState(false);
   
   const AddAdmissionConversionBody: IAdmissionConversionBody = {
@@ -58,8 +57,33 @@ function AdmisssionConversion() {
   }, [AddAdmissionConversion])
 
 const onSubmit=()=>{
+  let isError = false
+  if(password === ''){
+    setPasswordError('please enter Password')
+    isError = true
+  }
+  else if(password.length < 8){
+    setPasswordError("please enter min 8 Charactor")
+    isError = true
+  }
+  else{
+    setPasswordError('')
+  }
+  if(confirmpassword === ''){
+    setConfirmpasswordError("please enter confirm password ")
+    isError = true
+  }else if (confirmpassword !== password) {
+    setConfirmpasswordError("Passwords do not match.")
+    isError = true
+  }
+  else{
+    setConfirmpasswordError('')
+  }
   setChecked(false)
-  dispatch(AdmissionConversion(AddAdmissionConversionBody));
+  if(!isError){
+    dispatch(AdmissionConversion(AddAdmissionConversionBody));
+  }
+
 }
 
 const clickEdit=()=>{
@@ -102,10 +126,12 @@ const clickEdit=()=>{
         <TextField value={emailid} onChange={(e)=>{setEmailid(e.target.value)}} label={'Email Id'}/>
         
         <FormControlLabel control={<Checkbox checked={checked}
-          onChange={() => setChecked(!checked)} />} label="ischecked" /><br></br>
+          onChange={() => setChecked(!checked)} />} label="SMS" /><br></br>
           <input type="file"/>
-          <TextField  value={password} onChange={(e)=>{setPassword(e.target.value)}} label={'Password'}/>
-          <TextField value={confirmpassword} onChange={(e)=>{setConfirmpassword(e.target.value)}} label={'Confirmpassword'}/>
+          <TextField  value={password} onChange={(e)=>{setPassword(e.target.value)}}  inputProps={{ maxLength: 10 , minLength: 8}} label={'Password'}/>
+          <ErrorMessageForm error={passworderror}/>
+          <TextField value={confirmpassword} onChange={(e)=>{setConfirmpassword(e.target.value)}} label={'Confirm Password'}/>
+          <ErrorMessageForm error={confirmpassworderror}/>
         <Button onClick={onSubmit}>Submit</Button>
       
       </Card>
