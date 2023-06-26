@@ -38,6 +38,27 @@ export interface IGetAdmissionDetailsResult{
     BirthDate: null,
     UserId: 0
 }
+
+export interface IStudentEnquiryListResult{
+        Id: number,
+        Class: null,
+        ClassId: 0,
+        StudentName: string,
+        BirthDate: null,
+        Age: 0,
+        FatherName: string,
+        PhoneNo: string,
+        MotherName: null,
+        PhoneNo2: null,
+        SocietyName: null,
+        StudentAddress: null,
+        EmailId: null,
+        StudentDetailsId: number,
+        SMS: false,
+        UserId: number,
+        InsertedDate: string,
+        ClassName: string
+}
 export interface IAddUserLoginInfoBody{
     emailid:string,
     PhoneNo:string,

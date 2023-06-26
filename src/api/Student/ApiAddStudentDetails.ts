@@ -1,5 +1,5 @@
 import http from "../../utils/http-common";
-import { IAddStudentEnquiryResult, IAddStudentEnquiryBody ,IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody,IAddUserLoginInfoResult} from "src/Interface/Student/IAddStudentDetails";
+import { IAddStudentEnquiryResult, IAddStudentEnquiryBody ,IStudentEnquiryListResult,IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody,IAddUserLoginInfoResult} from "src/Interface/Student/IAddStudentDetails";
 
 
 const GetAddStudentEnquiryDetails = (data: IAddStudentEnquiryBody) => {
@@ -9,6 +9,9 @@ const GetAddStudentEnquiryDetails = (data: IAddStudentEnquiryBody) => {
 const GetAdmissionDetail = (data: IGetAdmissionDetailsBody) => {
     return http.post<IGetAdmissionDetailsResult[]>('GetAdmissionDetails', data)
 };
+const GetStudentEnquiryList = () => {
+    return http.post<IStudentEnquiryListResult[]>('GetStudentEnquiryDetailsList')
+};
 
 const AddUserLoginInfo= (data: IAddUserLoginInfoBody) => {
     return http.post<IAddUserLoginInfoResult[]>('AddUserLoginInfo', data)
@@ -17,7 +20,8 @@ const AddUserLoginInfo= (data: IAddUserLoginInfoBody) => {
 const GetAddStudentEnquiryDetailsApi = {
     GetAddStudentEnquiryDetails,
     GetAdmissionDetail,
-    AddUserLoginInfo
+    AddUserLoginInfo,
+    GetStudentEnquiryList
 
 }
 

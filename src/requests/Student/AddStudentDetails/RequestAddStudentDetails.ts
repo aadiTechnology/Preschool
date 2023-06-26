@@ -10,7 +10,8 @@ const AddStudentDetailsslice = createSlice({
     initialState: {
         AddStudentDetails: '',
         AdmissionDetails:[],
-        AddUserLoginInfo:''
+        AddUserLoginInfo:'',
+        StudentEnquiry:[]
 
       },
     reducers: {
@@ -21,7 +22,10 @@ const AddStudentDetailsslice = createSlice({
             getAdmissionDetails(state, action) {
               state.AdmissionDetails = action.payload;
               },
-        resetAddStudentDetails(state) {
+              getStudentEnquiry(state, action) {
+                state.StudentEnquiry = action.payload;
+                },
+            resetAddStudentDetails(state) {
             state.AddStudentDetails = '';
           },
           AddUserLoginInfo(state, action) {
@@ -61,6 +65,25 @@ async(dispatch)=>{
    })
 
    dispatch(AddStudentDetailsslice.actions.getAdmissionDetails(StudentList))
+}
+
+export const getStudentEnquiryList=
+():AppThunk =>
+async(dispatch)=>{
+  const response=await GetAddStudentDetailsApi.GetStudentEnquiryList()
+  let StudentEnquiryList = response.data.map((item,i)=>{
+    return {
+         Id:item.ClassId,
+         Text1:  item.StudentName,
+         Text2 : item.BirthDate,
+         Text3 : item.FatherName,
+         Text4 : item.SocietyName,
+         Text5 : item.EmailId,
+     
+    }
+   })
+
+   dispatch(AddStudentDetailsslice.actions.getStudentEnquiry(StudentEnquiryList))
 }
 
 export const resetAddStudent=
