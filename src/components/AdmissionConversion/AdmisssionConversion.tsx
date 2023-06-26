@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { IAdmissionConversionBody } from 'src/Interface/Admin/IAdmissionConversion'
 import { AdmissionConversion ,resetgetAddAdmissionConversion } from 'src/requests/Admin/RequestAdmissionConversion'
-import { Card, Container, TextField, Grid, Button, FormControlLabel, Checkbox } from '@mui/material';
+import { Card, Container, TextField, Grid, Button, FormControlLabel, Checkbox, InputAdornment } from '@mui/material';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import { toast } from 'react-toastify';
 import AdmissionConversionList from './AdmissionConversionList';
@@ -102,8 +102,12 @@ const clickEdit=()=>{
           </Grid>
           <Grid item xs={6}>
             
-            <TextField type={'date'} value={birtDate} onChange={(e) => { setBirthDate(e.target.value) }}  label={'BirthDate'}/>
-          </Grid>
+            <TextField  value={birtDate} onChange={(e) => { setBirthDate(e.target.value) }}
+          type="date"   focused
+            label={'BirthDate'}/>
+
+
+          </Grid> 
         </Grid>
         <Grid container spacing={2}>
           <Grid item xs={6}>

@@ -194,7 +194,7 @@ function AddStudentDetails() {
         <TextField value={studentName} onChange={(e) => { setStudentName(e.target.value) }} label={'studentName'} />
 
         <ErrorMessageForm error={studentNameerror} />
-        <TextField value={birthDate} type='date' onChange={(e) => { setBirthDate(e.target.value) }} label={''} />
+        <TextField value={birthDate} type='date' onChange={(e) => { setBirthDate(e.target.value) }} label={'Birth Date'} focused />
 
         <ErrorMessageForm error={birthDateerror} />
         <TextField value={age} type="text"
