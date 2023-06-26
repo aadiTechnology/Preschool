@@ -10,6 +10,7 @@ import AddPhotoSlice from 'src/requests/Admin/RequestAddPhoto';
 import AddStudentDetailsslice from 'src/requests/Student/AddStudentDetails/RequestAddStudentDetails';
 import UserLoginSlice, { UserLogin } from 'src/requests/Admin/RequestUserLogin'
 import AdmissionConversionSlice from 'src/requests/Admin/RequestAdmissionConversion'
+import AddStudentFollowUpSlice from 'src/requests/Admin/RequestAddStudentFollowUp'
 const rootReducer = combineReducers({
     Holidays:Holidaysslice,
     SchoolList: SchoolListslice,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     AddPhoto:AddPhotoSlice,
     UserLogin:UserLoginSlice,
     AddStudentDetails :AddStudentDetailsslice,
-    AddAdmissionConversion:AdmissionConversionSlice
+    AddAdmissionConversion:AdmissionConversionSlice,
+    AddStudentFollowUp:AddStudentFollowUpSlice
     
 });
 
