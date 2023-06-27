@@ -4,7 +4,7 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const SingleCheck = ({Item,ClickItem}) => {
- console.log(Item,"Item")
+
   const onClick=()=>{
     Item = {...Item,IsActive:!Item.IsActive}
     ClickItem(Item)}

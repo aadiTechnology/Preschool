@@ -58,7 +58,7 @@ async(dispatch)=>{
   const response=await GetAddStudentDetailsApi.GetAdmissionDetail(data)
   let StudentList = response.data.map((item,i)=>{
     return {
-         Id:item.ClassId,
+         Id:item.Id,
          Text1:  item.StudentName,
          Text2 : item.FatherName,
          Text3 : item.PhoneNo,
@@ -77,7 +77,7 @@ async(dispatch)=>{
   const response=await GetAddStudentDetailsApi.GetStudentEnquiryList()
   let StudentEnquiryList = response.data.map((item,i)=>{
     return {
-         Id:item.ClassId,
+         Id:item.Id,
          Text1:  item.StudentName,
          Text2 : item.BirthDate,
          Text3 : item.FatherName,

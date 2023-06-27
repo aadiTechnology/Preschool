@@ -27,7 +27,8 @@ function AddStudentList({ clickEdit }) {
     }, [])
 
     const Submit = (Id) => {
-    navigate('FollowUp')
+        console.log(Id ,"Id")
+    navigate('FollowUp/' + Id)
     }
 
     const Delete = () => {

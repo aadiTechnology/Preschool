@@ -22,7 +22,7 @@ function CheckUnCheckList({ItemList,clickItem }) {
     <Grid container spacing={1}>
     
     {ItemList.map((item, i) => {
-       console.log(item ,"item")
+      
            return (
             <Grid  item xs={6} md={3} key={i}>
             <SingleCheck Item={item}

@@ -1,12 +1,6 @@
 import { Card, Container, TextField, Grid, Button, Typography, InputAdornment } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import PageHeader from 'src/library/heading/pageHeader'
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import SelectedCard from 'src/library/Card/SelectedCard';
 import CheckUnCheckList from 'src/library/Card/CheckUnCheckList';
 import { TextareaAutosize } from '@mui/material';
 import { monthArray } from 'src/components/Common/util'
@@ -47,7 +41,7 @@ const FollowUp = () => {
       Reminder:reminderitemlist.filter((item) => {return (item.IsActive) }).map((obj) => { return obj.Value }).toString(),
       Comment:comment
     }
-    console.log(AddStudentFollow,"StudentFollowUp")
+   
 
 
     useEffect(() => {
