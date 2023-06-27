@@ -16,6 +16,7 @@ const GetStudentEnquiryList = () => {
 };
 
 const GetStudentDetailsFollowUp = (data: IStudentDetailFollowUpBody) => {
+    console.log('GetStudentDetailsForFollowUp',data)
     return http.post<IStudentDetailFollowUpResult[]>('GetStudentDetailsForFollowUp', data)
 };
 

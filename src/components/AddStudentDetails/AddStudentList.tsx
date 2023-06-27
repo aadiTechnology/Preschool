@@ -3,13 +3,14 @@ import { RootState, } from 'src/store';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getAdmissionDetails ,getStudentEnquiryList,StudentDetailsForFollowUp} from 'src/requests/Student/AddStudentDetails/RequestAddStudentDetails';
-import { IGetAdmissionDetailsBody } from 'src/Interface/Student/IAddStudentDetails';
+import { IGetAdmissionDetailsBody ,IStudentDetailFollowUpBody} from 'src/Interface/Student/IAddStudentDetails';
 import TabulerList from 'src/library/List/TabulerList';
 import { Navigate } from 'react-router';
 import { useNavigate } from 'react-router';
 function AddStudentList({ clickEdit }) {
     const dispatch = useDispatch();
     const navigate=useNavigate()
+ 
     const GetAdmissionDetails: any = useSelector(
         (state: RootState) => state.AddStudentDetails.AdmissionDetails
     );
@@ -21,6 +22,8 @@ function AddStudentList({ clickEdit }) {
     );
     const GetAdmissionDetailsBody: IGetAdmissionDetailsBody =
         { "Id": 1, }
+
+     
     
     useEffect(() => {
     dispatch(getStudentEnquiryList());
@@ -28,8 +31,8 @@ function AddStudentList({ clickEdit }) {
 
     const Submit = (Id) => {
         console.log(Id ,"Id")
-    navigate('FollowUp/' + Id)
-    }
+      navigate('FollowUp/' + Id)
+   }
 
     const Delete = () => {
 

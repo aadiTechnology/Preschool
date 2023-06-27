@@ -75,7 +75,7 @@ export const getStudentEnquiryList=
 ():AppThunk =>
 async(dispatch)=>{
   const response=await GetAddStudentDetailsApi.GetStudentEnquiryList()
-  let StudentEnquiryList = response.data.map((item,i)=>{
+  let StudentEnquiryList =  response.data.map((item,i)=>{
     return {
          Id:item.Id,
          Text1:  item.StudentName,
@@ -86,7 +86,6 @@ async(dispatch)=>{
      
     }
    })
-
    dispatch(AddStudentDetailsslice.actions.getStudentEnquiry(StudentEnquiryList))
 }
 
@@ -94,7 +93,8 @@ export const StudentDetailsForFollowUp=
 (data:IStudentDetailFollowUpBody):AppThunk =>
 async(dispatch)=>{
   const response=await GetAddStudentDetailsApi.GetStudentDetailsFollowUp(data)
-  let StudentFollowUpList = response.data.map((item,i)=>{
+  let StudentFollowUpList = null
+  let dataRecieved = response.data.map((item,i)=>{
     return {
          Id:item.Id,
          Text1:  item.StudentName,
@@ -102,10 +102,14 @@ async(dispatch)=>{
          Text3 : item.PhoneNo,
          Text4 : item.ClassName,
          Text5 : item.EmailId,
+         Text6 : item.MotherName,
+         Text7 : item.PhoneNo2,
+       
      
     }
    })
-
+   if(dataRecieved.length>0)
+   StudentFollowUpList = dataRecieved[0];
    dispatch(AddStudentDetailsslice.actions.getStudentDetailsFollowUp(StudentFollowUpList))
 }
 

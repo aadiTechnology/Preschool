@@ -12,6 +12,9 @@ import { RootState } from 'src/store';
 import{IAddStudentFollowUpBody} from 'src/Interface/Admin/IAddStudentFollowUp'
 import {AddStudentFollowUp} from 'src/requests/Admin/RequestAddStudentFollowUp'
 import { toast } from 'react-toastify';
+import { StudentDetailsForFollowUp } from 'src/requests/Student/AddStudentDetails/RequestAddStudentDetails';
+import { IStudentDetailFollowUpBody } from 'src/Interface/Student/IAddStudentDetails';
+import { useParams } from 'react-router-dom';
 
 
 
@@ -28,12 +31,15 @@ const FollowUp = () => {
   const [comment, setComment] = useState("");
   const [month, setMonth] = useState("");
   const [searchName, setSearchName] = useState("");
-
+  
   const dispatch = useDispatch();
+  const { Id } = useParams();
 
   const AddStudentFollow: any = useSelector(
     (state: RootState) => state.AddStudentFollowUp.StudentFollowUp);
-
+    const GetStudentFollowUpList: any = useSelector(
+      (state: RootState) => state.AddStudentDetails.StudentDetailsFollowUp
+  );
 
     const AddStudentFollowUpBody: IAddStudentFollowUpBody = {
       Id:4,
@@ -41,15 +47,29 @@ const FollowUp = () => {
       Reminder:reminderitemlist.filter((item) => {return (item.IsActive) }).map((obj) => { return obj.Value }).toString(),
       Comment:comment
     }
+    const GetStudentFollowUpBody: IStudentDetailFollowUpBody =
+    { "Id": parseInt(Id) }
    
-
-
+  
     useEffect(() => {
       if(AddStudentFollow!==""){
         toast.success(AddStudentFollow ,{ toastId: 'success1' })
       }
       },
     [AddStudentFollow])
+
+    useEffect(() => {
+      dispatch(StudentDetailsForFollowUp(GetStudentFollowUpBody));
+    },[])
+    useEffect(() => {
+      setName(GetStudentFollowUpList.Text1)
+      setFatherName(GetStudentFollowUpList.Text2)
+      setPhoneNumber1(GetStudentFollowUpList.Text3)
+      setMotherName(GetStudentFollowUpList.Text6)
+      setPhoneNumber2(GetStudentFollowUpList.Text7)
+      setEmail(GetStudentFollowUpList.Text5)
+      },
+    [GetStudentFollowUpList])
 
   const clickItem = (value) => {
     setItemList(value)
@@ -72,13 +92,13 @@ const FollowUp = () => {
       <Container>
         <PageHeader heading={'FollowUp'} />
         <Card>
-          <TextField value={name} onChange={(e) => { setName(e.target.value) }} label={'Student Name'} />
+          <TextField value={name} onChange={(e) => {setName(e.target.value) }} label={'Student Name'} />
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <TextField value={fathername} onChange={(e) => { setFatherName(e.target.value) }} label={'Father Name'} />
+              <TextField value={fathername} onChange={(e) => {setFatherName(e.target.value) }} label={'Father Name'} />
             </Grid>
             <Grid item xs={6}>
-              <TextField value={phonenumber1} onChange={(e) => { setPhoneNumber1(e.target.value) }} label={'Phone Number'} />
+              <TextField value={phonenumber1} onChange={(e) => {setPhoneNumber1(e.target.value) }} label={'Phone Number'} />
             </Grid>
 
             <Grid item xs={6}>
