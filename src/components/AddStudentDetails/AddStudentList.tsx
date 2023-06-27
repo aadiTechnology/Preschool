@@ -27,7 +27,7 @@ function AddStudentList({ clickEdit }) {
     }, [])
 
     const Submit = (Id) => {
-    navigate('/extended-sidebar/Student/FollowUp/'+Id)
+    navigate('FollowUp')
     }
 
     const Delete = () => {
