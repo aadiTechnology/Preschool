@@ -1,9 +1,9 @@
 import http from "../../utils/http-common";
-import {IAddPhotoAlbumBody,IAddPhotoAlbumResult,IGetClassNameListBody,IGetClassNameListResult,IGetAllAlbumNameListBody,IGetAllAlbumNameListResult,IDeletePhotoAlbumBody,IDeletePhotoAlbumResult} from 'src/Interface/Admin/IAddPhoto'
+import {IAddPhotoAlbumBody,IGetClassNameListResult,IGetAllAlbumNameListResult,IDeletePhotoAlbumBody} from 'src/Interface/Admin/IAddPhoto'
 
 
 const GetAddPhoto = (data: IAddPhotoAlbumBody) => {
-    return http.post<IAddPhotoAlbumResult[]>('AddPhotoAlbum',data);
+    return http.post<string>('AddPhotoAlbum',data);
   };
 
   const GetClassList=()=>{
@@ -15,7 +15,7 @@ const GetAddPhoto = (data: IAddPhotoAlbumBody) => {
   };
 
   const DeleteAlbumList=(data:IDeletePhotoAlbumBody)=>{
-    return http.post<IDeletePhotoAlbumResult>('DeletePhotoAlbum',data)
+    return http.post<string>('DeletePhotoAlbum',data)
   }
 
   const GetAddPhotoApi ={

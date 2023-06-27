@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AppThunk } from 'src/store';
-import { IAddPhotoAlbumBody, IAddPhotoAlbumResult, IGetClassNameListBody, IGetClassNameListResult, IGetAllAlbumNameListBody, IGetAllAlbumNameListResult, IDeletePhotoAlbumBody, IDeletePhotoAlbumResult } from "src/Interface/Admin/IAddPhoto"
+import { IAddPhotoAlbumBody, IGetClassNameListResult, IGetAllAlbumNameListResult, IDeletePhotoAlbumBody } from "src/Interface/Admin/IAddPhoto"
 import GetAddPhotoApi from 'src/api/Admin/ApiAddPhoto';
 
 
@@ -10,7 +10,7 @@ const AddPhotoSlice = createSlice({
     AddPhotoAlbum: '',
     GetClassNameList: [],
     GetAllAlbumNameList: [],
-    DeleteAllAlbumList: null,
+    DeleteAllAlbumList: '',
     Loading :true
 
   },
@@ -96,7 +96,7 @@ export const GetAllAlbumNameList =
       dispatch(AddPhotoSlice.actions.GetAllAlubumList(getAllAlbum));
     };
 
-    export const DeleteAllAlbumList =
+    export const DeleteAllAlbum =
     (data:IDeletePhotoAlbumBody): AppThunk =>
     async (dispatch) => {
       dispatch(AddPhotoSlice.actions.getLoading());

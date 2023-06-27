@@ -6,10 +6,6 @@ export interface IAddPhotoAlbumBody {
     UserId:number
 };
 
-export interface IAddPhotoAlbumResult{};
-
-export interface IGetClassNameListBody{};
-
 export interface IGetClassNameListResult{
     Id:number
     ClassId: number,
@@ -17,10 +13,6 @@ export interface IGetClassNameListResult{
     InsertBy: string,
     TeacherId: string
 
-};
-
-export interface IGetAllAlbumNameListBody{
-    Id:number
 };
 
 export interface IGetAllAlbumNameListResult{
@@ -38,6 +30,6 @@ export interface IDeletePhotoAlbumBody{
     Id:number
 };
 
-export interface IDeletePhotoAlbumResult{}
+
 
 

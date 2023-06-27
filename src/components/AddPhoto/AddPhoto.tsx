@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { toast } from 'react-toastify';
-import { IAddPhotoAlbumBody, IGetClassNameListBody, IGetAllAlbumNameListBody, IDeletePhotoAlbumBody } from 'src/Interface/Admin/IAddPhoto'
-import { getAddPhoto, getClassNameList, GetAllAlbumNameList, DeleteAllAlbumList ,resetDeleteAlbumListMessage ,resetgetAddPhoto } from 'src/requests/Admin/RequestAddPhoto'
+import { IAddPhotoAlbumBody, IDeletePhotoAlbumBody } from 'src/Interface/Admin/IAddPhoto'
+import { getAddPhoto, getClassNameList, GetAllAlbumNameList, DeleteAllAlbum ,resetDeleteAlbumListMessage ,resetgetAddPhoto } from 'src/requests/Admin/RequestAddPhoto'
 import SelectedCard from 'src/library/Card/SelectedCard';
 import ListCard from 'src/library/List/ListCard';
 import List2Card from 'src/library/List/List2Card';
@@ -47,7 +47,7 @@ function AddPhoto() {
     (state: RootState) => state.AddPhoto.GetAllAlbumNameList
   );
 
-  const DeleteAllAlbum: any = useSelector(
+  const DeleteAllAlbumL: any = useSelector(
     (state: RootState) => state.AddPhoto.DeleteAllAlbumList
   );
   const loading = useSelector(
@@ -139,16 +139,16 @@ function AddPhoto() {
 
  
   useEffect(()=>{
-    if(DeleteAllAlbum !== null && DeleteAllAlbum !== ""){
-      toast.success(DeleteAllAlbum , { toastId: 'success1' })
+    if(DeleteAllAlbumL !== ""){
+      toast.success(DeleteAllAlbumL , { toastId: 'success1' })
     dispatch(resetDeleteAlbumListMessage());
     }
     dispatch(GetAllAlbumNameList())
-  },[DeleteAllAlbum])
+  },[DeleteAllAlbumL])
 
   const Delete =(Id)=>{
     const DeleteAllAlbumBody: IDeletePhotoAlbumBody = { Id: Id }
-    dispatch(DeleteAllAlbumList(DeleteAllAlbumBody))
+    dispatch(DeleteAllAlbum(DeleteAllAlbumBody))
   }
 
   
