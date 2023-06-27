@@ -116,7 +116,7 @@ const FollowUp = () => {
           <br></br>
           <Typography>Reminder</Typography>
           <CheckUnCheckList ItemList={reminderitemlist} clickItem={clickReminderItem} />
-          <TextareaAutosize name="Outlined" placeholder="Comment" minRows={4} style={{ width: "100%" }} />
+          <TextareaAutosize value={comment} onChange={(e)=>setComment(e.target.value)} name="Outlined" placeholder="Comment" minRows={4} style={{ width: "100%" }} />
           <br></br>
           <Grid container spacing={2}>
             <Grid item xs={6} sx={{ mt: 2.7 }}>
