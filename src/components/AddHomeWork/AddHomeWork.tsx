@@ -28,7 +28,7 @@ function AddHomeWork() {
     const dispatch = useDispatch();
     const [Id, setId] = useState(0)
     const [subjectDescription, setSubjectDescription] = useState('')
-    const [selectclass, setSelectClass] = useState(0);
+    const [selectclass, setSelectClass] = useState('');
     const [selectsubject, setSelectSubject] = useState(0);
     const [selectdate, setSelectDate] = useState('');
     const [errordescription, setErrordescription] = useState('')
@@ -49,7 +49,7 @@ function AddHomeWork() {
     const GetAddHomeworkBody: IGetAddHomeworkBody =
     {
         Id: Id,
-        ClassId: selectclass,
+        ClassId: parseInt(selectclass),
         SubjectId: selectsubject,
         SubjectDescription: subjectDescription,
         AssignDate: selectdate,
@@ -104,7 +104,7 @@ function AddHomeWork() {
             console.log(GetAddHomeworkBody,"GetAddHomeworkBody")
             dispatch(getAddHomework(GetAddHomeworkBody));
             setSubjectDescription('');
-            setSelectClass(0);
+            setSelectClass('');
             setSelectDate('');
         }
     };
