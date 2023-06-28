@@ -107,3 +107,7 @@ export interface IEditStudentEnquiryResult{
     SocietyName: number,
     StudentAddress: number
 }
+
+export interface IDeleteStudentBody{
+    Id : number
+}

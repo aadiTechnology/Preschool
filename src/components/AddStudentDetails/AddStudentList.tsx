@@ -2,29 +2,23 @@ import React, { useState, useEffect } from 'react'
 import { RootState, } from 'src/store';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { getAdmissionDetails ,getStudentEnquiryList,StudentDetailsForFollowUp} from 'src/requests/Student/AddStudentDetails/RequestAddStudentDetails';
-import { IGetAdmissionDetailsBody ,IStudentDetailFollowUpBody} from 'src/Interface/Student/IAddStudentDetails';
+import {getStudentEnquiryList,DeleteStudentDetails,resetStudentDelete} from 'src/requests/Student/AddStudentDetails/RequestAddStudentDetails';
+import {IDeleteStudentBody } from 'src/Interface/Student/IAddStudentDetails';
 import TabulerList from 'src/library/List/TabulerList';
 import { Navigate } from 'react-router';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 function AddStudentList({ clickEdit }) {
     const dispatch = useDispatch();
     const navigate=useNavigate()
- 
-    const GetAdmissionDetails: any = useSelector(
-        (state: RootState) => state.AddStudentDetails.AdmissionDetails
-    );
-    const GetStudentEnquiryList: any = useSelector(
+     const GetStudentEnquiryList: any = useSelector(
         (state: RootState) => state.AddStudentDetails.StudentEnquiry
     );
-    const GetStudentFollowUpList: any = useSelector(
-        (state: RootState) => state.AddStudentDetails.StudentDetailsFollowUp
-    );
-    const GetAdmissionDetailsBody: IGetAdmissionDetailsBody =
-        { "Id": 1, }
 
-     
-    
+    const StudentDetailDelete: any = useSelector(
+        (state: RootState) => state.AddStudentDetails.DeleteStudent
+    );
+  
     useEffect(() => {
     dispatch(getStudentEnquiryList());
     }, [])
@@ -34,8 +28,18 @@ function AddStudentList({ clickEdit }) {
       navigate('FollowUp/' + Id)
    }
 
-    const Delete = () => {
+   useEffect(() => {
+    if (StudentDetailDelete !== '') {
+     toast.success(StudentDetailDelete, { toastId: 'success1' })
+    dispatch(resetStudentDelete());
+    dispatch(getStudentEnquiryList());
+    }
+   }, [StudentDetailDelete])
 
+    const Delete = (Id) => {
+    const DeleteStudentDetailsBody: IDeleteStudentBody =
+    { "Id": Id, }
+    dispatch(DeleteStudentDetails(DeleteStudentDetailsBody))
     }
     return (
         <div>

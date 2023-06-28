@@ -1,7 +1,7 @@
 import http from "../../utils/http-common";
 import { IAddStudentEnquiryBody ,IStudentEnquiryListResult,
 IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody,IEditStudentEnquiryBody,IEditStudentEnquiryResult,
-IStudentDetailFollowUpResult ,IStudentDetailFollowUpBody} from "src/Interface/Student/IAddStudentDetails";
+IStudentDetailFollowUpResult ,IStudentDetailFollowUpBody,IDeleteStudentBody} from "src/Interface/Student/IAddStudentDetails";
 
 
 const GetAddStudentEnquiryDetails = (data: IAddStudentEnquiryBody) => {
@@ -26,6 +26,9 @@ const AddUserLoginInfo= (data: IAddUserLoginInfoBody) => {
 const EditStudentEnquiry= (data: IEditStudentEnquiryBody) => {
     return http.post<IEditStudentEnquiryResult>('EditStudentEnquirydetails', data)
 };
+const DeleteStudentDetails= (data: IDeleteStudentBody) => {
+    return http.post<string>('DeleteStudentDetails', data)
+};
 
 const GetAddStudentEnquiryDetailsApi = {
     GetAddStudentEnquiryDetails,
@@ -33,7 +36,8 @@ const GetAddStudentEnquiryDetailsApi = {
     AddUserLoginInfo,
     GetStudentEnquiryList,
     GetStudentDetailsFollowUp,
-    EditStudentEnquiry
+    EditStudentEnquiry,
+    DeleteStudentDetails
 
 }
 

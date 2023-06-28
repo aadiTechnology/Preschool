@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from "src/store";
 import GetAddStudentDetailsApi from "src/api/Student/ApiAddStudentDetails";
 import { async } from "q";
-import { IAddStudentEnquiryBody, IEditStudentEnquiryBody, IStudentDetailFollowUpBody, IGetAdmissionDetailsBody, IAddUserLoginInfoBody } from "src/Interface/Student/IAddStudentDetails"
+import { IAddStudentEnquiryBody, IEditStudentEnquiryBody,IDeleteStudentBody, IStudentDetailFollowUpBody, IGetAdmissionDetailsBody, IAddUserLoginInfoBody } from "src/Interface/Student/IAddStudentDetails"
 
 
 const AddStudentDetailsslice = createSlice({
@@ -13,7 +13,8 @@ const AddStudentDetailsslice = createSlice({
     AddUserLoginInfo: '',
     StudentEnquiry: [],
     StudentDetailsFollowUp: {},
-    EditStudent: {}
+    EditStudent: {},
+    DeleteStudent:'',
 
   },
   reducers: {
@@ -44,6 +45,13 @@ const AddStudentDetailsslice = createSlice({
       state.EditStudent = action.payload;
     },
 
+    DeleteStudentDetail(state, action) {
+      state.DeleteStudent = action.payload;
+    },
+    
+    resetStudentsDelete(state) {
+      state.DeleteStudent = '';
+    },
 
 
   }
@@ -146,6 +154,19 @@ export const EditStudentEnquirydetails =
     async (dispatch) => {
       const response = await GetAddStudentDetailsApi.EditStudentEnquiry(data)
       dispatch(AddStudentDetailsslice.actions.EditStudentEnquiry(response.data))
+    }
+
+    export const DeleteStudentDetails =
+  (data: IDeleteStudentBody): AppThunk =>
+    async (dispatch) => {
+      const response = await GetAddStudentDetailsApi.DeleteStudentDetails(data)
+      dispatch(AddStudentDetailsslice.actions.DeleteStudentDetail(response.data))
+    }
+
+    export const resetStudentDelete =
+  (): AppThunk =>
+    async (dispatch) => {
+      dispatch(AddStudentDetailsslice.actions.resetStudentsDelete());
     }
 
 

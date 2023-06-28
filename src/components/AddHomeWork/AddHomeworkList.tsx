@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { toast } from 'react-toastify';
-import { getDeleteHomework, getDetailsList, getHomeworkListForEdit, getSubmitHomework, resetDeleteMessage } from 'src/requests/Teacher/RequestAddHomeWork';
-import { IDeleteHomeworkBody, IGetDetailsListBody, IHomeworkListForEditBody, ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
+import { getDeleteHomework, getDetailsList, getSubmitHomework, resetDeleteMessage } from 'src/requests/Teacher/RequestAddHomeWork';
+import { IDeleteHomeworkBody, IGetDetailsListBody, ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
 import TabulerList from 'src/library/List/TabulerList';
 function AddHomeworkList({ clickEdit }) {
 const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const dispatch = useDispatch();
 
   useEffect(() => {
     if (GetDelete !== '') {
-      toast.success("Homework deleteded successfully", { toastId: 'success1' })
+      toast.success(GetDelete, { toastId: 'success1' })
       dispatch(resetDeleteMessage());
     }
   }, [GetDelete])
