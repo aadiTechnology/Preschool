@@ -14,9 +14,6 @@ export interface IAddStudentEnquiryBody{
     UserId:number
 };
 
-export interface IAddStudentEnquiryResult{}
-
-
 export interface IGetAdmissionDetailsBody{
    Id:number
 };
@@ -86,6 +83,27 @@ export interface IAddUserLoginInfoBody{
     BirthDate:string,
     UserId:number
 }
-export interface IAddUserLoginInfoResult{
-    
+
+
+export interface IEditStudentEnquiryBody{
+    Id : number
+}
+
+export interface IEditStudentEnquiryResult{
+    Id:number,
+    StudentName: number,
+    CallStatus: null,
+    Reminder: null,
+    Comment: null,
+    EmailId: number,
+    FatherName: number,
+    PhoneNo: number,
+    MotherName: number,
+    PhoneNo2: number,
+    ClassName: null,
+    UserId: number,
+    BirthDate: number,
+    Age: number,
+    SocietyName: number,
+    StudentAddress: number
 }

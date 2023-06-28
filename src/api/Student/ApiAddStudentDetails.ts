@@ -1,11 +1,11 @@
 import http from "../../utils/http-common";
-import { IAddStudentEnquiryResult, IAddStudentEnquiryBody ,IStudentEnquiryListResult,
-IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody,
-IAddUserLoginInfoResult ,IStudentDetailFollowUpResult ,IStudentDetailFollowUpBody} from "src/Interface/Student/IAddStudentDetails";
+import { IAddStudentEnquiryBody ,IStudentEnquiryListResult,
+IGetAdmissionDetailsResult ,IGetAdmissionDetailsBody,IAddUserLoginInfoBody,IEditStudentEnquiryBody,IEditStudentEnquiryResult,
+IStudentDetailFollowUpResult ,IStudentDetailFollowUpBody} from "src/Interface/Student/IAddStudentDetails";
 
 
 const GetAddStudentEnquiryDetails = (data: IAddStudentEnquiryBody) => {
-    return http.post<IAddStudentEnquiryResult[]>('AddStudentEnquiryDetails', data)
+    return http.post<string>('AddStudentEnquiryDetails', data)
 };
 
 const GetAdmissionDetail = (data: IGetAdmissionDetailsBody) => {
@@ -16,12 +16,15 @@ const GetStudentEnquiryList = () => {
 };
 
 const GetStudentDetailsFollowUp = (data: IStudentDetailFollowUpBody) => {
-    console.log('GetStudentDetailsForFollowUp',data)
     return http.post<IStudentDetailFollowUpResult[]>('GetStudentDetailsForFollowUp', data)
 };
 
 const AddUserLoginInfo= (data: IAddUserLoginInfoBody) => {
-    return http.post<IAddUserLoginInfoResult[]>('AddUserLoginInfo', data)
+    return http.post<string>('AddUserLoginInfo', data)
+};
+
+const EditStudentEnquiry= (data: IEditStudentEnquiryBody) => {
+    return http.post<IEditStudentEnquiryResult>('EditStudentEnquirydetails', data)
 };
 
 const GetAddStudentEnquiryDetailsApi = {
@@ -29,7 +32,8 @@ const GetAddStudentEnquiryDetailsApi = {
     GetAdmissionDetail,
     AddUserLoginInfo,
     GetStudentEnquiryList,
-    GetStudentDetailsFollowUp
+    GetStudentDetailsFollowUp,
+    EditStudentEnquiry
 
 }
 

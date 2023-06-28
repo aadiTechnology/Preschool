@@ -3,8 +3,8 @@ import PageHeader from 'src/library/heading/pageHeader'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
-import { IAddStudentEnquiryBody, IAddUserLoginInfoBody } from "src/Interface/Student/IAddStudentDetails"
-import { GetAddStudentEnquiryDetails, resetAddStudent, resetAddUserLogin, AddUserLoginInfo } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
+import { IAddStudentEnquiryBody, IAddUserLoginInfoBody,IEditStudentEnquiryBody } from "src/Interface/Student/IAddStudentDetails"
+import { GetAddStudentEnquiryDetails, resetAddStudent, resetAddUserLogin, AddUserLoginInfo,EditStudentEnquirydetails } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
 import { Button, TextField, Container, Card, Checkbox, FormControlLabel } from '@mui/material';
 import { toast } from 'react-toastify';
 import { IsEmailValid, IsMobileNoValid } from "src/components/Common/util"
@@ -21,6 +21,10 @@ function AddStudentDetails() {
  
   const AddUserLogin: any = useSelector(
     (state: RootState) => state.AddStudentDetails.AddUserLoginInfo
+  );
+
+  const EditList: any = useSelector(
+    (state: RootState) => state.AddStudentDetails.EditStudent
   );
 
   const [studentName, setStudentName] = useState('');
@@ -44,6 +48,7 @@ function AddStudentDetails() {
   const [emailid, setEmailid] = useState('');
   const [emailiderror, setEmailiderror] = useState('');
   const [checked, setChecked] = useState(false);
+  const [editing, setEditing] = useState(EditList);
 
 
   const AddUserLoginInfoBody: IAddUserLoginInfoBody = {
@@ -85,6 +90,28 @@ function AddStudentDetails() {
       dispatch(resetAddUserLogin());
     }
   }, [AddUserLogin])
+
+  useEffect(() => {
+    if(EditList !== ''){
+      setStudentName(EditList.StudentName)
+      setFatherName(EditList.FatherName)
+      setMotherName(EditList.MotherName)
+      setBirthDate(EditList.BirthDate)
+      setAge(EditList.Age)
+      setPhoneNo(EditList.PhoneNo)
+      setPhoneNo2(EditList.PhoneNo2)
+      setSocietyName(EditList.SocietyName)
+      setStudentAddress(EditList.StudentAddress)
+      setEmailid(EditList.EmailId)
+    }
+  }, [EditList])
+  
+
+    const clickEdit=(Id)=>{
+      setEditing(EditList)
+      const EditBody : IEditStudentEnquiryBody = {Id:Id}
+      dispatch(EditStudentEnquirydetails(EditBody)) 
+   }
 
   const onSubmit = () => {
     let isError = false
@@ -183,10 +210,7 @@ function AddStudentDetails() {
       setPhoneNo2(input);
     }
   };
-
-  const clickEdit=()=>{
-
-  }
+  
   return (
     <Container>
       <PageHeader heading={'Add Student Enquiry Details'} />
@@ -223,8 +247,8 @@ function AddStudentDetails() {
         <TextField value={studentAddress} onChange={(e) => { setStudentAddress(e.target.value) }} label={'StudentAddress'} />
         <ErrorMessageForm error={studentAddresserror} />
         <TextField value={emailid}
-          onChange={(e) => { setEmailid(e.target.value) }}
-          onBlur={(e) => { setEmailiderror(IsEmailValid(e.target.value)) }}
+          onChange={(e) => {setEmailid(e.target.value) }}
+          onBlur={(e) => {setEmailiderror(IsEmailValid(e.target.value)) }}
           label={'Emailid'} />
 
         <FormControlLabel control={<Checkbox checked={checked}
