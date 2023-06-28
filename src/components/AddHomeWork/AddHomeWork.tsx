@@ -111,7 +111,7 @@ function AddHomeWork() {
 
     useEffect(() => {
         if (GetAddHomework !== '') {
-          toast.success("Homework added successfully", { toastId: 'success1' })
+          toast.success(GetAddHomework, { toastId: 'success1' })
           dispatch(resetAddHomeworkMessage());
         }
       }, [GetAddHomework])

@@ -49,7 +49,7 @@ function AddStudentDetails() {
   const [emailiderror, setEmailiderror] = useState('');
   const [checked, setChecked] = useState(false);
   const [editing, setEditing] = useState(EditList);
-
+  const [Id, setId] = useState(0)
 
   const AddUserLoginInfoBody: IAddUserLoginInfoBody = {
     "emailid": emailid,
@@ -93,6 +93,7 @@ function AddStudentDetails() {
 
   useEffect(() => {
     if(EditList !== ''){
+      setId(EditList.Id)
       setStudentName(EditList.StudentName)
       setFatherName(EditList.FatherName)
       setMotherName(EditList.MotherName)

@@ -31,7 +31,7 @@ const dispatch = useDispatch();
 
   useEffect(() => {
     if (GetSubmit !== '') {
-      toast.success("Homework submitted successfully", { toastId: 'success1' })
+      toast.success(GetSubmit, { toastId: 'success1' })
       dispatch(resetDeleteMessage());
     }
   }, [GetSubmit])
