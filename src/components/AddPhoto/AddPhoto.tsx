@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { IAddPhotoAlbumBody, IDeletePhotoAlbumBody } from 'src/Interface/Admin/IAddPhoto'
 import { getAddPhoto, getClassNameList, GetAllAlbumNameList, DeleteAllAlbum ,resetDeleteAlbumListMessage ,resetgetAddPhoto } from 'src/requests/Admin/RequestAddPhoto'
 import SelectedCard from 'src/library/Card/SelectedCard';
-import ListCard from 'src/library/List/ListCard';
 import List2Card from 'src/library/List/List2Card';
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
@@ -37,7 +36,7 @@ function AddPhoto() {
     (state: RootState) => state.AddPhoto.AddPhotoAlbum
   );
 
-  console.log(GetAddPhoto ,'GetAddPhoto')
+ 
 
   const GetClass: any = useSelector(
     (state: RootState) => state.AddPhoto.GetClassNameList
@@ -112,7 +111,7 @@ function AddPhoto() {
     }
   
     setTitle('')
-    setDate('')
+    setDate(formattedDate)
     setLink('')
     setItemList(prev=> prev.map((item)=> 
       {return {...item,IsActive:false}}))
@@ -139,22 +138,26 @@ function AddPhoto() {
 
  
   useEffect(()=>{
-    if(DeleteAllAlbumL !== ""){
+  if(DeleteAllAlbumL !== ""){
       toast.success(DeleteAllAlbumL , { toastId: 'success1' })
     dispatch(resetDeleteAlbumListMessage());
-    }
     dispatch(GetAllAlbumNameList())
+    }
   },[DeleteAllAlbumL])
 
   const Delete =(Id)=>{
-    const DeleteAllAlbumBody: IDeletePhotoAlbumBody = { Id: Id }
-    dispatch(DeleteAllAlbum(DeleteAllAlbumBody))
-  }
+    if(confirm('Are you sure you want to delete photo album')){
+      const DeleteAllAlbumBody: IDeletePhotoAlbumBody = { Id: Id }
+      dispatch(DeleteAllAlbum(DeleteAllAlbumBody))
+    }
+   }
 
   
   return (
     <Container>
       <PageHeader heading={'AddPhoto'} />
+      <Typography mb={0.5}>Select Class</Typography>
+      
       {ItemList.length > 0 &&
 
         <SelectedCard ItemList={ItemList} clickItem={clickItem}  />
