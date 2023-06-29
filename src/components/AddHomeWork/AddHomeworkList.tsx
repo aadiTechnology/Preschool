@@ -13,9 +13,11 @@ const dispatch = useDispatch();
   const GetSubmit: any = useSelector((state: RootState) => state.AddHomeWork.SubmitHomework);
   const GetHomeWorkDetailsList: any = useSelector((state: RootState) => state.AddHomeWork.DetailsList);
   const Delete = (Id) => {
-    const GetDeleteHomeworkBody: IDeleteHomeworkBody = { Id: Id }
-    dispatch(getDeleteHomework(GetDeleteHomeworkBody));
-  }
+    if(confirm('Are you sure you want to delete homework?')){
+      const GetDeleteHomeworkBody: IDeleteHomeworkBody = { Id: Id }
+      dispatch(getDeleteHomework(GetDeleteHomeworkBody));
+    }
+   }
 
   useEffect(() => {
     if (GetDelete !== '') {
@@ -25,8 +27,11 @@ const dispatch = useDispatch();
   }, [GetDelete])
 
   const Submit = (Id) => {
-    const GetSubmitHomeworkBody: ISubmitHomeworkBody = { Id: Id }
-    dispatch(getSubmitHomework(GetSubmitHomeworkBody));
+    if(confirm('Are you sure you want to submit the homework?')){
+      const GetSubmitHomeworkBody: ISubmitHomeworkBody = { Id: Id }
+      dispatch(getSubmitHomework(GetSubmitHomeworkBody));
+    }
+   
   }
 
   useEffect(() => {
