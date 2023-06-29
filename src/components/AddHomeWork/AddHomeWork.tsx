@@ -29,10 +29,12 @@ function AddHomeWork() {
     const [Id, setId] = useState(0)
     const [subjectDescription, setSubjectDescription] = useState('')
     const [selectclass, setSelectClass] = useState('');
-    const [selectsubject, setSelectSubject] = useState(0);
+    const [selectclasserror, setSelectClasserror] = useState('');
+    const [selectsubject, setSelectSubject] = useState('');
+    const [selectsubjecterror, setSelectSubjecterror] = useState('');
     const [selectdate, setSelectDate] = useState('');
-    const [errordescription, setErrordescription] = useState('')
-    const [errorselectdate, setErrorselectdate] = useState('')
+    const [descriptionerror, setdescriptionerror] = useState('')
+    const [selectdateerror, setSelectdateerror] = useState('')
     const [editing, setEditing] = useState(GetEditList);
 
 
@@ -50,7 +52,7 @@ function AddHomeWork() {
     {
         Id: Id,
         ClassId: parseInt(selectclass),
-        SubjectId: selectsubject,
+        SubjectId: parseInt(selectsubject),
         SubjectDescription: subjectDescription,
         AssignDate: selectdate,
         AcademicId: 4,
@@ -87,21 +89,32 @@ function AddHomeWork() {
         let isValid = true;
 
         if (subjectDescription === '') {
-            setErrordescription('Field is required');
+            setdescriptionerror('Field is required');
             isValid = false;
         } else {
-            setErrordescription('');
+            setdescriptionerror('');
         }
 
         if (selectdate === '') {
-            setErrorselectdate('Field is required');
+            setSelectdateerror('Field is required');
             isValid = false;
         } else {
-            setErrorselectdate('');
+            setSelectdateerror('');
         }
+        if (selectclass === '') {
+            setSelectClasserror('Field is required');
+            isValid = false;
+        } else {
+            setSelectClasserror('');
+        }
+        if (selectsubject === '') {
+            setSelectSubjecterror('Field is required');
+            isValid = false;
+        } else {
+            setSelectSubjecterror('');
+        }  
 
         if (isValid) {
-            console.log(GetAddHomeworkBody,"GetAddHomeworkBody")
             dispatch(getAddHomework(GetAddHomeworkBody));
             setSubjectDescription('');
             setSelectClass('');
@@ -121,13 +134,15 @@ function AddHomeWork() {
             <PageHeader heading={'AddHomeWork'} />
             <Card>
                 <DropDown itemList={GetHomeWork} ClickItem={ClickItem} DefaultValue={selectclass} Label={'Select Class'} />
+                <ErrorMessageForm error={selectclasserror}/>
                 <br></br>
                 <DropDown itemList={GetSubject} ClickItem={ClickSubjectItem} DefaultValue={selectsubject} Label={'Select Subject'} />
+                <ErrorMessageForm error={selectsubjecterror}/>
                 <br></br>
                 <ReactQuill value={subjectDescription} onChange={(value) => setSubjectDescription(value)} modules={toolbarOptions} />
-                <ErrorMessageForm  error={errordescription}/>
+                <ErrorMessageForm  error={descriptionerror}/>
                 <TextField type="date" value={selectdate} onChange={(e) => setSelectDate(e.target.value)} />
-                <ErrorMessageForm error={errorselectdate}/>
+                <ErrorMessageForm error={selectdateerror}/>
                 <Box mt={2}>
                     <input type="file" ></input>
                 </Box>
