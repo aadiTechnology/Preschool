@@ -35,9 +35,9 @@ export const StudentFollowUpList =
       let StudentList = response.data.map((item, i) => {
         return {
           Id: item.Id,
-          Text1: item.StudentName,
-          Text2: item.MotherName,
-          Text3: item.FatherName,
+          Text1: item.CallStatus,
+          Text2: item.Comment,
+          Text3: item.Comment,
           Text4: item.SocietyName,
           Text5: item.StudentAddress,
 
