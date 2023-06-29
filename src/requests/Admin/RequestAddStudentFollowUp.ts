@@ -4,16 +4,20 @@ import { IAddStudentFollowUpBody } from "src/Interface/Admin/IAddStudentFollowUp
 import AddStudentFollowUpApi from 'src/api/Admin/ApiAddStudentFollowUp';
 
 const AddStudentFollowUpSlice = createSlice({
-    name: 'FollowUp',
-    initialState: {
-        StudentFollowUp: ''
+  name: 'FollowUp',
+  initialState: {
+    StudentFollowUp: '',
+    FollowUpList: []
+  },
+  reducers: {
+    StudentFollowUp(state, action) {
+      state.StudentFollowUp = action.payload;
     },
-    reducers: {
-        StudentFollowUp(state, action) {
-            state.StudentFollowUp = action.payload;
-        },
-
+    StudentFollowList(state, action) {
+      state.FollowUpList = action.payload;
     }
+
+  }
 });
 
 export const AddStudentFollowUp =
@@ -23,4 +27,23 @@ export const AddStudentFollowUp =
       dispatch(AddStudentFollowUpSlice.actions.StudentFollowUp(response.data));
     };
 
-    export default AddStudentFollowUpSlice.reducer
+
+export const StudentFollowUpList =
+  (): AppThunk =>
+    async (dispatch) => {
+      const response = await AddStudentFollowUpApi.FollowUpList()
+      let StudentList = response.data.map((item, i) => {
+        return {
+          Id: item.Id,
+          Text1: item.StudentName,
+          Text2: item.MotherName,
+          Text3: item.FatherName,
+          Text4: item.SocietyName,
+          Text5: item.StudentAddress,
+
+        }
+      })
+    dispatch(AddStudentFollowUpSlice.actions.StudentFollowList(StudentList));
+    }
+
+export default AddStudentFollowUpSlice.reducer

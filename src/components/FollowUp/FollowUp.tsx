@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import { StudentDetailsForFollowUp } from 'src/requests/Student/AddStudentDetails/RequestAddStudentDetails';
 import { IStudentDetailFollowUpBody } from 'src/Interface/Student/IAddStudentDetails';
 import { useParams } from 'react-router-dom';
+import FollowupStudentList from './FollowupStudentList';
 
 
 
@@ -87,6 +88,10 @@ const FollowUp = () => {
   const onSubmit=()=>{
     dispatch(AddStudentFollowUp(AddStudentFollowUpBody));
   }
+
+  const clickEdit =()=>{
+    
+  }
   return (
     <div>
       <Container>
@@ -136,6 +141,7 @@ const FollowUp = () => {
           <Button onClick={onSubmit}>Save</Button>
 
         </Card>
+        <FollowupStudentList clickEdit={clickEdit}/>
       </Container>
     </div>
   )
