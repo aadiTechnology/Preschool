@@ -8,10 +8,12 @@ import { AdmissionConversion ,resetgetAddAdmissionConversion } from 'src/request
 import { Card, Container, TextField, Grid, Button, FormControlLabel, Checkbox, InputAdornment } from '@mui/material';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import AdmissionConversionList from './AdmissionConversionList';
 
 function AdmisssionConversion() {
   const dispatch = useDispatch();
+  const { Id } = useParams()
   const AddAdmissionConversion: any = useSelector(
     (state: RootState) => state.AddAdmissionConversion.AdmissionConversion
   );

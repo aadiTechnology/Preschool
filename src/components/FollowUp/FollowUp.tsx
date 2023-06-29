@@ -29,7 +29,7 @@ const FollowUp = () => {
   const [email, setEmail] = useState("");
   const [itemList, setItemList] = useState([{ Id: 1, Name: "yes", Value: 1, IsActive: false }, { Id: 2, Name: "No", Value: 2, IsActive: false }, { Id: 3, Name: "Did Not Connect", Value: 3, IsActive: false }]);
   const [reminderitemlist, setReminderItemList] = useState([{ Id: 1, Name: "2 days", Value: 1, IsActive: false }, { Id: 2, Name: "7 days", Value: 2, IsActive: false }, { Id: 3, Name: "10 days", IsActive: false }, { Id: 4, Name: "1 month", Value: 4, IsActive: false }]);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
   const [month, setMonth] = useState("");
   const [searchName, setSearchName] = useState("");
   
@@ -41,8 +41,9 @@ const FollowUp = () => {
     const GetStudentFollowUpList: any = useSelector(
       (state: RootState) => state.AddStudentDetails.StudentDetailsFollowUp
   );
-
+ 
     const AddStudentFollowUpBody: IAddStudentFollowUpBody = {
+     
       Id:4,
       CallStatus:itemList.filter((item) => {return (item.IsActive) }).map((obj) => { return obj.Value }).toString(),
       Reminder:reminderitemlist.filter((item) => {return (item.IsActive) }).map((obj) => { return obj.Value }).toString(),
@@ -55,6 +56,7 @@ const FollowUp = () => {
     useEffect(() => {
       if(AddStudentFollow!==""){
         toast.success(AddStudentFollow ,{ toastId: 'success1' })
+      
       }
       },
     [AddStudentFollow])
