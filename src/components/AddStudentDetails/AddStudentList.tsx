@@ -37,9 +37,12 @@ function AddStudentList({ clickEdit }) {
    }, [StudentDetailDelete])
 
     const Delete = (Id) => {
-    const DeleteStudentDetailsBody: IDeleteStudentBody =
-    { "Id": Id, }
-    dispatch(DeleteStudentDetails(DeleteStudentDetailsBody))
+        if(confirm('Are you sure you want to delete enquiry')){
+            const DeleteStudentDetailsBody: IDeleteStudentBody =
+            { "Id": Id, }
+            dispatch(DeleteStudentDetails(DeleteStudentDetailsBody))
+        }
+
     }
     return (
         <div>
