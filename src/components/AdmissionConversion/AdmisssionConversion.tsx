@@ -3,11 +3,13 @@ import PageHeader from 'src/library/heading/pageHeader'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { IAdmissionConversionBody } from 'src/Interface/Admin/IAdmissionConversion'
-import { AdmissionConversion ,resetgetAddAdmissionConversion } from 'src/requests/Admin/RequestAdmissionConversion'
+import { IStudentDetailFollowUpBody } from 'src/Interface/Student/IAddStudentDetails';
+import { IAdmissionConversionBody } from 'src/Interface/Admin/IAdmissionConversion';
+import { AdmissionConversion ,resetgetAddAdmissionConversion } from 'src/requests/Admin/RequestAdmissionConversion';
 import { Card, Container, TextField, Grid, Button, FormControlLabel, Checkbox, InputAdornment } from '@mui/material';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import { toast } from 'react-toastify';
+import { StudentDetailsForFollowUp } from 'src/requests/Student/AddStudentDetails/RequestAddStudentDetails';
 import { useParams } from 'react-router-dom';
 import AdmissionConversionList from './AdmissionConversionList';
 
@@ -17,6 +19,10 @@ function AdmisssionConversion() {
   const AddAdmissionConversion: any = useSelector(
     (state: RootState) => state.AddAdmissionConversion.AdmissionConversion
   );
+
+  const GetStudentFollowUpList: any = useSelector(
+    (state: RootState) => state.AddStudentDetails.StudentDetailsFollowUp
+);
    
   const loading = useSelector(
     (state: RootState) => state.AddPhoto.Loading
@@ -26,9 +32,9 @@ function AdmisssionConversion() {
   const [studentName, setStudentName] = useState('');
   const [birtDate, setBirthDate] = useState('')
   const [fathersName, setFathersName] = useState('');
-  const[phoneNo,setPhoneNo]=useState('');
+  const [phoneNo,setPhoneNo]=useState('');
   const [mothersName, setMothersName] = useState('');
-  const[phoneNo1,setPhoneNo1]=useState('');
+  const [phoneNo1,setPhoneNo1]=useState('');
   const [address, setAddress] = useState('');
   const [emailid, setEmailid] = useState('');
   const [password, setPassword] = useState('');
@@ -57,7 +63,23 @@ function AdmisssionConversion() {
   toast.success(AddAdmissionConversion ,{ toastId: 'success1' } )}
   dispatch(resetgetAddAdmissionConversion());
   }, [AddAdmissionConversion])
+  
+  const GetStudentFollowUpBody: IStudentDetailFollowUpBody =
+  { "Id": parseInt(Id) }
 
+  useEffect(() => {
+    dispatch(StudentDetailsForFollowUp(GetStudentFollowUpBody));
+  },[])
+  useEffect(() => {
+    setStudentName(GetStudentFollowUpList.Text1)
+    setFathersName(GetStudentFollowUpList.Text2)
+    setMothersName(GetStudentFollowUpList.Text6)
+    setEmailid(GetStudentFollowUpList.Text5)
+    setAddress(GetStudentFollowUpList.Text7)
+    setClass1(GetStudentFollowUpList.Text4)
+ 
+    },
+  [GetStudentFollowUpList])
 const onSubmit=()=>{
   let isError = false
   if(password === ''){

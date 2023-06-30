@@ -119,6 +119,7 @@ export const StudentDetailsForFollowUp =
           Text5: item.EmailId,
           Text6: item.MotherName,
           Text7: item.PhoneNo2,
+          // Text8: item.BirthDate
 
 
         }

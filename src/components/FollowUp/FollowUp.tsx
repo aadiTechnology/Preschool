@@ -16,11 +16,12 @@ import { StudentDetailsForFollowUp } from 'src/requests/Student/AddStudentDetail
 import { IStudentDetailFollowUpBody } from 'src/Interface/Student/IAddStudentDetails';
 import { useParams } from 'react-router-dom';
 import FollowupStudentList from './FollowupStudentList';
+import ErrorMessage from 'src/library/ErrorMessage/ErrorMessage';
+import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 
 
 
 const FollowUp = () => {
-  const ItemList1 = [{ Id: 1, Name: "yes", value: 1, IsActive: "false" }, { Id: 2, Name: "No", value: 2, IsActive: "false" }, { Id: 3, Name: "Did Not Connect", value: 3, IsActive: "false" }]
   const [name, setName] = useState("");
   const [fathername, setFatherName] = useState("");
   const [phonenumber1, setPhoneNumber1] = useState("");
@@ -29,7 +30,10 @@ const FollowUp = () => {
   const [email, setEmail] = useState("");
   const [itemList, setItemList] = useState([{ Id: 1, Name: "yes", Value: 1, IsActive: false }, { Id: 2, Name: "No", Value: 2, IsActive: false }, { Id: 3, Name: "Did Not Connect", Value: 3, IsActive: false }]);
   const [reminderitemlist, setReminderItemList] = useState([{ Id: 1, Name: "2 days", Value: 1, IsActive: false }, { Id: 2, Name: "7 days", Value: 2, IsActive: false }, { Id: 3, Name: "10 days", IsActive: false }, { Id: 4, Name: "1 month", Value: 4, IsActive: false }]);
+  const [itemListerror, setItemListerror]= useState('')
+  const [reminderitemlisterror, setReminderItemListerror] = useState('')
   const [comment, setComment] = useState('');
+  const [commenterror, setCommenterror] = useState('');
   const [month, setMonth] = useState("");
   const [searchName, setSearchName] = useState("");
   
@@ -55,9 +59,7 @@ const FollowUp = () => {
   
     useEffect(() => {
       if(AddStudentFollow!==""){
-        toast.success(AddStudentFollow ,{ toastId: 'success1' })
-      
-      }
+        toast.success(AddStudentFollow ,{ toastId: 'success1' })}
       },
     [AddStudentFollow])
 
@@ -87,8 +89,54 @@ const FollowUp = () => {
     setSearchName(value)
   }
 
+  const IsSelected = () => {
+    let returnVal = false;
+    itemList.map((item)=>{
+      if(item.IsActive){
+        returnVal = true
+      }
+    })
+    return returnVal;
+  }
+
+  const IsSelectedreminder = () => {
+    let returnVal = false;
+    reminderitemlist.map((item)=>{
+      if(item.IsActive){
+        returnVal = true
+      }
+    })
+    return returnVal;
+  }
+
   const onSubmit=()=>{
-    dispatch(AddStudentFollowUp(AddStudentFollowUpBody));
+    let isError = false
+    if(comment===""){
+      setCommenterror('filled required')
+      isError = true
+    }else{
+      setCommenterror('')
+    }
+
+    if(!IsSelected()){
+      setItemListerror('Fill the Mandatory Field')
+      isError = true
+    }
+    else {
+      setItemListerror('')
+    }
+
+    if(!IsSelectedreminder()){
+      setReminderItemListerror('Fill the Mandatory Field')
+      isError = true
+    }
+    else {
+      setReminderItemListerror('')
+    }
+    if(!isError){
+      dispatch(AddStudentFollowUp(AddStudentFollowUpBody));
+    }
+    
   }
 
   const clickEdit =()=>{
@@ -120,29 +168,32 @@ const FollowUp = () => {
           <br />
           <Typography>Status of Call</Typography>
           <CheckUnCheckList ItemList={itemList} clickItem={clickItem} />
+          <ErrorMessageForm error={itemListerror}/>
           <br></br>
           <Typography>Reminder</Typography>
           <CheckUnCheckList ItemList={reminderitemlist} clickItem={clickReminderItem} />
-          <TextareaAutosize value={comment} onChange={(e)=>setComment(e.target.value)} name="Outlined" placeholder="Comment" minRows={4} style={{ width: "100%" }} />
+          <ErrorMessageForm error={reminderitemlisterror}/>
           <br></br>
-          <Grid container spacing={2}>
+          <TextareaAutosize value={comment} onChange={(e)=>setComment(e.target.value)} name="Outlined" placeholder="Comment" minRows={4} style={{ width: "100%" }} />
+          <ErrorMessageForm error={commenterror}/>
+          <br></br>
+          <Button onClick={onSubmit}>Save</Button>
+
+        </Card>
+
+        <Grid container spacing={2}>
             <Grid item xs={6} sx={{ mt: 2.7 }}>
               <DropDown itemList={monthArray} ClickItem={clickMonthItem} DefaultValue={month} Label={'Select Month'} />
             </Grid>
             <Grid item xs={6}>
-              <TextField value={searchName} onChange={(e) => { setSearchName(e.target.value) }} label={'Search by Student Name'}
+              <TextField value={searchName} onChange={(e) => {setSearchName(e.target.value) }} label={'Search by Student Name'}
                 InputProps={{
                   endAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>,
                 }}
               />
             </Grid>
           </Grid >
-
           <br></br>
-
-          <Button onClick={onSubmit}>Save</Button>
-
-        </Card>
         <FollowupStudentList clickEdit={clickEdit}/>
       </Container>
     </div>
