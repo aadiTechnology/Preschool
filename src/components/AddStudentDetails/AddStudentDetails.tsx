@@ -55,6 +55,7 @@ function AddStudentDetails() {
   const [emailiderror, setEmailiderror] = useState('');
   const [checked, setChecked] = useState(false);
   const [editing, setEditing] = useState(EditList);
+  const [schoolListerror, setSchoolListError] = useState('');
   const [Id, setId] = useState(0)
   const [ItemList, setItemList] = useState([])
   const AddUserLoginInfoBody: IAddUserLoginInfoBody = {
@@ -72,6 +73,15 @@ function AddStudentDetails() {
         classId= parseInt(item.Value) 
     })
     return classId
+  }
+  const IsSelected = () => {
+    let returnVal = false;
+    ItemList.map((item)=>{
+      if(item.IsActive){
+        returnVal = true
+      }
+    })
+    return returnVal;
   }
   const GetAddStudentDetailsBody: IAddStudentEnquiryBody =
   {
@@ -184,6 +194,13 @@ function AddStudentDetails() {
       setStudentAddresserror('')
 
     }
+    if(!IsSelected()){
+      setSchoolListError('Fill the Mandatory Field')
+      isError = true
+    }
+    else {
+      setSchoolListError('')
+    }
     if (!isError) {
       dispatch(GetAddStudentEnquiryDetails(GetAddStudentDetailsBody));
 
@@ -209,6 +226,9 @@ function AddStudentDetails() {
     setStudentAddress('')
     setEmailid('')
     setChecked(false)
+    setItemList(prev=> prev.map((item)=> 
+    {return {...item,IsActive:false}}))
+
   }
 
   const handleChange = (e) => {
@@ -249,7 +269,9 @@ function AddStudentDetails() {
       <PageHeader heading={' Enquiry Details'} />
       <Typography>Selected Class</Typography>
       {ItemList.length >  0 &&
-      <SelectedCard ItemList={ItemList} clickItem={clickItem}  />}
+      <SelectedCard ItemList={ItemList} clickItem={clickItem}  />
+     }
+       <ErrorMessageForm error={schoolListerror}/>
          <br></br>
       <Card>
  
