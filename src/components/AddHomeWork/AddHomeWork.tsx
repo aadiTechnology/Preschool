@@ -76,7 +76,7 @@ function AddHomeWork() {
             setSelectDate(GetEditList.AssignDate)
             setSubjectDescription(GetEditList.SubjectDescription)
             setSelectClass(GetEditList.ClassId)
-            setSelectSubject(GetEditList.SubjectIdId)
+            setSelectSubject(GetEditList.SubjectId)
         }
     }, [GetEditList])
 
