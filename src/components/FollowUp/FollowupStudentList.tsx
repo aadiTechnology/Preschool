@@ -4,7 +4,7 @@ import { RootState } from 'src/store';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
-import {StudentFollowUpList ,DeleteFollowUpList} from 'src/requests/Admin/RequestAddStudentFollowUp'
+import {StudentFollowUpList ,DeleteFollowUpList ,resetDeleteFollowUpList} from 'src/requests/Admin/RequestAddStudentFollowUp'
 import TabulerList from 'src/library/List/TabulerList';
 import {IDeleteFollowUpListBody} from 'src/Interface/Admin/IAddStudentFollowUp'
 import { toast } from 'react-toastify';
@@ -26,6 +26,7 @@ function FollowupStudentList({clickEdit}) {
       useEffect(() => {
         if(DeleteStudentFollow!==""){
           toast.success(DeleteStudentFollow ,{ toastId: 'success1' })}
+          dispatch(resetDeleteFollowUpList());
           dispatch(StudentFollowUpList())
         },
       [DeleteStudentFollow])
@@ -34,7 +35,7 @@ function FollowupStudentList({clickEdit}) {
     
       
       const clickDelete=(Id)=>{
-        if(confirm('are you sure')){
+        if(confirm('Are You Sure you want to delete The List')){
           const DeleteFollowUpBody: IDeleteFollowUpListBody =
           { "Id": Id}
           dispatch(DeleteFollowUpList(DeleteFollowUpBody))

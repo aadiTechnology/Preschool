@@ -20,7 +20,11 @@ const AddStudentFollowUpSlice = createSlice({
 
     DeleteFollowUpL(state, action) {
       state.DeleteFollowUp = action.payload;
-    }
+    },
+
+    resetDeleteFollowUpL(state) {
+      state.DeleteFollowUp = '';
+    },
 
   }
 });
@@ -32,11 +36,17 @@ export const AddStudentFollowUp =
       dispatch(AddStudentFollowUpSlice.actions.StudentFollowUp(response.data));
     };
 
-    export const DeleteFollowUpList =
+export const DeleteFollowUpList =
   (data: IDeleteFollowUpListBody): AppThunk =>
     async (dispatch) => {
       const response = await AddStudentFollowUpApi.DeleteFollowUp(data);
       dispatch(AddStudentFollowUpSlice.actions.DeleteFollowUpL(response.data));
+    };
+
+export const resetDeleteFollowUpList =
+    (): AppThunk =>
+    async (dispatch) => {
+      dispatch(AddStudentFollowUpSlice.actions.resetDeleteFollowUpL());
     };
 
 
