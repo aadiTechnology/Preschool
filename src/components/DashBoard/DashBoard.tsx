@@ -55,8 +55,8 @@ function DashBoard() {
   icon : <AddToQueueIcon fontSize='large'/>
 },
 {
-  Text:"AddStudent",
-  Text2:"Details",
+  Text:"Enquiry Details",
+  Text2:"",
   Link: 'Student/AddStudentDetails',
   icon : <AddToQueueIcon fontSize='large'/>
 },

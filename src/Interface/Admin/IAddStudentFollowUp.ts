@@ -5,6 +5,10 @@ export interface IAddStudentFollowUpBody{
     Comment:string
 }
 
+export interface IDeleteFollowUpListBody{
+    Id:number,
+  }
+
 export interface IGetStudentFollowUpListResult{
          Id: number,
         StudentName: string,

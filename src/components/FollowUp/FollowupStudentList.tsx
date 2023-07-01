@@ -4,24 +4,45 @@ import { RootState } from 'src/store';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useParams } from 'react-router-dom';
-import {StudentFollowUpList} from 'src/requests/Admin/RequestAddStudentFollowUp'
+import {StudentFollowUpList ,DeleteFollowUpList} from 'src/requests/Admin/RequestAddStudentFollowUp'
 import TabulerList from 'src/library/List/TabulerList';
-
+import {IDeleteFollowUpListBody} from 'src/Interface/Admin/IAddStudentFollowUp'
+import { toast } from 'react-toastify';
 function FollowupStudentList({clickEdit}) {
     const dispatch = useDispatch();
     const navigate=useNavigate()
-    // const { Id } = useParams();
+  
     const StudentFollowUp:any=useSelector(
         (state:RootState) => state.AddStudentFollowUp.FollowUpList
+      );
+
+      const DeleteStudentFollow:any=useSelector(
+        (state:RootState) => state.AddStudentFollowUp.DeleteFollowUp
       );
       useEffect(()=>{
         dispatch(StudentFollowUpList())
       },[])
-      console.log(StudentFollowUp,'StudentFollowUp')
 
-      const clickDelete=()=>{
-
+      useEffect(() => {
+        if(DeleteStudentFollow!==""){
+          toast.success(DeleteStudentFollow ,{ toastId: 'success1' })}
+          dispatch(StudentFollowUpList())
+        },
+      [DeleteStudentFollow])
+     
+      
+    
+      
+      const clickDelete=(Id)=>{
+        if(confirm('are you sure')){
+          const DeleteFollowUpBody: IDeleteFollowUpListBody =
+          { "Id": Id}
+          dispatch(DeleteFollowUpList(DeleteFollowUpBody))
+        }
+        
       }
+
+
       const clickSubmit=(Id)=>{
        navigate('/extended-sidebar/Student/AdmissionConversion/' + Id)
       }

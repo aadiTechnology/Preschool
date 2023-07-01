@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AppThunk } from 'src/store';
-import { IAddStudentFollowUpBody } from "src/Interface/Admin/IAddStudentFollowUp";
+import { IAddStudentFollowUpBody,IDeleteFollowUpListBody } from "src/Interface/Admin/IAddStudentFollowUp";
 import AddStudentFollowUpApi from 'src/api/Admin/ApiAddStudentFollowUp';
 
 const AddStudentFollowUpSlice = createSlice({
   name: 'FollowUp',
   initialState: {
     StudentFollowUp: '',
+    DeleteFollowUp: '',
     FollowUpList: []
   },
   reducers: {
@@ -15,6 +16,10 @@ const AddStudentFollowUpSlice = createSlice({
     },
     StudentFollowList(state, action) {
       state.FollowUpList = action.payload;
+    },
+
+    DeleteFollowUpL(state, action) {
+      state.DeleteFollowUp = action.payload;
     }
 
   }
@@ -25,6 +30,13 @@ export const AddStudentFollowUp =
     async (dispatch) => {
       const response = await AddStudentFollowUpApi.AddStudentFollowUp(data);
       dispatch(AddStudentFollowUpSlice.actions.StudentFollowUp(response.data));
+    };
+
+    export const DeleteFollowUpList =
+  (data: IDeleteFollowUpListBody): AppThunk =>
+    async (dispatch) => {
+      const response = await AddStudentFollowUpApi.DeleteFollowUp(data);
+      dispatch(AddStudentFollowUpSlice.actions.DeleteFollowUpL(response.data));
     };
 
 

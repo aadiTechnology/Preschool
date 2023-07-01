@@ -266,7 +266,7 @@ function AddStudentDetails() {
   }
   return (
     <Container>
-      <PageHeader heading={' Enquiry Details'} />
+      <PageHeader heading={'Enquiry Details'} />
       <Typography>Selected Class</Typography>
       {ItemList.length >  0 &&
       <SelectedCard ItemList={ItemList} clickItem={clickItem}  />
