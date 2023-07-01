@@ -3,6 +3,7 @@ import { AppThunk } from "src/store";
 import { IGetDateForLegendBody ,IGetDatewiseHomeworkDetailsBody } from "src/Interface/Student/IHomework";
 import GetHomeworkApi from "src/api/Student/ApiHomework";
 import {IGetViewHomeWorkListBody} from  "src/Interface/Student/IHomework"
+import { getMonthYearFormatted } from "src/components/Common/util";
 
 
 
@@ -29,7 +30,7 @@ const Homeworkslice = createSlice({
                
                 return {
                 Id:i,
-                Name:item.split(' ')[0],
+                Name:getMonthYearFormatted(item),
                 Value: item,
                 IsActive: i===count?true:false 
                 }

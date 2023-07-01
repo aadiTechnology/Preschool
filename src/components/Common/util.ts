@@ -58,6 +58,15 @@ export const getDateFormatted = (date) => {
     return `${arrDate[0]} ${monthNames[parseInt(arrDate[1])-1]} ${arrDate[2]}`;
 }
 
+export const getMonthYearFormatted = (date) => {
+    
+    let arrDate = date.split(' ')[0].split('-')
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    return `${arrDate[0]} ${monthNames[parseInt(arrDate[1])-1]}`;
+}
+
 export const getNextDate = (date, prevNext) => {
     var nextDate = new Date(date);
     console.log(date,"nextDate",nextDate)
