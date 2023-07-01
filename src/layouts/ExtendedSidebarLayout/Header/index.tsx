@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 import {
   Box,
@@ -9,14 +9,13 @@ import {
   IconButton,
   Tooltip,
   styled,
-  useTheme
+  useTheme,
+  Avatar, Typography, Popover, Button
 } from '@mui/material';
-import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
-import { SidebarContext } from 'src/contexts/SidebarContext';
-import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 
-import HeaderButtons from './Buttons';
-import HeaderUserbox from './Userbox';
+import { SidebarContext } from 'src/contexts/SidebarContext';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -37,10 +36,69 @@ const HeaderWrapper = styled(Box)(
 `
 );
 
+const MenuUserBox = styled(Box)(
+  ({ theme }) => `
+    background: ${theme.colors.alpha.black[5]};
+    padding: ${theme.spacing(2)};
+`
+);
+
+const UserBoxText = styled(Box)(
+  ({ theme }) => `
+    text-align: left;
+    padding-left: ${theme.spacing(1)};
+`
+);
+
+const UserBoxLabel = styled(Typography)(
+  ({ theme }) => `
+    font-weight: ${theme.typography.fontWeightBold};
+    color: ${theme.sidebar.menuItemColor};
+    display: block;
+    @media (max-width: 280px) {
+      font-size: 11px;
+    };
+    &.popoverTypo {
+      color: ${theme.palette.secondary.main};
+    }
+`
+);
+
+const UserBoxDescription = styled(Typography)(
+  ({ theme }) => `
+    color: ${alpha(theme.sidebar.menuItemColor, 0.6)};
+
+    &.popoverTypo {
+      color: ${theme.palette.secondary.light};
+    };
+    @media (max-width: 280px) {
+      font-size: 11px;
+    };
+`
+);
+
+
+
 function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
   const theme = useTheme();
+  const ref = useRef<any>(null);
+  const [isOpen, setOpen] = useState(false);
 
+  const handleOpen = (): void => {
+    setOpen(true);
+  };
+
+  const handleClose = (): void => {
+    setOpen(false);
+  };
+  const handleLogout = async (): Promise<void> => {
+    try {
+      sessionStorage.clear();
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <HeaderWrapper
       display="flex"
@@ -49,12 +107,12 @@ function Header() {
         boxShadow:
           theme.palette.mode === 'dark'
             ? '0 1px 0 ' +
-              alpha(lighten(theme.colors.primary.main, 0.7), 0.15) +
-              ', 0px 2px 8px -3px rgba(0, 0, 0, 0.2), 0px 5px 22px -4px rgba(0, 0, 0, .1)'
+            alpha(lighten(theme.colors.primary.main, 0.7), 0.15) +
+            ', 0px 2px 8px -3px rgba(0, 0, 0, 0.2), 0px 5px 22px -4px rgba(0, 0, 0, .1)'
             : '0px 2px 8px -3px ' +
-              alpha(theme.colors.alpha.black[100], 0.2) +
-              ', 0px 5px 22px -4px ' +
-              alpha(theme.colors.alpha.black[100], 0.1)
+            alpha(theme.colors.alpha.black[100], 0.2) +
+            ', 0px 5px 22px -4px ' +
+            alpha(theme.colors.alpha.black[100], 0.1)
       }}
     >
       <Stack
@@ -63,29 +121,76 @@ function Header() {
         alignItems="center"
         spacing={2}
       >
-       
+        <Avatar variant="rounded" sx={{ margin: 'auto', maxHeight: 70, }} />
+        {/* <img src={img_src}  /> */}
       </Stack>
-      <Box display="flex" alignItems="center">
-        {/* <HeaderButtons /> */}
-        <HeaderUserbox />
-        <Box
-          component="span"
+
+      <Stack direction="row" spacing={1} alignItems="center">
+        <IconButton
+          size="small"
           sx={{
-            ml: 2,
-            display: { lg: 'none', xs: 'inline-block' }
+            width: 35,
+            height: 35,
+            '&:hover': {
+              color: `${theme.colors.alpha.trueWhite[100]}`,
+              background: `${alpha(theme.colors.alpha.trueWhite[100], 0.2)}`
+            }
+          }}
+          ref={ref}
+          onClick={handleOpen}
+        >
+          <Avatar alt="user.name" src={''} sx={{ backgroundColor: "#90caf9", height: 50 }} variant="rounded" aria-label="add" />
+        </IconButton>
+        <Popover
+          disableScrollLock
+          anchorEl={ref.current}
+          onClose={handleClose}
+          open={isOpen}
+          anchorOrigin={{
+            vertical: 'center',
+            horizontal: 'center'
+          }}
+          transformOrigin={{
+            vertical: 'center',
+            horizontal: 'center'
           }}
         >
-          {/* <Tooltip arrow title="Toggle Menu">
-            <IconButton color="primary" onClick={toggleSidebar}>
-              {!sidebarToggle ? (
-                <MenuTwoToneIcon fontSize="small" />
-              ) : (
-                <CloseTwoToneIcon fontSize="small" />
-              )}
+          <MenuUserBox
+            sx={{
+              minWidth: 600
+            }}
+            display="flex"
+          >
+            <Avatar variant="rounded" alt="user.name" src={''} />
+            <UserBoxText>
+              <UserBoxLabel className="popoverTypo">
+                Student Name
+              </UserBoxLabel>
+              <UserBoxDescription className="popoverTypo" >
+                Nursary
+              </UserBoxDescription>
+              </UserBoxText>
+          </MenuUserBox>
+          <Divider
+            sx={{
+              mb: 0
+            }}
+          />
+          <Box sx={{ textAlign: "center" }} m={1}>
+            <IconButton onClick={handleLogout}>
+              <ExitToAppIcon fontSize="small"
+                sx={{
+                  mr: 1,
+                  fontWeight: "bold",
+                  color: "#053082"
+                }}
+              />
+              <UserBoxLabel sx={{ color: "blue", fontWeight: "bold" }}  >Sign Out</UserBoxLabel>
             </IconButton>
-          </Tooltip> */}
-        </Box>
-      </Box>
+          </Box>
+        </Popover>
+      </Stack>
+
     </HeaderWrapper>
   );
 }
