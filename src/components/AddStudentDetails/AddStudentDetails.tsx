@@ -5,11 +5,13 @@ import { useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
 import { IAddStudentEnquiryBody, IAddUserLoginInfoBody,IEditStudentEnquiryBody } from "src/Interface/Student/IAddStudentDetails"
 import { GetAddStudentEnquiryDetails, resetAddStudent, resetAddUserLogin, AddUserLoginInfo,EditStudentEnquirydetails } from "src/requests/Student/AddStudentDetails/RequestAddStudentDetails"
-import { Button, TextField, Container, Card, Checkbox, FormControlLabel } from '@mui/material';
+import { Button, TextField, Container, Card, Checkbox, FormControlLabel, Typography } from '@mui/material';
 import { toast } from 'react-toastify';
 import { IsEmailValid, IsMobileNoValid } from "src/components/Common/util"
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import AddStudentList from './AddStudentList';
+import { getClassNameList } from 'src/requests/Admin/RequestAddPhoto'
+import SelectedCard from 'src/library/Card/SelectedCard';
 
 
 function AddStudentDetails() {
@@ -25,6 +27,10 @@ function AddStudentDetails() {
 
   const EditList: any = useSelector(
     (state: RootState) => state.AddStudentDetails.EditStudent
+  );
+
+  const GetClass: any = useSelector(
+    (state: RootState) => state.AddPhoto.GetClassNameList
   );
 
   const [studentName, setStudentName] = useState('');
@@ -50,7 +56,7 @@ function AddStudentDetails() {
   const [checked, setChecked] = useState(false);
   const [editing, setEditing] = useState(EditList);
   const [Id, setId] = useState(0)
-
+  const [ItemList, setItemList] = useState([])
   const AddUserLoginInfoBody: IAddUserLoginInfoBody = {
     "emailid": emailid,
     "PhoneNo": phoneNo,
@@ -59,23 +65,34 @@ function AddStudentDetails() {
   }
 
 
+  const getClassId = ()=>{
+    let classId = 0;
+    ItemList.map((item) => {
+      if(item.IsActive)
+        classId= parseInt(item.Value) 
+    })
+    return classId
+  }
   const GetAddStudentDetailsBody: IAddStudentEnquiryBody =
   {
-
-    "ClassId": 1,
-    "StudentName": studentName,
-    "BirthDate": birthDate,
-    "Age": parseInt(age),
-    "FatherName": fatherName,
-    "PhoneNo": phoneNo,
-    "MotherName": motherName,
-    "PhoneNo2": phoneNo2,
-    "SocietyName": societyName,
-    "StudentAddress": studentAddress,
-    "emailid": emailid,
-    "SMS": "true",
-    "UserId": 1
+    ClassId: getClassId(),
+    StudentName: studentName,
+    BirthDate: birthDate,
+    Age: parseInt(age),
+    FatherName: fatherName,
+    PhoneNo: phoneNo,
+    MotherName: motherName,
+    PhoneNo2: phoneNo2,
+    SocietyName: societyName,
+    StudentAddress: studentAddress,
+    emailid: emailid,
+    SMS: "true",
+    UserId: 1
   }
+
+  useEffect(() => {
+    dispatch(getClassNameList())
+  }, [])
   useEffect(() => {
     if (GetAddStudent !== '') {
       toast.success(GetAddStudent, { toastId: 'success1' })
@@ -84,6 +101,10 @@ function AddStudentDetails() {
   }, [GetAddStudent])
 
 
+  useEffect(() => {
+    setItemList(GetClass)
+  }, [GetClass])
+  
   useEffect(() => {
     if (AddUserLogin !== '') {
       toast.success(AddUserLogin, { toastId: 'success2' })
@@ -107,7 +128,9 @@ function AddStudentDetails() {
     }
   }, [EditList])
   
-
+  const clickItem = (value) => {
+    setItemList(value)
+  }
     const clickEdit=(Id)=>{
       setEditing(EditList)
       const EditBody : IEditStudentEnquiryBody = {Id:Id}
@@ -212,14 +235,28 @@ function AddStudentDetails() {
     }
   };
   
+  const onBirthDateChange = (value) => {
+    setBirthDate(value)
+    const currentDate = new Date();
+    if(!isNaN(Date.parse(birthDate))){
+    const current = new Date(value);
+    setAge((currentDate.getFullYear() - current.getFullYear()).toString());
+  }else
+  setAge('')
+  }
   return (
     <Container>
-      <PageHeader heading={'Add Student Enquiry Details'} />
+      <PageHeader heading={' Enquiry Details'} />
+      <Typography>Selected Class</Typography>
+      {ItemList.length >  0 &&
+      <SelectedCard ItemList={ItemList} clickItem={clickItem}  />}
+<br></br>
       <Card>
+ 
         <TextField value={studentName} onChange={(e) => { setStudentName(e.target.value) }} label={'studentName'} />
 
         <ErrorMessageForm error={studentNameerror} />
-        <TextField value={birthDate} type='date' onChange={(e) => { setBirthDate(e.target.value) }} label={'Birth Date'} focused />
+        <TextField value={birthDate} type='date' onChange={(e) => { onBirthDateChange(e.target.value) }} label={'Birth Date'} focused />
 
         <ErrorMessageForm error={birthDateerror} />
         <TextField value={age} type="text"
