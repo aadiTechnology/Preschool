@@ -28,6 +28,11 @@ function AddStudentList({ clickEdit }) {
       navigate('FollowUp/' + Id)
    }
 
+   const Submit1 = (Id) => {
+    console.log(Id ,"Id")
+    navigate('/extended-sidebar/Student/AdmissionConversion/' + Id)
+}
+
    useEffect(() => {
     if (StudentDetailDelete !== '') {
      toast.success(StudentDetailDelete, { toastId: 'success1' })
@@ -46,7 +51,7 @@ function AddStudentList({ clickEdit }) {
     }
     return (
         <div>
-        <TabulerList ItemList={GetStudentEnquiryList} clickEdit={clickEdit} Submit={Submit} Delete={Delete}/>
+        <TabulerList ItemList={GetStudentEnquiryList} clickEdit={clickEdit} Submit={Submit} Delete={Delete} Submit1={Submit1}/>
         </div>
     )
 }

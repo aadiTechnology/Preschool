@@ -250,13 +250,13 @@ function AddStudentDetails() {
       <Typography>Selected Class</Typography>
       {ItemList.length >  0 &&
       <SelectedCard ItemList={ItemList} clickItem={clickItem}  />}
-<br></br>
+         <br></br>
       <Card>
  
         <TextField value={studentName} onChange={(e) => { setStudentName(e.target.value) }} label={'studentName'} />
 
         <ErrorMessageForm error={studentNameerror} />
-        <TextField value={birthDate} type='date' onChange={(e) => { onBirthDateChange(e.target.value) }} label={'Birth Date'} focused />
+        <TextField value={birthDate} type='date' onChange={(e) => {onBirthDateChange(e.target.value) }} label={'Birth Date'} focused />
 
         <ErrorMessageForm error={birthDateerror} />
         <TextField value={age} type="text"

@@ -3,7 +3,8 @@ import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SendIcon from '@mui/icons-material/Send';
-function TabulerCard({item ,clickEdit ,Submit ,Delete}) {
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+function TabulerCard({item ,clickEdit ,Submit ,Delete ,Submit1=undefined}) {
   return (
     <div>
           <Card sx={{ mb: 1 }}  >
@@ -31,6 +32,10 @@ function TabulerCard({item ,clickEdit ,Submit ,Delete}) {
               <Grid item xs={2} md={1}>
                 <DeleteIcon  color={'error'} onClick={() => Delete(item.Id)} />
               </Grid>
+              {Submit1 &&  <Grid item xs={2} md={1}>
+                <ArrowForwardIcon color={'secondary'} onClick={() =>Submit1(item.Id)} />
+              </Grid> }
+             
             </Grid>
           </Card>
 
