@@ -3,6 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from 'src/store';
 import {IGetClassNameListBody ,IGetAddHomeworkBody , IGetSubjectNameBody,ISubmitHomeworkBody,IGetDetailsListBody ,IDeleteHomeworkBody ,IHomeworkListForEditBody} from 'src/Interface/Teacher/IAddHomework';
 import GetClassForTeacherApi from 'src/api/Teacher/ApiAddHomeWork'
+import { getDateFormatted } from 'src/components/Common/util';
 
 const AddHomeWorkSlice = createSlice({
   name: 'AddHomeWork',
@@ -56,9 +57,6 @@ const AddHomeWorkSlice = createSlice({
     getHomeworkListForEdit(state,action){
       state.HomeworkListForEdit=action.payload;
       state.Loading = false
-    },
-    resetMessage(state) {
-      state.AddHomework = null;
     },
     getLoading(state) {
       state.Loading = true
@@ -136,7 +134,12 @@ export const getClassNameList =
     const response = await GetClassForTeacherApi.GetSubmitHomework(data);
     dispatch(AddHomeWorkSlice.actions.getSubmitHomework(response.data));
   };
-
+  
+  export const resetSubmitMessage =
+  (): AppThunk =>
+    async (dispatch) => {
+      dispatch(AddHomeWorkSlice.actions.resetSubmitMessage());
+    }
   export const getHomeworkListForEdit =
   (data:IHomeworkListForEditBody): AppThunk =>
   async (dispatch) => {
@@ -157,7 +160,7 @@ export const getClassNameList =
          Text3 : item.SubjectName,
          Text4 : item.Attachment,
          Text5 : item.Camera,
-         Text6 : item.AssignDate.split(' ')[0],
+         Text6 : getDateFormatted(item.AssignDate),
          IsSubmited: item.IsSubmited
     }
    })

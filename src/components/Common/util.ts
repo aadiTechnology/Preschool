@@ -48,12 +48,14 @@ export function IsEmailValid(value) {
     }
     return ''
 }
+
 export const getDateFormatted = (date) => {
-    date = date || new Date();
-    const Day = new Date(date).getDate();
-    const Month = new Date(date).toLocaleString('default', { month: 'short' });
-    const Year = new Date(date).getFullYear();
-    return `${Day} ${Month} ${Year}`;
+    
+    let arrDate = date.split(' ')[0].split('-')
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    return `${arrDate[0]} ${monthNames[parseInt(arrDate[1])-1]} ${arrDate[2]}`;
 }
 
 export const getNextDate = (date, prevNext) => {

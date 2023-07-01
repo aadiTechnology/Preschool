@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { toast } from 'react-toastify';
-import { getDeleteHomework, getDetailsList, getSubmitHomework, resetDeleteMessage } from 'src/requests/Teacher/RequestAddHomeWork';
+import { getDeleteHomework, getDetailsList, getSubmitHomework, resetDeleteMessage, resetSubmitMessage } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IDeleteHomeworkBody, IGetDetailsListBody, ISubmitHomeworkBody } from 'src/Interface/Teacher/IAddHomework';
 import TabulerList from 'src/library/List/TabulerList';
 function AddHomeworkList({ clickEdit }) {
@@ -37,7 +37,7 @@ const dispatch = useDispatch();
   useEffect(() => {
     if (GetSubmit !== '') {
       toast.success(GetSubmit, { toastId: 'success1' })
-      dispatch(resetDeleteMessage());
+      dispatch(resetSubmitMessage());
     }
   }, [GetSubmit])
 

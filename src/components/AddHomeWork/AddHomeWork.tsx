@@ -10,7 +10,7 @@ import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDelet
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { toolbarOptions } from '../Common/util';
+import { getDateFormatted, toolbarOptions } from '../Common/util';
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import AddHomeworkList from './AddHomeworkList';
@@ -73,7 +73,7 @@ function AddHomeWork() {
     useEffect(() => {
         if (GetEditList !== null) {
             setId(GetEditList.Id)
-            setSelectDate(GetEditList.AssignDate)
+            setSelectDate(getDateFormatted(GetEditList.AssignDate))
             setSubjectDescription(GetEditList.SubjectDescription)
             setSelectClass(GetEditList.ClassId)
             setSelectSubject(GetEditList.SubjectId)
@@ -98,6 +98,13 @@ function AddHomeWork() {
 
         if (selectdate === '') {
             setSelectdateerror('Field is required');
+            isValid = false;
+        } else {
+            setSelectdateerror('');
+        }
+
+        if (isNaN(Date.parse(selectdate))) {
+            setSelectdateerror('Please enter valid date');
             isValid = false;
         } else {
             setSelectdateerror('');
@@ -142,7 +149,7 @@ function AddHomeWork() {
                 <br></br>
                 <ReactQuill value={subjectDescription} onChange={(value) => setSubjectDescription(value)} modules={toolbarOptions} />
                 <ErrorMessageForm  error={descriptionerror}/>
-                <TextField type="date" value={selectdate} onChange={(e) => setSelectDate(e.target.value)} />
+                <TextField value={selectdate} onChange={(e) => setSelectDate(e.target.value)} /> (date format MM-dd-YYYY)
                 <ErrorMessageForm error={selectdateerror}/>
                 <Box mt={2}>
                     <input type="file" ></input>
