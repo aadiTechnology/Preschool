@@ -1,4 +1,5 @@
 import { useContext, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Box,
@@ -85,6 +86,8 @@ function Header() {
   const ref = useRef<any>(null);
   const [isOpen, setOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleOpen = (): void => {
     setOpen(true);
   };
@@ -95,6 +98,8 @@ function Header() {
   const handleLogout = async (): Promise<void> => {
     try {
       sessionStorage.clear();
+      handleClose();
+      navigate('/');
     } catch (err) {
       console.error(err);
     }
@@ -185,7 +190,8 @@ function Header() {
                   color: "#053082"
                 }}
               />
-              <UserBoxLabel sx={{ color: "blue", fontWeight: "bold" }}  >Sign Out</UserBoxLabel>
+              <UserBoxLabel sx={{ color: "blue", fontWeight: "bold" }}  
+              onClick={handleLogout}>Sign Out</UserBoxLabel>
             </IconButton>
           </Box>
         </Popover>
