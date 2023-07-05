@@ -1,12 +1,12 @@
 export const toolbarOptions = {
     toolbar: {
         container: [
-            ['bold', 'italic', 'underline', 'strike'],
+            ['bold', 'italic', 'underline'],
             [{ color: [] }],
             [{ align: [] }],
             [{ size: ['small', 'normal', 'large', 'huge'] }],
             [{ list: 'ordered' }, { list: 'bullet' }],
-            ['link', 'image'],
+            // ['link', 'image'],
             ['clean'],
         ],
     },
@@ -58,6 +58,39 @@ export const getDateFormatted = (date) => {
     return `${arrDate[0]} ${monthNames[parseInt(arrDate[1])-1]} ${arrDate[2]}`;
 }
 
+export const getInputDateFormatted = (date) => {
+    let arrDate = date.split(' ')[0].split('-')
+    return `${arrDate[0]}-${parseInt(arrDate[1])}-${arrDate[2]}`;
+}
+
+export const ChangeFileIntoBase64 = (fileData) => {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(fileData);
+
+        fileReader.onload = () => {
+            resolve(fileReader.result);
+        };
+        fileReader.onerror = (err) => {
+            reject(err);
+        };
+    });
+};
+export const CheckFileValidation = (fileData, allowedFileTypes, fileSize) => {
+    const fileExtension = fileData?.name?.split('.').at(-1);
+    if (fileExtension != undefined || null) {
+
+        if (fileData?.size > fileSize) {
+            return 'Please upload a file smaller than 2 MB';
+        }
+        if (!allowedFileTypes.includes(fileExtension.toLowerCase())) {
+            return 'File does not support. Please check Note';
+        } else if (allowedFileTypes.includes(fileExtension)) {
+            return null;
+        }
+    }
+};
+
 export const getMonthYearFormatted = (date) => {
     
     let arrDate = date.split(' ')[0].split('-')
@@ -68,9 +101,16 @@ export const getMonthYearFormatted = (date) => {
 }
 
 export const getNextDate = (date, prevNext) => {
-    var nextDate = new Date(date);
-    console.log(date,"nextDate",nextDate)
-    console.log(nextDate.getDate() + prevNext,"nextDate",nextDate.getDate())
+    var nextDate = new Date(getDateFormatted(date));
     nextDate.setDate(nextDate.getDate() + prevNext);
-    return getDateFormatted(nextDate)
+    return getFormattedNextDate(nextDate)
+}
+
+export const getFormattedNextDate = (date) => {
+    date = date || new Date();
+    const Day = new Date(date).getDate();
+    const Month = new Date(date).toLocaleString('default', { month: 'short' });
+    const Year = new Date(date).getFullYear();
+
+    return `${Day} ${Month} ${Year}`;
 }

@@ -14,6 +14,7 @@ export interface IGetDateForLegendResult{
 
 export interface IGetDatewiseHomeworkDetailsBody {
     StartDate:string;
+    EndDate:string;
 };
 
 export interface IGetDatewiseHomeworkDetailsResult{

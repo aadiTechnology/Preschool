@@ -156,7 +156,7 @@ export const getClassNameList =
     return {
          Id:item.Id,
          Text1:  item.ClassName,
-         Text2 : item.SubjectDescription,
+         Text2 : item.SubjectDescription.substring(10),
          Text3 : item.SubjectName,
          Text4 : item.Attachment,
          Text5 : item.Camera,

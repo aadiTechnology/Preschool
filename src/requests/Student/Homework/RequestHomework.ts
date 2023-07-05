@@ -38,6 +38,7 @@ const Homeworkslice = createSlice({
             state.HomeworkDate = HomeWorkDateList;
             state.AllowPrevious = action.payload.AllowPrevious
             state.AllowNext = action.payload.AllowNext
+            console.log(action.payload.AllowPrevious,"prev",action.payload.AllowNext,"Next")
             state.Loading = false;
         },
         GetViewHomework(state, action) {
