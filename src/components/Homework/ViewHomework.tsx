@@ -33,7 +33,7 @@ function ViewHomework() {
         <Typography dangerouslySetInnerHTML={{ __html: item.SubjectDescription }}></Typography>
         <Typography>{item.AssignDate}</Typography>
       {item.Attachment!=="" &&
-        <a target="_blank" rel="noreferrer" href={'/images/'+item.Attachment}>Attachment</a>
+        <a target="_blank" rel="noreferrer" href={'/documents/'+item.Attachment}>Attachment</a>
       }
       </Card>
            </div>
