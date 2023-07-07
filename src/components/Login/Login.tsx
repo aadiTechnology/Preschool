@@ -34,25 +34,30 @@ function Login() {
   }
 
   useEffect(() => {
-    console.log(GetUserLogin, "GetUserLogin")
     if (GetUserLogin !== null) {
-      if (GetUserLogin.UserType === null)
+      if (GetUserLogin.UserRoleId === null)
         toast.error("UserId and or Password is incorrect")
       else {
         setSession()
         dispatch(resetUserLogin());
-        if(sessionStorage.getItem("UserType")==="3")
-        navigate('/extended-sidebar/Student/HomeWork');
-        else if(sessionStorage.getItem("UserType")==="2")
-        navigate('/extended-sidebar/Student/AddHomeWork');
+        if (sessionStorage.getItem("UserRoleId") === "3")
+          navigate('/extended-sidebar/Student/HomeWork');
+        else if (sessionStorage.getItem("UserRoleId") === "2")
+          navigate('/extended-sidebar/Student/AddHomeWork');
         else
-        navigate('/extended-sidebar/Student/AddPhoto');
+          navigate('/extended-sidebar/Student/AddPhoto');
       }
     }
 
   }, [GetUserLogin])
-  const setSession=()=>{
-    sessionStorage.setItem("UserType",GetUserLogin.UserType)
+  const setSession = () => {
+    sessionStorage.setItem("UserId", GetUserLogin.UserId)
+    sessionStorage.setItem("UserRoleId", GetUserLogin.UserRoleId)
+    sessionStorage.setItem("ClassId", GetUserLogin.ClassId)
+    sessionStorage.setItem("ClassDivisionId", GetUserLogin.ClassDivisionId)
+    sessionStorage.setItem("EmailId", GetUserLogin.EmailId)
+    sessionStorage.setItem("BirthDate", GetUserLogin.BirthDate)
+    sessionStorage.setItem("PhoneNo", GetUserLogin.PhoneNo)
   }
   const emailRegExp = /^\S+@\S+\.\S+$/;
   const onSubmit = () => {
@@ -79,7 +84,7 @@ function Login() {
     }
 
     console.log({ username })
-    
+
   }
 
 
@@ -88,13 +93,13 @@ function Login() {
       <PageHeader heading={'Login'} />
       <TextField value={username} onChange={(e) => { setUserName(e.target.value) }}
         label={'username'} />
-   
-      <ErrorMessageForm error={usernameError}/>
+
+      <ErrorMessageForm error={usernameError} />
 
       <TextField value={password} onChange={(e) => { setPassword(e.target.value) }}
         label={'password'} />
-        <ErrorMessageForm error={passworderror}/>
-      
+      <ErrorMessageForm error={passworderror} />
+
       <Button onClick={onSubmit}>Login</Button>
     </Container>
   )

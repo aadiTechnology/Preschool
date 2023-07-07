@@ -22,7 +22,7 @@ export interface IGetSubjectNameResult {
 
 export interface IGetAddHomeworkBody {
     Id:number,
-    ClassId:number,
+    ClassDivisionId:number,
     SubjectId:number,
     SubjectDescription:string,
     AssignDate:string,

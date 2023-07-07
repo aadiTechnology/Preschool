@@ -7,17 +7,18 @@ import { RootState } from 'src/store';
 import {  GetViewHomework} from 'src/requests/Student/Homework/RequestHomework'
 import { IGetViewHomeWorkListBody } from 'src/Interface/Student/IHomework';
 import { Typography ,Card, Container} from '@mui/material';
+import { useParams } from 'react-router';
 
 function ViewHomework() {
   const dispatch = useDispatch();
   const ViewHomework: any = useSelector(
     (state: RootState) => state.HomeWork.ViewHomework
   );
-
+  const { Id } = useParams();
   console.log(ViewHomework ,"ViewHomework")
   const GetViewHomeworkBody: IGetViewHomeWorkListBody =
   {
-    "AssignDate": "2023-06-22"
+    Id: parseInt(Id)
   }
   useEffect(() => {
     dispatch(GetViewHomework(GetViewHomeworkBody));
@@ -31,7 +32,9 @@ function ViewHomework() {
              <Card sx={{mb:"10px"}}>
         <Typography dangerouslySetInnerHTML={{ __html: item.SubjectDescription }}></Typography>
         <Typography>{item.AssignDate}</Typography>
-        <Typography>{item.Attachment}</Typography>
+      {item.Attachment!=="" &&
+        <a target="_blank" rel="noreferrer" href={'/images/'+item.Attachment}>Attachment</a>
+      }
       </Card>
            </div>
       ))}

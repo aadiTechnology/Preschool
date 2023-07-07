@@ -72,7 +72,7 @@ function AddHomeWork() {
     const GetAddHomeworkBody: IGetAddHomeworkBody =
     {
         Id: Id,
-        ClassId: parseInt(selectclass),
+        ClassDivisionId: parseInt(selectclass),
         SubjectId: parseInt(selectsubject),
         SubjectDescription: subjectDescription,
         AssignDate: getDateFormatted(selectdate),
@@ -96,7 +96,7 @@ function AddHomeWork() {
             setId(GetEditList.Id)
             setSelectDate(getInputDateFormatted(GetEditList.AssignDate))
             setSubjectDescription(GetEditList.SubjectDescription)
-            setSelectClass(GetEditList.ClassId)
+            setSelectClass(GetEditList.ClassDivisionId)
             setSelectSubject(GetEditList.SubjectId)
         }
     }, [GetEditList])

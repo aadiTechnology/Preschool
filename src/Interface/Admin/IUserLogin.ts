@@ -6,7 +6,7 @@ export interface IUserLoginBody{
 };
 
 export interface IUserLoginResult{
-    
+    UserRoleId:number,
     EmailId: string,
     PhoneNo: string,
     LoginPassword: string,

@@ -1,4 +1,5 @@
 export interface IGetDateForLegendBody {
+    ClassDivisionId:number;
     AssignDate:string;
 };
 
@@ -13,6 +14,7 @@ export interface IGetDateForLegendResult{
 };
 
 export interface IGetDatewiseHomeworkDetailsBody {
+    ClassDivisionId:number;
     StartDate:string;
     EndDate:string;
 };
@@ -26,7 +28,7 @@ export interface IGetDatewiseHomeworkDetailsResult{
 
 
 export interface IGetViewHomeWorkListBody {
-    AssignDate:string;
+    Id:number;
 };
 
 export interface IGetViewHomeWorkListResult{

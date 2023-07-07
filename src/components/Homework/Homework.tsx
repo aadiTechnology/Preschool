@@ -14,14 +14,14 @@ import Card2Text from 'src/library/Card/Card2Text';
 import { useNavigate } from 'react-router';
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 import SelectedCard from 'src/library/Card/SelectedCard';
-import { getNextDate } from '../Common/util';
+import { getDateFormatted, getNextDate } from '../Common/util';
 
 function Homework() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const clickViewHomework = () => {
-    navigate('ViewHomework')
+  const clickViewHomework = (value) => {
+    navigate('ViewHomework/'+value)
   }
 
 
@@ -48,11 +48,13 @@ console.log(AllowPrevious,"AllowPrevious")
   const [endDate, setEndDate] = useState('')
   const GetHighlightedDateBody: IGetDateForLegendBody =
   {
-    AssignDate: ItemList.filter((item) => { return (item.IsActive) }).map((obj) => { return obj.Value }).toString(),
+    ClassDivisionId: parseInt(sessionStorage.getItem("ClassDivisionId")),
+    AssignDate: getDateFormatted(ItemList.filter((item) => { return (item.IsActive) }).map((obj) => { return obj.Value }).toString()),
   }
 
   const GetHomeworkDateBody: IGetDatewiseHomeworkDetailsBody =
   {
+    ClassDivisionId: parseInt(sessionStorage.getItem("ClassDivisionId")),
     StartDate: startdate,
     EndDate: endDate
   }

@@ -64,7 +64,7 @@ const studentRoutes = [
     element:<Homework/>
   },
   {
-    path:'Homework/ViewHomework',
+    path:'Homework/ViewHomework/:Id',
     element:<ViewHomework/>
   },
   {
