@@ -49,19 +49,6 @@ export function IsEmailValid(value) {
     return ''
 }
 
-export const getDateFormatted = (date) => {
-    
-    let arrDate = date.split(' ')[0].split('-')
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-    return `${arrDate[0]} ${monthNames[parseInt(arrDate[1])-1]} ${arrDate[2]}`;
-}
-
-export const getInputDateFormatted = (date) => {
-    let arrDate = date.split(' ')[0].split('-')
-    return `${arrDate[0]}-${parseInt(arrDate[1])}-${arrDate[2]}`;
-}
 
 export const ChangeFileIntoBase64 = (fileData) => {
     return new Promise((resolve, reject) => {
@@ -91,13 +78,35 @@ export const CheckFileValidation = (fileData, allowedFileTypes, fileSize) => {
     }
 };
 
-export const getMonthYearFormatted = (date) => {
-    
-    let arrDate = date.split(' ')[0].split('-')
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+export const dateSeparator = "/"    
+export const dayIndex = "1"
+export const monthIndex = "0"
 
-    return `${arrDate[0]} ${monthNames[parseInt(arrDate[1])-1]}`;
+// export const dateSeparator = "/"    
+// export const dayIndex = "1"
+// export const monthIndex = "0"
+
+export const getDateFormatted = (date) => {
+    console.log(date.split(' ')[0],"getDateFormatted",date.split(' ')[0].split(dateSeparator))
+    let arrDate = date.split(' ')[0].split(dateSeparator)
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    return `${arrDate[dayIndex]} ${monthNames[parseInt(arrDate[monthIndex]) - 1]} ${arrDate[2]}`;
+}
+
+export const getInputDateFormatted = (date) => {
+    let arrDate = date.split(' ')[0].split(dateSeparator)
+    return `${arrDate[dayIndex]}-${parseInt(arrDate[monthIndex])}-${arrDate[2]}`;
+}
+
+export const getMonthYearFormatted = (date) => {
+
+    let arrDate = date.split(' ')[0].split(dateSeparator)
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    return `${arrDate[dayIndex]} ${monthNames[parseInt(arrDate[monthIndex]) - 1]}`;
 }
 
 export const getNextDate = (date, prevNext) => {
