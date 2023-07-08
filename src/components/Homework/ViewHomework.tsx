@@ -8,6 +8,7 @@ import {  GetViewHomework} from 'src/requests/Student/Homework/RequestHomework'
 import { IGetViewHomeWorkListBody } from 'src/Interface/Student/IHomework';
 import { Typography ,Card, Container} from '@mui/material';
 import { useParams } from 'react-router';
+import { getDateFormatted } from '../Common/util';
 
 function ViewHomework() {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function ViewHomework() {
         <div key={i}>
              <Card sx={{mb:"10px"}}>
         <Typography dangerouslySetInnerHTML={{ __html: item.SubjectDescription }}></Typography>
-        <Typography>{item.AssignDate}</Typography>
+        <Typography>{getDateFormatted(item.AssignDate)}</Typography>
       {item.Attachment!=="" &&
         <a target="_blank" rel="noreferrer" href={'/documents/'+item.Attachment}>Attachment</a>
       }

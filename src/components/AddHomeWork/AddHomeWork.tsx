@@ -75,7 +75,7 @@ function AddHomeWork() {
         ClassDivisionId: parseInt(selectclass),
         SubjectId: parseInt(selectsubject),
         SubjectDescription: subjectDescription,
-        AssignDate: getDateFormatted(selectdate),
+        AssignDate: selectdate,
         AcademicId: 4,
         Attachment: fileData,
         AttachmentName: fileName,
@@ -94,7 +94,7 @@ function AddHomeWork() {
     useEffect(() => {
         if (GetEditList !== null) {
             setId(GetEditList.Id)
-            setSelectDate(getInputDateFormatted(GetEditList.AssignDate))
+            setSelectDate(getDateFormatted(GetEditList.AssignDate))
             setSubjectDescription(GetEditList.SubjectDescription)
             setSelectClass(GetEditList.ClassDivisionId)
             setSelectSubject(GetEditList.SubjectId)
@@ -123,7 +123,7 @@ function AddHomeWork() {
             setSelectdateerror('');
         }
 
-        if (isNaN(Date.parse(getDateFormatted(selectdate)))) {
+        if (isNaN(Date.parse(selectdate))) {
             setSelectdateerror('Please enter valid date');
             isValid = false;
         } else {
@@ -174,7 +174,8 @@ function AddHomeWork() {
                 <ReactQuill value={subjectDescription} modules={toolbarOptions}
                 onChange={(value) => setSubjectDescription(value)}  />
                 <ErrorMessageForm error={descriptionerror} />
-                <TextField value={selectdate} onChange={(e) => setSelectDate(e.target.value)} /> (date format MM-dd-YYYY)
+                <TextField value={selectdate} onChange={(e) => setSelectDate(e.target.value)} /> 
+                (date format dd MMM YYYY e.g. 23 May 2023)
                 <ErrorMessageForm error={selectdateerror} />
                 <Box mt={2}>
                     <input type="file" ref={aRef} onChange={changeFile} ></input>

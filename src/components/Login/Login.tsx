@@ -96,7 +96,7 @@ function Login() {
 
       <ErrorMessageForm error={usernameError} />
 
-      <TextField value={password} onChange={(e) => { setPassword(e.target.value) }}
+      <TextField type='password' value={password} onChange={(e) => { setPassword(e.target.value) }}
         label={'password'} />
       <ErrorMessageForm error={passworderror} />
 

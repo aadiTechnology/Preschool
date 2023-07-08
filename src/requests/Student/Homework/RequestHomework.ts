@@ -3,7 +3,7 @@ import { AppThunk } from "src/store";
 import { IGetDateForLegendBody ,IGetDatewiseHomeworkDetailsBody } from "src/Interface/Student/IHomework";
 import GetHomeworkApi from "src/api/Student/ApiHomework";
 import {IGetViewHomeWorkListBody} from  "src/Interface/Student/IHomework"
-import { getMonthYearFormatted } from "src/components/Common/util";
+import { getDateFormatted, getMonthYearFormatted } from "src/components/Common/util";
 
 
 
@@ -61,7 +61,7 @@ async(dispatch)=>{
         return {
              Id:item.Id,
              Text1:  item.SubjectName,
-             Text2 : item.AssignDate.split(' ')[0],
+             Text2 : getDateFormatted(item.AssignDate.split(' ')[0]),
         }
        })
        dispatch(Homeworkslice.actions.GetHomework(HomeWorkList))

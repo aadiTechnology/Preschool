@@ -78,9 +78,9 @@ export const CheckFileValidation = (fileData, allowedFileTypes, fileSize) => {
     }
 };
 
-export const dateSeparator = "/"    
-export const dayIndex = "1"
-export const monthIndex = "0"
+export const dateSeparator = "-"    
+export const dayIndex = "0"
+export const monthIndex = "1"
 
 // export const dateSeparator = "/"    
 // export const dayIndex = "1"
@@ -94,7 +94,6 @@ export const getDateFormatted = (date) => {
 
     return `${arrDate[dayIndex]} ${monthNames[parseInt(arrDate[monthIndex]) - 1]} ${arrDate[2]}`;
 }
-
 export const getInputDateFormatted = (date) => {
     let arrDate = date.split(' ')[0].split(dateSeparator)
     return `${arrDate[dayIndex]}-${parseInt(arrDate[monthIndex])}-${arrDate[2]}`;
