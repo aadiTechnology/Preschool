@@ -126,7 +126,7 @@ function Header() {
         alignItems="center"
         spacing={2}
       >
-        <Avatar variant="rounded" sx={{ margin: 'auto', maxHeight: 70, }} />
+        {/* <Avatar variant="rounded" sx={{ margin: 'auto', maxHeight: 70, }} />a */}
         {/* <img src={img_src}  /> */}
       </Stack>
 
@@ -169,10 +169,10 @@ function Header() {
             <Avatar variant="rounded" alt="user.name" src={''} />
             <UserBoxText>
               <UserBoxLabel className="popoverTypo">
-                Student Name
+              {sessionStorage.getItem("UserName")}
               </UserBoxLabel>
               <UserBoxDescription className="popoverTypo" >
-                Nursary
+                {sessionStorage.getItem("ClassDivisionName")}
               </UserBoxDescription>
               </UserBoxText>
           </MenuUserBox>

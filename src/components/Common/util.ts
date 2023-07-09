@@ -82,9 +82,9 @@ export const CheckFileValidation = (fileData, allowedFileTypes, fileSize) => {
 // export const dayIndex = "1"
 // export const monthIndex = "0"
 
-export const dateSeparator = "/"    
-export const dayIndex = "1"
-export const monthIndex = "0"
+export const dateSeparator = "-"    
+export const dayIndex = "0"
+export const monthIndex = "1"
 
 export const getDateFormatted = (date) => {
     console.log(date.split(' ')[0],"getDateFormatted",date.split(' ')[0].split(dateSeparator))

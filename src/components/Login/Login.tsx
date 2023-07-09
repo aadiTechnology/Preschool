@@ -54,6 +54,8 @@ function Login() {
     sessionStorage.setItem("UserId", GetUserLogin.UserId)
     sessionStorage.setItem("UserRoleId", GetUserLogin.UserRoleId)
     sessionStorage.setItem("ClassId", GetUserLogin.ClassId)
+    sessionStorage.setItem("UserName", GetUserLogin.UserName)
+    sessionStorage.setItem("ClassDivisionName", GetUserLogin.ClassDivisionName)
     sessionStorage.setItem("ClassDivisionId", GetUserLogin.ClassDivisionId)
     sessionStorage.setItem("EmailId", GetUserLogin.EmailId)
     sessionStorage.setItem("BirthDate", GetUserLogin.BirthDate)
