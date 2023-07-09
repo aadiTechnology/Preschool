@@ -175,7 +175,7 @@ function AddHomeWork() {
                 onChange={(value) => setSubjectDescription(value)}  />
                 <ErrorMessageForm error={descriptionerror} />
                 <TextField value={selectdate} onChange={(e) => setSelectDate(e.target.value)} /> 
-                (date format dd MMM YYYY e.g. 23 May 2023)
+                (date format dd MMM YYYY e.g. <b>23 May 2023</b>)
                 <ErrorMessageForm error={selectdateerror} />
                 <Box mt={2}>
                     <input type="file" ref={aRef} onChange={changeFile} ></input>

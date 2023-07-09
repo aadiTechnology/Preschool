@@ -38,7 +38,6 @@ const Homeworkslice = createSlice({
             state.HomeworkDate = HomeWorkDateList;
             state.AllowPrevious = action.payload.AllowPrevious
             state.AllowNext = action.payload.AllowNext
-            console.log(action.payload.AllowPrevious,"prev",action.payload.AllowNext,"Next")
             state.Loading = false;
         },
         GetViewHomework(state, action) {
@@ -72,7 +71,6 @@ export const GetHomeworkDate=
 async(dispatch)=>{
     dispatch(Homeworkslice.actions.getLoading());
     const response=await GetHomeworkApi.GetHomeWorkDate(data)
-  console.log(response.data,"response.data")
        dispatch(Homeworkslice.actions.GetHomeworkDate(response.data))
 }
 export const GetViewHomework=

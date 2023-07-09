@@ -20,66 +20,55 @@ function Homework() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const clickViewHomework = (value) => {
-    navigate('ViewHomework/'+value)
-  }
+  
+  const HomeworkDetails: any = useSelector((state: RootState) => state.HomeWork.HomeworkDetails);
 
+  const HomeworkDates: any = useSelector((state: RootState) => state.HomeWork.HomeworkDate);
 
-  const HomeworkDetails: any = useSelector(
-    (state: RootState) => state.HomeWork.HomeworkDetails);
+  const AllowNext: any = useSelector((state: RootState) => state.HomeWork.AllowNext);
 
-  const HomeworkDates: any = useSelector(
-    (state: RootState) => state.HomeWork.HomeworkDate);
-
-  const AllowNext: any = useSelector(
-    (state: RootState) => state.HomeWork.AllowNext);
-  const AllowPrevious: any = useSelector(
-    (state: RootState) => state.HomeWork.AllowPrevious);
-console.log(AllowPrevious,"AllowPrevious")
-
-
-  const loading = useSelector(
-    (state: RootState) => state.HomeWork.Loading
-  );
+  const AllowPrevious: any = useSelector((state: RootState) => state.HomeWork.AllowPrevious);
+  
+  const loading = useSelector((state: RootState) => state.HomeWork.Loading);
 
   const [ItemList, setItemList] = useState([])
-  const [prevNext, setPrevNext] = useState(0)
   const [startdate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
-  const GetHighlightedDateBody: IGetDateForLegendBody =
-  {
-    ClassDivisionId: parseInt(sessionStorage.getItem("ClassDivisionId")),
-    AssignDate: getDateFormatted(ItemList.filter((item) => { return (item.IsActive) }).map((obj) => { return obj.Value }).toString()),
-  }
-
-  const GetHomeworkDateBody: IGetDatewiseHomeworkDetailsBody =
-  {
-    ClassDivisionId: parseInt(sessionStorage.getItem("ClassDivisionId")),
-    StartDate: startdate,
-    EndDate: endDate
-  }
 
 
   useEffect(() => {
+    const GetHomeworkDateBody: IGetDatewiseHomeworkDetailsBody =
+    {
+      ClassDivisionId: parseInt(sessionStorage.getItem("ClassDivisionId")),
+      StartDate: startdate,
+      EndDate: endDate
+    }
     dispatch(GetHomeworkDate(GetHomeworkDateBody));
-  }, [startdate, endDate])
+  }, [endDate])
 
   useEffect(() => {
-    dispatch(GetHomework(GetHighlightedDateBody));
+    if (ItemList.length > 0) {
+      const assignDate = ItemList
+        .filter((item) => { return (item.IsActive) })
+        .map((obj) => { return obj.Value }).toString();
+      const GetHighlightedDateBody: IGetDateForLegendBody =
+      {
+        ClassDivisionId: parseInt(sessionStorage.getItem("ClassDivisionId")),
+        AssignDate: getDateFormatted(assignDate),
+      }
+      dispatch(GetHomework(GetHighlightedDateBody));
+    }
   }, [ItemList])
 
   useEffect(() => {
     setItemList(HomeworkDates)
-    console.log("HomeworkDates--", HomeworkDates)
   }, [HomeworkDates])
 
   const clickItem = (value) => {
     setItemList(value)
-
   }
 
   const clickPrevNext = (value) => {
-    setPrevNext(value)
     if (value === -1) {
       setStartDate('')
       setEndDate(getNextDate(ItemList[0].Value, -1))
@@ -89,6 +78,11 @@ console.log(AllowPrevious,"AllowPrevious")
       setEndDate('')
     }
   }
+
+  const clickViewHomework = (value) => {
+    navigate('ViewHomework/' + value)
+  }
+
   return (
     <Container>
       <PageHeader heading={'Homework'} />

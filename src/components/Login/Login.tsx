@@ -35,7 +35,7 @@ function Login() {
 
   useEffect(() => {
     if (GetUserLogin !== null) {
-      if (GetUserLogin.UserRoleId === null)
+      if (GetUserLogin.UserRoleId === 0)
         toast.error("UserId and or Password is incorrect")
       else {
         setSession()
