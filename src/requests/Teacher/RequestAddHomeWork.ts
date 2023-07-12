@@ -58,6 +58,9 @@ const AddHomeWorkSlice = createSlice({
       state.HomeworkListForEdit=action.payload;
       state.Loading = false
     },
+    resetHomeworkListForEdit(state){
+      state.HomeworkListForEdit=null;
+    },
     getLoading(state) {
       state.Loading = true
     }
@@ -140,12 +143,18 @@ export const getClassNameList =
     async (dispatch) => {
       dispatch(AddHomeWorkSlice.actions.resetSubmitMessage());
     }
-  export const getHomeworkListForEdit =
-  (data:IHomeworkListForEditBody): AppThunk =>
+    export const getHomeworkListForEdit =
+    (data:IHomeworkListForEditBody): AppThunk =>
+    async (dispatch) => {
+      dispatch(AddHomeWorkSlice.actions.getLoading());
+      const response = await GetClassForTeacherApi.GetHomeworkListForEdit(data);
+      dispatch(AddHomeWorkSlice.actions.getHomeworkListForEdit(response.data));
+    };
+    
+  export const resetHomeworkListForEdit =
+  (): AppThunk =>
   async (dispatch) => {
-    dispatch(AddHomeWorkSlice.actions.getLoading());
-    const response = await GetClassForTeacherApi.GetHomeworkListForEdit(data);
-    dispatch(AddHomeWorkSlice.actions.getHomeworkListForEdit(response.data));
+    dispatch(AddHomeWorkSlice.actions.resetHomeworkListForEdit());
   };
 
   export const getDetailsList =

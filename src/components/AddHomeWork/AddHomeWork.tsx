@@ -5,7 +5,7 @@ import DropDown from 'src/library/DropDown/DropDown'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { getClassNameList, getAddHomework, getHomeworkListForEdit, resetAddHomeworkMessage, getSubjectNameList } from 'src/requests/Teacher/RequestAddHomeWork';
+import { getClassNameList, getAddHomework, getHomeworkListForEdit, resetAddHomeworkMessage, getSubjectNameList, resetHomeworkListForEdit } from 'src/requests/Teacher/RequestAddHomeWork';
 import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDeleteHomeworkBody, IHomeworkListForEditBody, IGetSubjectNameBody } from 'src/Interface/Teacher/IAddHomework';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
@@ -39,6 +39,7 @@ function AddHomeWork() {
     const [descriptionerror, setdescriptionerror] = useState('')
     const [selectdateerror, setSelectdateerror] = useState('')
     const [fileData, setFileData] = useState('');
+    const [Attachment, setAttachment] = useState('');
     const [fileName, setFileName] = useState('');
     const [Error, setError] = useState('');
     const validFiles = ['jpg', 'jpeg', 'png', 'bmp']
@@ -77,8 +78,9 @@ function AddHomeWork() {
         SubjectDescription: subjectDescription,
         AssignDate: selectdate,
         AcademicId: 4,
-        Attachment: fileData,
+        BinaryData: fileData,
         AttachmentName: fileName,
+        Attachment: Attachment,
         Camera: '',
         UserId: 1,
         UserRoleId: 1,
@@ -98,6 +100,12 @@ function AddHomeWork() {
             setSubjectDescription(GetEditList.SubjectDescription)
             setSelectClass(GetEditList.ClassDivisionId)
             setSelectSubject(GetEditList.SubjectId)
+            if(GetEditList.AttachmentName != null){
+                setAttachment(GetEditList.Attachment)
+                setFileName(GetEditList.AttachmentName)
+            }
+        dispatch(resetHomeworkListForEdit());
+
         }
     }, [GetEditList])
 
@@ -163,7 +171,7 @@ function AddHomeWork() {
 
     return (
         <Container>
-            <PageHeader heading={'AddHomeWork'} />
+            <PageHeader heading={'Add Homework'} />
             <Card>
                 <DropDown itemList={GetHomeWork} ClickItem={ClickItem} DefaultValue={selectclass} Label={'Select Class'} />
                 <ErrorMessageForm error={selectclasserror} />
@@ -180,6 +188,7 @@ function AddHomeWork() {
                 <Box mt={2}>
                     <input type="file" ref={aRef} onChange={changeFile} ></input>
                 </Box>
+                {fileName}
                 <Box className={classes.iIconSupport}>
                         <Icon1 Note={"Supports only " + validFiles.join(', ') + " files types up to 2 MB"} />
                     </Box>

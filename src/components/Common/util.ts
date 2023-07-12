@@ -78,16 +78,18 @@ export const CheckFileValidation = (fileData, allowedFileTypes, fileSize) => {
     }
 };
 
+//Production
 // export const dateSeparator = "/"    
 // export const dayIndex = "1"
 // export const monthIndex = "0"
 
+//test or local
 export const dateSeparator = "-"    
 export const dayIndex = "0"
 export const monthIndex = "1"
 
 export const getDateFormatted = (date) => {
-    console.log(date.split(' ')[0],"getDateFormatted",date.split(' ')[0].split(dateSeparator))
+    console.log(date.split(' ')[0],"getDateFormatted",date.split(' ')[0].split( ))
     let arrDate = date.split(' ')[0].split(dateSeparator)
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

@@ -27,6 +27,7 @@ export interface IGetAddHomeworkBody {
     SubjectDescription:string,
     AssignDate:string,
     AcademicId:number,
+    BinaryData:string,
     Attachment:string,
     AttachmentName:string,
     Camera:string,
