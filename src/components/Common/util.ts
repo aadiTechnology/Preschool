@@ -38,6 +38,35 @@ export function IsMobileNoValid(value) {
     return ''
 }
 
+export const IsDateValid = (value) => {
+    const emailRegExp = /^(([0-9])|([0-2][0-9])|([3][0-1]))\ (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\ \d{4}$/;
+    if (value === '') {
+        return 'Date should not be blank.';
+    }
+    else if (!emailRegExp.test(value)) {
+        return 'Please enter date format dd MMM yyyy';
+    }
+    else
+        return ''
+}
+
+export const IsFutureDateValid = (value) => {
+    if (!IsFutureDate(value)) {
+        return 'Please enter future date';
+    }
+    else
+        return ''
+}
+
+export const IsFutureDate = (value) => {
+    const compareDate = new Date(value)
+    if (compareDate > new Date()) {
+        return true;
+    }
+    else
+        return false;
+}
+
 export function IsEmailValid(value) {
     const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{1,3})+$/;
     if (!value) {
@@ -84,12 +113,11 @@ export const CheckFileValidation = (fileData, allowedFileTypes, fileSize) => {
 // export const monthIndex = "0"
 
 //test or local
-export const dateSeparator = "-"    
+export const dateSeparator = "-"
 export const dayIndex = "0"
 export const monthIndex = "1"
-
 export const getDateFormatted = (date) => {
-    console.log(date.split(' ')[0],"getDateFormatted",date.split(' ')[0].split( ))
+    console.log(date.split(' ')[0], "getDateFormatted", date.split(' ')[0].split())
     let arrDate = date.split(' ')[0].split(dateSeparator)
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

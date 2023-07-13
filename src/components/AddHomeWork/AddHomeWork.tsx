@@ -10,7 +10,7 @@ import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDelet
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { ChangeFileIntoBase64, CheckFileValidation, getDateFormatted, getInputDateFormatted, toolbarOptions } from '../Common/util';
+import { ChangeFileIntoBase64, CheckFileValidation, IsDateValid, IsFutureDateValid, getDateFormatted, getInputDateFormatted, toolbarOptions } from '../Common/util';
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import AddHomeworkList from './AddHomeworkList';
@@ -36,6 +36,7 @@ function AddHomeWork() {
     const [selectsubject, setSelectSubject] = useState('');
     const [selectsubjecterror, setSelectSubjecterror] = useState('');
     const [selectdate, setSelectDate] = useState('');
+    const [dateerror, setDateerror] = useState('');
     const [descriptionerror, setdescriptionerror] = useState('')
     const [selectdateerror, setSelectdateerror] = useState('')
     const [fileData, setFileData] = useState('');
@@ -100,11 +101,12 @@ function AddHomeWork() {
             setSubjectDescription(GetEditList.SubjectDescription)
             setSelectClass(GetEditList.ClassDivisionId)
             setSelectSubject(GetEditList.SubjectId)
-            if(GetEditList.AttachmentName != null){
+            if (GetEditList.AttachmentName != null) {
                 setAttachment(GetEditList.Attachment)
                 setFileName(GetEditList.AttachmentName)
             }
-        dispatch(resetHomeworkListForEdit());
+            resetError();
+            dispatch(resetHomeworkListForEdit());
 
         }
     }, [GetEditList])
@@ -124,18 +126,9 @@ function AddHomeWork() {
             setdescriptionerror('');
         }
 
-        if (selectdate === '') {
-            setSelectdateerror('Field is required');
+        if (IsAssignDateValid(selectdate) !== '') {
+            setSelectdateerror(IsAssignDateValid(selectdate))
             isValid = false;
-        } else {
-            setSelectdateerror('');
-        }
-
-        if (isNaN(Date.parse(selectdate))) {
-            setSelectdateerror('Please enter valid date');
-            isValid = false;
-        } else {
-            setSelectdateerror('');
         }
         if (selectclass === '') {
             setSelectClasserror('Field is required');
@@ -162,6 +155,12 @@ function AddHomeWork() {
         }
     };
 
+    const resetError = () => {
+        setdescriptionerror('');
+        setSelectdateerror('');
+        setSelectSubjecterror('');
+        setSelectClasserror('');
+    }
     useEffect(() => {
         if (GetAddHomework !== '') {
             toast.success(GetAddHomework, { toastId: 'success1' })
@@ -169,6 +168,12 @@ function AddHomeWork() {
         }
     }, [GetAddHomework])
 
+    const IsAssignDateValid = (value) => {
+        let msg = IsDateValid(value);
+        if (msg === '')
+            msg = IsFutureDateValid(value);
+        return msg
+    }
     return (
         <Container>
             <PageHeader heading={'Add Homework'} />
@@ -180,18 +185,19 @@ function AddHomeWork() {
                 <ErrorMessageForm error={selectsubjecterror} />
                 <br></br>
                 <ReactQuill value={subjectDescription} modules={toolbarOptions}
-                onChange={(value) => setSubjectDescription(value)}  />
+                    onChange={(value) => setSubjectDescription(value)} />
                 <ErrorMessageForm error={descriptionerror} />
-                <TextField value={selectdate} onChange={(e) => setSelectDate(e.target.value)} /> 
-                (date format dd MMM YYYY e.g. <b>23 May 2023</b>)
+                <TextField value={selectdate} onChange={(e) => setSelectDate(e.target.value)}
+                    onBlur={(e) => { setSelectdateerror(IsAssignDateValid(e.target.value)) }} />
+                (date format dd MMM yyyy e.g. <b>23 May 2023</b>)
                 <ErrorMessageForm error={selectdateerror} />
                 <Box mt={2}>
                     <input type="file" ref={aRef} onChange={changeFile} ></input>
                 </Box>
                 {fileName}
                 <Box className={classes.iIconSupport}>
-                        <Icon1 Note={"Supports only " + validFiles.join(', ') + " files types up to 2 MB"} />
-                    </Box>
+                    <Icon1 Note={"Supports only " + validFiles.join(', ') + " files types up to 2 MB"} />
+                </Box>
                 {Error && <ErrorMessageForm error={Error} />}
 
                 <Button sx={{ mt: 2 }} onClick={onAddHomeWork}>Save</Button>
