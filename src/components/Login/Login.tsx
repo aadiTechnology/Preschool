@@ -34,23 +34,35 @@ function Login() {
   }
 
   useEffect(() => {
+    if(localStorage.getItem("auth")!==null){
+        setSession(JSON.parse(localStorage.getItem("auth")));
+        NavigateByRole();
+    }
+    else
     if (GetUserLogin !== null) {
       if (GetUserLogin.UserRoleId === 0)
         toast.error("UserId and or Password is incorrect")
       else {
-        setSession()
+        localStorage.setItem("auth", JSON.stringify(GetUserLogin));
+        setSession(GetUserLogin);
+        // setSession()
         dispatch(resetUserLogin());
-        if (sessionStorage.getItem("UserRoleId") === "3")
-          navigate('/extended-sidebar/Student/HomeWork');
-        else if (sessionStorage.getItem("UserRoleId") === "2")
-          navigate('/extended-sidebar/Student/AddHomeWork');
-        else
-          navigate('/extended-sidebar/Student/AddPhoto');
+        NavigateByRole();
       }
     }
 
+
   }, [GetUserLogin])
-  const setSession = () => {
+
+  const NavigateByRole = () => {
+    if (sessionStorage.getItem("UserRoleId") === "3")
+      navigate('/extended-sidebar/Student/HomeWork');
+    else if (sessionStorage.getItem("UserRoleId") === "2")
+      navigate('/extended-sidebar/Student/AddHomeWork');
+    else
+      navigate('/extended-sidebar/Student/AddPhoto');
+  }
+  const setSession = (GetUserLogin) => {
     sessionStorage.setItem("UserId", GetUserLogin.UserId)
     sessionStorage.setItem("UserRoleId", GetUserLogin.UserRoleId)
     sessionStorage.setItem("ClassId", GetUserLogin.ClassId)
@@ -61,6 +73,7 @@ function Login() {
     sessionStorage.setItem("BirthDate", GetUserLogin.BirthDate)
     sessionStorage.setItem("PhoneNo", GetUserLogin.PhoneNo)
   }
+
   const emailRegExp = /^\S+@\S+\.\S+$/;
   const onSubmit = () => {
     let isError = false;
@@ -84,8 +97,6 @@ function Login() {
       setUserNameError('')
 
     }
-
-    console.log({ username })
 
   }
 

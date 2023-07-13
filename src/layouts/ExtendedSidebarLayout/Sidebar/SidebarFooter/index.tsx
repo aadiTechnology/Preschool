@@ -38,6 +38,7 @@ function SidebarFooter() {
 
   const handleLogout = async (): Promise<void> => {
     try {
+      localStorage.removeItem("auth");
       navigate('/');
     } catch (err) {
       console.error(err);

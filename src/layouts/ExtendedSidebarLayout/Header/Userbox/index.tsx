@@ -130,6 +130,7 @@ function HeaderUserbox() {
   const handleLogout = async (): Promise<void> => {
     try {
       handleClose();
+      localStorage.removeItem("auth");
       navigate('/');
     } catch (err) {
       console.error(err);
