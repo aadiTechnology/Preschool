@@ -80,6 +80,7 @@ function SidebarTopSection() {
 
   const handleLogout = async (): Promise<void> => {
     try {
+      localStorage.removeItem("auth");
       handleClose();
       navigate('/');
     } catch (err) {
