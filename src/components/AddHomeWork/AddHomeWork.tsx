@@ -16,7 +16,6 @@ import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import AddHomeworkList from './AddHomeworkList';
 import { Styles } from 'src/assets/style/CommonStyle';
 import Icon1 from 'src/library/icon/icon1';
-import { FullWidthScreenwise } from 'src/library/StyledComponents/CommonCss';
 import { ButtonPrimary } from 'src/library/StyledComponents/CommonStyled';
 
 function AddHomeWork() {
