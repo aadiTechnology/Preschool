@@ -112,29 +112,29 @@ function Login() {
   return (
     <Container>
       <Grid container>
-      <Grid item xs={12} alignItems="center" sx={{ mt: "30px" }} >
-        <img src='/images/SmartKidz_logo.png' style={{ width: 200 }} />
-      </Grid>
-        
-      <Grid item xs={12} alignContent={'center'} >
-      <PageHeader heading={'Login'} />
-      </Grid>
-      <Grid item xs={12} alignContent={'center'} >
-      <TextField value={username} onChange={(e) => { setUserName(e.target.value) }}
-        label={'username'} />
+        <Grid item xs={12} alignItems="center" sx={{ mt: "30px" }} >
+          <img src='/images/SmartKidz_logo.png' style={{ width: 200 }} />
+        </Grid>
 
-      <ErrorMessageForm error={usernameError} />
-      </Grid>
-      <Grid item xs={12} alignContent={'center'} >
+        <Grid item xs={12} alignContent={'center'} >
+          <PageHeader heading={'Login'} />
+        </Grid>
+        <Grid item xs={12} alignContent={'center'} >
+          <TextField value={username} onChange={(e) => { setUserName(e.target.value) }}
+            label={'username'} />
 
-      <TextField type='password' value={password} onChange={(e) => { setPassword(e.target.value) }}
-        label={'password'} />
-      <ErrorMessageForm error={passworderror} />
-      </Grid>
-      <Grid item xs={12} alignContent={'center'} >
+          <ErrorMessageForm error={usernameError} />
+        </Grid>
+        <Grid item xs={12} alignContent={'center'} >
 
-      <Button onClick={onSubmit}>Login</Button>
-      </Grid>
+          <TextField type='password' value={password} onChange={(e) => { setPassword(e.target.value) }}
+            label={'password'} />
+          <ErrorMessageForm error={passworderror} />
+        </Grid>
+        <Grid item xs={12} alignContent={'center'} >
+          <br />
+          <Button onClick={onSubmit}>Login</Button>
+        </Grid>
       </Grid>
     </Container>
   )
