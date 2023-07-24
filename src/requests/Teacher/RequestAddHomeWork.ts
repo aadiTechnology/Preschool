@@ -164,7 +164,7 @@ export const getClassNameList =
    let DeleteList = response.data.map((item,i)=>{
     return {
          Id:item.Id,
-         Text1:  item.ClassName,
+         Text1:  item.DivisionName,
          Text2 : item.SubjectDescription.substring(10),
          Text3 : item.SubjectName,
          Text4 : item.Attachment,
