@@ -120,10 +120,6 @@ function Login() {
       <TextField value={username} onChange={(e) => { setUserName(e.target.value) }}
         label={'username'} />
 
-      <ErrorMessageForm error={usernameError} />
-      </Grid>
-      <Grid item xs={12} alignContent={'center'} >
-
       <TextField type='password' value={password} onChange={(e) => { setPassword(e.target.value) }}
         label={'password'} />
       <ErrorMessageForm error={passworderror} />
