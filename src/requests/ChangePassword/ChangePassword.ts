@@ -7,12 +7,15 @@ import ChangePasswordApi from 'src/api/Student/ChangePassword'
 const ChangePasswordslice = createSlice({
   name: 'SchoolList',
   initialState:{
-    ChangePassword:{},
+    ChangePassword:'',
    
   },
   reducers: {
     getChangePassword(state,action){
       state.ChangePassword=action.payload;
+    },
+    resetChangePassword(state){
+      state.ChangePassword='';
     },
   }   
 });
@@ -22,7 +25,13 @@ export const getChangePassword =
   (data:IChangePasswordBody): AppThunk =>
   async (dispatch) => {
     const response = await ChangePasswordApi.GetChangePassword(data);
-    dispatch(ChangePasswordslice.actions.getChangePassword(response));
+    dispatch(ChangePasswordslice.actions.getChangePassword(response.data));
+  };
+
+  export const resetChangePassword =
+  (): AppThunk =>
+  async (dispatch) => {
+    dispatch(ChangePasswordslice.actions.resetChangePassword());
   };
 
 

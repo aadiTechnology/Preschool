@@ -1,9 +1,7 @@
 export interface IChangePasswordBody {
-    asUserName: string;
-    asUserId: string;
-    asSchoolId: string;
-    asNewPassword: string;
-    asOldPassword: string;
+    UserId: string;
+    NewPassword: string;
+    OldPassword: string;
 };
 
 export interface IChangePasswordResult {

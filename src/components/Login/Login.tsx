@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { Button, Container, TextField } from '@mui/material';
+import { Button, Grid, TextField } from '@mui/material';
 import PageHeader from 'src/library/heading/pageHeader';
 import { UserLogin, resetUserLogin } from 'src/requests/Admin/RequestUserLogin';
 import { IUserLoginBody } from 'src/Interface/Admin/IUserLogin';
@@ -13,6 +13,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ErrorMessage from 'src/library/ErrorMessage/ErrorMessage';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 
+import { styled, Typography, Box, Divider, useTheme, Container } from '@mui/material';
 function Login() {
   const dispatch = useDispatch();
   const [username, setUserName] = useState('');
@@ -25,7 +26,6 @@ function Login() {
     (state: RootState) => state.UserLogin.UserLogin
   );
 
-  console.log(GetUserLogin, "GetUserLogin")
 
   const UserLoginBody: IUserLoginBody =
   {
@@ -34,22 +34,22 @@ function Login() {
   }
 
   useEffect(() => {
-    if(localStorage.getItem("auth")!==null){
-        setSession(JSON.parse(localStorage.getItem("auth")));
-        NavigateByRole();
+    if (localStorage.getItem("auth") !== null) {
+      setSession(JSON.parse(localStorage.getItem("auth")));
+      NavigateByRole();
     }
     else
-    if (GetUserLogin !== null) {
-      if (GetUserLogin.UserRoleId === 0)
-        toast.error("UserId and or Password is incorrect")
-      else {
-        localStorage.setItem("auth", JSON.stringify(GetUserLogin));
-        setSession(GetUserLogin);
-        // setSession()
-        dispatch(resetUserLogin());
-        NavigateByRole();
+      if (GetUserLogin !== null) {
+        if (GetUserLogin.UserRoleId === 0)
+          toast.error("UserId and or Password is incorrect", { toastId: 'success1' })
+        else {
+          localStorage.setItem("auth", JSON.stringify(GetUserLogin));
+          setSession(GetUserLogin);
+          // setSession()
+          dispatch(resetUserLogin());
+          NavigateByRole();
+        }
       }
-    }
 
 
   }, [GetUserLogin])
@@ -75,6 +75,7 @@ function Login() {
   }
 
   const emailRegExp = /^\S+@\S+\.\S+$/;
+  const phoneRegExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
   const onSubmit = () => {
     let isError = false;
     if (password === '') {
@@ -82,38 +83,59 @@ function Login() {
       isError = true
     } else {
       setPassworderror('')
-      dispatch(UserLogin(UserLoginBody));
     }
 
     if (username === '') {
       setUserNameError("feild required")
       isError = true
     }
-    else if (!emailRegExp.test(username)) {
-      setUserNameError('Invalid email address');
+    else if (!emailRegExp.test(username) && !phoneRegExp.test(username)) {
+      setUserNameError('Invalid email address or Phone number');
+      isError = true
     }
-
     else {
       setUserNameError('')
 
     }
+    if (!isError)
+      dispatch(UserLogin(UserLoginBody));
 
   }
+  const RootWrapper = styled(Box)(
+    ({ theme }) => `
+          margin-top: ${theme.spacing(2)};
+          margin-bottom: ${theme.spacing(2)};
+  `
+  );
 
 
   return (
     <Container>
+      <Grid container>
+      <Grid item xs={12} alignItems="center" sx={{ mt: "30px" }} >
+        <img src='/images/SmartKidz_logo.png' style={{ width: 200 }} />
+      </Grid>
+        
+      <Grid item xs={12} alignContent={'center'} >
       <PageHeader heading={'Login'} />
+      </Grid>
+      <Grid item xs={12} alignContent={'center'} >
       <TextField value={username} onChange={(e) => { setUserName(e.target.value) }}
         label={'username'} />
 
       <ErrorMessageForm error={usernameError} />
+      </Grid>
+      <Grid item xs={12} alignContent={'center'} >
 
       <TextField type='password' value={password} onChange={(e) => { setPassword(e.target.value) }}
         label={'password'} />
       <ErrorMessageForm error={passworderror} />
+      </Grid>
+      <Grid item xs={12} alignContent={'center'} >
 
       <Button onClick={onSubmit}>Login</Button>
+      </Grid>
+      </Grid>
     </Container>
   )
 }

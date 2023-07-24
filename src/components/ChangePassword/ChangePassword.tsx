@@ -4,8 +4,11 @@ import { Button, Card, Container, TextField } from '@mui/material'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
-import { getChangePassword } from 'src/requests/ChangePassword/ChangePassword';
+import { getChangePassword, resetChangePassword } from 'src/requests/ChangePassword/ChangePassword';
 import { IChangePasswordBody } from 'src/Interface/ChangePassword';
+import { toast } from 'react-toastify';
+import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
+
 function ChangePassword() {
     const dispatch = useDispatch();
     const [oldPassword, setOldPassword] = useState('');
@@ -19,40 +22,53 @@ function ChangePassword() {
     );
 
 
+    useEffect(() => {
+        if (GetChangePassword !== '') {
+            toast.success(GetChangePassword, { toastId: 'success1' })
+            dispatch(resetChangePassword());
+        }
+    }, [GetChangePassword])
+
+    const ValidatePassword = (value) => {
+        let returnVal = ''
+        if (value === '') {
+            returnVal = 'Field is required';
+        } else if (value.length < 6) {
+            returnVal = 'Enter more than 6 characters'
+        }
+        return returnVal;
+    }
 
     const Submit = () => {
         let isError = false;
-        if (confirmPassword === '') {
-            setErrorconfirmPassword('filled is required')
+        let sReturn = '';
+        if (newPassword === oldPassword && newPassword !== "") {
+            setErroroldPassword("Old and New password cannot be same")
             isError = true
-        }
-        else if (confirmPassword.length < 8) {
-            setErrorconfirmPassword('Enter more than 8 characters')
-
-        }else{
-            setErrorconfirmPassword('')
-        }
-        if (newPassword === '') {
-            setErrornewPassword('filled is required')
+        } else
+        if (newPassword !== confirmPassword && newPassword !== "") {
+            setErrornewPassword("New and Confirm password are not same")
             isError = true
         } else {
-            setErrornewPassword('')
-        }
-        if (oldPassword === '') {
-            setErroroldPassword('filled is required')
-            isError = true
-        } else {
-            setErroroldPassword('')
+            sReturn = ValidatePassword(oldPassword)
+            setErroroldPassword(sReturn)
+            if (sReturn !== '')
+                isError = true
+            sReturn = ValidatePassword(newPassword)
+            setErrornewPassword(sReturn)
+            if (sReturn !== '')
+                isError = true
+            sReturn = ValidatePassword(confirmPassword)
+            setErrorconfirmPassword(sReturn)
+            if (sReturn !== '')
+                isError = true
         }
         if (!isError) {
-            console.log("Submit")
             const getChangePasswordBody: IChangePasswordBody =
             {
-                asUserName: "rizwana.n.admin",
-                asUserId: "695",
-                asSchoolId: "120",
-                asNewPassword: "Riz@12",
-                asOldPassword: "Pass@1234"
+                UserId: sessionStorage.getItem("UserId"),
+                NewPassword: newPassword,
+                OldPassword: oldPassword
             }
             dispatch(getChangePassword(getChangePasswordBody));
 
@@ -63,20 +79,16 @@ function ChangePassword() {
             <Container>
                 <PageHeader heading={'Change Password'} />
                 <Card sx={{ height: "500px", padding: 3 }} >
-                    <label>UserName</label>
-                    <TextField fullWidth name="username" type="number"
-                        variant="standard" value={14416} />
-
-                    <TextField fullWidth label="Old Password"
+                    <TextField type='password' fullWidth label="Old Password"
                         value={oldPassword}
                         onChange={(e) => setOldPassword(e.target.value)} variant="standard" />
-                    {erroroldPassword}
+                    <ErrorMessageForm error={erroroldPassword} />
                     <TextField fullWidth label="New Password" value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)} variant="standard" />
-                    {errornewPassword}
-                    <TextField fullWidth label="Confirm Password" value={confirmPassword}
+                    <ErrorMessageForm error={errornewPassword} />
+                    <TextField type='password' fullWidth label="Confirm Password" value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)} variant="standard" />
-                    {errorconfirmPassword}
+                    <ErrorMessageForm error={errorconfirmPassword} />
                     <br></br>
                     <br></br>
                     <Button onClick={Submit} variant='contained'>

@@ -1,5 +1,6 @@
 import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 
 import {
   Box,
@@ -11,11 +12,12 @@ import {
   Tooltip,
   styled,
   useTheme,
-  Avatar, Typography, Popover, Button
+  Avatar, Typography, Popover, Button, List, ListItem, ListItemText
 } from '@mui/material';
 
 import { SidebarContext } from 'src/contexts/SidebarContext';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { NavLink } from 'react-router-dom';
 
 
 const HeaderWrapper = styled(Box)(
@@ -128,7 +130,7 @@ function Header() {
         spacing={2}
       >
         {/* <Avatar variant="rounded" sx={{ margin: 'auto', maxHeight: 70, }} />a */}
-        {/* <img src={img_src}  /> */}
+        <img src='/images/SmartKidz_logo.png' style={{ width: 200 }} />
       </Stack>
 
       <Stack direction="row" spacing={1} alignItems="center">
@@ -170,18 +172,28 @@ function Header() {
             <Avatar variant="rounded" alt="user.name" src={''} />
             <UserBoxText>
               <UserBoxLabel className="popoverTypo">
-              {sessionStorage.getItem("UserName")}
+                {sessionStorage.getItem("UserName")}
               </UserBoxLabel>
               <UserBoxDescription className="popoverTypo" >
                 {sessionStorage.getItem("ClassDivisionName")}
               </UserBoxDescription>
-              </UserBoxText>
+            </UserBoxText>
           </MenuUserBox>
-          <Divider
-            sx={{
-              mb: 0
+          <Divider sx={{ mb: 0 }} />
+          <List sx={{ p: 1 }} component="nav">
+          <ListItem
+            onClick={() => {
+              handleClose();
             }}
-          />
+            button
+            to={"/extended-sidebar/Student/changePassword"}
+            component={NavLink}
+          >
+            <LockOpenTwoToneIcon fontSize="small" sx={{color:"blue"}} />
+            <ListItemText sx={{color:"blue"}} primary={('Change Password')} />
+          </ListItem>
+          </List>
+          <Divider sx={{ mb: 0 }} />
           <Box sx={{ textAlign: "center" }} m={1}>
             <IconButton onClick={handleLogout}>
               <ExitToAppIcon fontSize="small"
@@ -191,8 +203,8 @@ function Header() {
                   color: "#053082"
                 }}
               />
-              <UserBoxLabel sx={{ color: "blue", fontWeight: "bold" }}  
-              onClick={handleLogout}>Sign Out</UserBoxLabel>
+              <UserBoxLabel sx={{ color: "blue", fontWeight: "bold" }}
+                onClick={handleLogout}>Sign Out</UserBoxLabel>
             </IconButton>
           </Box>
         </Popover>
