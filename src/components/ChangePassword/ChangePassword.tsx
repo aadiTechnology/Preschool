@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PageHeader from 'src/library/heading/pageHeader'
-import { Button, Card, Container, TextField } from '@mui/material'
+import { Button, Card, Container, TextField ,Grid } from '@mui/material'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
@@ -8,6 +8,7 @@ import { getChangePassword, resetChangePassword } from 'src/requests/ChangePassw
 import { IChangePasswordBody } from 'src/Interface/ChangePassword';
 import { toast } from 'react-toastify';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
+import { ButtonPrimary } from 'src/library/StyledComponents/CommonStyled';
 
 function ChangePassword() {
     const dispatch = useDispatch();
@@ -77,8 +78,12 @@ function ChangePassword() {
     return (
         <div>
             <Container>
+             
                 <PageHeader heading={'Change Password'} />
-                <Card sx={{ height: "500px", padding: 3 }} >
+                <Grid container>
+                   <Grid item md={3}></Grid>
+                    <Grid item xs={12} md={6}>
+                    <Card sx={{ padding: 2 }} >
                     <TextField type='password' fullWidth label="Old Password"
                         value={oldPassword}
                         onChange={(e) => setOldPassword(e.target.value)} variant="standard" />
@@ -90,11 +95,14 @@ function ChangePassword() {
                         onChange={(e) => setConfirmPassword(e.target.value)} variant="standard" />
                     <ErrorMessageForm error={errorconfirmPassword} />
                     <br></br>
-                    <br></br>
-                    <Button onClick={Submit} variant='contained'>
+                   
+                    <ButtonPrimary onClick={Submit} variant='contained'>
                         Submit
-                    </Button>
+                    </ButtonPrimary>
                 </Card>
+                    </Grid>
+                </Grid>
+           
             </Container>
 
 

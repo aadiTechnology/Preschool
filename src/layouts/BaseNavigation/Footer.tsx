@@ -1,4 +1,4 @@
-import { Paper ,Box , IconButton} from '@mui/material'
+import { Paper ,Box , IconButton, Fab} from '@mui/material'
 import React from 'react';
 import { Link } from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home';
@@ -13,13 +13,13 @@ function Footer() {
   return (
     <div>
    <Paper square>
-    <Box sx={{zIndex: "9999" ,textAlign:"center"}}>
+    <Box sx={{zIndex: "9999" ,textAlign:"center" ,backgroundColor:"#90caf9" , padding:"5px"}}>
       
-      {/* <Link to={`/${location.pathname.split('/')[1]}/landing/landing`} style={{ textDecoration: 'none' }}>
-         <IconButton >
+      <Link to={`/${location.pathname.split('/')[1]}/landing/landing`} style={{ textDecoration: 'none' }}>
+        <Fab aria-label="add" size="small" sx={{ textAlign: "center", boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.1)" }}>
           <HomeIcon fontSize='large'/>
-          </IconButton>
-          </Link> */}
+          </Fab>
+          </Link>
             <Link to={`/${location.pathname.split('/')[1]}/Student/Homework`} style={{ textDecoration: 'none' }}>
             {UserType === '3' && <IconButton><MenuBookIcon /> </IconButton>  }
             </Link>
@@ -28,9 +28,9 @@ function Footer() {
             {UserType === '3' && <IconButton><AddPhotoAlternateIcon /> </IconButton>  }
             </Link>
 
-            {/* <Link to={`/${location.pathname.split('/')[1]}/Student/AddHomeWork`} style={{ textDecoration: 'none' }}>
+            <Link to={`/${location.pathname.split('/')[1]}/Student/AddHomeWork`} style={{ textDecoration: 'none' }}>
             {UserType === '2' && <IconButton><ChromeReaderModeIcon /> </IconButton>  }
-            </Link> */}
+            </Link>
       </Box>
       </Paper>
     </div>

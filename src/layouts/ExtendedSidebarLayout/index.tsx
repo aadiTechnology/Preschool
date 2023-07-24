@@ -67,9 +67,10 @@ const ExtendedSidebarLayout: FC<ExtendedSidebarLayoutProps> = () => {
             // }
           }}
         >
-          <Box display="block">
+          <Box display="block" sx={{position:'absolute',width:'100%',paddingBottom:"100px"}}>
             <Outlet />
           </Box>
+       
           {/* <ThemeSettings /> */}
         </Box>
       </Box>

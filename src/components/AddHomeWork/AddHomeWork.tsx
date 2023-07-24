@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PageHeader from 'src/library/heading/pageHeader'
-import { Card, Container, TextField, Box, Button, Typography } from '@mui/material'
+import { Card, Container, TextField, Box, Button, Typography,Grid } from '@mui/material'
 import DropDown from 'src/library/DropDown/DropDown'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -16,6 +16,8 @@ import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import AddHomeworkList from './AddHomeworkList';
 import { Styles } from 'src/assets/style/CommonStyle';
 import Icon1 from 'src/library/icon/icon1';
+import { FullWidthScreenwise } from 'src/library/StyledComponents/CommonCss';
+import { ButtonPrimary } from 'src/library/StyledComponents/CommonStyled';
 
 function AddHomeWork() {
 
@@ -199,8 +201,12 @@ function AddHomeWork() {
                     <Icon1 Note={"Supports only " + validFiles.join(', ') + " files types up to 2 MB"} />
                 </Box>
                 {Error && <ErrorMessageForm error={Error} />}
-
-                <Button sx={{ mt: 2 }} onClick={onAddHomeWork}>Save</Button>
+                  <Grid container>
+                    <Grid item xs={12} md={3} sx={{float:"right"}}>
+                    <ButtonPrimary  onClick={onAddHomeWork} >Save</ButtonPrimary>
+                    </Grid>
+                  </Grid>
+              
             </Card>
             <br></br>
             {

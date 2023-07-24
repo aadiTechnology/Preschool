@@ -1,4 +1,4 @@
-import { Box, Typography, styled} from '@mui/material';
+import { Box, Button, Typography, styled} from '@mui/material';
 
 export const HeadingStyle= styled(Typography)( ({ theme }) =>`
 
@@ -35,3 +35,18 @@ export const IconCardSize = styled(Box)`
 text-decoration: none;
   box-shadow: 1px 4px 5px 2px rgba(0, 0, 0, 0.3);
 `;
+
+
+export const ButtonPrimary = styled(Button)(
+  ({ theme, color }) => `
+color: white;
+font-size: 12px;
+font-family: 'Roboto';
+text-decoration: none;
+height:30px;
+border-radius: 3px;
+box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+@media (min-width: 600px) {
+  
+ };
+`);

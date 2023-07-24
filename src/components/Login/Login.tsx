@@ -79,14 +79,14 @@ function Login() {
   const onSubmit = () => {
     let isError = false;
     if (password === '') {
-      setPassworderror("feild required")
+      setPassworderror("Password is Required")
       isError = true
     } else {
       setPassworderror('')
     }
 
     if (username === '') {
-      setUserNameError("feild required")
+      setUserNameError("Username is Required")
       isError = true
     }
     else if (!emailRegExp.test(username) && !phoneRegExp.test(username)) {
@@ -110,15 +110,12 @@ function Login() {
 
 
   return (
-    <Container>
-      <Grid container>
-      <Grid item xs={12} alignItems="center" sx={{ mt: "30px" }} >
+    <Container maxWidth={'xs'} >
+      <Grid container   alignItems="center" >
+      <Grid item xs={12} sx={{ mt: "30px" }} display={'flex'}  justifyContent={'center'}>
         <img src='/images/SmartKidz_logo.png' style={{ width: 200 }} />
       </Grid>
-        
-      <Grid item xs={12} alignContent={'center'} >
-      <PageHeader heading={'Login'} />
-      </Grid>
+    
       <Grid item xs={12} alignContent={'center'} >
       <TextField value={username} onChange={(e) => { setUserName(e.target.value) }}
         label={'username'} />
@@ -131,9 +128,9 @@ function Login() {
         label={'password'} />
       <ErrorMessageForm error={passworderror} />
       </Grid>
-      <Grid item xs={12} alignContent={'center'} >
+      <Grid item xs={12} alignContent={'center'} mt={1} >
 
-      <Button onClick={onSubmit}>Login</Button>
+      <Button onClick={onSubmit} fullWidth={false}>Login</Button>
       </Grid>
       </Grid>
     </Container>

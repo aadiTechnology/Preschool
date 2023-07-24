@@ -4,12 +4,12 @@ import '@mui/lab/themeAugmentation';
 // import i18n from 'src/i18n/i18n';
 
 const themeColors = {
-  primary: '#26a69a',
+  primary: '#8593fe',
   secondary: '#6E759F',
   success: '#ffc107',
   warning: '#FFA319',
   error: '#FF1943',
-  info: '#777777',
+  info: '#26a69a',
   black: '#223354',
   white: '#ffffff',
   primaryAlt: '#000C57'
@@ -582,7 +582,7 @@ export const PureLightTheme = createTheme({
         variant:'standard',
         fullWidth:true,
         margin:"dense",
-        color:"info"
+        color:"primary"
 
       },
       styleOverrides: {
@@ -613,14 +613,13 @@ export const PureLightTheme = createTheme({
       defaultProps: {
         variant:"contained",
         size:"small",
-       fullWidth:true
+       fullWidth:true 
       },
       styleOverrides: {
         root: {
           fontWeight: 'bold',
           textTransform: 'none',
-          paddingLeft: 10,
-          paddingRight: 10,
+        
 
           '.MuiSvgIcon-root': {
             transition: 'all .2s'
