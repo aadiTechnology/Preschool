@@ -14,6 +14,7 @@ import ErrorMessage from 'src/library/ErrorMessage/ErrorMessage';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 
 import { styled, Typography, Box, Divider, useTheme, Container } from '@mui/material';
+import { ButtonPrimary } from 'src/library/StyledComponents/CommonStyled';
 function Login() {
   const dispatch = useDispatch();
   const [username, setUserName] = useState('');
@@ -126,7 +127,7 @@ function Login() {
       </Grid>
       <Grid item xs={12} alignContent={'center'} mt={1} >
 
-      <Button onClick={onSubmit} fullWidth={false}>Login</Button>
+      <ButtonPrimary onClick={onSubmit} >Login</ButtonPrimary>
       </Grid>
       </Grid>
     </Container>
