@@ -1,7 +1,5 @@
-
 import React, { useState } from 'react'
-import { Button, Grid, TextField } from '@mui/material';
-import PageHeader from 'src/library/heading/pageHeader';
+import {  Grid, TextField } from '@mui/material';
 import { UserLogin, resetUserLogin } from 'src/requests/Admin/RequestUserLogin';
 import { IUserLoginBody } from 'src/Interface/Admin/IUserLogin';
 import { useDispatch } from 'react-redux';
@@ -9,11 +7,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'src/store';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { useNavigate, useLocation } from 'react-router-dom';
-import ErrorMessage from 'src/library/ErrorMessage/ErrorMessage';
+import { useNavigate } from 'react-router-dom';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
-
-import { styled, Typography, Box, Divider, useTheme, Container } from '@mui/material';
+import { Container } from '@mui/material';
 import { ButtonPrimary } from 'src/library/StyledComponents/CommonStyled';
 function Login() {
   const dispatch = useDispatch();
@@ -51,9 +47,7 @@ function Login() {
           NavigateByRole();
         }
       }
-
-
-  }, [GetUserLogin])
+}, [GetUserLogin])
 
   const NavigateByRole = () => {
     if (sessionStorage.getItem("UserRoleId") === "3")
@@ -102,12 +96,7 @@ function Login() {
       dispatch(UserLogin(UserLoginBody));
 
   }
-  const RootWrapper = styled(Box)(
-    ({ theme }) => `
-          margin-top: ${theme.spacing(2)};
-          margin-bottom: ${theme.spacing(2)};
-  `
-  );
+
 
 
   return (
@@ -118,10 +107,10 @@ function Login() {
       </Grid>
     
       <Grid item xs={12} alignContent={'center'} >
-      <TextField value={username} onChange={(e) => { setUserName(e.target.value) }}
+      <TextField value={username} onChange={(e) => {setUserName(e.target.value) }}
         label={'username'} />
 
-      <TextField type='password' value={password} onChange={(e) => { setPassword(e.target.value) }}
+      <TextField type='password' value={password} onChange={(e) => {setPassword(e.target.value) }}
         label={'password'} />
       <ErrorMessageForm error={passworderror} />
       </Grid>
