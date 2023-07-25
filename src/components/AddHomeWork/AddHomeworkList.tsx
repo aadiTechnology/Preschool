@@ -42,7 +42,7 @@ const dispatch = useDispatch();
   }, [GetSubmit])
 
   useEffect(() => {
-    const GetDetailsListBody: IGetDetailsListBody = { Id: 0 }
+    const GetDetailsListBody: IGetDetailsListBody = { ClassDivisionId: Number(sessionStorage.getItem("ClassDivisionId")) }
     dispatch(getDetailsList(GetDetailsListBody));
   }, [])
   return (

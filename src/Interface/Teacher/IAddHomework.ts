@@ -38,7 +38,7 @@ export interface IGetAddHomeworkBody {
 export interface IGetAddHomeworkResult{};
 
 export interface IGetDetailsListBody {
-    Id:number
+    ClassDivisionId:number
 };
 
 export interface IGetDetailsListResult {

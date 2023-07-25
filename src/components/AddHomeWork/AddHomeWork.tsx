@@ -32,7 +32,7 @@ function AddHomeWork() {
     const classes = Styles();
     const [Id, setId] = useState(0)
     const [subjectDescription, setSubjectDescription] = useState('')
-    const [selectclass, setSelectClass] = useState('');
+    const [selectclass, setSelectClass] = useState(sessionStorage.getItem("ClassDivisionId"));
     const [selectclasserror, setSelectClasserror] = useState('');
     const [selectsubject, setSelectSubject] = useState('');
     const [selectsubjecterror, setSelectSubjecterror] = useState('');
@@ -46,7 +46,7 @@ function AddHomeWork() {
     const [Error, setError] = useState('');
     const validFiles = ['jpg', 'jpeg', 'png', 'bmp']
 
-    const GetClassNameListBody: IGetClassNameListBody = { Id: 0 }
+    // const GetClassNameListBody: IGetClassNameListBody = { Id: 0 }
 
 
     const ClickItem = (value) => {
@@ -91,7 +91,7 @@ function AddHomeWork() {
 
 
     useEffect(() => {
-        dispatch(getClassNameList(GetClassNameListBody));
+        // dispatch(getClassNameList(GetClassNameListBody));
         dispatch(getSubjectNameList());
     }, [])
 
@@ -179,7 +179,7 @@ function AddHomeWork() {
         <Container>
             <PageHeader heading={'Add Homework'} />
             <Card>
-                <DropDown itemList={GetHomeWork} ClickItem={ClickItem} DefaultValue={selectclass} Label={'Select Class'} />
+                {/* <DropDown itemList={GetHomeWork} ClickItem={ClickItem} DefaultValue={selectclass} Label={'Select Class'} /> */}
                 <ErrorMessageForm error={selectclasserror} />
                 <br></br>
                 <DropDown itemList={GetSubject} ClickItem={ClickSubjectItem} DefaultValue={selectsubject} Label={'Select Subject'} />
@@ -190,7 +190,7 @@ function AddHomeWork() {
                 <ErrorMessageForm error={descriptionerror} />
                 <TextField value={selectdate} onChange={(e) => setSelectDate(e.target.value)}
                     onBlur={(e) => { setSelectdateerror(IsAssignDateValid(e.target.value)) }} />
-                (date format dd MMM yyyy e.g. <b>23 May 2023</b>)
+                (date format dd MMM yyyy e.g. <b>23 Aug 2023</b>)
                 <ErrorMessageForm error={selectdateerror} />
                 <Box mt={2}>
                     <input type="file" ref={aRef} onChange={changeFile} ></input>
