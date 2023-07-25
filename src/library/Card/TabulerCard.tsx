@@ -1,4 +1,4 @@
-import { Card, Grid, Typography } from '@mui/material'
+import { Card, Grid, Hidden, Tooltip, Typography } from '@mui/material'
 import React,{useState} from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -20,30 +20,29 @@ function TabulerCard({item ,clickEdit ,Submit ,Delete ,Submit1=undefined}) {
     <div>
           <Card sx={{ mb: 1 }}  >
             <Grid container style={{ display: "flex", alignItems: "center" }}>
-            <Grid item xs={12} >
-                <Typography dangerouslySetInnerHTML={{ __html: item.Text2 }}></Typography>
-              </Grid>
-              <Grid item xs={4} md={2}>
+              <Hidden mdDown>
+              <Tooltip title={item.Text2} placement="left-start">
+           <Typography dangerouslySetInnerHTML={{ __html: item.Text2 }} px={3} sx={{overflow:"hidden" ,whiteSpace:"nowrap" ,textOverflow:"ellipsis", width:"300px"}}></Typography>
+            </Tooltip>
+          
+              </Hidden>
+          
+              <Grid item xs={3} md={2}>
                 <Typography>{item.Text1}</Typography>
               </Grid>
-              <Grid item xs={4} md={2}>
+              <Grid item xs={4.5} md={2}>
                 <Typography>{item.Text3}</Typography>
               </Grid>
           
-              <Grid item xs={4} md={2}>
-                <Typography>{item.Text6}</Typography>
-              </Grid>
-              { isMobile && <Grid item xs={6}/>}
-            
-              <Grid item xs={2} md={1}>
+              <Grid item xs={1.5} md={1}>
                 {
                   !item.IsSubmited && <SendIcon color={'info'}  onClick={() => Submit(item.Id)} />
                 }
               </Grid>
-              <Grid item xs={2} md={1}>
+              <Grid item xs={1.5} md={1}>
                 <EditIcon color={'success'} onClick={() => clickEdit(item.Id)} />
               </Grid>
-              <Grid item xs={2} md={1}>
+              <Grid item xs={1.5} md={1}>
                 <DeleteIcon  color={'error'} onClick={() => Delete(item.Id)} />
               </Grid>
               {Submit1 &&  <Grid item xs={2} md={1}>

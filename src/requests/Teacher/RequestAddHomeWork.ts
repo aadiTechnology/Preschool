@@ -164,12 +164,12 @@ export const getClassNameList =
    let DeleteList = response.data.map((item,i)=>{
     return {
          Id:item.Id,
-         Text1:  item.DivisionName,
+         Text1:  item.SubjectName,
          Text2 : item.SubjectDescription.substring(10),
-         Text3 : item.SubjectName,
+         Text3 : getDateFormatted(item.AssignDate),
          Text4 : item.Attachment,
          Text5 : item.Camera,
-         Text6 : getDateFormatted(item.AssignDate),
+         Text6 : '',
          IsSubmited: item.IsSubmited
     }
    })
