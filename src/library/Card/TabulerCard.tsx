@@ -15,6 +15,7 @@ function TabulerCard({item ,clickEdit ,Submit ,Delete ,Submit1=undefined}) {
           setIsMobile(false)
       }
   }
+  console.log("here",item.Text2)
   window.addEventListener('resize', handleResize)
   return (
     <div>
@@ -22,7 +23,8 @@ function TabulerCard({item ,clickEdit ,Submit ,Delete ,Submit1=undefined}) {
             <Grid container style={{ display: "flex", alignItems: "center" }}>
               <Hidden mdDown>
               <Tooltip title={item.Text2} placement="left-start">
-           <Typography dangerouslySetInnerHTML={{ __html: item.Text2 }} px={3} sx={{overflow:"hidden" ,whiteSpace:"nowrap" ,textOverflow:"ellipsis", width:"300px"}}></Typography>
+           <Typography px={3} sx={{overflow:"hidden" ,whiteSpace:"nowrap" ,textOverflow:"ellipsis", width:"300px"}}>{item.Text2}</Typography>
+           {/* <Typography dangerouslySetInnerHTML={{ __html: item.Text2 }} px={3} sx={{overflow:"hidden" ,whiteSpace:"nowrap" ,textOverflow:"ellipsis", width:"300px"}}></Typography> */}
             </Tooltip>
           
               </Hidden>

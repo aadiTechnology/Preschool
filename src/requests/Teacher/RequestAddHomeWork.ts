@@ -160,12 +160,19 @@ export const getClassNameList =
   export const getDetailsList =
   (data:IGetDetailsListBody): AppThunk =>
   async (dispatch) => {
+    const getWithoutHTML = (value) =>{
+      var div = document.createElement("div");
+      div.innerHTML = value;
+      var text = div.textContent || div.innerText || "";
+      return text;
+    }
     const response = await GetClassForTeacherApi. GetDetailsList(data);
    let DeleteList = response.data.map((item,i)=>{
     return {
          Id:item.Id,
          Text1:  item.SubjectName,
-         Text2 : item.SubjectDescription.substring(10),
+         Text2 : getWithoutHTML(item.SubjectDescription),
+         //  Text2 : item.SubjectDescription.substring(10),
          Text3 : getDateFormatted(item.AssignDate),
          Text4 : item.Attachment,
          Text5 : item.Camera,
