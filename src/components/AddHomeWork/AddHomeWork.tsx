@@ -10,7 +10,7 @@ import { IGetClassNameListBody, IGetAddHomeworkBody, IGetDetailsListBody, IDelet
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { ChangeFileIntoBase64, CheckFileValidation, IsDateValid, IsFutureDateValid, getDateFormatted, getInputDateFormatted, toolbarOptions } from '../Common/util';
+import { ChangeFileIntoBase64, CheckFileValidation, IsDateValid, IsFutureDateValid, IsTodayFutureDateValid, getDateFormatted, getInputDateFormatted, getTodayformatDate, toolbarOptions } from '../Common/util';
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 import ErrorMessageForm from 'src/library/ErrorMessage/ErrorMessageForm';
 import AddHomeworkList from './AddHomeworkList';
@@ -36,7 +36,7 @@ function AddHomeWork() {
     const [selectclasserror, setSelectClasserror] = useState('');
     const [selectsubject, setSelectSubject] = useState('');
     const [selectsubjecterror, setSelectSubjecterror] = useState('');
-    const [selectdate, setSelectDate] = useState('');
+    const [selectdate, setSelectDate] = useState(getTodayformatDate());
     const [dateerror, setDateerror] = useState('');
     const [descriptionerror, setdescriptionerror] = useState('')
     const [selectdateerror, setSelectdateerror] = useState('')
@@ -148,7 +148,7 @@ function AddHomeWork() {
             dispatch(getAddHomework(GetAddHomeworkBody));
             setSubjectDescription('');
             setSelectSubject('');
-            setSelectDate('');
+            setSelectDate(getTodayformatDate());
             setFileData('');
             setFileName('');
             aRef.current.value = ""
@@ -171,7 +171,7 @@ function AddHomeWork() {
     const IsAssignDateValid = (value) => {
         let msg = IsDateValid(value);
         if (msg === '')
-            msg = IsFutureDateValid(value);
+            msg = IsTodayFutureDateValid(value);
         return msg
     }
     return (

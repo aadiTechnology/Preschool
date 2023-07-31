@@ -15,7 +15,6 @@ function TabulerCard({item ,clickEdit ,Submit ,Delete ,Submit1=undefined}) {
           setIsMobile(false)
       }
   }
-  console.log("here",item.Text2)
   window.addEventListener('resize', handleResize)
   return (
     <div>

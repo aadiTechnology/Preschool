@@ -57,7 +57,22 @@ export const IsFutureDateValid = (value) => {
     else
         return ''
 }
+export const IsTodayFutureDateValid = (value) => {
+    if (!IsTodayOrFutureDate(value)) {
+        return 'Please enter today or future date';
+    }
+    else
+        return ''
+}
 
+export const IsTodayOrFutureDate = (value) => {
+    const compareDate = new Date(value)
+    if (compareDate >= new Date(getTodayformatDate())) {
+        return true;
+    }
+    else
+        return false;
+}
 export const IsFutureDate = (value) => {
     const compareDate = new Date(value)
     if (compareDate > new Date()) {
@@ -117,12 +132,21 @@ export const dateSeparator = "-"
 export const dayIndex = "0"
 export const monthIndex = "1"
 export const getDateFormatted = (date) => {
-    console.log(date.split(' ')[0], "getDateFormatted", date.split(' ')[0].split())
     let arrDate = date.split(' ')[0].split(dateSeparator)
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     return `${arrDate[dayIndex]} ${monthNames[parseInt(arrDate[monthIndex]) - 1]} ${arrDate[2]}`;
+}
+export const getTodayformatDate = () => {
+    
+    let date = new Date(),
+        day = date.getDate(),
+        month = date.getMonth(),
+        year = date.getFullYear(),
+        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return day + ' ' + months[month] + ' ' + year;
 }
 export const getInputDateFormatted = (date) => {
     let arrDate = date.split(' ')[0].split(dateSeparator)
