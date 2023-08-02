@@ -30,9 +30,9 @@ function ViewHomework() {
       <BackButton  FromRoute={'/Student/Homework'}/>
       {ViewHomework.map((item,i)=>(
         <div key={i}>
-             <Card sx={{mb:"10px"}}>
-        <Typography dangerouslySetInnerHTML={{ __html: item.SubjectDescription }}></Typography>
-        <Typography>{getDateFormatted(item.AssignDate)}</Typography>
+             <Card>
+        <Typography dangerouslySetInnerHTML={{ __html: item.SubjectDescription }} mt={-2}></Typography>
+        <Typography mt={-1.5}>{getDateFormatted(item.AssignDate)}</Typography>
       {item.Attachment!=="" &&
         <a target="_blank" rel="noreferrer" href={'/documents/'+item.Attachment}>Attachment</a>
       }
