@@ -46,9 +46,9 @@ function TabulerCard({item ,clickEdit ,Submit ,Delete ,Submit1=undefined}) {
               <Grid item xs={1.5} md={1}>
                 <DeleteIcon  color={'error'} onClick={() => Delete(item.Id)} />
               </Grid>
-              {Submit1 &&  <Grid item xs={2} md={1}>
+              {/* {Submit1 &&  <Grid item xs={2} md={1}>
                 <ArrowForwardIcon color={'secondary'} onClick={() =>Submit1(item.Id)} />
-              </Grid> }
+              </Grid> } */}
              
             </Grid>
           </Card>

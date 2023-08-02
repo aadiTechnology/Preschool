@@ -187,10 +187,10 @@ function AddHomeWork() {
                 <ReactQuill value={subjectDescription} modules={toolbarOptions}
                     onChange={(value) => setSubjectDescription(value)} />
                 <ErrorMessageForm error={descriptionerror} />
-                <TextField value={selectdate} onChange={(e) => setSelectDate(e.target.value)}
+                {/* <TextField value={selectdate} onChange={(e) => setSelectDate(e.target.value)}
                     onBlur={(e) => { setSelectdateerror(IsAssignDateValid(e.target.value)) }} />
                 (date format dd MMM yyyy e.g. <b>23 Aug 2023</b>)
-                <ErrorMessageForm error={selectdateerror} />
+                <ErrorMessageForm error={selectdateerror} /> */}
                 <Box mt={2}>
                     <input type="file" ref={aRef} onChange={changeFile} ></input>
                 </Box>
