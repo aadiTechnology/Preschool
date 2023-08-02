@@ -1,7 +1,7 @@
 import ReplyIcon from '@mui/icons-material/Reply';
 import PropTypes from 'prop-types';
-import {  Button, Fab } from '@mui/material';
-
+import {  Button } from '@mui/material';
+import { useTheme, Fab } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 BackButton.propTypes = {
@@ -9,7 +9,7 @@ BackButton.propTypes = {
 };
 
 function BackButton({ FromRoute }) {
-
+  const theme = useTheme();
 
 
   
@@ -18,10 +18,10 @@ function BackButton({ FromRoute }) {
       <RouterLink to={`/${location.pathname.split('/')[1]}` + FromRoute}>
         <Fab
           sx={{
-          
+            background: 'white',
             position: 'absolute',
-            top: '100px',
-            left: '60px',
+            top: '18px',
+            left: '20px',
             width: '35px !important',
             height: '10px !important',
             borderRadius: '4px !important',
