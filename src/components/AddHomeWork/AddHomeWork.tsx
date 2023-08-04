@@ -17,6 +17,7 @@ import AddHomeworkList from './AddHomeworkList';
 import { Styles } from 'src/assets/style/CommonStyle';
 import Icon1 from 'src/library/icon/icon1';
 import { ButtonPrimary } from 'src/library/StyledComponents/CommonStyled';
+import SendIcon from '@mui/icons-material/Send';
 
 function AddHomeWork() {
 
@@ -201,7 +202,8 @@ function AddHomeWork() {
                 {Error && <ErrorMessageForm error={Error} />}
                   <Grid container>
                     <Grid item xs={12} md={3} sx={{float:"right"}}>
-                    <ButtonPrimary  onClick={onAddHomeWork} >Save</ButtonPrimary>
+                        
+                    <ButtonPrimary  onClick={onAddHomeWork} >Submit&nbsp;<SendIcon fontSize="small"/></ButtonPrimary>
                     </Grid>
                   </Grid>
               
