@@ -11,6 +11,8 @@ import AddStudentDetailsslice from 'src/requests/Student/AddStudentDetails/Reque
 import UserLoginSlice, { UserLogin } from 'src/requests/Admin/RequestUserLogin'
 import AdmissionConversionSlice from 'src/requests/Admin/RequestAdmissionConversion'
 import AddStudentFollowUpSlice from 'src/requests/Admin/RequestAddStudentFollowUp'
+import AddStudentDetailSlice from 'src/requests/AddStudentDetails/RequestAddStudentDetails'
+
 const rootReducer = combineReducers({
     Holidays:Holidaysslice,
     SchoolList: SchoolListslice,
@@ -22,8 +24,9 @@ const rootReducer = combineReducers({
     UserLogin:UserLoginSlice,
     AddStudentDetails :AddStudentDetailsslice,
     AddAdmissionConversion:AdmissionConversionSlice,
-    AddStudentFollowUp:AddStudentFollowUpSlice
-    
+    AddStudentFollowUp:AddStudentFollowUpSlice,
+    AddStudentDetail:AddStudentDetailSlice,
+   
 });
 
 export default rootReducer;

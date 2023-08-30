@@ -73,7 +73,35 @@ function DashBoard() {
   Link: 'Student/AdmissionConversion',
   iconColor: '#f0483e',
   icon : <AddToQueueIcon fontSize='large'/>
+},
+{
+  Text:"Enquiry",
+  Text2:"Form",
+  Link: 'Student/EnquiryForm',
+  iconColor: '#f0483e',
+  icon : <AddToQueueIcon fontSize='large'/>
+},
+{
+  Text:"Admission",
+  Text2:"Form",
+  Link: 'Student/AdmissionForm',
+  iconColor: '#f0483e',
+  icon : <AddToQueueIcon fontSize='large'/>
+},
+{
+  Text:"StudentDetails",
+  Text2:"List",
+  Link: 'Student/StudentDetailsList',
+  iconColor: '#f0483e',
+  icon : <AddToQueueIcon fontSize='large'/>
 }
+// {
+//   Text:"Admission",
+//   Text2:"Form",
+//   Link: 'Student/AdmissionForm',
+//   iconColor: '#f0483e',
+//   icon : <AddToQueueIcon fontSize='large'/>
+// }
 
 ]
 

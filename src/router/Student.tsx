@@ -25,6 +25,9 @@ const Dashboard = Loader(lazy(()=> import('src/components/DashBoard/DashBoard'))
 const AddStudentDetails = Loader(lazy(()=> import('src/components/AddStudentDetails/AddStudentDetails')))
 const FollowUp = Loader(lazy(()=> import('src/components/FollowUp/FollowUp')))
 const AdmissionConversion = Loader(lazy(()=> import('src/components/AdmissionConversion/AdmisssionConversion')))
+const EnquiryForm = Loader(lazy(()=> import('src/components/AddEnquiryStudentDetails/AddStudentDetails1')))
+const AdmissionForm = Loader(lazy(()=>import('src/components/AddAdmissionStudentDetails/AdmissionStudentDetails')))
+const StudentDetailsList = Loader(lazy(()=>import('src/components/StudentDetailsList/StudentDetailsList')))
 const studentRoutes = [
   {
     path: '/',
@@ -90,7 +93,19 @@ const studentRoutes = [
     path:'AddStudentDetails/FollowUp/:Id',
     element:<FollowUp/>
   },
-
+  {
+    path:'EnquiryForm',
+    element:<EnquiryForm/>
+  },
+  {
+    path:'AdmissionForm',
+    element:<AdmissionForm/>
+  },
+  {
+    path:'StudentDetailsList',
+    element:<StudentDetailsList/>
+  }
+  
 ];
 
 export default studentRoutes;
