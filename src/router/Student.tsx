@@ -28,6 +28,11 @@ const AdmissionConversion = Loader(lazy(()=> import('src/components/AdmissionCon
 const EnquiryForm = Loader(lazy(()=> import('src/components/AddEnquiryStudentDetails/AddStudentDetails1')))
 const AdmissionForm = Loader(lazy(()=>import('src/components/AddAdmissionStudentDetails/AdmissionStudentDetails')))
 const StudentDetailsList = Loader(lazy(()=>import('src/components/StudentDetailsList/StudentDetailsList')))
+const SchoolNotice =Loader(lazy(()=>import('src/components/SchoolNotice/SchoolNotice'))) 
+const ViewSchoolNotice =Loader(lazy(()=>import('src/components/SchoolNotice/ViewSchoolNotice'))) 
+const TasksList = Loader(lazy(()=>import('src/components/Tasks/TasksList')))
+const AddSchoolNotice = Loader(lazy(()=>import('src/components/AddSchoolNotice/AddSchoolNotice')))
+const AddSchoolNoticeList = Loader(lazy(()=>import('src/components/AddSchoolNotice/AddSchoolNoticeList')))
 const studentRoutes = [
   {
     path: '/',
@@ -104,6 +109,30 @@ const studentRoutes = [
   {
     path:'StudentDetailsList',
     element:<StudentDetailsList/>
+  },
+  {
+    path:'SchoolNotice',
+    element:<SchoolNotice/>
+  },
+  {
+    path:'ViewSchoolNotice',
+    element:<ViewSchoolNotice />
+  },
+  {
+    path:'SchoolNotice/ViewSchoolNotice/:Id',
+    element:<ViewSchoolNotice />
+  },
+  {
+    path: 'TasksList',
+    element: <TasksList />
+  },
+  {
+    path:'AddSchoolNotice',
+    element:<AddSchoolNotice/>
+  },
+  {
+    path:'AddSchoolNoticeList',
+    element:<AddSchoolNoticeList />
   }
   
 ];
