@@ -30,7 +30,6 @@ const AdmissionForm = Loader(lazy(()=>import('src/components/AddAdmissionStudent
 const StudentDetailsList = Loader(lazy(()=>import('src/components/StudentDetailsList/StudentDetailsList')))
 const SchoolNotice =Loader(lazy(()=>import('src/components/SchoolNotice/SchoolNotice'))) 
 const ViewSchoolNotice =Loader(lazy(()=>import('src/components/SchoolNotice/ViewSchoolNotice'))) 
-const TasksList = Loader(lazy(()=>import('src/components/Tasks/TasksList')))
 const AddSchoolNotice = Loader(lazy(()=>import('src/components/AddSchoolNotice/AddSchoolNotice')))
 const AddSchoolNoticeList = Loader(lazy(()=>import('src/components/AddSchoolNotice/AddSchoolNoticeList')))
 const studentRoutes = [
@@ -121,10 +120,6 @@ const studentRoutes = [
   {
     path:'SchoolNotice/ViewSchoolNotice/:Id',
     element:<ViewSchoolNotice />
-  },
-  {
-    path: 'TasksList',
-    element: <TasksList />
   },
   {
     path:'AddSchoolNotice',
