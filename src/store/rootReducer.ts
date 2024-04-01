@@ -14,7 +14,6 @@ import AddStudentFollowUpSlice from 'src/requests/Admin/RequestAddStudentFollowU
 import AddStudentDetailSlice from 'src/requests/AddStudentDetails/RequestAddStudentDetails';
 import ClassNameSlice from 'src/requests/ClassNameList/RequestClassNameList';
 import SchoolNoticeSlice from 'src/requests/SchoolNotice/RequestSchoolNotice';
-import TasksListSlice from 'src/requests/Tasks/RequestTasksList'
 import AddSchoolNoticeSlice from 'src/requests/AddSchoolNotice/RequestAddSchoolNotice';
 
 
@@ -33,7 +32,6 @@ const rootReducer = combineReducers({
     AddStudentFollowUp:AddStudentFollowUpSlice,
     AddStudentDetail:AddStudentDetailSlice,
     ViewSchoolNotice:SchoolNoticeSlice,
-    TasksList:TasksListSlice,
     AddSchoolNotice:AddSchoolNoticeSlice,
     ClassNameList:ClassNameSlice,
 
