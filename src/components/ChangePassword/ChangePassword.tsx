@@ -84,14 +84,17 @@ function ChangePassword() {
                    <Grid item md={3}></Grid>
                     <Grid item xs={12} md={6}>
                     <Card sx={{ padding: 2 }} >
-                    <TextField type='password' fullWidth label="Old Password"
+                    <TextField type='password' fullWidth 
+                    label="Old Password"
                         value={oldPassword}
                         onChange={(e) => setOldPassword(e.target.value)} variant="standard" />
                     <ErrorMessageForm error={erroroldPassword} />
-                    <TextField fullWidth label="New Password" value={newPassword}
+                    <TextField fullWidth label="New Password"
+                     value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)} variant="standard" />
                     <ErrorMessageForm error={errornewPassword} />
-                    <TextField type='password' fullWidth label="Confirm Password" value={confirmPassword}
+                    <TextField type='password' fullWidth 
+                    label="Confirm Password" value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)} variant="standard" />
                     <ErrorMessageForm error={errorconfirmPassword} />
                     <br></br>

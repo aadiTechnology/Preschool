@@ -14,7 +14,7 @@ const router: PartialRouteObject[] = [
   // ExtendedSidebarLayout 
 
   {
-    path: 'extended-sidebar',
+    path: 'c',
     element: (
         <ExtendedSidebarLayout />
     ),

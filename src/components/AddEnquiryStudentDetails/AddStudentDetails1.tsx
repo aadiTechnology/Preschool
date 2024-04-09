@@ -297,7 +297,8 @@ const EnquiryStudentDetails = () => {
                 <ErrorMessageForm error={motherNameerror} />
                 </Grid>
             <Grid item xs={6}>
-                <TextField value={phoneNo2} onChange={(e) => ChangephoneNo2(e)} onBlur={(e) => { setPhoneNoerror2(IsMobileNoValid(e.target.value)) }}
+                <TextField value={phoneNo2} onChange={(e) => ChangephoneNo2(e)} 
+                onBlur={(e) => { setPhoneNoerror2(IsMobileNoValid(e.target.value)) }}
                   error={phoneNoerror2 !== ''}
                   helperText={phoneNoerror2}
                   label={'PhoneNo2'} />

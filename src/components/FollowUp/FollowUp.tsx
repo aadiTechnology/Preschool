@@ -186,7 +186,8 @@ const FollowUp = () => {
               <DropDown itemList={monthArray} ClickItem={clickMonthItem} DefaultValue={month} Label={'Select Month'} />
             </Grid>
             <Grid item xs={6}>
-              <TextField value={searchName} onChange={(e) => {setSearchName(e.target.value) }} label={'Search by Student Name'}
+              <TextField value={searchName} onChange={(e) => {setSearchName(e.target.value) }} 
+              label={'Search by Student Name'}
                 InputProps={{
                   endAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>,
                 }}

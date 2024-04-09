@@ -171,7 +171,8 @@ function AddPhoto() {
         <TextField value={link} onChange={(e) => setLink(e.target.value)}
         label={'Link'} />
         <ErrorMessageForm error={linkerror}/>
-      <TextField type='date' value={date} onChange={(e) => setDate(e.target.value)} inputProps={{
+      <TextField type='date' value={date} 
+      onChange={(e) => setDate(e.target.value)} inputProps={{
         max: formattedDate,
       }} />
       <ErrorMessageForm error={dateerror}/>

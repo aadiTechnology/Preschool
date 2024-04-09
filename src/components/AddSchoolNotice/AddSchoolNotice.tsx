@@ -213,7 +213,9 @@ function AddSchoolNotice() {
               helperText={Titleerror} > </TextField>
           </Grid>
           <Grid item xs={6}>
-            <TextField type='date' label={"Date"} value={selectdate} focused onChange={(e) => { setSelectDate(e.target.value) }}
+            <TextField type='date' label={"Date"} 
+            value={selectdate} focused
+             onChange={(e) => { setSelectDate(e.target.value) }}
              /><br></br>
           </Grid>
         </Grid>
