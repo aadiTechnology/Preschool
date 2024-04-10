@@ -54,6 +54,8 @@ function Login() {
       navigate('/extended-sidebar/Student/HomeWork');
     else if (sessionStorage.getItem("UserRoleId") === "2")
       navigate('/extended-sidebar/Student/AddHomeWork');
+    else if (sessionStorage.getItem("UserRoleId") === "1")
+      navigate('/extended-sidebar/Student/StudentDetails');
     else
       navigate('/extended-sidebar/Student/AddPhoto');
   }

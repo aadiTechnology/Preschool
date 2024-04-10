@@ -1,6 +1,5 @@
 import { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
-
 import SuspenseLoader from 'src/layouts/Components/SuspenseLoader';
 
 const Loader = (Component) => (props) =>
@@ -18,6 +17,8 @@ const AddHomeWork = Loader(lazy(()=> import('src/components/AddHomeWork/AddHomeW
  const ViewPhotoAlbum = Loader(lazy(()=> import('src/components/ViewPhotoAlbum/ViewPhotoAlbum')))
 const AddStaff = Loader(lazy(()=> import('src/components/AddStaff/AddStaff')))
 const Login = Loader(lazy(()=> import('src/components/Login/Login')))
+const StudentDetails = Loader(lazy(()=> import('src/components/Enquiry/StudentDetails')))
+const AddEnquiry = Loader(lazy(()=> import('src/components/Enquiry/AddEnquiry')))
 const Homework = Loader(lazy(()=> import('src/components/Homework/Homework')))
 const ViewHomework = Loader(lazy(()=> import('src/components/Homework/ViewHomework')))
 const AddPhoto = Loader(lazy(()=> import('src/components/AddPhoto/AddPhoto')))
@@ -128,6 +129,14 @@ const studentRoutes = [
   {
     path:'AddSchoolNoticeList',
     element:<AddSchoolNoticeList />
+  },
+  {
+    path:'StudentDetails',
+    element:<StudentDetails />
+  },
+  {
+    path:'AddEnquiry',
+    element:<AddEnquiry />
   }
   
 ];

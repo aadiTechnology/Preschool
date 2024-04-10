@@ -12,6 +12,27 @@ export const toolbarOptions = {
     },
 };
 
+export     const calculateAge = (BirthDate) => {
+    const today = new Date();
+    const dob = new Date(BirthDate);
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+        age--;
+    }
+    return age;
+  }
+  
+  export const IsPhoneNoValid = (value) => {
+    let returnVal = ''
+    const emailRegExp = /^[0-9]{10}$/;
+    if (!emailRegExp.test(value) && value.length < 11) {
+      returnVal = 'Invalid Phone Number';
+    }
+  
+    return returnVal
+  }
+
 export const monthArray = [
     { Value: 1, Name: "January" },
     { Value: 2, Name: "February" },
@@ -107,6 +128,7 @@ export const ChangeFileIntoBase64 = (fileData) => {
         };
     });
 };
+
 export const CheckFileValidation = (fileData, allowedFileTypes, fileSize) => {
     const fileExtension = fileData?.name?.split('.').at(-1);
     if (fileExtension != undefined || null) {
