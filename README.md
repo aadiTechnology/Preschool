@@ -8,4 +8,4 @@
 ![Enquiry Form Page](https://github.com/aadiTechnology/Preschool/blob/Development-v.0.1/Snapshots/AddEnquiryForm.png)
 ## On Clicking Home 🏠 Icon Admin is redirected to the Default Page.
 ## Pending Features of Current Page
-- Existing Enquiry Editing Functionality
+- Existing Enquiry Editing 📝 Functionality
