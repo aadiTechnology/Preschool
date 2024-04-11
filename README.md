@@ -1,4 +1,4 @@
-# SmatKidz
+# SmartKidz
 ## Perspective of User (Admin)
 ## Login Page
 ![Login Page](https://github.com/aadiTechnology/Preschool/blob/Development-v.0.1/Snapshots/LoginPage.png)
