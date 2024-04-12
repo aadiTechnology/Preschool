@@ -3,7 +3,7 @@
 ## Login Page
 ![Login Page](https://github.com/aadiTechnology/Preschool/blob/Development-v.0.1/Snapshots/LoginPage.png)
 ## Student Details Page ~ a.k.a ~ Landing Page
-![Landing Page](https://github.com/aadiTechnology/Preschool/blob/Development-v.0.1/Snapshots/AdminPage.png)
+![Landing Page](https://github.com/aadiTechnology/Preschool/blob/Development-v.0.1/Snapshots/upd_Adm_Pg.png)
 ## Enquiry Form 
 ![Enquiry Form Page](https://github.com/aadiTechnology/Preschool/blob/Development-v.0.1/Snapshots/AddEnquiryForm.png)
 ## On Clicking Home 🏠 Icon Admin is redirected to the Default Page.
