@@ -71,11 +71,17 @@ const AddEnquiry = () => {
         }
     }, [EnquiryDetails])
     useEffect(() => {
-        dispatch(getClass())
-        const GetEnquiryDetailsBody: IGetEnquiryDetailsBody = {
-            ID: Number(Id)
+        if (Id!==undefined){
+            const GetEnquiryDetailsBody: IGetEnquiryDetailsBody = {
+                ID: Number(Id)
+            }
+            dispatch(getEnquiryDetails(GetEnquiryDetailsBody))
         }
-        dispatch(getEnquiryDetails(GetEnquiryDetailsBody))
+
+    }, [Id]);
+    useEffect(() => {
+        dispatch(getClass())
+        clickCancel()
     }, []);
 
     useEffect(() => {
