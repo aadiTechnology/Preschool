@@ -1,5 +1,5 @@
 import CallIcon from '@mui/icons-material/Call'
-import { Container, Grid, Button, Typography, Box } from '@mui/material'
+import { Container, Grid, Button, Typography, Box, IconButton, Tooltip } from '@mui/material'
 import DynamicList from 'src/libraries/Training/DynamicList'
 import PageHeader from 'src/libraries/heading/PageHeader'
 import EditIcon from '@mui/icons-material/Edit';
@@ -33,7 +33,8 @@ const EnquiryList = () => {
   const paginatedList = enquiryList.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
 
   const HeaderList = ["Name", "Class", "BirthDate", "Gender", "Phone", "Society", "Enquiry Date-Time", "Edit","Follow Up"]
-  const IconList = [{ Id: 1, Icon: <EditIcon />, Action: 'Followup',Value:"1" },{ Id: 2, Icon: <CallIcon />, Action: 'Followup',Value:"2"}]
+  const IconList = [{ Id: 1, Icon:  <Tooltip title="Edit Details"><IconButton><EditIcon /></IconButton></Tooltip> , Action: 'Followup',Value:"1" },
+                    { Id: 2, Icon:<Tooltip title="Take FollowUp"><IconButton><CallIcon /></IconButton></Tooltip> , Action: 'Followup',Value:"2"}]
 
   const totalCount = enquiryList.length
   const startIndex = pageIndex * pageSize + 1
