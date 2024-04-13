@@ -87,7 +87,7 @@ const AddEnquiry = () => {
     useEffect(() => {
         if (AddStudentMsg !== '') {
             toast.success(AddStudentMsg);
-            dispatch(resetAddEnquiryDetails);
+            dispatch(resetAddEnquiryDetails());
             clickCancel();
             // navigate("/")
 
