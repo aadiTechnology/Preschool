@@ -1,4 +1,4 @@
-### Web App Link ( https://smartkidz.vercel.app/)
+### Web App Link ( https://smart-kidz.vercel.app/)
 # SmartKidz
 ## Perspective of User (Admin)
 ## Login Page
