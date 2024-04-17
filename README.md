@@ -8,5 +8,10 @@
 ## Enquiry Form 
 ![Enquiry Form Page](https://github.com/aadiTechnology/Preschool/blob/Development-v.0.1/Snapshots/AddEnquiryForm.png)
 ## On Clicking Home 🏠 Icon Admin is redirected to the Default Page.
-## ⌚ Pending Features of Current Page 
-- Existing Enquiry Editing 📝 Functionality
+## FollowUp Form 
+![FollowUp Form](https://github.com/aadiTechnology/Preschool/blob/Development-v.0.1/Snapshots/FollowUpForm.png)
+## FollowUps Reminders List
+![FollowUps](https://github.com/aadiTechnology/Preschool/blob/Development-v.0.1/Snapshots/FollowUpsReminderList.png)
+## FollowUp Count History List (Displayed Below FollowUp Form)
+![Count History](https://github.com/aadiTechnology/Preschool/blob/Development-v.0.1/Snapshots/FollowUpCountHistoryList.png)
+
