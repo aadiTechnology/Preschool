@@ -185,7 +185,7 @@ export     const calculateAge = (BirthDate) => {
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
         age--;
     }
-    return age;
+    return age.toString() + ' Yrs ' + Math.abs(monthDiff) + " Months";
   }
   
   export const IsPhoneNoValid = (value) => {

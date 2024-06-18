@@ -171,8 +171,7 @@ const AddEnquiry = () => {
             if (AddStudentMsg === '0'){
                 toast.error('Failed to Add Enquiry.');
             } else if (AddStudentMsg === '1'){
-                toast.success('Enquiry Added Successfully.');
-                clickCancel();
+                navigate('../UserMessage/0')
             } else if (AddStudentMsg === '2'){
                 toast.success('Enquiry Details Updated Successfully.');
                 clickCancel();

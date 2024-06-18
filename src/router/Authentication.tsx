@@ -11,8 +11,8 @@ const Loader = (Component) => (props) =>
 );
 
 // Dashboards
-const SchoolList = Loader(lazy(() => import('src/components/SchoolList/SchoolList')));
 const Login = Loader(lazy(()=> import('src/components/Login/Login')))
+const UserMessage = Loader(lazy(()=> import('src/components/Common/UserMessage')))
 
 const AddEnquiry = Loader(lazy(()=> import('src/components/Enquiry/AddEnquiry')))
 
@@ -30,6 +30,11 @@ const AuthenticationRoute = [
   {
     path: 'AddEnquiry',
     element: <AddEnquiry/>
+  },
+ 
+  {
+    path: 'UserMessage/:Id',
+    element: <UserMessage/>
   },
 
 ];
