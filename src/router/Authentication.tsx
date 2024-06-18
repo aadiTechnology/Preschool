@@ -19,7 +19,7 @@ const AddEnquiry = Loader(lazy(()=> import('src/components/Enquiry/AddEnquiry'))
 const AuthenticationRoute = [
   {
     path: '/',
-    element: <Navigate to="AddEnquiry" replace />
+    element: <Navigate to="Login" replace />
   },
  
   {

@@ -71,6 +71,9 @@ function Login() {
 
   const emailRegExp = /^\S+@\S+\.\S+$/;
   const phoneRegExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+  const onRegister = () => {
+    navigate('../AddEnquiry')
+  }
   const onSubmit = () => {
     let isError = false;
     if (password === '') {
@@ -101,7 +104,7 @@ function Login() {
 
   return (
     <Container maxWidth={'xs'} >
-      <Grid container   alignItems="center" >
+      <Grid container   alignItems="center"  columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       <Grid item xs={12} sx={{ mt: "30px" }} display={'flex'}  justifyContent={'center'}>
         <img src='/images/SmartKidz_logo.png' style={{ width: 200 }} />
       </Grid>
@@ -114,9 +117,12 @@ function Login() {
         label={'password'} />
       <ErrorMessageForm error={passworderror} />
       </Grid>
-      <Grid item xs={12} alignContent={'center'} mt={1} >
+      <Grid item xs={6} alignContent={'center'} mt={1} >
 
       <ButtonPrimary onClick={onSubmit} >Login</ButtonPrimary>
+      </Grid>
+      <Grid item xs={6} alignContent={'center'} mt={1} >
+      <ButtonPrimary onClick={onRegister} >Register</ButtonPrimary>
       </Grid>
       </Grid>
     </Container>
