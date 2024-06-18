@@ -14,16 +14,22 @@ const Loader = (Component) => (props) =>
 const SchoolList = Loader(lazy(() => import('src/components/SchoolList/SchoolList')));
 const Login = Loader(lazy(()=> import('src/components/Login/Login')))
 
+const AddEnquiry = Loader(lazy(()=> import('src/components/Enquiry/AddEnquiry')))
 
 const AuthenticationRoute = [
   {
     path: '/',
-    element: <Navigate to="Login" replace />
+    element: <Navigate to="AddEnquiry" replace />
   },
  
   {
     path: 'Login',
     element: <Login/>
+  },
+ 
+  {
+    path: 'AddEnquiry',
+    element: <AddEnquiry/>
   },
 
 ];

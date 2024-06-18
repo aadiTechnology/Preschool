@@ -176,3 +176,34 @@ export const getFormattedNextDate = (date) => {
 
     return `${Day} ${Month} ${Year}`;
 }
+
+export     const calculateAge = (BirthDate) => {
+    const today = new Date();
+    const dob = new Date(BirthDate);
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+        age--;
+    }
+    return age;
+  }
+  
+  export const IsPhoneNoValid = (value) => {
+    let returnVal = ''
+    const emailRegExp = /^[0-9]{10}$/;
+    if (!emailRegExp.test(value) && value.length < 11) {
+      returnVal = 'Invalid Phone Number';
+    }
+  
+    return returnVal
+  }
+  
+  export const getCalendarFormat = (date) => {
+    date = date || new Date();
+    let Day = new Date(date).getDate();
+    let DayFormat = Day < 10 ? "0" + Day.toString() : Day.toString();
+    let Month = new Date(date).getMonth()+1;
+    let MonthFormat = Month < 10 ? "0" + Month.toString() : Month.toString();
+    const Year = new Date(date).getFullYear();
+    return `${Year}-${MonthFormat}-${DayFormat}`;
+  };

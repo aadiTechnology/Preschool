@@ -15,6 +15,8 @@ import AddStudentDetailSlice from 'src/requests/AddStudentDetails/RequestAddStud
 import ClassNameSlice from 'src/requests/ClassNameList/RequestClassNameList';
 import SchoolNoticeSlice from 'src/requests/SchoolNotice/RequestSchoolNotice';
 import AddSchoolNoticeSlice from 'src/requests/AddSchoolNotice/RequestAddSchoolNotice';
+import EnquirySlice from '../requests/Enquiry/RequestEnquiryList'
+import AdmissionSlice from '../requests/Admission/RequestAdmission'; // Import FollowUpSlice
 
 
 
@@ -35,7 +37,9 @@ const rootReducer = combineReducers({
     AddSchoolNotice:AddSchoolNoticeSlice,
     ClassNameList:ClassNameSlice,
 
-   
+    Enquiry:EnquirySlice,
+    Admission: AdmissionSlice,
+    
 });
 
 export default rootReducer;

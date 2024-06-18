@@ -5,7 +5,7 @@ export const HeadingStyle= styled(Typography)( ({ theme }) =>`
 font-weight: 500;
 font-size: 20px;
 color: black;
-margin: auto;
+// margin: auto;
 text-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 font-family: roboto;
 @media (min-width: 280px) and (max-width: 320px)  {

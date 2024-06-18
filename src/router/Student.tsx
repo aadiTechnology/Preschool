@@ -32,6 +32,7 @@ const SchoolNotice =Loader(lazy(()=>import('src/components/SchoolNotice/SchoolNo
 const ViewSchoolNotice =Loader(lazy(()=>import('src/components/SchoolNotice/ViewSchoolNotice'))) 
 const AddSchoolNotice = Loader(lazy(()=>import('src/components/AddSchoolNotice/AddSchoolNotice')))
 const AddSchoolNoticeList = Loader(lazy(()=>import('src/components/AddSchoolNotice/AddSchoolNoticeList')))
+const AddEnquiry = Loader(lazy(()=> import('src/components/Enquiry/AddEnquiry')))
 const studentRoutes = [
   {
     path: '/',
@@ -108,6 +109,10 @@ const studentRoutes = [
   {
     path:'StudentDetailsList',
     element:<StudentDetailsList/>
+  },
+  {
+    path:'AddEnquiry',
+    element:<AddEnquiry />
   },
   {
     path:'SchoolNotice',
