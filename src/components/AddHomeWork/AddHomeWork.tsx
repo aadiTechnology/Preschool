@@ -149,6 +149,7 @@ function AddHomeWork() {
             dispatch(getAddHomework(GetAddHomeworkBody));
             setSubjectDescription('');
             setSelectSubject('');
+            setId(0);
             setSelectDate(getTodayformatDate());
             setFileData('');
             setFileName('');
