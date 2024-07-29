@@ -13,9 +13,10 @@ import { useNavigate } from 'react-router'
 import { Tooltip } from '@mui/material';
 // import FollowUpList from '../FollowUp/FollowUpList';
 import AdmissionList from './AdmissionList';
+import FollowUpList from '../FollowUp/FollowUpList';
 
 const AddClass = () => {
-    const [componentName,setComponentName] = useState(<EnquiryList />)
+    const [componentName,setComponentName] = useState(<AdmissionList />)
     const [pageHeader,setPageHeader] = useState('Enquiry List');
     const navigate = useNavigate();
     // const clickEnquiry = () => {
@@ -24,7 +25,7 @@ const AddClass = () => {
     // const enquiryList = [{ Id: 1, Name: "Enquiry List", Value: "1" },
     // { Id: 2, Name: "Follow Ups", Value: "2" },
     // { Id: 3, Name: "Admission List", Value: "3" }];
-    const [toggle,setToggle] = useState('1')
+    const [toggle,setToggle] = useState('3')
 
     // const [toggleId, setToggleId] = useState('1');
 
@@ -39,12 +40,12 @@ const AddClass = () => {
 
             navigate('/extended-sidebar/Student/AddEnquiry')
         }
-        // else if(value==="2"){
-        //     setPageHeader('Follow Ups')
-        //     // navigate('/extended-sidebar/Student/FollowUpList')
-        //     setToggle(value)
-        //     setComponentName(<FollowUpList />)
-        // }
+        else if(value==="2"){
+            setPageHeader('Follow Ups')
+            // navigate('/extended-sidebar/Student/FollowUpList')
+            setToggle(value)
+            setComponentName(<FollowUpList />)
+        }
         else if(value==="3"){
             setPageHeader('Admission List')
             setComponentName(<AdmissionList />)

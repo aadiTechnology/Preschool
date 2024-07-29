@@ -9,14 +9,15 @@ import { ButtonPrimary } from 'src/library/StyledComponents/CommonStyled';
 import { RootState } from 'src/store';
 import CalendarField from 'src/libraries/Training/CalendarField';
 import RadioList from 'src/libraries/Training/RadioList';
-import { IsEmailValid, IsPhoneNoValid, calculateAge } from '../Common/util';
-import { IAddEnquiryBody } from 'src/Interface/Enquiry/IEnquiry';
+import { IsEmailValid, IsPhoneNoValid, calculateAge, getCalendarFormat } from '../Common/util';
+import { IAddEnquiryBody, IGetEnquiryDetailsBody } from 'src/Interface/Enquiry/IEnquiry';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router-dom';
 import PageHeader from 'src/library/heading/pageHeader';
 import { HeadingStyle } from 'src/libraries/styled/HeadingStyled';
 
 const AddEnquiry = () => {
+    const { Id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [ClassID, setClassID] = useState('0')
@@ -51,6 +52,7 @@ const AddEnquiry = () => {
     const Class = useSelector((state: RootState) => state.Enquiry.Class);
     const AddStudentMsg = useSelector((state: RootState) => state.Enquiry.AddEnquiryMsg)
     const  Loading  = useSelector((state: RootState) => state.Enquiry.Loading);
+    const EnquiryDetails  = useSelector((state: RootState) => state.Enquiry.EnquiryDetails);
     const clickClass = (value) => {
         setClassID(value);
         setClassErrorMessage("");
@@ -138,7 +140,24 @@ const AddEnquiry = () => {
         };
         return isValid
     }
+    const clearEdit=()=>{
+        setClassID(EnquiryDetails.ClassId)
+            setStudentName(EnquiryDetails.StudentName)
+            setBirthDate(getCalendarFormat(EnquiryDetails.Birthdate))
+            setAge(calculateAge(EnquiryDetails.Birthdate).toString())
+            setGender(EnquiryDetails.Gender)
+            setFatherName(EnquiryDetails.FatherName)
+            setFatherPhoneNo(EnquiryDetails.FatherPhoneNo)
+            setMotherName(EnquiryDetails.MotherName)
+            setMotherPhoneNo(EnquiryDetails.MotherPhoneNo)
+            setStudentAddress(EnquiryDetails.StudentAddress)
+            setSocietyName(EnquiryDetails.SocietyName)
+            setEmailId(EnquiryDetails.EmailId)
+    }
     const clickCancel = () => {
+        if (EnquiryDetails !== null) {
+            clearEdit()
+        }else{
         setClassID('0')
         setStudentName('')
         setBirthDate('')
@@ -162,7 +181,7 @@ const AddEnquiry = () => {
         setGenderErrorMessage('')
         setStudentNameErrorMessage('')
         setClassErrorMessage('')
-        
+    }
     }
     
     useEffect(() => {
@@ -175,7 +194,7 @@ const AddEnquiry = () => {
             } else if (AddStudentMsg === '2'){
                 toast.success('Enquiry Details Updated Successfully.');
                 clickCancel();
-                navigate('/extended-sidebar/Student/AddEnquiry')
+                navigate('/extended-sidebar/Student/StudentDetails')
             } else if (AddStudentMsg === '3'){
                 toast.error('Email Id Already Exists.');
             } 
@@ -189,7 +208,7 @@ const AddEnquiry = () => {
         const isFormValid = IsFormValid();
         if (isFormValid) {
             const AddStudentBody: IAddEnquiryBody = {
-                ID: 0,
+                ID: Id == undefined ? 0 : Number(Id),
                 ClassId: Number(ClassID),
                 StudentName: StudentName,
                 Birthdate: BirthDate,
@@ -298,13 +317,45 @@ const AddEnquiry = () => {
     const BlurEmailId = () => {
         setEmailIdErrorMessage(IsEmailValid(EmailId.trim()))
     }
+    
+    useEffect(() => {
+        if (Id !== undefined) {
+            const GetEnquiryDetailsBody: IGetEnquiryDetailsBody = {
+                ID: Number(Id)
+            }
+            dispatch(getEnquiryDetails(GetEnquiryDetailsBody))
+        }
+
+    }, [Id, dispatch]);
+    
     useEffect(() => {
         dispatch(getClass())
     }, []);
+console.log(EnquiryDetails,"EnquiryDetails");
+
+    useEffect(() => {
+        if (EnquiryDetails !== null) {
+            setClassID(EnquiryDetails.ClassId)
+            setStudentName(EnquiryDetails.StudentName)
+            setBirthDate(getCalendarFormat(EnquiryDetails.Birthdate))
+            setAge(calculateAge(EnquiryDetails.Birthdate).toString())
+            setGender(EnquiryDetails.Gender)
+            setFatherName(EnquiryDetails.FatherName)
+            setFatherPhoneNo(EnquiryDetails.FatherPhoneNo)
+            setMotherName(EnquiryDetails.MotherName)
+            setMotherPhoneNo(EnquiryDetails.MotherPhoneNo)
+            setStudentAddress(EnquiryDetails.StudentAddress)
+            setSocietyName(EnquiryDetails.SocietyName)
+            setEmailId(EnquiryDetails.EmailId)
+        }
+    }, [EnquiryDetails])
+
     return (<Container>
         <Grid container>
         <Grid item xs={5} sm={5}>
+            {Id==undefined &&
         <img src='/images/SmartKidz_logo.png' style={{ width: 200 }} />
+            }
                 </Grid>
                 <Grid item xs={7} sm={7}>
                 <HeadingStyle>Register Student</HeadingStyle>
@@ -430,6 +481,7 @@ const AddEnquiry = () => {
                                             <ButtonPrimary  onClick={clickSubmit} >Submit&nbsp;<SendIcon fontSize="small"/></ButtonPrimary>
                                             {/* <ButtonField Label="Clear" ClickItem={clickCancel} /> */}
                                             <ButtonPrimary  onClick={clickCancel} >Clear</ButtonPrimary>
+                                            <ButtonPrimary  onClick={()=>navigate('/extended-sidebar/Student/StudentDetails')} >Student List</ButtonPrimary>
                                         </Box>
                                     </Grid>
                                 </Grid>

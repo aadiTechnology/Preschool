@@ -55,7 +55,7 @@ function Login() {
     else if (sessionStorage.getItem("UserRoleId") === "2")
       navigate('/extended-sidebar/Student/AddHomeWork');
     else
-      navigate('/extended-sidebar/Student/AddPhoto');
+      navigate('/extended-sidebar/Student/StudentDetails');
   }
   const setSession = (GetUserLogin) => {
     sessionStorage.setItem("UserId", GetUserLogin.UserId)

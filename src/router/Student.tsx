@@ -26,13 +26,16 @@ const AddStudentDetails = Loader(lazy(()=> import('src/components/AddStudentDeta
 const FollowUp = Loader(lazy(()=> import('src/components/FollowUp/FollowUp')))
 const AdmissionConversion = Loader(lazy(()=> import('src/components/AdmissionConversion/AdmisssionConversion')))
 const EnquiryForm = Loader(lazy(()=> import('src/components/AddEnquiryStudentDetails/AddStudentDetails1')))
-const AdmissionForm = Loader(lazy(()=>import('src/components/AddAdmissionStudentDetails/AdmissionStudentDetails')))
 const StudentDetailsList = Loader(lazy(()=>import('src/components/StudentDetailsList/StudentDetailsList')))
 const SchoolNotice =Loader(lazy(()=>import('src/components/SchoolNotice/SchoolNotice'))) 
 const ViewSchoolNotice =Loader(lazy(()=>import('src/components/SchoolNotice/ViewSchoolNotice'))) 
 const AddSchoolNotice = Loader(lazy(()=>import('src/components/AddSchoolNotice/AddSchoolNotice')))
 const AddSchoolNoticeList = Loader(lazy(()=>import('src/components/AddSchoolNotice/AddSchoolNoticeList')))
 const AddEnquiry = Loader(lazy(()=> import('src/components/Enquiry/AddEnquiry')))
+const StudentDetails = Loader(lazy(()=> import('src/components/Enquiry/StudentDetails')))
+const FollowUpList = Loader(lazy(()=> import('src/components/FollowUp/FollowUpList')))
+const FollowUpForm = Loader(lazy(()=> import('src/components/FollowUp/FollowUpForm')))
+const AdmissionForm = Loader(lazy(()=> import('src/components/Admission/AdmissionForm')))
 const studentRoutes = [
   {
     path: '/',
@@ -103,7 +106,7 @@ const studentRoutes = [
     element:<EnquiryForm/>
   },
   {
-    path:'AdmissionForm',
+    path:'AdmissionForm/:Id',
     element:<AdmissionForm/>
   },
   {
@@ -111,8 +114,20 @@ const studentRoutes = [
     element:<StudentDetailsList/>
   },
   {
-    path:'AddEnquiry',
+    path:'AddEnquiry/:Id',
     element:<AddEnquiry />
+  },
+  {
+    path: 'FollowUpList',
+    element: <FollowUpList />
+  },
+  {
+    path: 'FollowUpForm/:Id',
+    element: <FollowUpForm />
+  },
+  {
+    path:'StudentDetails',
+    element:<StudentDetails/>
   },
   {
     path:'SchoolNotice',

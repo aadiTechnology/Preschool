@@ -2,7 +2,7 @@ import React from 'react'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import TabulerCard from '../Card/TabulerCard'
 
-function TabulerList({ ItemList, clickEdit, Submit, Delete ,Submit1=undefined}) {
+function TabulerList({ ItemList, clickEdit, Submit=undefined, Delete ,Submit1=undefined}) {
     return (
         <div>
             {ItemList.length == 0 ? <ErrorMessage error={'No records found'} /> :
